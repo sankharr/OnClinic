@@ -19,6 +19,21 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { DoctorsComponent } from './layouts/doctors/doctors.component';
 import { PatientsComponent } from './layouts/patients/patients.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
+  authDomain: "onclinic-dd11a.firebaseapp.com",
+  databaseURL: "https://onclinic-dd11a.firebaseio.com",
+  projectId: "onclinic-dd11a",
+  storageBucket: "onclinic-dd11a.appspot.com",
+  messagingSenderId: "431443097768",
+  appId: "1:431443097768:web:a82ec860e388224d4fea9d",
+  measurementId: "G-NEX6MKFZJY"
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +53,10 @@ import { PatientsComponent } from './layouts/patients/patients.component';
     FormsModule,
     RouterModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
