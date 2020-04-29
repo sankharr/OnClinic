@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
   focus;
   focus1;
-  constructor() { }
 
+  authError: any
+
+  constructor(
+    private auth:AuthService,
+    private router:Router
+  ) { }
+ 
   ngOnInit() {
+    this.auth.eventAuthErrors$.subscribe ( data => {
+      this.authError = data;
+    })
+  }
+
+  login(frm) {
+    this.auth.login(frm.value.email, frm.value.password);
   }
 
 }

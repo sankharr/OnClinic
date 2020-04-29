@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, PopStateEvent } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-navbar',
@@ -12,7 +13,12 @@ export class NavbarComponent implements OnInit {
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
 
-    constructor(public location: Location, private router: Router) {
+    user: firebase.User;
+
+    constructor(
+        public location: Location,
+        private router: Router,
+        private auth: AuthService) {
     }
 
     ngOnInit() {
@@ -32,6 +38,11 @@ export class NavbarComponent implements OnInit {
      this.location.subscribe((ev:PopStateEvent) => {
          this.lastPoppedUrl = ev.url;
      });
+
+     this.auth.getUserState()
+     .subscribe( user => {
+         this.user = user;
+     })
     }
 
     isHome() {
@@ -53,4 +64,9 @@ export class NavbarComponent implements OnInit {
             return false;
         }
     }
+
+    logout() {
+        this.auth.logout();
+    }
+
 }
