@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
   focus;
   focus1;
 
+  //related to email password login
   authError: any
 
   constructor(
@@ -19,11 +20,13 @@ export class LoginComponent implements OnInit {
   ) { }
  
   ngOnInit() {
+    //related to email password login
     this.auth.eventAuthErrors$.subscribe ( data => {
       this.authError = data;
     })
   }
 
+  //related to email password login
   login(frm) {
     this.auth.login(frm.value.email, frm.value.password);
   }

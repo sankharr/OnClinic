@@ -9,6 +9,8 @@ import { SignupComponent } from './signup/signup.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { PatientsComponent } from './layouts/patients/patients.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
@@ -17,6 +19,7 @@ const routes: Routes =[
     { path: 'register',           component: SignupComponent },
     { path: 'landing',          component: LandingComponent },
     { path: 'login',          component: LoginComponent },
+    { path: 'patients',          component: PatientsComponent, canActivate: [AuthGuard] },
     { path: '', redirectTo: 'homepage', pathMatch: 'full' }
 ];
 
