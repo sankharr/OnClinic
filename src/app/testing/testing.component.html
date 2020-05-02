@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div *ngIf="user?.displayName; then authenticated else guest">
+
+        </div>
+
+        <ng-template #guest>
+            <h3>Yo guest</h3>
+        </ng-template>
+
+        <ng-template #authenticated>
+            <div *ngIf="user">
+                <h3> Yo {{ user.displayName }}</h3>
+                <img [src]="user.photoURL" style="width: 100px; height: 100px;">
+                <p>UID: {{ user.uid }}</p>
+            </div>
+        </ng-template>
+    </div>
+</div>

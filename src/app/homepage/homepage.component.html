@@ -23,6 +23,22 @@
                 <img src="./assets/img/brand/onclinic-logo.png" style="width: 200px;" class="img-fluid">
                 <p class="lead text-white" *ngIf="user"> Hii {{ user?.displayName }}</p>
 
+                <div *ngIf="user?.displayName; then authenticated else guest">
+
+                </div>
+                
+                <ng-template #guest>
+                    <h3>Yo guest</h3>
+                </ng-template>
+                
+                <ng-template #authenticated>
+                    <div *ngIf="user">
+                        <h3> Yo {{ user.displayName }}</h3>
+                        <img [src]="user.photoURL" style="width: 100px; height: 100px;">
+                        <p>UID: {{ user.role }}</p>
+                    </div>
+                </ng-template>
+
                 <!-- <div class="btn-wrapper mt-5">
                   <a href="https://www.creative-tim.com/product/argon-design-system-angular?ref=adsa-index-header" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
                     <span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>

@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PatientsComponent } from './layouts/patients/patients.component';
 import { AuthGuard } from './services/auth.guard';
+import { TestingComponent } from './testing/testing.component';
+import { DoctorsComponent } from './layouts/doctors/doctors.component';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
@@ -20,6 +22,8 @@ const routes: Routes =[
     { path: 'landing',          component: LandingComponent },
     { path: 'login',          component: LoginComponent },
     { path: 'patients',          component: PatientsComponent, canActivate: [AuthGuard] },
+    { path: 'doctors',          component: DoctorsComponent },
+    { path: 'testing', component:TestingComponent},
     { path: '', redirectTo: 'homepage', pathMatch: 'full' }
 ];
 

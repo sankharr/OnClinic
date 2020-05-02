@@ -24,6 +24,7 @@
           </div>
         </div>
       </div>
+      
       <!-- <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
         <li class="nav-item dropdown">
           <a class="nav-link no-caret" data-toggle="dropdown" role="button">
@@ -117,7 +118,7 @@
             <span class="nav-link-inner--text">Signup</span>
           </a>
         </li>
-        <li class="nav-item d-none d-lg-block ml-lg-4">
+        <li *ngIf="!user" class="nav-item d-none d-lg-block ml-lg-4">
           <a href="login" class="btn btn-neutral btn-icon">
             <!-- <span class="btn-inner--icon">
               <i class="fa fa-cloud-download mr-2"></i>

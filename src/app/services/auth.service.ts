@@ -6,7 +6,17 @@ import { BehaviorSubject,Observable,of } from 'rxjs';
 
 import { auth } from 'firebase/app';
 import { switchMap } from 'rxjs/operators';
-import { User } from './user.model';
+import { User } from './user.model';             //changed here
+// import { User } from './user';
+import * as firebase from 'firebase/app';
+
+// interface User {
+//   uid:string;
+//   email: string;
+//   photoURL?: string;
+//   displayName?: string;
+//   favoriteColor?: string;
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +30,7 @@ export class AuthService {
 
   //related to google login
   user$: Observable<User>;
+  // user: Observable<User>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -40,11 +51,53 @@ export class AuthService {
 
    }
 
+   //related to role based authorization
+   googleLogin() {
+     const provider = new firebase.auth.GoogleAuthProvider()
+     return this.oAuthLogin(provider);
+   }
+
+   private oAuthLogin(provider) {
+     return this.afAuth.signInWithPopup(provider)
+     .then((credentials) => {
+       this.updateUserData(credentials.user);
+      //  this.router.navigate(['/patients/dashboard']);
+     })
+   }
+
+  //  private checkAuthorization(user: User, allowedRoles:string[]): boolean {
+  //    if(!user) return false
+  //    for (const role of allowedRoles) {
+  //      if(user.) {
+  //        return true
+  //      }
+  //    }
+  //    return false
+  //  }
+
+  //  canRead(user: User): boolean {
+  //    const allowed = ['admin','editor','subscriber']
+  //    return this.checkAuthorization(user, allowed)
+  //  }
+
+  //  canEdit(user: User): boolean {
+  //   const allowed = ['admin','editor']
+  //   return this.checkAuthorization(user, allowed)
+  // }
+
+  // canDelete(user: User): boolean {
+  //   const allowed = ['admin']
+  //   return this.checkAuthorization(user, allowed)
+  // }
+
+
+
   //related to google login
    async googleSignin() {
      const provider = new auth.GoogleAuthProvider();
      const credential = await this.afAuth.signInWithPopup(provider);
-     return this.updateUserData(credential.user);
+     this.updateUserData(credential.user);
+     return this.router.navigate(['/']);
    }
 
    async signOut() {

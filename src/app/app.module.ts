@@ -23,6 +23,11 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 // import { AuthService } from './services/auth.service';
+import { CoreModule } from './core/core.module';
+
+import { PatientsRoutingModule } from './layouts/patients/patients.routing';
+import { TestingComponent } from './testing/testing.component';
+import { CoreAuthService } from './core/core-auth.service';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -46,7 +51,8 @@ var firebaseConfig = {
     LoginComponent,
     HomepageComponent,
     DoctorsComponent,
-    PatientsComponent
+    PatientsComponent,
+    TestingComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,9 @@ var firebaseConfig = {
     HomeModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    CoreModule,
+    PatientsRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

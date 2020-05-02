@@ -1,0 +1,15 @@
+.container{
+    background-color: aquamarine;
+    height: 1000px;
+    
+}
+.row{
+    padding-top: 100px;
+    padding-left: 300px;
+    align-self: stretch;
+}
+
+ng-template{
+    position: relative;
+    align-content: center;
+}
