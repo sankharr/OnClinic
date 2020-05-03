@@ -28,6 +28,7 @@ import { CoreModule } from './core/core.module';
 import { PatientsRoutingModule } from './layouts/patients/patients.routing';
 import { TestingComponent } from './testing/testing.component';
 import { CoreAuthService } from './core/core-auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -65,7 +66,8 @@ var firebaseConfig = {
     AngularFireAuthModule,
     AngularFirestoreModule,
     CoreModule,
-    PatientsRoutingModule
+    PatientsRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

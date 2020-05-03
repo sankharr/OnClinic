@@ -38,8 +38,7 @@ export class LoginComponent implements OnInit {
 
   //related to email password login
   login(frm) {
-    this.auth.login(frm.value.email, frm.value.password);
-    this.router.navigate(['/patients/dashboard']);
+    this.auth.login(frm.value.email, frm.value.password)
   }
 
   googleLog() {
@@ -66,12 +65,12 @@ export class LoginComponent implements OnInit {
             docref.snapshotChanges()
               .subscribe(output => {
                 this.role = output.payload.get("role");
-                console.log("role - ",this.role);
+                console.log("role - ", this.role);
 
-                if (this.role == "patient"){
+                if (this.role == "patient") {
                   this.router.navigate(['/patients']);
                 }
-                if (this.role == "doctor"){
+                if (this.role == "doctor") {
                   this.router.navigate(['/doctors']);
                 }
               })

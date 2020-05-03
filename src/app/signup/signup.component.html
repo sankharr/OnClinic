@@ -12,13 +12,14 @@
     </div>
     <div class="container pt-lg-md">
       <div class="row justify-content-center">
-        <div class="col-lg-5">
+        <div class="col-lg-9">
           <div class="card bg-secondary shadow border-0">
             <div class="card-header bg-white pb-5">
-              <div class="text-muted text-center mb-3">
+              <!-- <div class="text-muted text-center mb-3">
                 <small>Sign up with</small>
-              </div>
-              <div class="text-center">
+              </div> -->
+
+              <!-- <div class="text-center">
                 <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4">
                   <span class="btn-inner--icon">
                     <img src="./assets/img/icons/common/github.svg">
@@ -31,68 +32,285 @@
                   </span>
                   <span class="btn-inner--text">Google</span>
                 </a>
-              </div>
-            </div>
-            <div class="card-body px-lg-5 py-lg-5">
-              <div class="text-center text-muted mb-4">
-                <small>Or sign up with credentials</small>
+              </div> -->
+
+              <!-- <hr> -->
+
+                                                                  <!-- upper part of the form  -->
+              <h5 style="text-align: center;">Your are a</h5>
+              <div class="text-center" style="margin-top: 20px;">
+                <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4" (click)="doctorVal = 1">
+                  <!-- <span class="btn-inner--icon">
+                    <img src="./assets/img/icons/common/github.svg">
+                  </span> -->
+                  <span class="btn-inner--text">Doctor</span>
+                </a>
+                <a href="javascript:void(0)" class="btn btn-neutral btn-icon" (click)="doctorVal = 0">
+                  <!-- <span class="btn-inner--icon">
+                    <img src="./assets/img/icons/common/google.svg">
+                  </span> -->
+                  <span class="btn-inner--text">Patient</span>
+                </a>
               </div>
 
-              <div class="row" *ngIf="authError">
+            </div>
+            <div class="card-body px-lg-5 py-lg-5">
+              <!-- <div class="text-center text-muted mb-4">
+                <small>Or sign up with credentials</small>
+              </div> -->
+
+                                                                  <!-- displaying the error message -->
+              <div class="row" *ngIf="authError">                 
                 <div class="col-12 alert alert-danger">
                   {{ authError?.message }}
                 </div>
               </div>
 
-              <form role="form" #userRegForm="ngForm" (ngSubmit)="createUser(userRegForm)">
-                <div class="form-group" [ngClass]="{'focused':focus===true}">
-                  <div class="input-group input-group-alternative mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                    </div>
-                    <input [(ngModel)]="userRegForm.name" name="name" class="form-control" placeholder="Name" type="text" (focus)="focus=true" (blur)="focus=false">
-                  </div>
-                </div>
+                                                                  <!-- choosing which form to be displayed based on the role -->
+              <div *ngIf="doctorVal == 1; then doctorReg else patientReg">
 
-                <div class="form-group" [ngClass]="{'focused':focus1===true}">
-                  <div class="input-group input-group-alternative mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                    </div>
-                    <input [(ngModel)]="userRegForm.email" name="email" class="form-control" placeholder="Email" type="email" (focus)="focus1=true" (blur)="focus1=false">
-                  </div>
-                </div>
+              </div>
 
-                <div class="form-group" [ngClass]="{'focused':focus2===true}">
-                  <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                    </div>
-                    <input [(ngModel)]="userRegForm.password" name="password" class="form-control" placeholder="Password" type="password" (focus)="focus2=true" (blur)="focus2=false">
-                  </div>
-                </div>
+                                                                  <!-- doctors form -->
+              <ng-template #doctorReg>
+                <h6 style="text-align: center; margin-top: -20px; margin-bottom: 20px;">Doctor's Registration</h6>
+                <form role="form" #userRegForm="ngForm" (ngSubmit)="createDoctor(userRegForm)">
 
-                <div class="text-muted font-italic">
-                  <small>password strength:
-                    <span class="text-success font-weight-700">strong</span>
-                  </small>
-                </div>
-                <div class="row my-4">
-                  <div class="col-12">
-                    <div class="custom-control custom-control-alternative custom-checkbox">
-                      <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                      <label class="custom-control-label" for="customCheckRegister">
-                        <span>I agree with the
-                          <a href="javascript:void(0)">Privacy Policy</a>
-                        </span>
-                      </label>
+                  <div class="form-group" [ngClass]="{'focused':focus===true}">
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                      </div>
+                      <input [(ngModel)]="userRegForm.name" name="name" class="form-control" placeholder="Name"
+                        type="text" (focus)="focus=true" (blur)="focus=false">
                     </div>
                   </div>
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary mt-4">Create account</button>
-                </div>
-              </form>
+
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group" [ngClass]="{'focused':focus===true}">
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                          </div>
+                          <input [(ngModel)]="userRegForm.docID" name="docID" class="form-control"
+                            placeholder="Doctor ID" type="text" (focus)="focus=true" (blur)="focus=false">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div *ngIf="!user; then new else hid">  
+                        </div>
+                                                                  <!-- if the user is getting registered directly using the form -->
+                        <ng-template #new>
+                          <div class="input-group input-group-alternative mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                            </div>
+                            <input [(ngModel)]="userRegForm.email" name="email" class="form-control" placeholder="Email"
+                              type="email" (focus)="focus1=true" (blur)="focus1=false">
+                          </div>
+                        </ng-template>                        
+                                                                      <!-- if the user is logged in with a google account -->
+                        <ng-template #hid>    
+                          <p style="margin-top: 10px;"><b>Email : </b>{{ user.email }}</p>
+                        </ng-template>
+                      <!-- <div class="form-group" [ngClass]="{'focused':focus1===true}">
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                          </div>
+                          <input [(ngModel)]="userRegForm.email" name="email" class="form-control" placeholder="Email"
+                            type="email" (focus)="focus1=true" (blur)="focus1=false">
+                        </div>
+                      </div> -->
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group" [ngClass]="{'focused':focus===true}">
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                          </div>
+                          <input [(ngModel)]="userRegForm.age" name="age" class="form-control" placeholder="Age"
+                            type="text" (focus)="focus=true" (blur)="focus=false">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group" [ngClass]="{'focused':focus===true}">
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                          </div>
+                          <input [(ngModel)]="userRegForm.telno" name="telno" class="form-control"
+                            placeholder="Contact Number" type="text" (focus)="focus=true" (blur)="focus=false">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group" [ngClass]="{'focused':focus===true}">
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                      </div>
+                      <input [(ngModel)]="userRegForm.address" name="address" class="form-control" placeholder="Address"
+                        type="text" (focus)="focus=true" (blur)="focus=false">
+                    </div>
+                  </div>
+
+                                                                               <!--this password field will only be shown to the ones who arent got logged in with a google account -->
+                  <div *ngIf="!user"class="form-group" [ngClass]="{'focused':focus2===true}">
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                      </div>
+                      <input [(ngModel)]="userRegForm.password" name="password" class="form-control"
+                        placeholder="Password" type="password" (focus)="focus2=true" (blur)="focus2=false">
+                    </div>
+                  </div>
+
+                  <!-- <div class="text-muted font-italic">
+                    <small>password strength:
+                      <span class="text-success font-weight-700">strong</span>
+                    </small>
+                  </div>
+                  <div class="row my-4">
+                    <div class="col-12">
+                      <div class="custom-control custom-control-alternative custom-checkbox">
+                        <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                        <label class="custom-control-label" for="customCheckRegister">
+                          <span>I agree with the
+                            <a href="javascript:void(0)">Privacy Policy</a>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                  </div>
+                </form>
+              </ng-template>
+
+                                                                  <!-- patients form -->
+              <ng-template #patientReg>
+                <h6 style="text-align: center; margin-top: -20px; margin-bottom: 20px;">Patient's Registration</h6>
+                <form role="form" #userRegForm="ngForm" (ngSubmit)="createPatient(userRegForm)">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group" [ngClass]="{'focused':focus===true}">
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                          </div>
+                          <input [(ngModel)]="userRegForm.name" name="name" class="form-control" placeholder="Name"
+                            type="text" (focus)="focus=true" (blur)="focus=false">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group" [ngClass]="{'focused':focus1===true}">
+                        <div *ngIf="!user; then new else hid">  
+                        </div>
+
+                                                                  <!-- if the user is getting registered directly using the form -->
+                        <ng-template #new>
+                          <div class="input-group input-group-alternative mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                            </div>
+                            <input [(ngModel)]="userRegForm.email" name="email" class="form-control" placeholder="Email"
+                              type="email" (focus)="focus1=true" (blur)="focus1=false">
+                          </div>
+                        </ng-template>
+                        
+                                                                      <!-- if the user is logged in with a google account -->
+                        <ng-template #hid>    
+                          <p style="margin-top: 10px;"><b>Email : </b>{{ user.email }}</p>
+                        </ng-template>
+
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- {{ user.email }} -->
+
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group" [ngClass]="{'focused':focus===true}">
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                          </div>
+                          <input [(ngModel)]="userRegForm.age" name="age" class="form-control" value="age9"
+                            placeholder="Age" type="text" (focus)="focus=true" (blur)="focus=false">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group" [ngClass]="{'focused':focus===true}">
+                        <div class="input-group input-group-alternative mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                          </div>
+                          <input [(ngModel)]="userRegForm.telno" name="telno" class="form-control"
+                            placeholder="Contact Number" type="text" (focus)="focus=true" (blur)="focus=false">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group" [ngClass]="{'focused':focus===true}">
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                      </div>
+                      <input [(ngModel)]="userRegForm.address" name="address" class="form-control" placeholder="Address"
+                        type="text" (focus)="focus=true" (blur)="focus=false">
+                    </div>
+                  </div>
+
+                  <div *ngIf="!user" class="form-group" [ngClass]="{'focused':focus2===true}">
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                      </div>
+                      <input [(ngModel)]="userRegForm.password" name="password" class="form-control"
+                        placeholder="Password" type="password" (focus)="focus2=true" (blur)="focus2=false">
+                    </div>
+                  </div>
+
+                  <!-- <div class="text-muted font-italic">
+                    <small>password strength:
+                      <span class="text-success font-weight-700">strong</span>
+                    </small>
+                  </div>
+                  <div class="row my-4">
+                    <div class="col-12">
+                      <div class="custom-control custom-control-alternative custom-checkbox">
+                        <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                        <label class="custom-control-label" for="customCheckRegister">
+                          <span>I agree with the
+                            <a href="javascript:void(0)">Privacy Policy</a>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div> -->
+                  
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                  </div>
+                  
+                </form>
+
+              </ng-template>
+
             </div>
           </div>
         </div>
