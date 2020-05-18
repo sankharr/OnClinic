@@ -133,17 +133,18 @@ export class AuthService {
         if (userCredential) {
           // this.router.navigate(['/homepage']);
           console.log(userCredential.user.uid);
+          localStorage.setItem("uid",userCredential.user.uid)    //saving uid to local storage
           var docref = this.db.collection('Users').doc(userCredential.user.uid);
           docref.snapshotChanges()
             .subscribe(output => {
               this.role = output.payload.get("role");
               console.log("role - ", this.role);
-
+              localStorage.setItem("role",this.role);
               if (this.role == "patient") {
-                this.router.navigate(['/patients']);
+                this.router.navigate(['/patients/dashboard']);
               }
               if (this.role == "doctor") {
-                this.router.navigate(['/doctors']);
+                this.router.navigate(['/doctors/dashboard']);
               }
             })
         }
@@ -164,14 +165,14 @@ export class AuthService {
         if (role == "patient") {
           this.insertPatientData(userCredential)
             .then(() => {
-              this.router.navigate(['/patient']);
+              this.router.navigate(['/patient/dashboard']);
             });
         }
 
         if (role == "doctor") {
           this.insertDoctorData(userCredential)
             .then(() => {
-              this.router.navigate(['/doctor']);
+              this.router.navigate(['/doctor/dashboard']);
             });
         }
 

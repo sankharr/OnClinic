@@ -13,6 +13,7 @@ import { PatientsComponent } from './layouts/patients/patients.component';
 import { AuthGuard } from './services/auth.guard';
 import { TestingComponent } from './testing/testing.component';
 import { DoctorsComponent } from './layouts/doctors/doctors.component';
+import { DoctorsRoutingModule } from './layouts/doctors/doctors.routing';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },

@@ -1,4 +1,5 @@
 <main>
+  <app-navbar></app-navbar>
   <div class="position-relative">
     <!-- Hero for FREE version -->
     <section class="section section-lg section-hero section-shaped">
@@ -33,9 +34,9 @@
 
               <ng-template #authenticated>
                 <div *ngIf="user">
-                  <h3> Yo {{ user.displayName }}</h3>
+                  <h3> Hello {{ user.displayName }}</h3>
                   <img [src]="user.photoURL" style="width: 100px; height: 100px;">
-                  <p style="color: black; font-weight: bold;">UID: {{ data.telno }}</p>
+                  <p style="color: black; font-weight: bold;">Role: {{ data.role }}</p>
                 </div>
               </ng-template>
 

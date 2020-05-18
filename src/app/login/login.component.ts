@@ -61,17 +61,18 @@ export class LoginComponent implements OnInit {
           .subscribe(user => {
             this.userk = user;
             console.log(user.uid)
+            localStorage.setItem("uid",user.uid)
             var docref = this.db.collection('Users').doc(this.userk.uid);
             docref.snapshotChanges()
               .subscribe(output => {
                 this.role = output.payload.get("role");
                 console.log("role - ", this.role);
-
+                localStorage.setItem("role",this.role);
                 if (this.role == "patient") {
-                  this.router.navigate(['/patients']);
+                  this.router.navigate(['/patients/dashboard']);
                 }
                 if (this.role == "doctor") {
-                  this.router.navigate(['/doctors']);
+                  this.router.navigate(['/doctors/dashboard']);
                 }
               })
 

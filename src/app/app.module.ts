@@ -29,6 +29,12 @@ import { PatientsRoutingModule } from './layouts/patients/patients.routing';
 import { TestingComponent } from './testing/testing.component';
 import { CoreAuthService } from './core/core-auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+
+import { DoctorsModule } from './layouts/doctors/doctors.module';
+import { PatientsModule } from './layouts/patients/patients.module';
+
+
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -53,7 +59,8 @@ var firebaseConfig = {
     HomepageComponent,
     DoctorsComponent,
     PatientsComponent,
-    TestingComponent
+    TestingComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +74,9 @@ var firebaseConfig = {
     AngularFirestoreModule,
     CoreModule,
     PatientsRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DoctorsModule,
+    PatientsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

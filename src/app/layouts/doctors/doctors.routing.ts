@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
-import { PatientsComponent } from './patients.component';
+import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
+import { DoctorsComponent } from './doctors.component';
+import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
+// import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
+// import { PatientsComponent } from './patients.component';
 
 // import { HomeComponent } from './home/home.component';
 // import { ProfileComponent } from './profile/profile.component';
@@ -16,11 +19,13 @@ import { PatientsComponent } from './patients.component';
 
 const routes: Routes =[
 
-  { path: 'patients', component: PatientsComponent,
-  children:[
-     { path: 'dashboard', component: PatientDashboardComponent },
-
-  ] },  
+    { path: 'doctors', component: DoctorsComponent,
+     children:[
+        { path: 'dashboard', component: DoctorDashboardComponent},
+        { path: 'profile', component: DoctorProfileComponent},
+        // { path: 'doctors', redirectTo: 'dashboard', pathMatch: 'full' }
+     ] },  
+    // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -34,4 +39,4 @@ const routes: Routes =[
   exports: [
   ],
 })
-export class PatientsRoutingModule { }
+export class DoctorsRoutingModule { }
