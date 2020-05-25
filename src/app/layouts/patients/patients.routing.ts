@@ -3,6 +3,7 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
+import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
 import { PatientsComponent } from './patients.component';
 
 // import { HomeComponent } from './home/home.component';
@@ -19,6 +20,7 @@ const routes: Routes =[
   { path: 'patients', component: PatientsComponent,
   children:[
      { path: 'dashboard', component: PatientDashboardComponent },
+     { path: 'profileDoctorView', component: ProfileDoctorviewComponent },
 
   ] },  
 ];
