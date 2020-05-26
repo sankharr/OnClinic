@@ -20,7 +20,7 @@ const routes: Routes =[
   { path: 'patients', component: PatientsComponent,
   children:[
      { path: 'dashboard', component: PatientDashboardComponent },
-     { path: 'profileDoctorView', component: ProfileDoctorviewComponent },
+     { path: 'profileDoctorView', component: ProfileDoctorviewComponent },//path name calls on sidebar
 
   ] },  
 ];
