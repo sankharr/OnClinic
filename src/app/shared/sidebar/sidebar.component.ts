@@ -24,6 +24,7 @@ export const doctorROUTES: RouteInfo[] = [
 export const patientROUTES: RouteInfo[] = [
   { path: '/patients/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
   { path: '/patients/profileDoctorView', title: 'Profile', icon: 'profile', class: '' },
+  { path: '/patients/payments', title: 'Payments', icon: 'payments', class: '' },
   // { path: '/add-new-moderator', title: 'Add New Moderator', icon: 'add', class: '' },
   // { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
   // { path: '/admin-notifications', title: 'Notifications', icon: 'notifications', class: '' },
