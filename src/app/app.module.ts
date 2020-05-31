@@ -33,6 +33,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 import { DoctorsModule } from './layouts/doctors/doctors.module';
 import { PatientsModule } from './layouts/patients/patients.module';
+import { DoctorsRoutingModule } from './layouts/doctors/doctors.routing';
 
 
 
@@ -76,7 +77,8 @@ var firebaseConfig = {
     PatientsRoutingModule,
     ReactiveFormsModule,
     DoctorsModule,
-    PatientsModule
+    PatientsModule,
+    DoctorsRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
