@@ -34,6 +34,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { DoctorsModule } from './layouts/doctors/doctors.module';
 import { PatientsModule } from './layouts/patients/patients.module';
 import { DoctorsRoutingModule } from './layouts/doctors/doctors.routing';
+import { LiveConsultationComponent } from './live-consultation/live-consultation.component';
 
 
 
@@ -61,7 +62,8 @@ var firebaseConfig = {
     DoctorsComponent,
     PatientsComponent,
     TestingComponent,
-    SidebarComponent
+    SidebarComponent,
+    LiveConsultationComponent
   ],
   imports: [
     BrowserModule,

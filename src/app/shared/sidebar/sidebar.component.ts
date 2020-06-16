@@ -15,6 +15,7 @@ declare interface RouteInfo {
 export const doctorROUTES: RouteInfo[] = [
   { path: '/doctors/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
   { path: '/doctors/profile', title: 'Profile', icon: 'content_paste', class: '' },
+  { path: '/doctors/lcd', title: 'Live Consultation', icon: 'content_paste', class: '' },
   // { path: '/add-new-moderator', title: 'Add New Moderator', icon: 'add', class: '' },
   // { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
   // { path: '/admin-notifications', title: 'Notifications', icon: 'notifications', class: '' },
@@ -23,6 +24,7 @@ export const doctorROUTES: RouteInfo[] = [
 //patient routings
 export const patientROUTES: RouteInfo[] = [
   { path: '/patients/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
+  { path: '/patients/lcp', title: 'Live Consultation', icon: 'content_paste', class: '' },
   // { path: '/add-new-moderator', title: 'Add New Moderator', icon: 'add', class: '' },
   // { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
   // { path: '/admin-notifications', title: 'Notifications', icon: 'notifications', class: '' },

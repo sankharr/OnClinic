@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
 import { DoctorsComponent } from './doctors.component';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
+import { LiveConsultationComponent } from 'src/app/live-consultation/live-consultation.component';
 // import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 // import { PatientsComponent } from './patients.component';
 
@@ -23,6 +24,7 @@ const routes: Routes =[
      children:[
         { path: 'dashboard', component: DoctorDashboardComponent},
         { path: 'profile', component: DoctorProfileComponent},
+        { path: 'lcd', component: LiveConsultationComponent},
         // { path: 'doctors', redirectTo: 'dashboard', pathMatch: 'full' }
      ] },  
     // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }

@@ -4,6 +4,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { PatientsComponent } from './patients.component';
+import { LiveConsultationComponent } from 'src/app/live-consultation/live-consultation.component';
 
 // import { HomeComponent } from './home/home.component';
 // import { ProfileComponent } from './profile/profile.component';
@@ -19,6 +20,7 @@ const routes: Routes =[
   { path: 'patients', component: PatientsComponent,
   children:[
      { path: 'dashboard', component: PatientDashboardComponent },
+     { path: 'lcp', component: LiveConsultationComponent },
 
   ] },  
 ];
