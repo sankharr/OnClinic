@@ -82,4 +82,8 @@ export class SidebarComponent implements OnInit {
 
   }
 
+  closeSidebar() {
+    (<HTMLInputElement>document.getElementById("sidebar")).style.display = "none";
+  }
+
 }

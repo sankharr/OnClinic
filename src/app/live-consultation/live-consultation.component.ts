@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from 'ngx-agora';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -9,18 +10,48 @@ import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from '
 })
 export class LiveConsultationComponent implements OnInit {
 
+  channelForm: FormGroup;
+
   localCallId = 'agora_local';
-  remoteCalls: string[] = []
+  remoteCalls: any[] = []
 
   private client: AgoraClient;
   private localStream: Stream;
   private uid: number;
+  private channelid: any;
 
-  constructor(private ngxAgoraService: NgxAgoraService) {
+
+  constructor(
+    private ngxAgoraService: NgxAgoraService,
+    private formbuilder: FormBuilder,
+    ) {
     this.uid = Math.floor(Math.random() * 100);
   }
 
   ngOnInit() {
+
+    this.channelForm = this.formbuilder.group({
+      channelid: ["", Validators.required]      
+    });
+
+    // this.client = this.ngxAgoraService.createClient({ mode: 'rtc', codec: 'h264' });
+    // this.assignClientHandlers();
+
+    // // Added in this step to initialize the local A/V stream
+    // this.localStream = this.ngxAgoraService.createStream({ streamID: this.uid, audio: true, video: true, screen: false });
+    // this.assignLocalStreamHandlers();
+    // // this.initLocalStream();
+    // this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
+
+  }
+
+  startCall() {
+
+    let channelID = this.channelForm.controls["channelid"].value;
+    console.log("Channel ID - ",channelID);
+
+    this.channelid = channelID;
+
     this.client = this.ngxAgoraService.createClient({ mode: 'rtc', codec: 'h264' });
     this.assignClientHandlers();
 
@@ -29,14 +60,33 @@ export class LiveConsultationComponent implements OnInit {
     this.assignLocalStreamHandlers();
     // this.initLocalStream();
     this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
+    
+  }
 
+  endCall() {
+    this.client.leave(()=> {
+
+      if(this.localStream.isPlaying()) {
+        this.localStream.stop()
+      }
+      this.localStream.close();
+
+      for (let i = 0; i < this.remoteCalls.length; i++) {
+        var stream = this.remoteCalls.shift();
+        var id = stream.getId()
+        if(stream.isPlaying()) {
+          stream.stop()
+        }
+        // removeView(id)
+      }
+    })
   }
 
   /**
  * Attempts to connect to an online chat room where users can host and receive A/V streams.
  */
   join(onSuccess?: (uid: number | string) => void, onFailure?: (error: Error) => void): void {
-    this.client.join(null, 'foo-bar', this.uid, onSuccess, onFailure);
+    this.client.join(null, this.channelid, this.uid, onSuccess, onFailure);
   }
 
   /**
