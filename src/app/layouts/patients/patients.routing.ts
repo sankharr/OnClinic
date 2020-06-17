@@ -6,6 +6,7 @@ import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
 import { PatientPaymentsComponent } from './patient-payments/patient-payments.component';
 import { PatientsComponent } from './patients.component';
+import { LiveConsultationComponent } from 'src/app/live-consultation/live-consultation.component';
 
 const routes: Routes =[
 
@@ -14,6 +15,8 @@ const routes: Routes =[
      { path: 'dashboard', component: PatientDashboardComponent },
      { path: 'profileDoctorView', component: ProfileDoctorviewComponent },//path name calls on sidebar
      { path: 'payments', component: PatientPaymentsComponent },
+     { path: 'lcp', component: LiveConsultationComponent },
+
   ] },  
 ];
 

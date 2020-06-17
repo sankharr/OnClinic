@@ -12,4 +12,12 @@ export class PatientsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openSidebar() {
+    (<HTMLInputElement>document.getElementById("sidebar")).style.display = "inline";
+    // document.getElementById("sidebar").style.display = "inline";
+    // document.getElementById("main").style.marginLeft = "250px";
+  }
+
+  
+
 }

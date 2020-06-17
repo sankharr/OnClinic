@@ -1,0 +1,19 @@
+<form [formGroup]="channelForm">
+    <div class="row">
+        <div class="col-3">
+            <!-- <label for="coption"><b>Teacher Id</b></label> -->
+            <input class="form-control" type="text" placeholder="Channel ID" formControlName="channelid">
+        </div>
+        <div class="col-1">
+            <button class="btn btn-primary" type="submit" (click)="startCall()">Join</button>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-primary" type="submit" (click)="endCall()">Leave</button>
+        </div>
+    </div>
+</form>
+<!-- </div> -->
+
+<div [id]="localCallId" class="local"></div>
+
+<div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>

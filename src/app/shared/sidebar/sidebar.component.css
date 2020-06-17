@@ -1,3 +1,7 @@
+#clsbtn{
+  display: none;
+}
+
 /* The side navigation menu */
 .sidenav {
     margin-top: 85px;
@@ -43,6 +47,18 @@
   #main {
     transition: margin-left .5s;
     padding: 20px;
+  }
+
+  @media screen and (max-width: 990px){
+    #clsbtn{
+      display: inline;
+    }
+  }
+  
+  @media screen and (max-width: 320px){
+    #clsbtn{
+      display: inline;
+    }
   }
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
