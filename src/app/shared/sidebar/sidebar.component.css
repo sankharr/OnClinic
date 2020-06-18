@@ -1,14 +1,26 @@
 #clsbtn{
   display: none;
 }
+/* .nav{
+  position: fixed;
+} */
+
+/* html, body {
+  height: 100%;
+} */
+
+/* .full-height {
+  height: 100%;
+} */
 
 /* The side navigation menu */
 .sidenav {
+    position: absolute;
     margin-top: 85px;
-    height: 100%; /* 100% Full-height */
+    height: 100%;
     width: 250px; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: -1; /* Stay on top */
+    /* Stay in place */
+    z-index: 1;
     top: 0; /* Stay at the top */
     left: 0;
     background-color: #111; /* Black*/

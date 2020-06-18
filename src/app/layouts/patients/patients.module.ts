@@ -4,12 +4,15 @@ import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
 import { PatientsRoutingModule } from './patients.routing';
 import { PatientPaymentsComponent } from './patient-payments/patient-payments.component';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+
 
 
 @NgModule({
   declarations: [PatientDashboardComponent , ProfileDoctorviewComponent, PatientPaymentsComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    CalendarModule
   ]
 })
 export class PatientsModule { }
