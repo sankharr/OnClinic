@@ -1,0 +1,19 @@
+main{
+    margin-top: 84px;
+}
+
+@media screen and (max-width: 990px){
+
+    main{
+        margin-top: 72px;
+    }
+    /* #clsbtn{
+      display: inline;
+    } */
+  }
+  
+  /* @media screen and (max-width: 320px){
+    #clsbtn{
+      display: inline;
+    }
+  } */
