@@ -1,27 +1,69 @@
 <!--Upper block-->
-<section class="section section-lg section-shaped pt-lg-3 pb-300">
-  <div class="container">
+<section class="section section-lg section-shaped pt-lg-4 pb-300">
+  <div class="container" style="margin-right: 50px;">
     <div class="row justify-content-center">
       <div class="col-lg-12">
         <div class="row row-grid">
-          <!--First grid-->
+          <!--Health details-->
           <div class="col-lg-8">
             <div class="card shadow border-0">
               <div class="pt-0 text-center">
-                <div class="card-body py-20" style="height:250px">
-                        <span class="d-block mb-1">Ryan Tompson</span>
-                        <small class="h6 text-muted">Cardiologist</small>
-                      <h6 class="text-primary"><b>in 15 Mins</b></h6>
-                  <a href="javascript:void(0)" class="btn btn-primary mt-4">Live Concultation</a>
+                <div class="card-body py-20">
+                  <div class="row row-grid">
+                    <!--First grid - Man image-->
+                    <div class="col-lg-2">
+                        <div class="pt-0 text-center" style=margin:-20px;>
+                          <div class="card-body py-00">
+                            <img src="./assets/img/brand/man.jpg" style="width:200px;height:220px;" class="img-fluid">
+                          </div>
+                        </div>
+                    </div>
+                    <!--end of first grid-->
+                    <!--Second grid - last updates and limits-->
+                    <div class="col-lg-6">
+                      <div class="card shadow border-0"> 
+                      <div class="pt-0 text-center">
+                        <div class="card-body py-10">
+                          <span class="d-block mb-1">Last Health Data Update</span>
+                          <h6 style="color:red;">27.05.2020</h6>
+                          <span class="d-block mb-1">Last Report Upolad</span>
+                          <h6 style="color:red;">27.05.2020</h6>
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    <!--end of second grid-->
+                    <!--Third grid - BMI-->
+                    <div class="col-lg-4">
+                      <div class="card shadow border-0"> 
+                      <div class="pt-0 text-center" style="margin: 20px;">
+                        <div class="card-body py-0">
+                          <span class="d-block mb-1;line-height: 500px;">Weight</span>
+                          <p style="color:blueviolet;line-height: 10px;"><b>136 cm</b></p>
+                          <span class="d-block mb-1;line-height: 10px;">Height</span>
+                          <p style="color:blueviolet;line-height: 10px;"><b>45 kg</b></p>
+                          <h6>BMI</h6>
+                          <h6 style="color:blue;line-height: 10px;"><b>18.5</b></h6>
+                          <h6 style="color:green;line-height: 25px;"><b>NORMAL</b></h6>
+                          <!--<h6 style="color:red;">OVER WEIGHT</h6>
+                          <h6 style="color:red;">UNDER WEIGHT</h6>-->
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <!--end of third grid-->
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <!--Second grid-->
+          <!--End of Health details-->
+          <!--Calander-->
           <div class="col-lg-4" >
             <div class="card shadow border-0" style="background-color:#dab3ff">
               <div class="pt-0 text-center">
-                <div class="card-body py-20" style="height:250px">
+                <div class="card-body py-20" style="height:300px">
                   <div class="card shadow border-0" style="background-color:#e6e6e6">
                     <div class="pt-0 text-center">
                       <div class="card-body py-0">
@@ -29,18 +71,27 @@
                       </div>
                     </div>
                   </div>
+                  <div class="card shadow border-0" style="background-color:#d538f5;margin-top: 10px;">
+                    <div class="pt-0 text-center">
+                      <div class="card-body py-0">
+                        <ejs-calendar id=calendar [values]='value' [isMultiSelection]='multiselect' ></ejs-calendar>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <!--End of Calander-->  
         </div>
       </div>
     </div>
   </div>
 </section>
+<!--End of Upper block-->
 <!--Second Bolck-->
 <section class="section section-lg pt-lg-3 mt--300">
-  <div class="container">
+  <div class="container" style="margin-right: 50px;">
     <div class="row justify-content-center">
       <div class="col-lg-12">
         <div class="row row-grid">
@@ -56,7 +107,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row row-grid">
+                  <div class="row row-grid" style="margin-top: 20px;">
                     <!--First grid-->
                     <div class="col-lg-4">
                       <div class="card shadow border-0">
@@ -109,11 +160,27 @@
           <div class="col-lg-3">
             <div class="card shadow border-0" style="background-color:#dab3ff">
               <div class="pt-0 text-center">
-                <div class="card-body py-20" style="height:450px">
-                  <div class="card shadow border-0" style="background-color:#e6e6e6">
+                <div class="card-body py-20">
+                  <div class="card shadow border-0" style="background-color:#a851a4">
                     <div class="pt-0 text-center">
                       <div class="card-body py-0">
-                        <span class="d-block mb-1">Channelling History</span>
+                        <small class="h6 text-muted"><b>Channelling History</b></small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card shadow border-0" style="background-color:#e6e6e6; margin-top: 10px;">
+                    <div class="pt-0 text-center" >
+                      <div class="card-body py-0"style="line-height:10px;">
+                        <p>Date </p><p><b>27.05.2020</b></p>
+                        <p>Doctor </p><p><b>Dr.Kamal De Silva</b></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card shadow border-0" style="background-color:#e6e6e6; margin-top: 10px;">
+                    <div class="pt-0 text-center" >
+                      <div class="card-body py-0"style="line-height:10px;">
+                        <p>Date </p><p><b>01.05.2020</b></p>
+                        <p>Doctor </p><p><b>Dr.Kamal De Silva</b></p>
                       </div>
                     </div>
                   </div>
@@ -128,7 +195,6 @@
   </div>
 </section>
 <!--end second section-->
-
 <!--profile icon-->
     <!--<div class="container">
     <div class="row justify-content-center">

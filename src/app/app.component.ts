@@ -17,7 +17,10 @@ var navbarHeight = 0;
 })
 export class AppComponent implements OnInit {
     private _router: Subscription;
-
+//calander
+    public value: Date [] = [new Date ("05/16/2017"), new Date ("05/12/2017"), new Date ("05/6/2017"), new Date ("05/26/2017"), new Date ("05/20/2017")]  
+    public multiselect: Boolean = true;
+    
     constructor( private renderer : Renderer2, private router: Router, @Inject(DOCUMENT,) private document: any, private element : ElementRef, public location: Location) {}
     @HostListener('window:scroll', ['$event'])
     hasScrolled() {
