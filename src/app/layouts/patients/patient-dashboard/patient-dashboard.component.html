@@ -8,12 +8,12 @@
           <div class="col-lg-8">
             <div class="card shadow border-0">
               <div class="pt-0 text-center">
-                <div class="card-body py-20" style="height:300px">
+                <div class="card-body py-20">
                   <div class="row row-grid">
                     <!--First grid - Man image-->
                     <div class="col-lg-2">
                         <div class="pt-0 text-center" style=margin:-20px;>
-                          <div class="card-body py-00" style="height:300px">
+                          <div class="card-body py-00">
                             <img src="./assets/img/brand/man.jpg" style="width:200px;height:220px;" class="img-fluid">
                           </div>
                         </div>
@@ -21,8 +21,9 @@
                     <!--end of first grid-->
                     <!--Second grid - last updates and limits-->
                     <div class="col-lg-6">
+                      <div class="card shadow border-0"> 
                       <div class="pt-0 text-center">
-                        <div class="card-body py-10" style="height:300px">
+                        <div class="card-body py-10">
                           <span class="d-block mb-1">Last Health Data Update</span>
                           <h6 style="color:red;">27.05.2020</h6>
                           <span class="d-block mb-1">Last Report Upolad</span>
@@ -30,13 +31,14 @@
                           <hr>
                         </div>
                       </div>
+                    </div>
                   </div>
                     <!--end of second grid-->
                     <!--Third grid - BMI-->
                     <div class="col-lg-4">
                       <div class="card shadow border-0"> 
                       <div class="pt-0 text-center" style="margin: 20px;">
-                        <div class="card-body py-0" style="height:220px;">
+                        <div class="card-body py-0">
                           <span class="d-block mb-1;line-height: 500px;">Weight</span>
                           <p style="color:blueviolet;line-height: 10px;"><b>136 cm</b></p>
                           <span class="d-block mb-1;line-height: 10px;">Height</span>
@@ -72,7 +74,7 @@
                   <div class="card shadow border-0" style="background-color:#d538f5;margin-top: 10px;">
                     <div class="pt-0 text-center">
                       <div class="card-body py-0">
-                        <span class="d-block mb-1">Calender</span>
+                        <ejs-calendar id=calendar [values]='value' [isMultiSelection]='multiselect' ></ejs-calendar>
                       </div>
                     </div>
                   </div>

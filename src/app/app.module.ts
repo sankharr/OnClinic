@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
@@ -84,6 +85,7 @@ var firebaseConfig = {
     DoctorsModule,
     PatientsModule,
     DoctorsRoutingModule,
+    CalendarModule,
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
   ],
   providers: [],
