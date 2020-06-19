@@ -1,88 +1,67 @@
-/* :host {
-  display: block;    
-  background-color: #66e9e9;
-  margin:-3%;
-} */
-
-.mainRow{
-  margin-top: 10%;
-}
-
 .container-fluid{
-  background-color: #66e9e9;
+  background-color: #16d6f0;
   width: 102%;
   margin-top: -0.9%;
   height: max-content;
   margin-left: -2%;
-  padding-left: 9%;
-  padding-bottom: 1.25%;
-  padding-right: 8%;
-  /* margin-right: 200px; */
-}
-
-/* .humanImage img{
-  height: 50%;
-  width: 50%;
-} */
-
-section{
-  margin-left: 300px;
 }
 
 .row{
-  padding: 1%;
-  
+  padding: 1.5%;
+  align-content: center;
+  min-height: max-content;
 }
+.mainRow{
+  margin-top:30px;
+}/*block 2*/
 
 .card{
   padding: 2%;
+  text-align: center;
+  align-content: center;
+  font-size: xx-large;
+}
+#dark.card{
+  background-color:#a970b1;
+}
+#light.card{
+  background-color:#dca6e4;
+}
+#differ.card{
+  margin: 20px;
+}
+#space.card{
+  margin-top: 10px;
+}
+
+.image-man{
+  width: 150px;
+  height: 350px;
+  align-self: center;
+}
+.rounded-circle{
+  width: 120px;
+  align-self: center;
 }
 
 ejs-calendar{
-  position: absolute;
   z-index: 3; 
-  /* margin-top: 50%; */
-  margin-left: 8%;
+  max-width: fit-content;
+  min-width: fit-content;
 }
-
-
-
-.cald{
-  height: 140%;
-}
-
-.caldcard{
-  height: 135%;
-  padding-top: 5%;
-}
-
-.healthDetailsCard{
-  /* padding-top:7%;
-  padding-bottom: 7%; */
-}
-
-@media screen and (max-width: 1280px){
-  
+@media screen and (max-width: 500px){
   .container-fluid{   
-    width: 103%; 
-    margin-left: -3%;
-    padding-left: 9%;
-    margin-top: -1.5%;
-    padding-top: 3%;
-    padding-left: 3%;
-    padding-right: 3%;    
+    width: 105%; 
+    margin-left: -6%;
+    margin-top: -6%; 
+    padding-left: 0%;  
+    padding-right: 0%;
   }
-  
-  ejs-calendar{
-    position: absolute;
-    z-index: 3; 
-    /* margin-top: 50%; */
-    margin-left: -15%;
+  .row{
+    padding: 5%;
   }
-
-  .mainRow{
-    margin-top: 15%;
+  .card{
+    margin-top: 10px;
   }
-
 }
   
