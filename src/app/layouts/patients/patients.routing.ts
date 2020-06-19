@@ -7,6 +7,7 @@ import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorv
 import { PatientPaymentsComponent } from './patient-payments/patient-payments.component';
 import { PatientsComponent } from './patients.component';
 import { LiveConsultationComponent } from 'src/app/live-consultation/live-consultation.component';
+import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 
 const routes: Routes =[
 
@@ -16,7 +17,7 @@ const routes: Routes =[
      { path: 'profileDoctorView', component: ProfileDoctorviewComponent },//path name calls on sidebar
      { path: 'payments', component: PatientPaymentsComponent },
      { path: 'lcp', component: LiveConsultationComponent },
-
+     { path: 'lcp', component: WaitingRoomComponent },
   ] },  
 ];
 
