@@ -8,7 +8,7 @@ import { HomeComponent } from './home/home.component';
 import {MailVerificationComponent} from './mail-verification/mail-verification.component'
 import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
-import {DashboardComponent} from './doctor/dashboard/dashboard.component';
+// import {DashboardComponent} from './doctor/dashboard/dashboard.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -21,7 +21,7 @@ import { DoctorsComponent } from './layouts/doctors/doctors.component';
 import { MlComponent } from './ml/ml.component';
 import { DiseaseComponent } from './disease/disease.component';
 import {AddressVerifyComponent} from './address-verify/address-verify.component'
-import { PatientDashboardComponent } from './patient/patient-dashboard/patient-dashboard.component';
+// import { PatientDashboardComponent } from './patient/patient-dashboard/patient-dashboard.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -37,8 +37,8 @@ const routes: Routes = [
   { path: 'disease', component: DiseaseComponent },
   { path: 'moderator', component:ModeratorComponent},
   { path: 'doctorverification',component:DoctorverificationComponent},
-  { path: 'doctordashboard',component:DashboardComponent},
-  { path: 'patientdashboard',component:PatientDashboardComponent},
+  // { path: 'doctordashboard',component:DashboardComponent},
+  // { path: 'patientdashboard',component:PatientDashboardComponent},
   { path: 'emailverify',component:MailVerificationComponent},
   {path: 'addressverificatoin',component:AddressVerifyComponent},
   {path: 'welcomepage',component:WelcomeComponent},

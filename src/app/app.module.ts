@@ -38,8 +38,8 @@ import { MlComponent } from './ml/ml.component';
 import { DiseaseComponent } from './disease/disease.component';
 import { ModeratorComponent } from './moderator/moderator.component';
 import { DoctorverificationComponent } from './doctorverification/doctorverification.component';
-import { DashboardComponent } from './doctor/dashboard/dashboard.component';
-import { PatientDashboardComponent } from './patient/patient-dashboard/patient-dashboard.component';
+// import { DashboardComponent } from './doctor/dashboard/dashboard.component';
+// import { PatientDashboardComponent } from './patient/patient-dashboard/patient-dashboard.component';
 import { MailVerificationComponent } from './mail-verification/mail-verification.component';
 import { AddressVerifyComponent } from './address-verify/address-verify.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -74,8 +74,6 @@ var firebaseConfig = {
     DiseaseComponent,
     ModeratorComponent,
     DoctorverificationComponent,
-    DashboardComponent,
-    PatientDashboardComponent,
     MailVerificationComponent,
     AddressVerifyComponent,
     WelcomeComponent
