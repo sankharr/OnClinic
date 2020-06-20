@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import {HttpModule} from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
@@ -20,6 +21,9 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { DoctorsComponent } from './layouts/doctors/doctors.component';
 import { PatientsComponent } from './layouts/patients/patients.component';
 
+
+import { AngularFirestore } from '@angular/fire/firestore';
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -30,16 +34,16 @@ import { PatientsRoutingModule } from './layouts/patients/patients.routing';
 import { TestingComponent } from './testing/testing.component';
 import { CoreAuthService } from './core/core-auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-
-import { DoctorsModule } from './layouts/doctors/doctors.module';
-import { PatientsModule } from './layouts/patients/patients.module';
-import { DoctorsRoutingModule } from './layouts/doctors/doctors.routing';
-import { LiveConsultationComponent } from './live-consultation/live-consultation.component';
-
-import { environment } from 'src/environments/environment';
-import { NgxAgoraModule } from 'ngx-agora';
-
+import { MlComponent } from './ml/ml.component';
+import { DiseaseComponent } from './disease/disease.component';
+import { ModeratorComponent } from './moderator/moderator.component';
+import { DoctorverificationComponent } from './doctorverification/doctorverification.component';
+import { DashboardComponent } from './doctor/dashboard/dashboard.component';
+import { PatientDashboardComponent } from './patient/patient-dashboard/patient-dashboard.component';
+import { MailVerificationComponent } from './mail-verification/mail-verification.component';
+import { AddressVerifyComponent } from './address-verify/address-verify.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+// import { FirebaseListObservable } from '@angular/fire/database';
 
 
 var firebaseConfig = {
@@ -66,8 +70,15 @@ var firebaseConfig = {
     DoctorsComponent,
     PatientsComponent,
     TestingComponent,
-    SidebarComponent,
-    LiveConsultationComponent
+    MlComponent,
+    DiseaseComponent,
+    ModeratorComponent,
+    DoctorverificationComponent,
+    DashboardComponent,
+    PatientDashboardComponent,
+    MailVerificationComponent,
+    AddressVerifyComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -76,17 +87,14 @@ var firebaseConfig = {
     RouterModule,
     AppRoutingModule,
     HomeModule,
+    HttpModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     CoreModule,
     PatientsRoutingModule,
-    ReactiveFormsModule,
-    DoctorsModule,
-    PatientsModule,
-    DoctorsRoutingModule,
-    CalendarModule,
-    NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,8 @@
+.responsive {
+    height: 100px;             /* collapse the container's height */
+    width: auto;    /* specify any width you want (a percentage value, basically) */
+    /* apply a padding using the following formula */
+    /* this formula makes sure the aspect ratio of the container equals that of the svg graphic */
+    padding-top: (svg height / svg width) * width-value;
+    position: absolute;    /* create positioning context for svg */
+}

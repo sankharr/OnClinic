@@ -26,7 +26,10 @@
               "src/styles.css",
               "src/assets/scss/argon.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/js/custom.js"
+            ]
           },
           "configurations": {
             "production": {
