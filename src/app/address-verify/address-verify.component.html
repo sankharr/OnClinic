@@ -1,0 +1,11 @@
+<div class="main" id='main' *ngIf="send">
+    <div class="responsive" style="top: 100px;left: 100px;">
+        <img src='../../assets/svg/locaton.svg' style="width: 100%; height: auto;opacity: 80%;">
+    </div>
+
+    <a (click)="div1Function()" class="btn btn-primary">Dashboard</a>
+
+</div>
+<div *ngIf="sent" style="left: 80px;">
+    <img src="../../assets/svg/mailSent.svg" alt="" >
+</div>

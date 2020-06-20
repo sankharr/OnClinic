@@ -1,0 +1,27 @@
+<section class="wrapper">
+
+    <div class="container">
+        <div *ngFor="let alert of alerts">
+            <ngb-alert [type]="alert.type" [dismissible]="true" (close)="close(alert)">
+                <ng-container *ngIf="alert.icon">
+                    <div class="alert-inner--icon">
+                        <i class="{{alert.icon}}"></i>
+                    </div>
+                </ng-container>
+                <span class="alert-inner--text"> <strong>{{alert.strong}} </strong>{{ alert.message }}</span>
+            </ngb-alert>
+        </div>
+    </div>
+
+
+    <img *ngIf=flsg src="assets/svg/sendmessage.svg" alt="">
+    <div class="container">
+        <div class="col md-7">
+            <a class="btn btn-primary" (click)="[phoneOtp()]">Send Phone Otp</a>
+        </div>
+    </div>
+</section>
+<img src="assets/svg/locaton.svg" alt="">
+<div class="col md-7">
+    <a class="btn btn-primary" (click)="[phoneVerify()]">Verify Phone</a>
+</div>
