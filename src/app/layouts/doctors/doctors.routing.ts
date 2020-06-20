@@ -8,6 +8,7 @@ import { DoctorProfileComponent } from './doctor-profile/doctor-profile.componen
 import { LiveConsultationComponent } from 'src/app/live-consultation/live-consultation.component';
 import { DoctorPaymentsComponent } from './doctor-payments/doctor-payments.component';
 import { DoctorLogComponent } from './doctor-log/doctor-log.component';
+import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
 
 // import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 // import { PatientsComponent } from './patients.component';
@@ -30,6 +31,7 @@ const routes: Routes =[
         { path: 'lcd', component: LiveConsultationComponent},
         { path: 'payments', component: DoctorPaymentsComponent},
         { path: 'log', component: DoctorLogComponent},
+        { path: 'ppv', component: ProfilePatientviewComponent},
         // { path: 'doctors', redirectTo: 'dashboard', pathMatch: 'full' }
      ] },  
     // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
