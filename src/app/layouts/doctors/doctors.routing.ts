@@ -6,6 +6,9 @@ import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.co
 import { DoctorsComponent } from './doctors.component';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { LiveConsultationComponent } from 'src/app/live-consultation/live-consultation.component';
+import { DoctorPaymentsComponent } from './doctor-payments/doctor-payments.component';
+import { DoctorLogComponent } from './doctor-log/doctor-log.component';
+
 // import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 // import { PatientsComponent } from './patients.component';
 
@@ -25,6 +28,8 @@ const routes: Routes =[
         { path: 'dashboard', component: DoctorDashboardComponent},
         { path: 'profile', component: DoctorProfileComponent},
         { path: 'lcd', component: LiveConsultationComponent},
+        { path: 'payments', component: DoctorPaymentsComponent},
+        { path: 'log', component: DoctorLogComponent},
         // { path: 'doctors', redirectTo: 'dashboard', pathMatch: 'full' }
      ] },  
     // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
