@@ -13,6 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { DoctorsListComponent } from './doctors-list/doctors-list.component';
+import { DoctorBookComponent } from './doctor-book/doctor-book.component';
 
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
@@ -39,6 +41,8 @@ import { LiveConsultationComponent } from './live-consultation/live-consultation
 
 import { environment } from 'src/environments/environment';
 import { NgxAgoraModule } from 'ngx-agora';
+import { PaymentComponent } from './payment/payment.component';
+
 
 
 
@@ -67,7 +71,10 @@ var firebaseConfig = {
     PatientsComponent,
     TestingComponent,
     SidebarComponent,
-    LiveConsultationComponent
+    LiveConsultationComponent,
+    DoctorsListComponent,
+    DoctorBookComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
