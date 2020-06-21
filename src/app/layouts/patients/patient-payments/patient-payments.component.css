@@ -11,15 +11,21 @@
   align-content: center;
   min-height: max-content;
 }
-.mainRow{
-  margin-top:30px;
-}/*block 2*/
+#notfirst.row{
+  margin-top:1px;
+}
+#fixsize.row{
+  height: 20px;
+  align-items: center;
+  text-align: left;
+}
 
 .card{
   padding: 2%;
   text-align: center;
   align-content: center;
   font-size: xx-large;
+  border: none;
 }
 #dark.card{
   background-color:#a970b1;
@@ -32,6 +38,19 @@
 }
 #space.card{
   margin-top: 10px;
+}
+
+.btn{
+  height: 30px;
+  background-color: #820fd4;
+  color: aliceblue;
+  width: fit-content;
+  align-self: center;
+  padding: 0%;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: -5%;
+  /*padding-bottom: 30px;*/
 }
 
 .image-man{
@@ -57,6 +76,7 @@ ejs-calendar{
     margin-left: -3%;
     padding-left: -2%;
   }
+
 }
 
 @media screen and (max-width: 500px){
@@ -70,7 +90,13 @@ ejs-calendar{
   .row{
     padding: 5%;
   }
-  .card{
+  #notfirst.row{
+    margin-top: -5%;
+  }
+  #dark.card{
     margin-top: 10px;
   }
 }
+
+
+  
