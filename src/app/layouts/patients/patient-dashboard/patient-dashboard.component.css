@@ -20,6 +20,7 @@
   text-align: center;
   align-content: center;
   font-size: xx-large;
+  border: none;
 }
 #dark.card{
   background-color:#a970b1;
