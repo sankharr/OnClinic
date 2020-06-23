@@ -16,8 +16,9 @@ const routes: Routes =[
      { path: 'dashboard', component: PatientDashboardComponent },
      { path: 'profileDoctorView', component: ProfileDoctorviewComponent },//path name calls on sidebar
      { path: 'payments', component: PatientPaymentsComponent },
+     { path: 'waiting-room', component: WaitingRoomComponent },
      { path: 'lcp', component: LiveConsultationComponent },
-     { path: 'lcp', component: WaitingRoomComponent },
+     /*{ path: 'lcp', component: WaitingRoomComponent },*/
   ] },  
 ];
 
