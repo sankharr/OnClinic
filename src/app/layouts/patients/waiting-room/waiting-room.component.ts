@@ -16,6 +16,5 @@ export class WaitingRoomComponent implements OnInit {
     this.router.navigate(['patients/dashboard'])
   }
   ready(){
-        document.getElementById("orange").style.color = "green";
   }
 }

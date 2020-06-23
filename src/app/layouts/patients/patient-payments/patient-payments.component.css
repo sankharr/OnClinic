@@ -90,23 +90,6 @@
   border: none;
   font-size: 20px;
 }
-
-.image-man{
-  width: 150px;
-  height: 350px;
-  align-self: center;
-}
-.rounded-circle{
-  width: 120px;
-  align-self: center;
-}
-
-ejs-calendar{
-  z-index: 3; 
-  max-width: fit-content;
-  min-width: fit-content;
-}
-
 @media screen and (max-width: 1366px){
   .container-fluid{   
     width: 105%; 
