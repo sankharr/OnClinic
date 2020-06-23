@@ -29,10 +29,10 @@ const routes: Routes =[
     { path: 'login',          component: LoginComponent },
     { path: 'patients',          component: PatientsComponent, canActivate: [AuthGuard] },
     { path: 'doctors',          component: DoctorsComponent },
-    { path: 'testing', component:TestingComponent},
-    {path: 'doctors-list',        component: DoctorsListComponent},
-    {path: 'doctor-book',        component:DoctorBookComponent},
-    {path: 'payment',      component:PaymentComponent},
+    { path: 'testing', component:TestingComponent },
+    { path: 'doctors-list',        component: DoctorsListComponent },
+    { path: 'doctor-book',        component:DoctorBookComponent },
+    { path: 'payment',      component:PaymentComponent },
     { path: '', redirectTo: 'homepage', pathMatch: 'full' }
 ];
 
