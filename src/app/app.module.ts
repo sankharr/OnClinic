@@ -39,6 +39,7 @@ import { LiveConsultationComponent } from './live-consultation/live-consultation
 
 import { environment } from 'src/environments/environment';
 import { NgxAgoraModule } from 'ngx-agora';
+import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
 
 
 
@@ -67,7 +68,8 @@ var firebaseConfig = {
     PatientsComponent,
     TestingComponent,
     SidebarComponent,
-    LiveConsultationComponent
+    LiveConsultationComponent,
+    DoctorRegistration2Component
   ],
   imports: [
     BrowserModule,

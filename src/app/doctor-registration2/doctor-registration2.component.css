@@ -1,0 +1,27 @@
+.container{
+    margin-top: 7%;
+}
+
+form{
+    margin-top: 5%;
+}
+
+ul{
+    margin-left: -5%;
+}
+
+/* .mainRow{
+    margin-bottom: 2%;
+} */
+
+#avgTime{
+    margin-top: 2%;
+}
+
+.impo{
+    padding: 1.5%;
+    background-color: rgb(255, 193, 193);
+    margin-bottom: 3%;
+    font-weight: bold;
+    width: 68%;
+}
