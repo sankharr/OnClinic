@@ -1,58 +1,76 @@
 <main>
     <div class="container" style="margin-top: 30px;">
         <h5>Add symptoms</h5>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleFormControlInput1"
-                        placeholder="name@example.com">
+        <form [formGroup]="myform" role="form" #symptomForm="ngForm" (ngSubmit)="addSymptom(symptomForm)">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="symptomForm.displayName" name="displayName" class="form-control" formControlName="displayName"
+                            placeholder="Symptom Name">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-primary" type="submit">Add</button>
                 </div>
             </div>
-            <div class="col-6">
-                <button class="btn btn-primary" type="button">Add</button>
-            </div>
-        </div>
+        </form>
 
         <!-- <input type="text" [(ngModel)]="searchterm" (keydown)="search($event)"> -->
-
-
-
-        <h5 style="margin-top: 30px;">Symptoms Finder</h5>
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <div class="input-group mb-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+            <div class="col-9">
+                <h5 style="margin-top: 30px;">Symptoms Finder</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                </div>
+                                <input id="txtBox" class="form-control" [(ngModel)]="searchValue"
+                                    [ngModelOptions]="{standalone: true}" (keyup)="searchByName()" placeholder="Search"
+                                    type="text">
+                            </div>
                         </div>
-                        <input class="form-control" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}"
-                            (keyup)="searchByName()" placeholder="Search" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="list-group users-list">
+                        <div *ngFor="let item of items"
+                            class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="row tile">
+                                <!-- <div class="col-md-1 image-col">
+                            <img class="image" src="{{ item.payload.doc.data().photo1 }}">
+                        </div> -->
+                                <div class="col-md-8 text-col">
+                                    <h5 class="mb-1">{{item.payload.doc.data().displayName}}</h5>
+                                    <!-- <small>Fee - Rs. {{item.payload.doc.data().fee}}</small>
+                            <small style="margin-left: 30px;">Seating Capacity -
+                                {{item.payload.doc.data().seating_capacity}}</small> -->
+                                </div>
+                                <div class="col col-md-3 actions-col">
+                                    <!-- <i class="fa fa-plus-square"></i> -->
+                                    <button class="btn btn-outline-primary action" (click)="addList(item.payload.doc.data().symptom)"
+                                        type="button"><i style="font-size: larger;" class="fa fa-plus"></i></button>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="list-group users-list">
-            <div *ngFor="let item of items"
-                class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="row tile">
-                    <!-- <div class="col-md-1 image-col">
-                        <img class="image" src="{{ item.payload.doc.data().photo1 }}">
-                    </div> -->
-                    <div class="col-md-5 text-col">
-                        <h5 class="mb-1">{{item.payload.doc.data().nameToSearch}}</h5>
-                        <!-- <small>Fee - Rs. {{item.payload.doc.data().fee}}</small>
-                        <small style="margin-left: 30px;">Seating Capacity -
-                            {{item.payload.doc.data().seating_capacity}}</small> -->
-                    </div>
-                    <div class="col col-md-6 actions-col">
-                        <button class="btn btn-outline-primary action" (click)="viewDetails(item)"
-                            type="button">Add to List</button>
-
-                    </div>
-                </div>
+            <div class="col-3">
+                <h5>Selected Symptoms</h5>
+                <p id="para">{{ this.mainArray }}</p>
+                
             </div>
+
+
         </div>
+
+
+
+
+
 
         <!-- <div class="row">
             <ul *ngFor="let club of clubs">

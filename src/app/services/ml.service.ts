@@ -21,6 +21,17 @@ export class MlService {
       .snapshotChanges()
   }
 
+  insertSymptom(formValue: any, str: string, str2: string) {
+    return this.db.collection('Symptoms').add({
+      displayName: formValue.displayName,
+      symptom: str,
+      nameToSearch: str2
+    }).then(()=>{
+      console.log("Successfully Inserted - ",formValue);
+    })
+    
+  }
+
   // getMovies(start, end): AngularFireList<any>{
   //   return this.db.list('/movies', {
   //     query: {

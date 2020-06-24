@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject, Observable, combineLatest } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MlService } from '../services/ml.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-ml',
@@ -11,13 +12,13 @@ import { MlService } from '../services/ml.service';
 export class MlComponent implements OnInit {
 
   searchterm: string;
- 
+
   startAt = new Subject();
   endAt = new Subject();
- 
+
   clubs;
   allclubs;
- 
+
   startobs = this.startAt.asObservable();
   endobs = this.endAt.asObservable();
 
@@ -27,18 +28,30 @@ export class MlComponent implements OnInit {
   name_filtered_items: Array<any>;
   age_filtered_items: Array<any>;
 
+  myform: FormGroup;
+  displayName: FormControl;
+
+  mainArray: string[] = [];
+  i: number = 0;
+
   constructor(
     private afs: AngularFirestore,
     private mlservice: MlService
-    ) { }
+  ) {
+    this.createFormControls();
+    this.createForm();
+  }
 
   ngOnInit() {
+
     this.mlservice.getUsers()
-    .subscribe(result => {
-      this.items = result;
-      this.age_filtered_items = result;
-      this.name_filtered_items = result;
-    })
+      .subscribe(result => {
+        this.items = result;
+        this.age_filtered_items = result;
+        this.name_filtered_items = result;
+      })
+
+
     // this.getallclubs().subscribe((clubs) => {
     //   this.allclubs = clubs;
     // })
@@ -49,6 +62,25 @@ export class MlComponent implements OnInit {
     // })
   }
 
+  addList(item) {
+    console.log(item);
+    var temp = item.toString();
+    var leng = this.mainArray.push(item);
+    var myJSON = JSON.stringify(this.mainArray);
+    console.log(myJSON);
+    document.getElementById("para").append(item,", ");    
+  }
+
+  createFormControls() {
+    this.displayName = new FormControl('');
+  }
+
+  createForm() {
+    this.myform = new FormGroup({
+      displayName: this.displayName
+    });
+  }
+
   searchByName() {
     let value = this.searchValue.toLowerCase();
     this.mlservice.searchUsers(value).subscribe(result => {
@@ -57,6 +89,8 @@ export class MlComponent implements OnInit {
       // this.items = this.combineLists(result, this.age_filtered_items);
     });
   }
+
+
 
   combineLists(a, b) {
     let result = [];
@@ -70,7 +104,18 @@ export class MlComponent implements OnInit {
     });
     return result;
   }
-  
+
+  addSymptom(frm) {
+    var str = frm.displayName.toLowerCase();
+    var newStr = str.replace(" ", "_");
+    console.log(newStr);
+    this.mlservice.insertSymptom(frm.value, newStr, str)
+      .then(() => {
+        this.myform.reset();
+      })
+    // console.log("Successfully Inserted - ",frm.value);
+  }
+
 
   search($event) {
     let q = $event.target.value;
@@ -86,7 +131,7 @@ export class MlComponent implements OnInit {
   firequery(start, end) {
     return this.afs.collection('epl', ref => ref.limit(4).orderBy('club').startAt(start).endAt(end)).valueChanges();
   }
- 
+
   getallclubs() {
     return this.afs.collection('epl', ref => ref.orderBy('club')).valueChanges();
   }
