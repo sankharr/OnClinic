@@ -9,6 +9,8 @@ import { PatientsComponent } from './patients.component';
 import { LiveConsultationComponent } from 'src/app/live-consultation/live-consultation.component';
 import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { ChannelingComponent } from './channeling/channeling.component';
+import { MyhealthComponent } from './myhealth/myhealth.component';
+
 
 const routes: Routes =[
 
@@ -20,6 +22,7 @@ const routes: Routes =[
      { path: 'waiting-room', component: WaitingRoomComponent },
      { path: 'channeling', component: ChannelingComponent },
      { path: 'lcp', component: LiveConsultationComponent },
+     { path: 'myhealth', component: MyhealthComponent },
   ] },  
 ];
 

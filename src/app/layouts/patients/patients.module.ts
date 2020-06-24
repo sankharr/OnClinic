@@ -7,11 +7,12 @@ import { PatientPaymentsComponent } from './patient-payments/patient-payments.co
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { ChannelingComponent } from './channeling/channeling.component';
+import { MyhealthComponent } from './myhealth/myhealth.component';
 
 
 
 @NgModule({
-  declarations: [PatientDashboardComponent , ProfileDoctorviewComponent, PatientPaymentsComponent, WaitingRoomComponent, ChannelingComponent],
+  declarations: [PatientDashboardComponent , ProfileDoctorviewComponent, PatientPaymentsComponent, WaitingRoomComponent, ChannelingComponent, MyhealthComponent],
   imports: [
     CommonModule,
     CalendarModule
