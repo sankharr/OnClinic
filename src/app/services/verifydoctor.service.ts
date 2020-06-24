@@ -18,4 +18,7 @@ export class VerifydoctorService {
     // console.log(id,data)
     return this.http.post('api/doctor_verification',[data,id])
   }
+  sendEmail(data){
+    return this.http.post('api/email',data)
+  }
 }

@@ -42,6 +42,11 @@ export class DoctorverificationComponent implements OnInit {
       console.log(res)  
     })
   }
+  sendEmail(){
+    this.verify.sendEmail(this.data).subscribe(res=>{
+      console.log(res)
+    })
+  }
 
 
 }
