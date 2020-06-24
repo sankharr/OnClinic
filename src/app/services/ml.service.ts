@@ -1,3 +1,4 @@
+import {HttpClient} from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -8,6 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class MlService {
 
   constructor(
+    private http: HttpClient,
     private db:AngularFirestore
   ) { }
 
@@ -34,6 +36,10 @@ export class MlService {
       console.log("Successfully Inserted - ",formValue);
     })
     
+  }
+  get_prediction(symptoms){
+    console.log(symptoms)
+    return this.http.post('api/predict',symptoms)
   }
 
   // getMovies(start, end): AngularFireList<any>{
