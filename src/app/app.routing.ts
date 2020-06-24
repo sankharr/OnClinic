@@ -15,7 +15,8 @@ import { TestingComponent } from './testing/testing.component';
 import { DoctorsComponent } from './layouts/doctors/doctors.component';
 import { DoctorsRoutingModule } from './layouts/doctors/doctors.routing';
 import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
-import {MailVerificationComponent} from './mail-verification/mail-verification.component'
+import {MailVerificationComponent} from './mail-verification/mail-verification.component';
+import {WelcomeComponent} from './welcome/welcome.component'
 
 import { MlComponent } from './ml/ml.component';
 import { DiseaseComponent } from './disease/disease.component';
@@ -43,6 +44,7 @@ const routes: Routes =[
     { path: 'doctorverification',component:DoctorverificationComponent},
     { path: 'emailverify',component:MailVerificationComponent},
     {path: 'addressverificatoin',component:AddressVerifyComponent},
+    {path: 'welcomepage',component:WelcomeComponent},
     { path: '', redirectTo: 'homepage', pathMatch: 'full' }
 ];
 

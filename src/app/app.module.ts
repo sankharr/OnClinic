@@ -49,6 +49,7 @@ import { ModeratorComponent } from './moderator/moderator.component';
 import { DoctorverificationComponent } from './doctorverification/doctorverification.component';
 import { MailVerificationComponent } from './mail-verification/mail-verification.component';
 import { AddressVerifyComponent } from './address-verify/address-verify.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 
@@ -84,7 +85,8 @@ var firebaseConfig = {
     ModeratorComponent,
     DoctorverificationComponent,
     MailVerificationComponent,
-    AddressVerifyComponent
+    AddressVerifyComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

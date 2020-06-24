@@ -33,12 +33,18 @@ export class AddressVerifyComponent implements OnInit {
           })
       })
   }
-
+// uid,token,name,address
   sendToken(){
     var otp = Math.floor(1000000 + Math.random() * 9000000)
-    this.doctorService.sendToken(this.user.uid,otp,this.user.displayName).subscribe(res=>{
+    this.doctorService.sendToken(this.user.uid,otp,this.user.displayName,['address']).subscribe(res=>{
       console.log(res)
     })
+  }
+
+  verifyToken(){
+    this.doctorService.verifyAddress(this.user.uid);
+    this.router.navigate(['/welcomepage'])
+
   }
 
 }

@@ -29,15 +29,24 @@ export class VerifydoctorService {
   sendPhoneOtp(id,otp){
     return this.http.post('api/phoneotp',[id,otp])
   }
-  verifyphone(id,otp){
-    return this.http.post('api/phoneverify',[id,otp])
+  verifyphone(id,x){
+    this.db.collection("Users").doc(id).update({
+      PhoneNumberVerified:x
+    })
+    // return this.http.post('api/phoneverify',[id,otp])
   }
-  sendToken(uid,token,name){
+  sendToken(uid,token,name,address){
     this.db.collection("Users").doc(uid).update({
       addressToken:token,
       addressTokenVerified:false
   })
-  return this.http.post('api/address',[name])
+  return this.http.post('api/address',[name,token,address,uid])
+  }
+  verifyAddress(uid){
+    this.db.collection("Users").doc(uid).update({
+      addressTokenVerified:true,
+    })
+    console.log('addressTokenVerified');
   }
 
 }

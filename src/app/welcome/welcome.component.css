@@ -1,0 +1,16 @@
+a{
+    color: white;
+    text-decoration: none;
+}
+
+.container{
+    background: url('../../assets/svg/welcome.svg') no-repeat;
+    background-size: cover;
+    padding: 150px;
+}
+
+#logo {
+    font-size: 2em;
+}
+
+
