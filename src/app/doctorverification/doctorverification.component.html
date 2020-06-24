@@ -3,7 +3,7 @@
         <!-- Hero for FREE version -->
         <section class="section section-lg section-hero section-shaped">
             <!-- Background circles -->
-            <div class="shape shape-style-1 shape-primary">
+            <div class="shape shape-style-1 shape-primary"> 
                 <span class="span-150"></span>
                 <span class="span-50"></span>
                 <span class="span-50"></span>
@@ -27,11 +27,11 @@
                             <div *ngIf="user?.displayName; then authenticated else guest">
                             </div>
 
-                            <ng-template #guest>
+                            <!-- <ng-template #guest>
                                 <h3>Yo Doca</h3>
-                            </ng-template>
+                            </ng-template> -->
                             <div class="lds-spinner" *ngIf="!data">
-                                <div></div>
+                                <div></div> 
                                 <div></div>
                                 <div></div>
                                 <div></div>
@@ -45,8 +45,8 @@
                                 <div></div>
                             </div>
 
-                            <div class="container2" *ngIf="data && !mailFlag">
-                                <div class="alert alert-success" role="alert" *ngIf="!data.slmcVerified">
+                            <div class="container2" *ngIf="data && !mailFlag" id="slmcok_div">
+                                <div class="alert alert-success" role="alert" *ngIf="data.slmcVerified">
                                     <h4 class="alert-heading">Account Successfully Verified by SLMC</h4>
                                     <p>Your account Successfully verified we will send verification code via post</p>
                                     <p>Thank you</p>
@@ -60,9 +60,10 @@
                                             aria-label="Username" aria-describedby="basic-addon1" value={{data.email}}
                                             disabled>
                                     </div>
-                                    <p class="btn btn-primary" (click)=sendEmail()>Continue</p>
-                                </div>
+                                    <button class="btn btn-primary" (click)="[sendEmail()]" id="slmcok">Continue</button>
 
+                                </div>
+                                
                                 <!-- <div id="dynamicCheck">
                                     <input type="button" value="Create Element" onclick="createNewElement();" />
                                 </div>
@@ -77,7 +78,9 @@
                                     <p class="btn btn-link">Ask why?</p>
                                 </div>
                             </div>
-                            <div class="alert alert-success" role="alert" *ngIf="mailFlag">
+                            <!-- <button >Continue</button> -->
+                            
+                            <div class="alert alert-success" role="alert" id="div1" style="display: none;">
                                 <h4 class="alert-heading">Enter OTP Here.</h4>
                                 <p>We send OTP to <label class="label label-primary"> {{data.email}}</label></p>
                                 <hr>

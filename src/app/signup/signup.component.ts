@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-signup',
@@ -19,7 +20,7 @@ export class SignupComponent implements OnInit {
     doctorVal: any = 0;
     user: firebase.User;
 
-    constructor(private auth: AuthService) { }
+    constructor(private auth: AuthService,private router: Router) { }
 
     ngOnInit() {
         this.auth.eventAuthErrors$.subscribe(data => {  //getting the errors of the fields
@@ -53,7 +54,8 @@ export class SignupComponent implements OnInit {
             console.log("at createDoctor with USER");   //getting registered with google account
             frm.value.email = this.user.email;
             console.log(frm.value);
-            this.auth.insertGoogleDoctorData(frm.value,this.user.uid)
+            this.auth.insertGoogleDoctorData(frm.value,this.user.uid);
+            this.router.navigate(['/doctorverification'])
         }
         else{
             console.log("at create patient TS");
