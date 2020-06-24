@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -8,9 +9,15 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class PatientDashboardComponent implements OnInit {
 
-  constructor(public auth:AuthService) { }
+  constructor(public auth:AuthService,
+                      private router:Router) { 
+  }
 
   ngOnInit(): void {
   }
+  joinlc() {
+    this.router.navigate(['/patients/waiting-room'])
+  }
 
 }
+

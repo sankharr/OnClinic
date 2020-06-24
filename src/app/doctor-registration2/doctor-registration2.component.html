@@ -1,0 +1,197 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Complete Your Profile</h2>
+  <!-- <button class="btn btn-primary" (click)=generatex()>Test</button> -->
+  <form [formGroup]="completeProfileDoctorForm" novalidate>
+
+    <div *ngIf="submitError" class="alert alert-danger">
+      Submission Failed! Please check whether you have filled all the required fields and try again!
+    </div>
+
+    <div *ngIf="submitSuccess" class="alert alert-success">
+      Succesfully Submited!
+    </div>
+
+    <div class="row mb-lg-4">
+      <div class="col-4">
+        <label for="coption"><b>Speciality</b></label>
+        <select class="form-control" formControlName="speciality" required>
+          <option *ngFor="let category of doctorCategories">{{category}}</option>
+        </select>
+
+        <div
+          *ngIf="completeProfileDoctorForm.controls['speciality'].invalid && (completeProfileDoctorForm.controls['speciality'].dirty || completeProfileDoctorForm.controls['speciality'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="completeProfileDoctorForm.controls['speciality'].errors.required">
+            Speciality is required.
+          </div>
+        </div>
+
+      </div>
+      <div class="col-4">
+        <label for="coption"><b>Fee</b></label>
+        <input class="form-control" type="text" placeholder="" formControlName="doctorFee" required>
+
+        <div
+          *ngIf="completeProfileDoctorForm.controls['doctorFee'].invalid && (completeProfileDoctorForm.controls['doctorFee'].dirty || completeProfileDoctorForm.controls['doctorFee'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="completeProfileDoctorForm.controls['doctorFee'].errors.required">
+            Fee is required.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row mb-lg-4">
+      <div class="col-4">
+        <label for="coption"><b>Maximum number of appointments that you can do per day</b></label>
+        <select class="form-control" formControlName="numberOfAppointments" required>
+          <option *ngFor="let numberx of numberOfAppointments">{{numberx}}</option>
+        </select>
+
+        <div
+          *ngIf="completeProfileDoctorForm.controls['numberOfAppointments'].invalid && (completeProfileDoctorForm.controls['numberOfAppointments'].dirty || completeProfileDoctorForm.controls['numberOfAppointments'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="completeProfileDoctorForm.controls['numberOfAppointments'].errors.required">
+            This field is required.
+          </div>
+        </div>
+
+      </div>
+      <div class="col-4  mt-lg-3">
+        <label for="coption" id="avgTime"><b>Average time per consultation (In Minutes)</b></label>
+        <input class="form-control" type="text" placeholder="" formControlName="averageConsulationTime" required>
+
+        <div
+          *ngIf="completeProfileDoctorForm.controls['averageConsulationTime'].invalid && (completeProfileDoctorForm.controls['averageConsulationTime'].dirty || completeProfileDoctorForm.controls['averageConsulationTime'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="completeProfileDoctorForm.controls['averageConsulationTime'].errors.required">
+            This field is required.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <p id="days" style="font-weight: 900; font-size:larger;">Select the starting time of the session in each day</p>
+    <div class="card impo">
+      IMPORTANT! - &nbsp; Select the times only in the days that you can do the consultations
+    </div>
+
+    <div class="row">
+      <div class="col-10">
+        <ul style="list-style: none;">
+          <li>
+            <div class="row">
+              <div class="col-5">
+                <p id="days" style="font-weight: bold;">Day of the week</p>
+              </div>
+              <div class="col-5">
+                <p id="days" style="font-weight: bold;">Starting Time</p>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-5">
+                <p id="days">Monday</p>
+              </div>
+              <div class="col-5">
+                <select class="form-control" formControlName="mondayTime">
+                  <option *ngFor="let time of times">{{time}}</option>
+                </select>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-5">
+                <p id="days">Tuesday</p>
+              </div>
+              <div class="col-5">
+                <select class="form-control" formControlName="tuesdayTime">
+                  <option *ngFor="let time of times">{{time}}</option>
+                </select>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-5">
+                <p id="days">Wednesday</p>
+              </div>
+              <div class="col-5">
+                <select class="form-control" formControlName="wednesdayTime">
+                  <option *ngFor="let time of times">{{time}}</option>
+                </select>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-5">
+                <p id="days">Thursday</p>
+              </div>
+              <div class="col-5">
+                <select class="form-control" formControlName="thursdayTime">
+                  <option *ngFor="let time of times">{{time}}</option>
+                </select>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-5">
+                <p id="days">Friday</p>
+              </div>
+              <div class="col-5">
+                <select class="form-control" formControlName="fridayTime">
+                  <option *ngFor="let time of times">{{time}}</option>
+                </select>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-5">
+                <p id="days">Saturday</p>
+              </div>
+              <div class="col-5">
+                <select class="form-control" formControlName="saturdayTime">
+                  <option *ngFor="let time of times">{{time}}</option>
+                </select>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-5">
+                <p id="days">Sunday</p>
+              </div>
+              <div class="col-5">
+                <select class="form-control" formControlName="sundayTime">
+                  <option *ngFor="let time of times">{{time}}</option>
+                </select>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <button class="btn btn-primary" type="submit" (click)="updateProfileDoctor()">Save</button>
+      </div>
+
+    </div>
+
+  </form>
+
+
+
+</div>

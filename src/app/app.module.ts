@@ -42,9 +42,7 @@ import { LiveConsultationComponent } from './live-consultation/live-consultation
 import { environment } from 'src/environments/environment';
 import { NgxAgoraModule } from 'ngx-agora';
 import { PaymentComponent } from './payment/payment.component';
-
-
-
+import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -74,7 +72,8 @@ var firebaseConfig = {
     LiveConsultationComponent,
     DoctorsListComponent,
     DoctorBookComponent,
-    PaymentComponent
+    PaymentComponent,
+    DoctorRegistration2Component
   ],
   imports: [
     BrowserModule,

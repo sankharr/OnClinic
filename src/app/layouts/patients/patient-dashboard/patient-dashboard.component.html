@@ -71,7 +71,7 @@
     <!-- end of 1st row -->
 
     <!-- 2nd row -->
-    <div class="row mainRow">
+    <div class="row" id="notfirst">
       <!--Upcomming Consultation-->
       <div class="col-lg-9">
         <div class="card shadow" id="dark">
@@ -89,7 +89,8 @@
                         <h5>Ryan Tompson</h5>
                         <h6>Cardiologist</h6>
                         <h6 class="text-primary"><b>in 15 Mins</b></h6>
-                        <a href="javascript:void(0)" class="btn btn-primary mt-4">Join</a>
+                        <button class="btn btn-primary" type="submit" (click)="joinlc()">Join</button>
+                       <!--<a href="waiting-room" button class="btn" type="submit">Learn more</a>-->
                       </div>
                   </div>
                 </div>
@@ -101,7 +102,7 @@
                         <h5>Ryan Tompson</h5>
                         <h6>Cardiologist</h6>
                         <h6 class="text-primary"><b>in 15 Mins</b></h6>
-                        <a href="javascript:void(0)" class="btn btn-primary mt-4">More</a>
+                        <button class="btn btn-primary" type="submit" (click)="startCall()">More</button>
                       </div>
                   </div>
                 </div>
@@ -113,7 +114,7 @@
                         <h5>Ryan Tompson</h5>
                         <h6>Cardiologist</h6>
                         <h6 class="text-primary"><b>in 15 Mins</b></h6>
-                        <a href="javascript:void(0)" class="btn btn-primary mt-4">More</a>
+                        <button class="btn btn-primary" type="submit" (click)="startCall()">More</button>
                       </div>
                   </div>
                 </div>

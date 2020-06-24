@@ -1,5 +1,95 @@
-:host {
-    display: block;    
-    background-color: #66e9e9;
-    margin:-3%;
+.container-fluid{
+  background-color: #16d6f0;
+  width: 102%;
+  margin-top: -0.9%;
+  height: max-content;
+  margin-left: -2%;
+}
+
+.row{
+  padding: 1.5%;
+  align-content: center;
+  min-height: max-content;
+}
+#notfirst.row{
+  margin-top:1px;
+}
+
+.card{
+  padding: 2%;
+  text-align: center;
+  align-content: center;
+  font-size: xx-large;
+  border: none;
+}
+#fixsize.card{
+  min-height: 260px;
+}
+#dark.card{
+  background-color:#a970b1;
+}
+#light.card{
+  background-color:#dca6e4;
+}
+#space.card{
+  margin-top: 10px;
+}
+.btn{
+  height: 38px;
+  background-color: #820fd4;
+  color: aliceblue;
+  width: fit-content;
+  align-self: center;
+  padding: 0%;
+  padding-left: 10px;
+  padding-right: 10px;
+  /*padding-bottom: 30px;*/
+}
+
+.image-man{
+  width: 150px;
+  height: 350px;
+  align-self: center;
+}
+.rounded-circle{
+  width: 120px;
+  align-self: center;
+}
+
+ejs-calendar{
+  z-index: 3; 
+  max-width: fit-content;
+  min-width: fit-content;
+}
+
+@media screen and (max-width: 1366px){
+  .container-fluid{   
+    width: 105%; 
+    margin-top: -1.5%;
+    margin-left: -3%;
+    padding-left: -2%;
   }
+
+}
+
+@media screen and (max-width: 500px){
+  .container-fluid{   
+    width: 105%; 
+    margin-left: -6%;
+    margin-top: -6%; 
+    padding-left: 0%;  
+    padding-right: 0%;
+  }
+  .row{
+    padding: 5%;
+  }
+  #notfirst.row{
+    margin-top: -5%;
+  }
+  #dark.card{
+    margin-top: 10px;
+  }
+}
+
+
+  
