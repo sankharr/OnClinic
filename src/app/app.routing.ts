@@ -17,6 +17,8 @@ import { DoctorsRoutingModule } from './layouts/doctors/doctors.routing';
 import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
 
 import { MlComponent } from './ml/ml.component';
+import { DiseaseComponent } from './disease/disease.component';
+
 
 
 const routes: Routes =[
@@ -31,6 +33,7 @@ const routes: Routes =[
     { path: 'testing', component:TestingComponent},
     { path: 'doctor-completeProfile', component:DoctorRegistration2Component},
     { path: 'ml', component:MlComponent},
+    { path: 'disease', component: DiseaseComponent },
     { path: '', redirectTo: 'homepage', pathMatch: 'full' }
 ];
 

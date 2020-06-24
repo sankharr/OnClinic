@@ -44,6 +44,7 @@ import { DoctorRegistration2Component } from './doctor-registration2/doctor-regi
 import {HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { MlComponent } from './ml/ml.component';
+import { DiseaseComponent } from './disease/disease.component';
 
 
 
@@ -74,7 +75,8 @@ var firebaseConfig = {
     SidebarComponent,
     LiveConsultationComponent,
     DoctorRegistration2Component,
-    MlComponent
+    MlComponent,
+    DiseaseComponent
   ],
   imports: [
     BrowserModule,
