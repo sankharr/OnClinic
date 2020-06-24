@@ -108,7 +108,7 @@ export class MlComponent implements OnInit {
 
   addSymptom(frm) {
     var str = frm.displayName.toLowerCase();
-    var newStr = str.replace(" ", "_");
+    var newStr = str.split(' ').join('_');  
     console.log(newStr);
     this.mlservice.insertSymptom(frm.value, newStr, str)
       .then(() => {
@@ -135,6 +135,14 @@ export class MlComponent implements OnInit {
 
   getallclubs() {
     return this.afs.collection('epl', ref => ref.orderBy('club')).valueChanges();
+  }
+
+  get_prediction(){
+    console.log('hiiii')
+    // const symtoms = ["chest_pain","sweating","fatigue"]
+    this.mlservice.get_prediction(this.mainArray).subscribe((res)=>{
+      console.log(res)
+    })
   }
 
 }
