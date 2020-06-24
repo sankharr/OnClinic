@@ -18,6 +18,9 @@ import { DoctorRegistration2Component } from './doctor-registration2/doctor-regi
 
 import { MlComponent } from './ml/ml.component';
 import { DiseaseComponent } from './disease/disease.component';
+import { DoctorverificationComponent } from './doctorverification/doctorverification.component';
+import { ModeratorComponent } from './moderator/moderator.component';
+
 
 
 
@@ -34,6 +37,8 @@ const routes: Routes =[
     { path: 'doctor-completeProfile', component:DoctorRegistration2Component},
     { path: 'ml', component:MlComponent},
     { path: 'disease', component: DiseaseComponent },
+    { path: 'moderator', component:ModeratorComponent},
+    { path: 'doctorverification',component:DoctorverificationComponent},
     { path: '', redirectTo: 'homepage', pathMatch: 'full' }
 ];
 
