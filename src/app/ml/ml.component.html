@@ -41,16 +41,20 @@
                                 <!-- <div class="col-md-1 image-col">
                             <img class="image" src="{{ item.payload.doc.data().photo1 }}">
                         </div> -->
-                                <div class="col-md-8 text-col">
+                                <div class="col-md-6 text-col">
                                     <h5 class="mb-1">{{item.payload.doc.data().displayName}}</h5>
                                     <!-- <small>Fee - Rs. {{item.payload.doc.data().fee}}</small>
                             <small style="margin-left: 30px;">Seating Capacity -
                                 {{item.payload.doc.data().seating_capacity}}</small> -->
                                 </div>
-                                <div class="col col-md-3 actions-col">
+                                <div class="col col-md-6 actions-col">
                                     <!-- <i class="fa fa-plus-square"></i> -->
-                                    <button class="btn btn-outline-primary action" (click)="addList(item.payload.doc.data().symptom)"
+                                    <div class="row">
+                                        <button class="btn btn-outline-primary action" (click)="delete(item.payload.doc.id)" type="button"><i style="font-size: larger;" class="fa fa-trash"></i></button>
+                                        <button class="btn btn-outline-primary action" (click)="addList(item.payload.doc.data().symptom)"
                                         type="button"><i style="font-size: larger;" class="fa fa-plus"></i></button>
+                                    </div>
+                                    
 
                                 </div>
                             </div>
@@ -61,9 +65,6 @@
             <div class="col-3">
                 <h5>Selected Symptoms</h5>
                 <p id="para">{{ this.mainArray }}</p>
-                <div>
-                    <button class="btn btn-danger" (click)="get_prediction()">Predict</button>
-                </div>
                 
             </div>
 

@@ -62,6 +62,21 @@ export class MlComponent implements OnInit {
     // })
   }
 
+  delete(itemId){
+    // console.log(item);
+    this.mlservice.deleteUser(itemId)
+    .then(
+      res => {
+            console.log("successfully deleted!");
+
+        // this.router.navigate(['/home']);
+      },
+      // err => {
+      //   console.log(err);
+      // }
+    )
+  }
+
   addList(item) {
     console.log(item);
     var temp = item.toString();
@@ -108,7 +123,7 @@ export class MlComponent implements OnInit {
 
   addSymptom(frm) {
     var str = frm.displayName.toLowerCase();
-    var newStr = str.split(' ').join('_');  
+    var newStr = str.replace(" ", "_");
     console.log(newStr);
     this.mlservice.insertSymptom(frm.value, newStr, str)
       .then(() => {
@@ -135,14 +150,6 @@ export class MlComponent implements OnInit {
 
   getallclubs() {
     return this.afs.collection('epl', ref => ref.orderBy('club')).valueChanges();
-  }
-
-  get_prediction(){
-    console.log('hiiii')
-    // const symtoms = ["chest_pain","sweating","fatigue"]
-    this.mlservice.get_prediction(this.mainArray).subscribe((res)=>{
-      console.log(res)
-    })
   }
 
 }
