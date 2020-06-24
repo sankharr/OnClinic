@@ -1,5 +1,6 @@
 import {HttpClient} from '@angular/common/http'
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 // import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
 // import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -9,6 +10,7 @@ import { Injectable } from '@angular/core';
 export class VerifydoctorService {
 
   constructor(
+    private db: AngularFirestore,
     private http: HttpClient,
     // private db:AngularFirestore
   ) { }
@@ -30,4 +32,13 @@ export class VerifydoctorService {
   verifyphone(id,otp){
     return this.http.post('api/phoneverify',[id,otp])
   }
+  sendToken(uid,token,name){
+    this.db.collection("Users").doc(uid).update({
+      addressToken:token,
+      addressTokenVerified:false
+  })
+  return this.http.post('api/address',[name])
+  }
+
 }
+

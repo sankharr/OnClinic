@@ -21,6 +21,7 @@ import { MlComponent } from './ml/ml.component';
 import { DiseaseComponent } from './disease/disease.component';
 import { DoctorverificationComponent } from './doctorverification/doctorverification.component';
 import { ModeratorComponent } from './moderator/moderator.component';
+import { AddressVerifyComponent } from './address-verify/address-verify.component';
 
 
 
@@ -41,6 +42,7 @@ const routes: Routes =[
     { path: 'moderator', component:ModeratorComponent},
     { path: 'doctorverification',component:DoctorverificationComponent},
     { path: 'emailverify',component:MailVerificationComponent},
+    {path: 'addressverificatoin',component:AddressVerifyComponent},
     { path: '', redirectTo: 'homepage', pathMatch: 'full' }
 ];
 
