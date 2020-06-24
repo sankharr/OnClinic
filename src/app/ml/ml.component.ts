@@ -68,6 +68,7 @@ export class MlComponent implements OnInit {
     var leng = this.mainArray.push(item);
     var myJSON = JSON.stringify(this.mainArray);
     console.log(myJSON);
+    console.log(this.mainArray);
     document.getElementById("para").append(item,", ");    
   }
 
