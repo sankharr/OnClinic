@@ -15,10 +15,10 @@ export class VerifydoctorService {
 
   verifyDoctor(id,data){
     // console.log("At service")
-    // console.log(id,data)
+    console.log(id,data)
     return this.http.post('api/doctor_verification',[data,id])
   }
-  sendEmail(data){
-    return this.http.post('api/email',data)
+  sendEmail(id,data){
+    return this.http.post('api/email',[data,id])
   }
 }

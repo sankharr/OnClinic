@@ -45,7 +45,7 @@
                                 <div></div>
                             </div>
 
-                            <div class="container2" *ngIf="data">
+                            <div class="container2" *ngIf="data && !mailFlag">
                                 <div class="alert alert-success" role="alert" *ngIf="!data.slmcVerified">
                                     <h4 class="alert-heading">Account Successfully Verified by SLMC</h4>
                                     <p>Your account Successfully verified we will send verification code via post</p>
@@ -69,13 +69,27 @@
 
                                 <div id="newElementId">New inputbox goes here:</div> -->
 
-                                <div class="alert alert-danger" role="alert" *ngIf="!data.slmcVerified">
+                                <div class="alert alert-danger" role="alert" *ngIf="!data.slmcVerified && !mailFlag">
                                     <h4 class="alert-heading">Verification faield:</h4>
                                     <p>No Doctor data associated with this credintials</p>
                                     <hr>
                                     <p class="mb-0">Thank you</p>
                                     <p class="btn btn-link">Ask why?</p>
                                 </div>
+                            </div>
+                            <div class="alert alert-success" role="alert" *ngIf="mailFlag">
+                                <h4 class="alert-heading">Enter OTP Here.</h4>
+                                <p>We send OTP to <label class="label label-primary"> {{data.email}}</label></p>
+                                <hr>
+                                <p>Submit your otp here</p>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">OTP</span>
+                                    </div>
+                                    <input type="text" class="form-control" 
+                                        aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <p class="btn btn-primary" (click)=onComplete(Username.values)>Continue</p>
                             </div>
 
                             <!-- <ng-template #authenticated> -->

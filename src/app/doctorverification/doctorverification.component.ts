@@ -14,6 +14,7 @@ export class DoctorverificationComponent implements OnInit {
   user: firebase.User;
   data: any;
   flag: any;
+  mailFlag:any;
 
   constructor(
     private auth: AuthService,
@@ -43,10 +44,20 @@ export class DoctorverificationComponent implements OnInit {
     })
   }
   sendEmail(){
-    this.verify.sendEmail(this.data).subscribe(res=>{
+    this.mailFlag = true;
+    this.verify.sendEmail(this.user.uid,this.data).subscribe(res=>{
       console.log(res)
     })
   }
+
+  onSubmit(otp){
+    // if(this.data.OTP === )
+    console.log(otp)
+  }
+
+
+
+
 
 
 }
