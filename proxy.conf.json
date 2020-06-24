@@ -1,0 +1,11 @@
+{
+    "/api/*":{
+        "target":"https://onclinic-test.herokuapp.com/api",
+        "secure":false,
+        "logLevel":"debug",
+        "changeOrigin":true,
+        "pathRewrite":{
+            "^/api":""
+        }
+    }
+}

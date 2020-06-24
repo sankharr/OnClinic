@@ -44,6 +44,16 @@ import { NgxAgoraModule } from 'ngx-agora';
 import { PaymentComponent } from './payment/payment.component';
 import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
 
+import {HttpModule} from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { MlComponent } from './ml/ml.component';
+import { DiseaseComponent } from './disease/disease.component';
+import { ModeratorComponent } from './moderator/moderator.component';
+import { DoctorverificationComponent } from './doctorverification/doctorverification.component';
+import { MailVerificationComponent } from './mail-verification/mail-verification.component';
+import { AddressVerifyComponent } from './address-verify/address-verify.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
   authDomain: "onclinic-dd11a.firebaseapp.com",
@@ -70,6 +80,14 @@ var firebaseConfig = {
     TestingComponent,
     SidebarComponent,
     LiveConsultationComponent,
+    DoctorRegistration2Component,
+    MlComponent,
+    DiseaseComponent,
+    ModeratorComponent,
+    DoctorverificationComponent,
+    MailVerificationComponent,
+    AddressVerifyComponent,
+    WelcomeComponent,
     DoctorsListComponent,
     DoctorBookComponent,
     PaymentComponent,
@@ -92,7 +110,9 @@ var firebaseConfig = {
     PatientsModule,
     DoctorsRoutingModule,
     CalendarModule,
-    NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
+    NgxAgoraModule.forRoot({ AppID: environment.agora.appId }),
+    HttpModule,
+    HttpClientModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

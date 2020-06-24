@@ -1,0 +1,195 @@
+import { Component, OnInit } from '@angular/core';
+import { Subject, Observable, combineLatest } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { MlService } from '../services/ml.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import { newArray } from '@angular/compiler/src/util';
+
+@Component({
+  selector: 'app-ml',
+  templateUrl: './ml.component.html',
+  styleUrls: ['./ml.component.css']
+})
+export class MlComponent implements OnInit {
+
+  searchterm: string;
+
+  startAt = new Subject();
+  endAt = new Subject();
+
+  clubs;
+  allclubs;
+
+  startobs = this.startAt.asObservable();
+  endobs = this.endAt.asObservable();
+
+  ageValue: number = 0;
+  searchValue: string = "";
+  items: Array<any>;
+  name_filtered_items: Array<any>;
+  age_filtered_items: Array<any>;
+
+  myform: FormGroup;
+  displayName: FormControl;
+
+  mainArray: string[] = [];
+  i: number = 0;
+
+  constructor(
+    private afs: AngularFirestore,
+    private mlservice: MlService
+  ) {
+    this.createFormControls();
+    this.createForm();
+  }
+
+  ngOnInit() {
+
+    this.mlservice.getUsers()
+      .subscribe(result => {
+        this.items = result;
+        this.age_filtered_items = result;
+        this.name_filtered_items = result;
+      })
+
+
+    // this.getallclubs().subscribe((clubs) => {
+    //   this.allclubs = clubs;
+    // })
+    // Observable.combineLatest(this.startobs, this.endobs).subscribe((value) => {
+    //   this.firequery(value[0], value[1]).subscribe((clubs) => {
+    //     this.clubs = clubs;
+    //   })
+    // })
+  }
+
+  delete(doc) {
+    // console.log(item);
+    this.mlservice.deleteUser(doc.id)
+      .then(
+        res => {
+          console.log("successfully deleted! - ",doc.data().displayName);
+
+          // this.router.navigate(['/home']);
+        },
+        // err => {
+        //   console.log(err);
+        // }
+      )
+  }
+
+  addList(item) {
+    console.log(item);
+    var temp = item.toString();
+    var leng = this.mainArray.push(item);
+    var myJSON = JSON.stringify(this.mainArray);
+    console.log(myJSON);
+    console.log(this.mainArray);
+
+    //to make these view good on the text area
+    // var tempStr = this.mainArray.toString()
+    // var newStr = tempStr.split(',').join('\n');
+    // (<HTMLInputElement>document.getElementById("para")).value = newStr;
+
+    (<HTMLInputElement>document.getElementById("para")).value = this.mainArray.toString();
+    // document.getElementById("para").append(item, ", ");
+
+
+  }
+
+  createFormControls() {
+    this.displayName = new FormControl('');
+  }
+
+  createForm() {
+    this.myform = new FormGroup({
+      displayName: this.displayName
+    });
+  }
+
+  searchByName() {
+    let value = this.searchValue.toLowerCase();
+    this.mlservice.searchUsers(value).subscribe(result => {
+      // this.name_filtered_items = result;
+      this.items = result;
+      // this.items = this.combineLists(result, this.age_filtered_items);
+    });
+  }
+
+
+
+  combineLists(a, b) {
+    let result = [];
+
+    a.filter(x => {
+      return b.filter(x2 => {
+        if (x2.payload.doc.id == x.payload.doc.id) {
+          result.push(x2);
+        }
+      });
+    });
+    return result;
+  }
+
+  addSymptom(frm) {
+    var str = frm.displayName.toLowerCase();
+    var newStr = str.split(' ').join('_');
+    console.log(newStr);
+    this.mlservice.insertSymptom(frm.value, newStr, str)
+      .then(() => {
+        this.myform.reset();
+      })
+    // console.log("Successfully Inserted - ",frm.value);
+  }
+
+
+  search($event) {
+    let q = $event.target.value;
+    if (q != '') {
+      this.startAt.next(q);
+      this.endAt.next(q + "\uf8ff");
+    }
+    else {
+      this.clubs = this.allclubs;
+    }
+  }
+
+  firequery(start, end) {
+    return this.afs.collection('epl', ref => ref.limit(4).orderBy('club').startAt(start).endAt(end)).valueChanges();
+  }
+
+  getallclubs() {
+    return this.afs.collection('epl', ref => ref.orderBy('club')).valueChanges();
+  }
+
+  get_prediction() {
+    console.log('hiiii')
+    // const symtoms = ["chest_pain","sweating","fatigue"]
+    this.mlservice.get_prediction(this.mainArray)
+    .subscribe((res) => {
+      console.log(res);
+      (<HTMLInputElement>document.getElementById("prediction")).value = res.toString();
+      console.log(this.mainArray)
+
+                              //resetting the textarea 
+      // this.mainArray.length = 0;
+      // console.log(this.mainArray);
+      // (<HTMLInputElement>document.getElementById("para")).value = this.mainArray.toString();
+
+    },
+    (err) => {
+      alert("ERROR");
+      console.log("ERROR!!!!! ----  ",err);
+    }
+    );
+  }
+
+  eraseText() {
+    this.mainArray.length = 0;
+    console.log(this.mainArray);
+    (<HTMLInputElement>document.getElementById("para")).value = this.mainArray.toString();
+    (<HTMLInputElement>document.getElementById("prediction")).value = "";
+
+  }
+
+}
