@@ -3,6 +3,7 @@ import { Subject, Observable, combineLatest } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MlService } from '../services/ml.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-ml',
@@ -62,19 +63,19 @@ export class MlComponent implements OnInit {
     // })
   }
 
-  delete(itemId){
+  delete(doc) {
     // console.log(item);
-    this.mlservice.deleteUser(itemId)
-    .then(
-      res => {
-            console.log("successfully deleted!");
+    this.mlservice.deleteUser(doc.id)
+      .then(
+        res => {
+          console.log("successfully deleted! - ",doc.data().displayName);
 
-        // this.router.navigate(['/home']);
-      },
-      // err => {
-      //   console.log(err);
-      // }
-    )
+          // this.router.navigate(['/home']);
+        },
+        // err => {
+        //   console.log(err);
+        // }
+      )
   }
 
   addList(item) {
@@ -84,7 +85,16 @@ export class MlComponent implements OnInit {
     var myJSON = JSON.stringify(this.mainArray);
     console.log(myJSON);
     console.log(this.mainArray);
-    document.getElementById("para").append(item,", ");    
+
+    //to make these view good on the text area
+    // var tempStr = this.mainArray.toString()
+    // var newStr = tempStr.split(',').join('\n');
+    // (<HTMLInputElement>document.getElementById("para")).value = newStr;
+
+    (<HTMLInputElement>document.getElementById("para")).value = this.mainArray.toString();
+    // document.getElementById("para").append(item, ", ");
+
+
   }
 
   createFormControls() {
@@ -123,7 +133,7 @@ export class MlComponent implements OnInit {
 
   addSymptom(frm) {
     var str = frm.displayName.toLowerCase();
-    var newStr = str.split(' ').join('_');  
+    var newStr = str.split(' ').join('_');
     console.log(newStr);
     this.mlservice.insertSymptom(frm.value, newStr, str)
       .then(() => {
@@ -152,12 +162,34 @@ export class MlComponent implements OnInit {
     return this.afs.collection('epl', ref => ref.orderBy('club')).valueChanges();
   }
 
-  get_prediction(){
+  get_prediction() {
     console.log('hiiii')
     // const symtoms = ["chest_pain","sweating","fatigue"]
-    this.mlservice.get_prediction(this.mainArray).subscribe((res)=>{
-      console.log(res)
-    })
+    this.mlservice.get_prediction(this.mainArray)
+    .subscribe((res) => {
+      console.log(res);
+      (<HTMLInputElement>document.getElementById("prediction")).value = res.toString();
+      console.log(this.mainArray)
+
+                              //resetting the textarea 
+      // this.mainArray.length = 0;
+      // console.log(this.mainArray);
+      // (<HTMLInputElement>document.getElementById("para")).value = this.mainArray.toString();
+
+    },
+    (err) => {
+      alert("ERROR");
+      console.log("ERROR!!!!! ----  ",err);
+    }
+    );
+  }
+
+  eraseText() {
+    this.mainArray.length = 0;
+    console.log(this.mainArray);
+    (<HTMLInputElement>document.getElementById("para")).value = this.mainArray.toString();
+    (<HTMLInputElement>document.getElementById("prediction")).value = "";
+
   }
 
 }

@@ -17,10 +17,10 @@
 
         <!-- <input type="text" [(ngModel)]="searchterm" (keydown)="search($event)"> -->
         <div class="row">
-            <div class="col-9">
+            <div class="col-8">
                 <h5 style="margin-top: 30px;">Symptoms Finder</h5>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-9">
                         <div class="form-group">
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="col">
                     <div class="list-group users-list">
                         <div *ngFor="let item of items"
                             class="list-group-item list-group-item-action flex-column align-items-start">
@@ -50,8 +50,8 @@
                                 <div class="col col-md-6 actions-col">
                                     <!-- <i class="fa fa-plus-square"></i> -->
                                     <div class="row">
-                                        <button class="btn btn-outline-primary action" (click)="delete(item.payload.doc.id)" type="button"><i style="font-size: larger;" class="fa fa-trash"></i></button>
-                                        <button class="btn btn-outline-primary action" (click)="addList(item.payload.doc.data().symptom)"
+                                        <button class="btn btn-outline-primary action" (click)="delete(item.payload.doc)" type="button"><i style="font-size: larger;" class="fa fa-trash"></i></button>
+                                        <button style="margin-left: 50px;" class="btn btn-outline-primary action" (click)="addList(item.payload.doc.data().symptom)"
                                         type="button"><i style="font-size: larger;" class="fa fa-plus"></i></button>
                                     </div>
                                     
@@ -64,9 +64,19 @@
             </div>
             <div class="col-3">
                 <h5>Selected Symptoms</h5>
-                <p id="para">{{ this.mainArray }}</p>
+                <div class="row">
+                    <textarea disabled type="text" id="para" style="width: 210px; height: 300px; background-color: white;"></textarea>
                 <div>
-                    <button class="btn btn-danger" (click)="get_prediction()">Predict</button>
+                    <button class="btn btn-danger" style="margin-top: 20px; margin-bottom: 40px;" (click)="get_prediction()">Predict</button>
+                    <button class="btn btn-outline-primary" style=" margin-top: 20px; margin-bottom: 40px;" (click)="eraseText()">Clear</button>
+                </div>
+                </div>
+                <!-- <p id="para">{{ this.mainArray }}</p> -->
+                <h5>Predicted Disease</h5>
+                <div class="row">
+                    <!-- <p id="prediction"></p> -->
+                    <textarea disabled style="background-color: white; width: 210px;" type="text" id="prediction"></textarea>
+
                 </div>
                 
             </div>
