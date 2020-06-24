@@ -183,7 +183,8 @@ export class AuthService {
         if (role == "doctor") {
           this.insertDoctorData(userCredential)
             .then(() => {
-              this.router.navigate(['/doctor-completeProfile']);
+              // this.router.navigate(['/doctor-completeProfile']);
+              this.router.navigate(['/doctorverification']);
             });
         }
 
