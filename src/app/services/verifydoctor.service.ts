@@ -24,4 +24,10 @@ export class VerifydoctorService {
   verifyEmail(id,code){
     return this.http.post('api/emailverify',[id,code])
   }
+  sendPhoneOtp(id,otp){
+    return this.http.post('api/phoneotp',[id,otp])
+  }
+  verifyphone(id,otp){
+    return this.http.post('api/phoneverify',[id,otp])
+  }
 }
