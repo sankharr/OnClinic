@@ -3,6 +3,7 @@ import { Router, ActivatedRouteSnapshot, Params, ActivatedRoute, RouterLinkActiv
 import { VerifydoctorService } from '../services/verifydoctor.service';
 import { CoreAuthService } from '../core/core-auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { HttpClient } from '@angular/common/http';
 
 // import {ActivatedRouteSnapshot} from ''
 
@@ -21,6 +22,7 @@ export interface IAlert {
   styleUrls: ['./mail-verification.component.css']
 })
 export class MailVerificationComponent implements OnInit {
+  touched:boolean = false
   user: firebase.User;
   @Input()
   public alerts: Array<IAlert> = [];
@@ -30,6 +32,7 @@ export class MailVerificationComponent implements OnInit {
   // flag: true;
 
   constructor(
+     private http: HttpClient,
     private router: Router,
     private _router: ActivatedRoute,
     private doctorService: VerifydoctorService,
@@ -88,11 +91,18 @@ export class MailVerificationComponent implements OnInit {
   //   })
   // }
 
+  _touched(){
+    setTimeout(()=>{
+      this.touched = true;
+ }, 2000);
+    
+  }
+
   phoneVerify() {
     // var otp = 731892
     // if(otp==) 
     this.doctorService.verifyphone(this.user.uid,true)
-    this.router.navigate(['/addressverificatoin'])
+    // this.router.navigate(['/addressverificatoin'])
   }
 
 
@@ -101,6 +111,13 @@ export class MailVerificationComponent implements OnInit {
     this.doctorService.sendPhoneOtp(this.user.uid, otp).subscribe(res => {
       console.log(res)
     })
+  }
+
+  loadSomething() {
+    this.http.get('https://www.mocky.io/v2/5ab2663b2e00003d044cc144?mocky-delay=1000ms')
+      .subscribe(data => {
+        console.log('Yo', data);
+      });
   }
   // changeFlag(){
   //   this.flag = false

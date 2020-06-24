@@ -24,7 +24,7 @@ export class VerifydoctorService {
     return this.http.post('api/email',[data,id])
   }
   verifyEmail(id,code){
-    return this.http.post('api/emailverify',[id,code])
+    return this.http.post('api/emailverify',[id,code])  
   }
   sendPhoneOtp(id,otp){
     return this.http.post('api/phoneotp',[id,otp])

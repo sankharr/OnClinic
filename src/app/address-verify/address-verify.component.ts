@@ -10,7 +10,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./address-verify.component.css']
 })
 export class AddressVerifyComponent implements OnInit {
+  touched:boolean = false
   user: firebase.User;
+  send:boolean=true;
+  sent:boolean=false;
+  // div3:boolean=true;
   data: any;
   constructor(
     private router: Router,
@@ -46,5 +50,11 @@ export class AddressVerifyComponent implements OnInit {
     this.router.navigate(['/welcomepage'])
 
   }
+_touched(){
+  setTimeout(()=>{
+    this.touched = true;
+}, 2000);
+  
+}
 
 }

@@ -1,6 +1,6 @@
 {
     "/api/*":{
-        "target":"http://localhost:5000/api",
+        "target":"https://onclinic-test.herokuapp.com/api",
         "secure":false,
         "logLevel":"debug",
         "changeOrigin":true,
