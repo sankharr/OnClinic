@@ -31,13 +31,13 @@
                                 <h3>Yo Doca</h3>
                             </ng-template>
 
-                            <div class="alert alert-success" role="alert" *ngIf="flag">
+                            <div class="alert alert-success" role="alert" *ngIf="data.slmcVerified">
                                 <h4 class="alert-heading">AccountSuccessfully Verified</h4>
                                 <p>Your account Successfully verified we will send verification code via post</p>
                                 <hr>
                                 <p class="mb-0">Thank you</p>
                             </div>
-                            <div class="alert alert-danger" role="alert" *ngIf="!flag">
+                            <div class="alert alert-danger" role="alert" *ngIf="!data.slmcVerified">
                                 <h4 class="alert-heading">Verification faield:</h4>
                                 <p>No Doctor data associated with this credintials</p>
                                 <hr>
