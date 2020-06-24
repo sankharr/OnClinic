@@ -41,6 +41,10 @@ import { environment } from 'src/environments/environment';
 import { NgxAgoraModule } from 'ngx-agora';
 import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
 
+import {HttpModule} from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { MlComponent } from './ml/ml.component';
+
 
 
 var firebaseConfig = {
@@ -69,7 +73,8 @@ var firebaseConfig = {
     TestingComponent,
     SidebarComponent,
     LiveConsultationComponent,
-    DoctorRegistration2Component
+    DoctorRegistration2Component,
+    MlComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +93,9 @@ var firebaseConfig = {
     PatientsModule,
     DoctorsRoutingModule,
     CalendarModule,
-    NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
+    NgxAgoraModule.forRoot({ AppID: environment.agora.appId }),
+    HttpModule,
+    HttpClientModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
