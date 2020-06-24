@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div class="section">
+<div class="container">
+  
+  <div class="row">
+    <div class="col-4">
+      <h1>Doctors List</h1>
+    </div>
+    <div class="col-4">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort By
+        </button>
+        <div class="dropdown-menu" aria-labelledby="Sort_By">
+          <a class="dropdown-item" href="doctors-list">Ratings</a>
+          <a class="dropdown-item" href="doctors-list">Accending</a>
+          <a class="dropdown-item" href="doctors-list">Decending</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Specialized in
+        </button>
+        <div class="dropdown-menu" aria-labelledby="Specialized_in">
+          <a class="dropdown-item" href="doctors-list">Physiological</a>
+          <a class="dropdown-item" href="doctors-list">Psychological</a>
+          <a class="dropdown-item" href="doctors-list">Genaral</a>
+        </div>
+      </div>
+    </div>
+
+</div>
+  <div class="list-group">
+    <div class="list-group-item" *ngFor="let item of items">
+      <div class="row">
+        <div class="col-8">
+          {{item.payload.doc.data().name}} <br>
+          category
+
+        </div>
+        <div class="col-2">
+          Ratings <br>
+        </div>
+        <div class="col-2">
+          <a href="doctor-book" button class="btn btn-primary" type="submit" >Book Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
