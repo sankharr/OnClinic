@@ -27,8 +27,13 @@ export class VerifydoctorService {
     return this.http.post('api/emailverify',[id,code])  
   }
   sendPhoneOtp(id,otp){
-    return this.http.post('api/phoneotp',[id,otp])
+     return this.http.post('api/phoneotp',[id,otp])
   }
+  
+  sendOtpText(message,phoneNumber){
+    return this.http.post('api/sendtextmessage',[message,phoneNumber])
+  }
+
   verifyphone(id,x){
     this.db.collection("Users").doc(id).update({
       PhoneNumberVerified:x
