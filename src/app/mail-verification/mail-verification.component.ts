@@ -61,7 +61,7 @@ export class MailVerificationComponent implements OnInit {
         docRef.valueChanges()
           .subscribe(result => {
             this.data = result;
-            console.log(result);
+            console.log(this.data.telno);
             // console.log(user.PhoneNumberVerified+"PhoneNumberVerified ")
             this.contunue(id,user.uid,code)
           })
@@ -108,16 +108,12 @@ export class MailVerificationComponent implements OnInit {
 
   phoneOtp() {
     var otp = Math.floor(100000 + Math.random() * 900000)
-    this.doctorService.sendPhoneOtp(this.user.uid, otp).subscribe(res => {
-      console.log(res)
-    })
-  }
-
-  loadSomething() {
-    this.http.get('https://www.mocky.io/v2/5ab2663b2e00003d044cc144?mocky-delay=1000ms')
-      .subscribe(data => {
-        console.log('Yo', data);
-      });
+    var message = "Hello this is your verification code: "+ otp;
+    this.doctorService.sendPhoneOtp(this.user.uid,otp).subscribe(res=>{
+      this.doctorService.sendOtpText(message,this.data.telno).subscribe(res=>{
+        console.log(res)
+      })
+    });
   }
   // changeFlag(){
   //   this.flag = false
