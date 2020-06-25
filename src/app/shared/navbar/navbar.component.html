@@ -1,6 +1,6 @@
 <nav id="navbar-main"
-  class="navbar navbar-main navbar-expand-lg navbar-transparent bg-default navbar-dark">
-  <div class="container">
+  class="navbar navbar-main navbar-expand navbar-transparent bg-default navbar-dark">
+  <div class="container-fluid">
     <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
       <img src="./assets/img/brand/onclinic-logo.png">
     </a>
@@ -104,11 +104,43 @@
           </a>
         </li> -->
         <li class="nav-item d-lg-block ml-lg-4">
+          <a href="patients/dashboard" class="nav-link no-caret">
+            <span class="btn-inner--icon">
+              <i class="fa fa-home mr-2"></i>
+            </span>
+            <span class="nav-link-inner--text">Patients</span>
+          </a>
+        </li>
+        <li class="nav-item d-lg-block ml-lg-4">
+          <a href="doctors/dashboard" class="nav-link no-caret">
+            <span class="btn-inner--icon">
+              <i class="fa fa-home mr-2"></i>
+            </span>
+            <span class="nav-link-inner--text">Doctors</span>
+          </a>
+        </li>
+        <li class="nav-item d-lg-block ml-lg-4">
+          <a href="doctor-completeProfile" class="nav-link no-caret">
+            <span class="btn-inner--icon">
+              <i class="fa fa-home mr-2"></i>
+            </span>
+            <span class="nav-link-inner--text">Doctor-CompleteProfile</span>
+          </a>
+        </li>
+        <li class="nav-item d-lg-block ml-lg-4">
           <a href="homepage" class="nav-link no-caret">
             <span class="btn-inner--icon">
               <i class="fa fa-home mr-2"></i>
             </span>
             <span class="nav-link-inner--text">Home</span>
+          </a>
+        </li>
+        <li class="nav-item d-lg-block ml-lg-4">
+          <a href="doctors-list" class="nav-link no-caret">
+            <span class="btn-inner--icon">
+              <i class="fa fa-search mr-2"></i>
+            </span>
+            <span class="nav-link-inner--text">Doctors List</span>
           </a>
         </li>
         <li *ngIf="!user" class="nav-item d-lg-block ml-lg-4">

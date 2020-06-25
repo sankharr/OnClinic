@@ -1,0 +1,17 @@
+.main{
+    margin-left: 60px;
+    margin-top: 40px;
+}
+
+/* .actions-col{
+    display: flex;
+    align-items: flex-end;
+    right: 0;
+    /* right: 0; */
+
+
+.col.col-md-6.actions-col{
+    display: flex;
+    align-items: flex-end;
+    right: 0;
+}

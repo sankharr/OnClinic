@@ -1,1 +1,163 @@
-<p>doctor-dashboard works!</p>
+<div class="container-fluid">
+  <div class="col-lg-12">
+
+    <!-- 1st row -->
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card bg-default">
+          <div class="card-body">
+            <div class="chart">
+              <!-- Chart wrapper -->
+              <canvas id="chart-sales" class="chart-canvas" ></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End of Health details-->
+
+      <!--Calander-->
+      <div class="col-lg-4">
+        <div class="card shadow" id="dark">
+            <div class="card shadow">
+              <div class="card" id="light">
+                <h6><b>Calender</b></h6>
+              </div>
+            </div>
+            <div class="card" id="space">
+              <ejs-calendar id=calendar [values]='value' [isMultiSelection]='multiselect' ></ejs-calendar>
+            </div>
+        </div>
+      </div>
+      <!--End of Calander-->
+    </div>
+    <!-- end of 1st row -->
+
+    <!-- 2nd row -->
+    <div class="row mainRow">
+      <!--Upcomming Consultation-->
+      <div class="col-lg-9">
+        <div class="card shadow" id="dark">
+              <div class="card">
+                <div class="card" id="light">
+                    <h2 style="text-align:center;"><b>Upcomming Channelling(s)</b></h2>
+                  </div>    
+              </div>
+              <div class="row"  id="lessmargin">
+                <!--First grid-->
+                <div class="col-lg-4">
+                  <div class="card shadow">
+                      <div class="card" id="differ">
+                        <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
+                        <h5>Ryan Tompson</h5>
+                        <h6>Cardiologist</h6>
+                        <h6 class="text-primary"><b>in 15 Mins</b></h6>
+                        <a href="javascript:void(0)" class="btn btn-primary mt-4">Join</a>
+                      </div>
+                  </div>
+                </div>
+                <!--Second grid-->
+                <div class="col-lg-4">
+                  <div class="card shadow">
+                      <div class="card" id="differ">
+                        <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
+                        <h5>Ryan Tompson</h5>
+                        <h6>Cardiologist</h6>
+                        <h6 class="text-primary"><b>in 15 Mins</b></h6>
+                        <a href="javascript:void(0)" class="btn btn-primary mt-4">More</a>
+                      </div>
+                  </div>
+                </div>
+                <!--Third grid-->
+                <div class="col-lg-4">
+                  <div class="card shadow">
+                      <div class="card" id="differ">
+                        <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
+                        <h5>Ryan Tompson</h5>
+                        <h6>Cardiologist</h6>
+                        <h6 class="text-primary"><b>in 15 Mins</b></h6>
+                        <a href="javascript:void(0)" class="btn btn-primary mt-4">More</a>
+                      </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+      <!--End of upcomming Consultation-->
+
+      <!--Chaneeling History-->
+      <div class="col-lg-3">
+
+        <div class="card shadow" id="dark">
+
+          <div class="card shadow" id="space">
+            <div class="card">
+
+              <div style="">
+                <div class="card card-stats mb-4 mb-lg-0">
+                  <div class="card-body">
+                    <div class="row">
+                      
+                        <h5 class="card-title text-uppercase  text-muted mb-0">Total Patients</h5>
+                        
+
+                        <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+                          <span class="h2 font-weight-bold mb-0">3</span>
+                        </div>  
+                    </div> 
+                </div>
+              </div>
+            
+            </div>
+        </div>
+
+        <div class="card shadow" id="space">
+          <div class="card">
+
+            <div style="">
+              <div class="card card-stats mb-4 mb-lg-0">
+                <div class="card-body">
+                  <div class="row">
+                    
+                      <h5 class="card-title text-uppercase text-muted mb-0">Total Channelings</h5>
+                      
+
+                      <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+                        <span class="h2 font-weight-bold mb-0">3</span>
+                      </div>  
+                  </div> 
+              </div>
+            </div>
+          
+          </div>
+      </div>
+
+      <div class="card shadow" id="space">
+        <div class="card">
+
+          <div style="">
+            <div class="card card-stats mb-4 mb-lg-0">
+              <div class="card-body">
+                <div class="row">
+                  
+                    <h5 class="card-title text-uppercase text-muted mb-0">Average Channeling Fee</h5>
+                    
+
+                    <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+                      <span class="h2 font-weight-bold mb-0">3</span>
+                    </div>  
+                </div> 
+            </div>
+          </div>
+        
+        </div>
+    </div>
+
+        </div>
+      </div> 
+      <!--End of Channeling history-->
+      
+    </div>
+    <!-- end of 2nd row -->
+
+  </div>
+</div>

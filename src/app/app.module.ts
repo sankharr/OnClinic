@@ -13,6 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { DoctorsListComponent } from './doctors-list/doctors-list.component';
+import { DoctorBookComponent } from './doctor-book/doctor-book.component';
 
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
@@ -39,8 +41,18 @@ import { LiveConsultationComponent } from './live-consultation/live-consultation
 
 import { environment } from 'src/environments/environment';
 import { NgxAgoraModule } from 'ngx-agora';
+import { PaymentComponent } from './payment/payment.component';
+import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
 
-
+import {HttpModule} from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { MlComponent } from './ml/ml.component';
+import { DiseaseComponent } from './disease/disease.component';
+import { ModeratorComponent } from './moderator/moderator.component';
+import { DoctorverificationComponent } from './doctorverification/doctorverification.component';
+import { MailVerificationComponent } from './mail-verification/mail-verification.component';
+import { AddressVerifyComponent } from './address-verify/address-verify.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -67,7 +79,19 @@ var firebaseConfig = {
     PatientsComponent,
     TestingComponent,
     SidebarComponent,
-    LiveConsultationComponent
+    LiveConsultationComponent,
+    DoctorRegistration2Component,
+    MlComponent,
+    DiseaseComponent,
+    ModeratorComponent,
+    DoctorverificationComponent,
+    MailVerificationComponent,
+    AddressVerifyComponent,
+    WelcomeComponent,
+    DoctorsListComponent,
+    DoctorBookComponent,
+    PaymentComponent,
+    DoctorRegistration2Component
   ],
   imports: [
     BrowserModule,
@@ -86,7 +110,9 @@ var firebaseConfig = {
     PatientsModule,
     DoctorsRoutingModule,
     CalendarModule,
-    NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
+    NgxAgoraModule.forRoot({ AppID: environment.agora.appId }),
+    HttpModule,
+    HttpClientModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

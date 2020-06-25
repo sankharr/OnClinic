@@ -13,7 +13,22 @@ import { PatientsComponent } from './layouts/patients/patients.component';
 import { AuthGuard } from './services/auth.guard';
 import { TestingComponent } from './testing/testing.component';
 import { DoctorsComponent } from './layouts/doctors/doctors.component';
+import {DoctorsListComponent} from './doctors-list/doctors-list.component';
 import { DoctorsRoutingModule } from './layouts/doctors/doctors.routing';
+import {DoctorBookComponent} from './doctor-book/doctor-book.component';
+import {PaymentComponent} from './payment/payment.component';
+import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
+import {MailVerificationComponent} from './mail-verification/mail-verification.component';
+import {WelcomeComponent} from './welcome/welcome.component'
+
+import { MlComponent } from './ml/ml.component';
+import { DiseaseComponent } from './disease/disease.component';
+import { DoctorverificationComponent } from './doctorverification/doctorverification.component';
+import { ModeratorComponent } from './moderator/moderator.component';
+import { AddressVerifyComponent } from './address-verify/address-verify.component';
+
+
+
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
@@ -25,6 +40,17 @@ const routes: Routes =[
     { path: 'patients',          component: PatientsComponent, canActivate: [AuthGuard] },
     { path: 'doctors',          component: DoctorsComponent },
     { path: 'testing', component:TestingComponent},
+    {path: 'doctors-list',        component: DoctorsListComponent},
+    {path: 'doctor-book',        component:DoctorBookComponent},
+    {path: 'payment',      component:PaymentComponent},
+    { path: 'doctor-completeProfile', component:DoctorRegistration2Component},
+    { path: 'ml', component:MlComponent},
+    { path: 'disease', component: DiseaseComponent },
+    { path: 'moderator', component:ModeratorComponent},
+    { path: 'doctorverification',component:DoctorverificationComponent},
+    { path: 'emailverify',component:MailVerificationComponent},
+    {path: 'addressverificatoin',component:AddressVerifyComponent},
+    {path: 'welcomepage',component:WelcomeComponent},
     { path: '', redirectTo: 'homepage', pathMatch: 'full' }
 ];
 

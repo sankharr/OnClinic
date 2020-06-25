@@ -32,6 +32,7 @@ export class AuthService {
   user$: Observable<User>;
   // user: Observable<User>;
   role: any;
+  last_doctorID: any;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -50,6 +51,15 @@ export class AuthService {
       })
     );
 
+    this.db.collection("system_variables").doc("system_variables").snapshotChanges()
+      .subscribe(result => {
+        console.log("latest_doctorID - ", result.payload.get("last_doctorID"));
+        this.last_doctorID = result.payload.get("last_doctorID");
+        sessionStorage.setItem("last_doctorID", this.last_doctorID);
+      })
+
+    // var temp = this.generateNewDoctorID();
+    // console.log("temp - ",temp);
   }
 
   //related to role based authorization
@@ -156,7 +166,8 @@ export class AuthService {
     this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
       .then(userCredential => {
         this.newUser = user;
-        console.log(userCredential)
+        console.log("uid in createUser - ",userCredential.user.uid)
+        localStorage.setItem("uid",userCredential.user.uid);
         userCredential.user.updateProfile({
           displayName: user.name  //you can add a photo url as well here
 
@@ -172,7 +183,8 @@ export class AuthService {
         if (role == "doctor") {
           this.insertDoctorData(userCredential)
             .then(() => {
-              this.router.navigate(['/doctor/dashboard']);
+              // this.router.navigate(['/doctor-completeProfile']);
+              this.router.navigate(['/doctorverification']);
             });
         }
 
@@ -208,6 +220,7 @@ export class AuthService {
   }
 
   insertDoctorData(userCredential: firebase.auth.UserCredential) {
+    localStorage.setItem("role","doctor");
     return this.db.doc(`Users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
       name: this.newUser.name,
@@ -215,11 +228,13 @@ export class AuthService {
       telno: this.newUser.telno,
       address: this.newUser.address,
       docID: this.newUser.docID,
-      role: 'doctor'
+      role: 'doctor',
+      doctorID: this.generateNewDoctorID()
     })
   }
 
   insertGoogleDoctorData(formValue: any,uID: any) {
+    localStorage.setItem("role","doctor");
     return this.db.doc(`Users/${uID}`).set({
       email: formValue.email,
       name: formValue.name,
@@ -234,6 +249,32 @@ export class AuthService {
 
   logout() {
     return this.afAuth.signOut();
+  }
+
+  generateNewDoctorID(): string {
+
+    this.last_doctorID = sessionStorage.getItem("last_doctorID");
+    console.log("last_docID - ", this.last_doctorID);
+    var i: number;
+    var splitted = this.last_doctorID.split("d", 2);
+
+    var lastIDInt: number = +splitted[1];
+    var newDocIDString = (lastIDInt + 1).toString();
+    for (i = 0; i < (7 - newDocIDString.length) + 4; i++) {
+      newDocIDString = 0 + newDocIDString;
+    }
+    this.last_doctorID = "d" + newDocIDString;
+    console.log(this.last_doctorID);
+
+    this.db.collection("system_variables").doc("system_variables").update({
+      last_doctorID: this.last_doctorID
+    })
+      .then(() => {
+        console.log("Successfully updated system variables - last_doctorID");
+      })
+
+    console.log("sgdsddddddddddddddd - ", this.last_doctorID)
+    return this.last_doctorID;
   }
 
 }
