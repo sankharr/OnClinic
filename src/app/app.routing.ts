@@ -19,7 +19,8 @@ import {DoctorBookComponent} from './doctor-book/doctor-book.component';
 import {PaymentComponent} from './payment/payment.component';
 import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
 import {MailVerificationComponent} from './mail-verification/mail-verification.component';
-import {WelcomeComponent} from './welcome/welcome.component'
+import {WelcomeComponent} from './welcome/welcome.component';
+import {ViewPatientsComponent} from './moderator/view-patients/view-patients.component'
 
 import { MlComponent } from './ml/ml.component';
 import { DiseaseComponent } from './disease/disease.component';
@@ -46,7 +47,8 @@ const routes: Routes =[
     { path: 'doctor-completeProfile', component:DoctorRegistration2Component},
     { path: 'ml', component:MlComponent},
     { path: 'disease', component: DiseaseComponent },
-    { path: 'moderator', component:ModeratorComponent},
+    { path: 'moderator/doctors', component:ModeratorComponent},
+    { path: 'moderator/patients', component:ViewPatientsComponent},
     { path: 'doctorverification',component:DoctorverificationComponent},
     { path: 'emailverify',component:MailVerificationComponent},
     {path: 'addressverificatoin',component:AddressVerifyComponent},

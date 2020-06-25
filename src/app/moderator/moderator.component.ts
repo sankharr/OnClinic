@@ -1,6 +1,7 @@
 import { ModeratorService } from './../services/moderator.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'firebase';
+import {AuthService} from '../services/auth.service'
 
 
 @Component({
@@ -9,6 +10,7 @@ import { User } from 'firebase';
   styleUrls: ['./moderator.component.scss']
 })
 export class ModeratorComponent implements OnInit {
+  slmcVerified = "all";
   usersData: unknown[];
 
   constructor(
@@ -18,10 +20,15 @@ export class ModeratorComponent implements OnInit {
 
   ngOnInit(): void {
     this.moderatorService.getAllUsers().subscribe(res => {
-      this.usersData = res
-      console.log(res)
-    })
+      this.usersData = res;
+      console.log(this.usersData)
+    });
   }
-
+  getdata(id){
+    console.log((id))
+    // this.moderatorService.getDoctor(id).subscribe(res=>{
+    //   console.log(res)
+    // })
+  }
 }
 

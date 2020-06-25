@@ -55,6 +55,10 @@ import { AddressVerifyComponent } from './address-verify/address-verify.componen
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ModeratorNavbarComponent } from './shared/moderator-navbar/moderator-navbar.component';
 
+import {ModeratorPipe} from './pipes/moderator.pipe';
+import { ViewPatientsComponent } from './moderator/view-patients/view-patients.component';
+import { ModeratorPatientPipe } from './pipes/moderator-patient.pipe';
+
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
   authDomain: "onclinic-dd11a.firebaseapp.com",
@@ -93,7 +97,10 @@ var firebaseConfig = {
     DoctorBookComponent,
     PaymentComponent,
     DoctorRegistration2Component,
-    ModeratorNavbarComponent
+    ModeratorNavbarComponent,
+    ModeratorPipe,
+    ViewPatientsComponent,
+    ModeratorPatientPipe
   ],
   imports: [
     BrowserModule,

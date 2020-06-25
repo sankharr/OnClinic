@@ -1,49 +1,60 @@
 <div class="section">
   <div class="container">
-    
+
     <div class="row">
       <div class="col-8">
         <h1>Doctors List</h1>
       </div>
       <div class="col-4">
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Verification Status
-          </button>
-          <div class="dropdown-menu" aria-labelledby="Specialized_in">
-            <a class="dropdown-item" [routerLink]="['/moderator']" routerLinkActive="router-link-active" >All</a>
-            <a class="dropdown-item" [routerLink]="['/moderator']" routerLinkActive="router-link-active">SLMC Verified</a>
-            <a class="dropdown-item" [routerLink]="['/moderator']" routerLinkActive="router-link-active">Not Verified</a>
-          </div>
+        <div class="form-group">
+          <strong>Verification</strong>
+          <select class="form-control" [(ngModel)]="slmcVerified">
+            <option value="all">All</option>
+            <option [ngValue]="true">SLMC Verified</option>
+            <option [ngValue]="false">SLMC Verification Failed</option>
+          </select>
         </div>
       </div>
-  
-  </div>
+
+    </div>
     <div class="list-group">
-      <div class="list-group-item" *ngFor="let item of usersData">
-        <div class="row">
-          <div class="col-6">
-            {{item.name}} <br>
-            <!-- <label *ngIf="item.slmcVerified" class="label label-success label-large">SLMC Verified |</label> -->
-            <label *ngIf="!item.slmcVerified" class="label label-warning label-large-danger">SLMC Failed |</label>
-            <!-- <label *ngIf="item.emailVerified" class="label label-success label-large">Email Verified |</label> -->
-            <label *ngIf="!item.emailVerified" class="label label-warning label-large-danger">Email Failed |</label>
-            <!-- <label *ngIf="item.PhoneNumberVerified" class="label label-success label-large">Phone Verified |</label> -->
-            <label *ngIf="!item.PhoneNumberVerified" class="label label-warning label-large-danger">Phone Failed</label>
-            <label *ngIf="item.addressTokenVerified" class="label label-warning label-large">Full Verified Profile</label>
-          </div>
-          <div class="col-2">
-            Other <br>
-          </div>
-          <div class="col-2">
-            Ratings <br>
-          </div>
-          <div class="col-2">
-            <a *ngIf="item.slmcVerified"  button class="btn btn-success" type="submit" style="text-decoration: aliceblue;" >View</a>
-            <a *ngIf="!item.slmcVerified" button class="btn btn-danger" type="submit" >Delete</a>
+      <div class="list-group-item" *ngFor="let item of usersData |moderator:slmcVerified">
+        <div *ngIf="item.role=='doctor'">
+          <div class="row">
+            <div class="col-6">
+              {{item.name}} <br>
+              <!-- <label *ngIf="item.slmcVerified" class="label label-success label-large">SLMC Verified |</label> -->
+              <label *ngIf="!item.slmcVerified" class="badge badge-warning">SLMC Failed |</label>
+              <!-- <label *ngIf="item.emailVerified" class="label label-success label-large">Email Verified |</label> -->
+              <label *ngIf="!item.emailVerified" class="badge badge-warning">Email Failed |</label>
+              <!-- <label *ngIf="item.PhoneNumberVerified" class="label label-success label-large">Phone Verified |</label> -->
+              <label *ngIf="!item.PhoneNumberVerified" class="badge badge-warning">Phone Failed</label>
+              <label *ngIf="item.addressTokenVerified" class="badge badge-success">Full Verified Profile</label>
+            </div>
+            <div class="col-2">
+              {{item.role}} <br>
+            </div>
+            <div class="col-2">
+              Ratings <br>
+            </div>
+            <div class="col-2">
+              <a *ngIf="item.slmcVerified" button class="btn btn-success" type="submit"
+                style="text-decoration: aliceblue;" (click)=" getdata(item)" data-toggle="modal"
+                data-target=".bd-example-modal-sm">View</a>
+              <a *ngIf="!item.slmcVerified" button class="btn btn-danger">Delete</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <p>{{item}}</p>
+    </div>
   </div>
+</div>
