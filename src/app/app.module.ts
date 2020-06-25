@@ -53,6 +53,7 @@ import { DoctorverificationComponent } from './doctorverification/doctorverifica
 import { MailVerificationComponent } from './mail-verification/mail-verification.component';
 import { AddressVerifyComponent } from './address-verify/address-verify.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ModeratorNavbarComponent } from './shared/moderator-navbar/moderator-navbar.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -91,7 +92,8 @@ var firebaseConfig = {
     DoctorsListComponent,
     DoctorBookComponent,
     PaymentComponent,
-    DoctorRegistration2Component
+    DoctorRegistration2Component,
+    ModeratorNavbarComponent
   ],
   imports: [
     BrowserModule,

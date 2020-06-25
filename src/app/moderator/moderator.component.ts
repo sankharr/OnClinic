@@ -1,14 +1,15 @@
 import { ModeratorService } from './../services/moderator.service';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'firebase';
 
 
 @Component({
   selector: 'app-moderator',
   templateUrl: './moderator.component.html',
-  styleUrls: ['./moderator.component.css']
+  styleUrls: ['./moderator.component.scss']
 })
 export class ModeratorComponent implements OnInit {
-  usersData: Array<any>;
+  usersData: unknown[];
 
   constructor(
     private moderatorService: ModeratorService,
@@ -16,7 +17,7 @@ export class ModeratorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.moderatorService.getAllUsers().subscribe(res=>{
+    this.moderatorService.getAllUsers().subscribe(res => {
       this.usersData = res
       console.log(res)
     })

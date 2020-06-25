@@ -1,26 +1,49 @@
-<div >
-    <div>
-        <table class="table" >
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Tel</th>
-                <th scope="col">Doctor Id</th>
-                <th scope="col">Address</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let item of usersData">
-              <tr *ngIf="item.role=='doctor' && !item.isVerified">
-                <td>{{item.name}}</td>
-                <td>{{item.email}}</td>
-                <td>{{item.telno}}</td>
-                <td>{{item.docID}}</td>
-                <td>{{item.address}}</td>
-                <td class="btn btn-link">Verify</td>
-              </tr>
-            </tbody>
-          </table>
+<div class="section">
+  <div class="container">
+    
+    <div class="row">
+      <div class="col-8">
+        <h1>Doctors List</h1>
+      </div>
+      <div class="col-4">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Verification Status
+          </button>
+          <div class="dropdown-menu" aria-labelledby="Specialized_in">
+            <a class="dropdown-item" [routerLink]="['/moderator']" routerLinkActive="router-link-active" >All</a>
+            <a class="dropdown-item" [routerLink]="['/moderator']" routerLinkActive="router-link-active">SLMC Verified</a>
+            <a class="dropdown-item" [routerLink]="['/moderator']" routerLinkActive="router-link-active">Not Verified</a>
+          </div>
+        </div>
+      </div>
+  
+  </div>
+    <div class="list-group">
+      <div class="list-group-item" *ngFor="let item of usersData">
+        <div class="row">
+          <div class="col-6">
+            {{item.name}} <br>
+            <!-- <label *ngIf="item.slmcVerified" class="label label-success label-large">SLMC Verified |</label> -->
+            <label *ngIf="!item.slmcVerified" class="label label-warning label-large-danger">SLMC Failed |</label>
+            <!-- <label *ngIf="item.emailVerified" class="label label-success label-large">Email Verified |</label> -->
+            <label *ngIf="!item.emailVerified" class="label label-warning label-large-danger">Email Failed |</label>
+            <!-- <label *ngIf="item.PhoneNumberVerified" class="label label-success label-large">Phone Verified |</label> -->
+            <label *ngIf="!item.PhoneNumberVerified" class="label label-warning label-large-danger">Phone Failed</label>
+            <label *ngIf="item.addressTokenVerified" class="label label-warning label-large">Full Verified Profile</label>
+          </div>
+          <div class="col-2">
+            Other <br>
+          </div>
+          <div class="col-2">
+            Ratings <br>
+          </div>
+          <div class="col-2">
+            <a *ngIf="item.slmcVerified"  button class="btn btn-success" type="submit" style="text-decoration: aliceblue;" >View</a>
+            <a *ngIf="!item.slmcVerified" button class="btn btn-danger" type="submit" >Delete</a>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+  </div>

@@ -1,0 +1,95 @@
+h1,
+a {
+  width: 100%;
+}
+h1 {
+  border-right: 1px solid #2479ce;
+}
+body {
+  height: 100%;
+}
+.navBg {
+  background-color: #6a46a5;
+  max-width: 196px;
+  height: 100vh;
+  nav {
+    padding-top: 75px;
+    h1 {
+      color: #2479ce;
+      font-size: 24px;
+      font-weight: 300;
+      padding: 25px 12px;
+      background-color: white;
+    }
+    a {
+      transition: 0.6s;
+      padding-bottom: 15px;
+      padding-top: 15px;
+      color: white;
+      border-bottom: 1px solid white;
+      font-weight: 300;
+      &:hover {
+        background-color: white;
+        color: #2479ce;
+        i {
+          color: #2479ce;
+        }
+      }
+    }
+    i {
+      padding-right: 10px;
+    }
+    small {
+      color: white;
+      text-align: center;
+      margin-top: 15px;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .navBg {
+    height: 100%;
+    nav {
+      padding-top: 0px;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .navBg {
+    height: 100vh;
+    max-width: 55px;
+    nav {
+      padding-top: 0px;
+      h1 {
+        display: none;
+      }
+      a {
+        text-align: center;
+      }
+      i {
+        padding-right: 0px;
+      }
+      span {
+        display: none;
+      }
+    }
+  }
+}
+@media screen and (max-height: 600px) {
+  .navBg {
+    height: 100%;
+    nav {
+      padding-top: 0px;
+    }
+  }
+}
+.label-large {
+  vertical-align: super;
+  font-size: small;
+  color: green;
+}
+.label-large-danger {
+  vertical-align: super;
+  font-size: small;
+  color: rgb(230, 63, 71);
+}
