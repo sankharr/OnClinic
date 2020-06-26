@@ -25,7 +25,7 @@ export class ModeratorComponent implements OnInit {
     });
   }
   getdata(id){
-    console.log((id))
+    
     // this.moderatorService.getDoctor(id).subscribe(res=>{
     //   console.log(res)
     // })

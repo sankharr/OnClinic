@@ -32,7 +32,7 @@
                 </div>
             </div> -->
         </div>
-        <div class="list-group" style="margin-top: 20px;">
+        <div class="list-group" style="margin-top: 20px;" @fade>
             <div class="list-group-item" *ngFor="let item of (usersData |moderator:slmcVerified) | moderatorPatient:searchText">
                 <div *ngIf="item.role=='patient'">
                     <div class="row">
