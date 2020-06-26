@@ -3,11 +3,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { VerifydoctorService } from '../services/verifydoctor.service';
 import { CoreAuthService } from '../core/core-auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { trigger, transition, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-address-verify',
   templateUrl: './address-verify.component.html',
-  styleUrls: ['./address-verify.component.css']
+  styleUrls: ['./address-verify.component.css'],
+  animations: [
+    trigger('fade', [
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(2000, style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class AddressVerifyComponent implements OnInit {
   touched:boolean = false

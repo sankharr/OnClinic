@@ -7,7 +7,10 @@
       </div>
       <div class="col-4">
         <div class="form-group">
-          <strong>Verification</strong>
+          <strong>Username or Email</strong>
+          <input placeholder="Type username or email" type="text" class="form-control"
+            aria-label="Text input with dropdown button" [(ngModel)]="searchText">
+          <strong>Verification Status</strong>
           <select class="form-control" [(ngModel)]="slmcVerified">
             <option value="all">All</option>
             <option [ngValue]="true">SLMC Verified</option>
@@ -17,8 +20,9 @@
       </div>
 
     </div>
-    <div class="list-group">
-      <div class="list-group-item" *ngFor="let item of usersData |moderator:slmcVerified">
+    <div class="list-group" style="margin-top:50px;">
+      <div class="list-group-item"
+        *ngFor="let item of (usersData |moderator:slmcVerified) | moderatorPatient:searchText">
         <div *ngIf="item.role=='doctor'">
           <div class="row">
             <div class="col-6">
@@ -38,9 +42,8 @@
               Ratings <br>
             </div>
             <div class="col-2">
-              <a *ngIf="item.slmcVerified" button class="btn btn-success" type="submit"
-                style="text-decoration: aliceblue;" (click)=" getdata(item)" data-toggle="modal"
-                data-target=".bd-example-modal-sm">View</a>
+              <a *ngIf="item.slmcVerified" button class="btn btn-success" type="submit" (click)=" getdata(item)"
+                data-toggle="modal" data-target=".bd-example-modal-sm">View</a>
               <a *ngIf="!item.slmcVerified" button class="btn btn-danger">Delete</a>
             </div>
           </div>

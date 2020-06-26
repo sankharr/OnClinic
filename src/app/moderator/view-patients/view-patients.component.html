@@ -8,20 +8,19 @@
             <!-- <div class="col-2" style="position:sticky;padding-left: 200px;">
                 <input [(ngModel)]="searchText" placeholder="search text goes here" class="textbox">
             </div> -->
-            <div class="input-group">
-                <input placeholder="Type username or email" type="text" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="searchText" >
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Verification</button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Verified</a>
-                        <a class="dropdown-item" href="#">Unerified</a>
-                        <!-- <a class="dropdown-item" href="#">Something else here</a>
-                        <div role="separator" class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a> -->
-                    </div>
+            <div class="col-4">
+                <div class="form-group">
+                  <strong>Username or Email</strong>
+                  <input placeholder="Type username or email" type="text" class="form-control"
+                    aria-label="Text input with dropdown button" [(ngModel)]="searchText">
+                  <strong>Verification Status</strong>
+                  <select class="form-control" [(ngModel)]="slmcVerified">
+                    <option value="all">All</option>
+                    <option [ngValue]="true">SLMC Verified</option>
+                    <option [ngValue]="false">SLMC Verification Failed</option>
+                  </select>
                 </div>
-            </div>
+              </div>
             <!-- <div class="col-4">
                 <div class="form-group">
                     <strong>Verification</strong>
@@ -34,7 +33,7 @@
             </div> -->
         </div>
         <div class="list-group" style="margin-top: 20px;">
-            <div class="list-group-item" *ngFor="let item of usersData | moderatorPatient:searchText">
+            <div class="list-group-item" *ngFor="let item of (usersData |moderator:slmcVerified) | moderatorPatient:searchText">
                 <div *ngIf="item.role=='patient'">
                     <div class="row">
                         <div class="col-6">

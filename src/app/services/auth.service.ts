@@ -277,7 +277,7 @@ export class AuthService {
     return this.last_doctorID;
   }
 
-  userloginDetails(uid){
+  updateLastlogin(uid){
     var datetime = new Date().toLocaleString();
     return this.db.doc(`Users/${uid}`).update({
       'lastlogin':datetime

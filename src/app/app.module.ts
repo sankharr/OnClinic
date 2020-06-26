@@ -54,10 +54,12 @@ import { MailVerificationComponent } from './mail-verification/mail-verification
 import { AddressVerifyComponent } from './address-verify/address-verify.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ModeratorNavbarComponent } from './shared/moderator-navbar/moderator-navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {ModeratorPipe} from './pipes/moderator.pipe';
 import { ViewPatientsComponent } from './moderator/view-patients/view-patients.component';
 import { ModeratorPatientPipe } from './pipes/moderator-patient.pipe';
+import { ModeratorDashboardComponent } from './moderator/moderator-dashboard/moderator-dashboard.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -100,7 +102,8 @@ var firebaseConfig = {
     ModeratorNavbarComponent,
     ModeratorPipe,
     ViewPatientsComponent,
-    ModeratorPatientPipe
+    ModeratorPatientPipe,
+    ModeratorDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +115,7 @@ var firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    BrowserAnimationsModule,
     CoreModule,
     PatientsRoutingModule,
     ReactiveFormsModule,
