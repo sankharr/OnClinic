@@ -54,6 +54,7 @@ import { MailVerificationComponent } from './mail-verification/mail-verification
 import { AddressVerifyComponent } from './address-verify/address-verify.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material/tabs';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -115,6 +116,7 @@ var firebaseConfig = {
     HttpModule,
     HttpClientModule,
     BrowserAnimationsModule, 
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
