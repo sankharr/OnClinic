@@ -58,7 +58,8 @@
             </div>
             <div class="modal-footer" data-backdrop="false">
                 <a type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
-                <button type="button" class="btn btn-primary" (click)="[phoneVerify()]" data-dismiss="modal" [routerLink]="['/addressverificatoin']">Submit</button>
+                <button *ngIf="data.role=='doctor'" type="button" class="btn btn-primary" (click)="[phoneVerify()]" data-dismiss="modal" [routerLink]="['/addressverificatoin']">Submit</button>
+                <button *ngIf="data.role=='patient'" type="button" class="btn btn-primary" (click)="[phoneVerify()]" data-dismiss="modal" [routerLink]="['/patients/dashboard']">Submit</button>
             </div>
         </div>
     </div>

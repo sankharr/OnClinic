@@ -1,3 +1,17 @@
 <div #chart>
 
 </div>
+
+<select data-placeholder="All Categories" class="category" value="category.categoryName" [(ngModel)]="selected" (change)="buildServices($event)">
+    <option selected="selected" style="display:none">Select Category</option>
+    <option class="select" *ngFor="let category of categories" [value]="category.categoryId">
+      {{category.categoryName}}
+    </option>
+  </select>
+  <select data-placeholder="All Cities" class="services location" value="category.categoryName">
+    <option selected="selected" style="display:none">select type of services</option>
+    <option *ngFor="let service of services; let i =
+        index" value="service.serviceId">{{service.serviceName}}
+    </option>
+  </select>
+

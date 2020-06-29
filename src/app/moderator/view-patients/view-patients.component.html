@@ -38,11 +38,11 @@
                     <div class="row">
                         <div class="col-6">
                             {{item.name}} <br>
-                            <label *ngIf="!item.slmcVerified" class="badge badge-warning">SLMC Failed |</label>
-                            <label *ngIf="!item.emailVerified" class="badge badge-warning">Email Failed |</label>
+                            <!-- <label *ngIf="!item.slmcVerified" class="badge badge-warning">SLMC Failed |</label> -->
+                            <label *ngIf="!item.emailVerified" class="badge badge-warning">{{item.emailVerified}}</label>
                             <label *ngIf="!item.PhoneNumberVerified" class="badge badge-warning">Phone Failed</label>
-                            <label *ngIf="item.addressTokenVerified" class="badge badge-success">Full Verified
-                                Profile</label>
+                            <!-- <label *ngIf="item.addressTokenVerified" class="badge badge-success">Full Verified -->
+                                <!-- Profile</label> -->
                         </div>
                         <div class="col-2">
                             {{item.role}} <br>

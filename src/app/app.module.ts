@@ -60,6 +60,8 @@ import {ModeratorPipe} from './pipes/moderator.pipe';
 import { ViewPatientsComponent } from './moderator/view-patients/view-patients.component';
 import { ModeratorPatientPipe } from './pipes/moderator-patient.pipe';
 import { ModeratorDashboardComponent } from './moderator/moderator-dashboard/moderator-dashboard.component';
+import { PatientverificationComponent } from './patientverification/patientverification.component';
+import { SelectionPipe } from './pipes/selection.pipe';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -104,6 +106,8 @@ var firebaseConfig = {
     ViewPatientsComponent,
     ModeratorPatientPipe,
     ModeratorDashboardComponent,
+    PatientverificationComponent,
+    SelectionPipe,
   ],
   imports: [
     BrowserModule,
