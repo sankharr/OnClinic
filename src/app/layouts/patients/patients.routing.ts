@@ -11,6 +11,7 @@ import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { ChannelingComponent } from './channeling/channeling.component';
 import { MyhealthComponent } from './myhealth/myhealth.component';
 import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 const routes: Routes =[
@@ -25,6 +26,7 @@ const routes: Routes =[
      { path: 'lcp', component: LiveConsultationComponent },
      { path: 'myhealth', component: MyhealthComponent },
      { path: 'profile', component: ProfileComponent },
+     { path: 'edit-profile', component: EditProfileComponent },
     ] },  
   ];
 

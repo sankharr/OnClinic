@@ -12,8 +12,8 @@
                 <div class="card" id="dark">
                     <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
                     <hr>
-                    <h5><b>Ryan Tompson</b></h5>
-                    <h6><b>Age : 25 Years</b></h6>
+                    <h5><b>{{result.name}}</b></h5>
+                    <h6><b>Age : {{result.age}} years</b></h6>
                 </div>
               </div>
               <!--end of first grid-->
@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-lg-8">
                                 <div class="card" id="light">
-                                <h6><b>No.23,Samagi Mavatha,Maharagama</b></h6>
+                                <h6><b>{{result.address}}</b></h6>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-lg-8">
                                 <div class="card" id="light">
-                                <h6><b>0715689472</b></h6>
+                                <h6><b>{{result.telno}}</b></h6>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-lg-8">
                                 <div class="card" id="light">
-                                <h6><b>chathu@gmail.com</b></h6>
+                                <h6><b>{{result.email}}</b></h6>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +176,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <button class="btn" type="submit" (click)="startCall()">
+                <button class="btn" type="submit" (click)="edit()">
                     <span class="btn-inner--icon">
                     <i class="fa fa-edit mr-2"></i>
                     </span>Edit Profile
