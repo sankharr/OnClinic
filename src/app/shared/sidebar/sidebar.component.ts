@@ -19,6 +19,8 @@ export const doctorROUTES: RouteInfo[] = [
   { path: '/doctors/payments', title: 'Payments', icon: 'content_paste', class: '' },
   { path: '/doctors/log', title: 'Log', icon: 'content_paste', class: '' },
   { path: '/doctors/ppv', title: 'Profile Patient View', icon: 'content_paste', class: '' },
+  { path: '/doctors/channeling', title: 'Channeling', icon: 'content_paste', class: '' },
+
   // { path: '/add-new-moderator', title: 'Add New Moderator', icon: 'add', class: '' },
   // { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
   // { path: '/admin-notifications', title: 'Notifications', icon: 'notifications', class: '' },

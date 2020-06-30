@@ -25,6 +25,12 @@ import { PatientsComponent } from './layouts/patients/patients.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {
+  AngularFireStorageModule,
+  AngularFireStorageReference,
+  AngularFireUploadTask  
+} from "@angular/fire/storage";
+// import { StorageBucket } from "@angular/fire/"
 // import { AuthService } from './services/auth.service';
 import { CoreModule } from './core/core.module';
 
@@ -55,6 +61,7 @@ import { AddressVerifyComponent } from './address-verify/address-verify.componen
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ModeratorNavbarComponent } from './shared/moderator-navbar/moderator-navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PatientRegistration2Component } from './patient-registration2/patient-registration2.component';
 
 import {ModeratorPipe} from './pipes/moderator.pipe';
 import { ViewPatientsComponent } from './moderator/view-patients/view-patients.component';
@@ -108,6 +115,7 @@ var firebaseConfig = {
     ModeratorDashboardComponent,
     PatientverificationComponent,
     SelectionPipe,
+    PatientRegistration2Component
   ],
   imports: [
     BrowserModule,
@@ -120,6 +128,7 @@ var firebaseConfig = {
     AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
+    AngularFireStorageModule,
     CoreModule,
     PatientsRoutingModule,
     ReactiveFormsModule,
@@ -129,7 +138,9 @@ var firebaseConfig = {
     CalendarModule,
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId }),
     HttpModule,
-    HttpClientModule, 
+    HttpClientModule,
+    BrowserAnimationsModule, 
+    // MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
