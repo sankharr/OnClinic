@@ -45,7 +45,7 @@ export class PatientRegistration2Component implements OnInit {
 
   percentage: Observable<number>;
   snapshot: Observable<any>;
-  finalReportsList = ["hii"];
+  finalReportsList = [];
   // downloadURL: string;
   // selectedFile: File;
   // tempArray: any;
