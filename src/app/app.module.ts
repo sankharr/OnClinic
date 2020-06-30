@@ -25,6 +25,12 @@ import { PatientsComponent } from './layouts/patients/patients.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {
+  AngularFireStorageModule,
+  AngularFireStorageReference,
+  AngularFireUploadTask  
+} from "@angular/fire/storage";
+// import { StorageBucket } from "@angular/fire/"
 // import { AuthService } from './services/auth.service';
 import { CoreModule } from './core/core.module';
 
@@ -105,6 +111,7 @@ var firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     CoreModule,
     PatientsRoutingModule,
     ReactiveFormsModule,
