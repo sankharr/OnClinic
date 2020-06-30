@@ -60,6 +60,8 @@ import { MailVerificationComponent } from './mail-verification/mail-verification
 import { AddressVerifyComponent } from './address-verify/address-verify.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PatientRegistration2Component } from './patient-registration2/patient-registration2.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { MatTabsModule } from '@angular/material/tabs';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -121,7 +123,9 @@ var firebaseConfig = {
     CalendarModule,
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId }),
     HttpModule,
-    HttpClientModule, 
+    HttpClientModule,
+    BrowserAnimationsModule, 
+    // MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
