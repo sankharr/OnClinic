@@ -1,10 +1,17 @@
 
 <!-- Alert -->
-<div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="touched" style="margin-top: 10px;">
+<div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="emailverify" style="margin-top: 10px;">
     <strong>Succsess!</strong> Your email succsessfuly verified!Thanks for your corporation😘
     <a type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </a>
+</div>
+
+<div class="card text-center" style="position:absalute;height: 100px;">
+    <div class="card-body">
+        <h6 class="card-title" style="color: rgba(94, 88, 180, 0.938);">Step 3 of 3 </h6>
+        <p class="card-text"></p>
+    </div>
 </div>
 
 <!-- Base image -->
@@ -14,7 +21,7 @@
 </figure>
 
 <!-- Send phone verification card -->
-<div class="card text-center" *ngIf="!touched">
+<div class="card text-center" *ngIf="!touched && emailverify">
     <div class="card-body">
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -52,7 +59,7 @@
                 <form>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Enter your one time password:</label>
-                        <input type="number" class="form-control">
+                        <input type="text" class="form-control">
                     </div>
                 </form>
             </div>
@@ -63,4 +70,11 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="alert alert-success alert-dismissible fade show" style="position:fixed;top:0;width:100%;z-index:100;text-align: center;" role="alert" *ngIf="phoneVerified">
+    <strong>Success!</strong> OTP sent to your phone number
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
