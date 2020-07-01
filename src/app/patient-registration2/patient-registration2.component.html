@@ -1,0 +1,249 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <h2>Complete Your Profile</h2>
+    <!-- <button class="btn btn-primary" (click)=generatex()>Test</button> -->
+    <form [formGroup]="completeProfilePatientForm" novalidate>
+
+        <div *ngIf="submitError" class="alert alert-danger">
+            Submission Failed! Please check whether you have filled all the required fields and try again!
+        </div>
+
+        <div *ngIf="submitSuccess" class="alert alert-success">
+            Succesfully Submited!
+        </div>
+
+        <div class="row mb-lg-4">
+            <div class="col-4">
+                <label for="coption"><b>Weight</b></label>
+                <input class="form-control" type="text" placeholder="" formControlName="weight">
+
+                <!-- <div *ngIf="completeProfilePatientForm.controls['weight'].invalid && (completeProfilePatientForm.controls['weight'].dirty || completeProfilePatientForm.controls['weight'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="completeProfilePatientForm.controls['weight'].errors.required">
+                        Weight is required.
+                    </div>
+                </div> -->
+
+            </div>
+            <div class="col-4">
+                <label for="coption"><b>Height</b></label>
+                <input class="form-control" type="text" placeholder="" formControlName="height">
+
+                <!-- <div *ngIf="completeProfilePatientForm.controls['height'].invalid && (completeProfilePatientForm.controls['height'].dirty || completeProfilePatientForm.controls['height'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="completeProfilePatientForm.controls['height'].errors.required">
+                        Height is required.
+                    </div>
+                </div> -->
+
+            </div>
+
+        </div>
+
+        <div class="row mb-lg-4">
+            <div class="col-4">
+                <label for="coption"><b>Long Term Diseases</b></label>
+                <select class="form-control" formControlName="longTermDiseases" (change)="selectedDisease($event)">
+                    <option #selectedDisease *ngFor="let disease of longTermDiseasesList">{{disease}}</option>
+                    <option #otherDisease>Other</option>
+                </select>
+            </div>
+
+            <div class="col-4" *ngIf="otherDisease.selected">
+                <label for="coption" id="avgTime"><b>Enter the disease</b></label>
+                <input class="form-control" type="text" placeholder="" formControlName="newLTDisease" required>
+
+            </div>
+            <div class="col-2 mt-4" *ngIf="otherDisease.selected">
+                <button class="btn btn-primary addbtn"
+                    (click)="newLTDAddList(completeProfilePatientForm.controls['newLTDisease'].value)"><i
+                        style="font-size: larger;" class="fa fa-plus"></i></button>
+            </div>
+        </div>
+
+        <h6 class="mt-lg-4">Selected Long Term Diseases</h6>
+
+        <!-- <div class="col-5" *ngIf="this.selectedLTDs.length == 0"> -->
+        <div class="alert alert-warning" *ngIf="this.selectedLTDs.length == 0">No long term diseases have been selected
+        </div>
+        <!-- </div> -->
+
+        <div class="row mb-lg-4">
+            <div class="col-5">
+                <div class="list-group">
+                    <div class="list-group-item" *ngFor="let LTD of selectedLTDs">
+                        {{LTD}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-lg-4">
+            <div class="col-4">
+                <label for="coption"><b>Allergies</b></label>
+                <select class="form-control" formControlName="allergies" (change)="selectedAllergy($event)">
+                    <option *ngFor="let allergy of allergiesList">{{allergy}}</option>
+                    <option #otherAllergy>Other</option>
+                </select>
+            </div>
+
+            <div class="col-4" *ngIf="otherAllergy.selected">
+                <label for="coption" id="avgTime"><b>Enter the allergy</b></label>
+                <input class="form-control" type="text" placeholder="" formControlName="newAllergy" required>
+
+            </div>
+            <div class="col-2 mt-4" *ngIf="otherAllergy.selected">
+                <button class="btn btn-primary addbtn"
+                    (click)="newAllergyAddList(completeProfilePatientForm.controls['newAllergy'].value)"><i
+                        style="font-size: larger;" class="fa fa-plus"></i></button>
+            </div>
+        </div>
+
+        <h6 class="mt-lg-4">Selected Allergies</h6>
+
+        <!-- <div class="col-5" *ngIf="this.selectedAllergies.length == 0"> -->
+        <div class="alert alert-warning" *ngIf="this.selectedAllergies.length == 0">No allergies have been selected
+        </div>
+        <!-- </div> -->
+
+        <div class="row mb-lg-4">
+            <div class="col-5">
+                <div class="list-group">
+                    <div class="list-group-item" *ngFor="let allergy of selectedAllergies">
+                        {{allergy}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="mt-lg-4">Previous Operations</h6>
+
+        <div class="row mb-lg-4 mt-lg-3">
+            <div class="col-4">
+                <label for="coption" id="avgTime"><b>Operation took place on</b></label>
+                <input class="form-control" type="date" placeholder="" formControlName="operationDate">
+            </div>
+
+            <div class="col-4">
+                <label for="coption" id="avgTime"><b>Operation Name</b></label>
+                <input class="form-control" type="text" placeholder="" formControlName="operationName">
+            </div>
+            <div class="col-2 mt-4">
+                <button class="btn btn-primary addbtn"
+                    (click)="addOperation(completeProfilePatientForm.controls['operationDate'].value,completeProfilePatientForm.controls['operationName'].value)"><i
+                        style="font-size: larger;" class="fa fa-plus"></i></button>
+            </div>
+        </div>
+
+        <!-- <div class="col-5" > -->
+        <div class="alert alert-warning" *ngIf="this.finalOperationsList.length == 0">No operations have been added
+        </div>
+        <!-- </div> -->
+
+        <div class="row mb-lg-4">
+            <div class="col-5">
+                <div class="list-group">
+                    <div class="list-group-item" *ngFor="let op of finalOperationsList">
+                        <div class="row">
+                            <div class="col ml-4">
+                                <div class="row">
+                                    <small>Date</small>
+                                </div>
+                                <div class="row">
+                                    <b>{{op.operationDate}}</b>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <small>Operation Name</small>
+                                </div>
+                                <div class="row">
+                                    <b>{{op.operationName}}</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="mt-sm-3">Previous Reports</h6>
+
+        <div class="row mb-lg-4 mt-lg-3">
+            <div class="col-3">
+                <label for="coption" id="avgTime"><b>Report Date</b></label>
+                <input class="form-control" type="date" placeholder="" formControlName="reportDate">
+            </div>
+
+            <div class="col-3">
+                <label for="coption" id="avgTime"><b>Report Name</b></label>
+                <input class="form-control" type="text" placeholder="Ex:- Blood Report" formControlName="reportName">
+            </div>
+            <div class="col-3">
+                
+                <label for="file">Report Upload</label>
+                <input id="file" type="file" (change)="detectFiles($event)" accept=".png,.jpg,.pdf,.jpeg" />
+
+                <progress max="100" [value]="(uploadProgress | async)"></progress>   
+
+            </div>
+            <div class="col-2 mt-4">
+                <button class="btn btn-primary addbtn"
+                    (click)="upload(completeProfilePatientForm.controls['reportDate'].value,completeProfilePatientForm.controls['reportName'].value)">
+                        Add Report</button>
+            </div>
+        </div>
+
+        <div class="alert alert-warning" *ngIf="this.finalReportsList.length == 0">No Reports have been added
+        </div>
+
+        <div class="row mb-lg-4">
+            <div class="col-6">
+                <div class="list-group">
+                    <div class="list-group-item" *ngFor="let rep of finalReportsList">
+                        <div class="row">
+                            <div class="col ml-4">
+                                <div class="row">
+                                    <small>Date</small>
+                                </div>
+                                <div class="row">
+                                    <b>{{rep[0]}}</b>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <small>Report Name</small>
+                                </div>
+                                <div class="row">
+                                    <b>{{rep[1]}}</b>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <button class="btn btn-danger" (click)="deleteReport(rep[0],rep[1])"><i class="fa fa-trash" style="font-size: larger;"></i></button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-2">
+                <button class="btn btn-primary" type="submit" (click)="updateProfilePatient()">Save</button>
+            </div>
+            <div class="col-8" *ngIf="submitSuccess">
+                <div class="alert alert-success">
+                    Succesfully Submited!
+                </div>
+            </div>
+            
+        </div>
+
+    </form>
+
+
+
+</div>

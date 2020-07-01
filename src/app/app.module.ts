@@ -25,6 +25,12 @@ import { PatientsComponent } from './layouts/patients/patients.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {
+  AngularFireStorageModule,
+  AngularFireStorageReference,
+  AngularFireUploadTask  
+} from "@angular/fire/storage";
+// import { StorageBucket } from "@angular/fire/"
 // import { AuthService } from './services/auth.service';
 import { CoreModule } from './core/core.module';
 
@@ -53,6 +59,9 @@ import { DoctorverificationComponent } from './doctorverification/doctorverifica
 import { MailVerificationComponent } from './mail-verification/mail-verification.component';
 import { AddressVerifyComponent } from './address-verify/address-verify.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { PatientRegistration2Component } from './patient-registration2/patient-registration2.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { MatTabsModule } from '@angular/material/tabs';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -91,7 +100,8 @@ var firebaseConfig = {
     DoctorsListComponent,
     DoctorBookComponent,
     PaymentComponent,
-    DoctorRegistration2Component
+    DoctorRegistration2Component,
+    PatientRegistration2Component
   ],
   imports: [
     BrowserModule,
@@ -103,6 +113,7 @@ var firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     CoreModule,
     PatientsRoutingModule,
     ReactiveFormsModule,
@@ -112,7 +123,9 @@ var firebaseConfig = {
     CalendarModule,
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId }),
     HttpModule,
-    HttpClientModule, 
+    HttpClientModule,
+    BrowserAnimationsModule, 
+    // MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
