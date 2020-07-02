@@ -8,6 +8,8 @@ import { DoctorLogComponent } from './doctor-log/doctor-log.component';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
 import { DoctorChannelingComponent } from './doctor-channeling/doctor-channeling.component';
+import { FormsModule } from '@angular/forms';
+
 // import {MatTabsModule} from '@angular/material/tabs';
 
 
@@ -20,6 +22,7 @@ import { DoctorChannelingComponent } from './doctor-channeling/doctor-channeling
     CommonModule,
     DoctorsRoutingModule,
     CalendarModule,
+    FormsModule,
     // MatTabsModule,
 
   ]
