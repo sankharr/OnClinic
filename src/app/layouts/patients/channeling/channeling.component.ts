@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-channeling',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChannelingComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
+  }joinlc() {
+    this.router.navigate(['/patients/waiting-room'])
   }
-
+  upload() {
+    this.router.navigate(['/patients/waiting-room/UploadDialogBox'])
+  }
 }
