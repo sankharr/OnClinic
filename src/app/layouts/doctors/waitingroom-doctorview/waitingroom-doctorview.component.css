@@ -1,0 +1,12 @@
+:host {
+  display: block;    
+  background-color: #66e9e9;
+  margin:-3%;
+}
+body{
+
+  background-image: url("src/assets/img/theme/doctor3.jpg");
+  background-size: cover;
+  height: 800px; 
+
+}
