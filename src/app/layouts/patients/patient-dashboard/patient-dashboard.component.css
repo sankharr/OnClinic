@@ -43,7 +43,11 @@
   width: 120px;
   align-self: center;
 }
-
+.btn{
+  align-self: center;
+  margin-top: 10px;
+  background-color: #820fd4;
+}
 ejs-calendar{
   z-index: 3; 
   max-width: fit-content;

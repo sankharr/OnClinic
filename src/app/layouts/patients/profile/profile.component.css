@@ -99,12 +99,13 @@
       padding-right: 0%;
     }
     .row{
-      padding: 5%;
+      padding: 0%;
+      margin-top: 5px;
     }
     #notfirst.row{
       margin-top: -5%;
     }
     #dark.card{
-      margin-top: 10px;
+      margin-top: 0px;
     }
   }
