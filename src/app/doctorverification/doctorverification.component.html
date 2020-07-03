@@ -60,7 +60,10 @@
                                             aria-label="Username" aria-describedby="basic-addon1" value={{data.email}}
                                             disabled>
                                     </div>
-                                    <button class="btn btn-primary" (click)="[sendEmail()]" id="slmcok">Continue</button>
+                                    <!-- <button class="btn btn-primary" (click)="[sendEmail()]" id="slmcok">Continue</button> -->
+                                    <button (click)="[sendEmail()]" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-new">
+                                        Continue
+                                      </button>
 
                                 </div>
                                 
@@ -137,4 +140,36 @@
         </section>
     </div>
     <!-- <app-sections></app-sections> -->
+    <div class="modal fade bs-example-modal-new" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  
+        <div class="modal-dialog">
+          
+          <!-- Modal Content: begins -->
+          <div class="modal-content">
+            
+            <!-- Modal Header -->
+            <!-- <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">Your Headings</h4>
+            </div> -->
+          
+            <!-- Modal Body -->  
+            <div class="modal-body">
+              <div class="body-message">
+                <h4 style="text-align: center;">Mail Sent!</h4>
+                <p style="text-align: center;">Check your inbox</p>
+              </div>
+            </div>
+          
+            <!-- Modal Footer -->
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div> -->
+          
+          </div>
+          <!-- Modal Content: ends -->
+          
+        </div>
+        
+      </div>
 </main>

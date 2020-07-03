@@ -28,6 +28,7 @@ export class DoctorverificationComponent implements OnInit {
     this.coreAuth.getUserState()    //getting the user data for the homepage
     .subscribe(user => {
       this.user = user;
+      this.auth.usersignupDetails(this.user.uid)
       // console.log(this.user)
       var docRef = this.db.collection("Users").doc(this.user.uid);
       docRef.valueChanges()
@@ -37,11 +38,6 @@ export class DoctorverificationComponent implements OnInit {
           console.log(this.data.slmcVerified+" :Slmc verification status")
         })
     })
-    // $(document).ready(function(){
-    //   $("#flip").click(function(){
-    //     $("#panel").slideDown("slow");
-    //   });
-    // });
   }
 
   verifyDoctor(){
@@ -50,18 +46,6 @@ export class DoctorverificationComponent implements OnInit {
     })
   }
   sendEmail(){
-    // $(document).ready(function(){
-    //   $("#slmcok").click(function(){
-    //     $("#slmcok_div").fadeOut();
-    //   });
-    // });
-
-    // this.mailFlag = true;
-    // this.verify.sendEmail(this.user.uid,this.data).subscribe(res=>{
-    //   console.log(res)
-    // })
-    // this.hide();
-
     var otpCode           = '';
     length = 30;
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -75,17 +59,7 @@ export class DoctorverificationComponent implements OnInit {
     })
   }
   
-  // hide(){
-  //   console.log("Jq called")
-  //   $(document).ready(function(){
-  //     $("#slmcok").click(function(){
-  //       $("#slmcok_div").fadeOut();
-  //     })
-  //   })
-  // }
-
   onSubmit(otp){
-    // if(this.data.OTP === )
     console.log(otp)
   }
 

@@ -1,0 +1,63 @@
+<div class="section">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-6">
+                <h1>Patients List</h1>
+            </div>
+            <!-- <div class="col-2" style="position:sticky;padding-left: 200px;">
+                <input [(ngModel)]="searchText" placeholder="search text goes here" class="textbox">
+            </div> -->
+            <div class="col-4">
+                <div class="form-group">
+                  <strong>Username or Email</strong>
+                  <input placeholder="Type username or email" type="text" class="form-control"
+                    aria-label="Text input with dropdown button" [(ngModel)]="searchText">
+                  <strong>Verification Status</strong>
+                  <select class="form-control" [(ngModel)]="slmcVerified">
+                    <option value="all">All</option>
+                    <option [ngValue]="true">SLMC Verified</option>
+                    <option [ngValue]="false">SLMC Verification Failed</option>
+                  </select>
+                </div>
+              </div>
+            <!-- <div class="col-4">
+                <div class="form-group">
+                    <strong>Verification</strong>
+                    <select class="form-control" [(ngModel)]="slmcVerified">
+                        <option value="all">All</option>
+                        <option [ngValue]="true">SLMC Verified</option>
+                        <option [ngValue]="false">SLMC Verification Failed</option>
+                    </select>
+                </div>
+            </div> -->
+        </div>
+        <div class="list-group" style="margin-top: 20px;" @fade>
+            <div class="list-group-item" *ngFor="let item of (usersData |moderator:slmcVerified) | moderatorPatient:searchText">
+                <div *ngIf="item.role=='patient'">
+                    <div class="row">
+                        <div class="col-6">
+                            {{item.name}} <br>
+                            <!-- <label *ngIf="!item.slmcVerified" class="badge badge-warning">SLMC Failed |</label> -->
+                            <label *ngIf="!item.emailVerified" class="badge badge-warning">{{item.emailVerified}}</label>
+                            <label *ngIf="!item.PhoneNumberVerified" class="badge badge-warning">Phone Failed</label>
+                            <!-- <label *ngIf="item.addressTokenVerified" class="badge badge-success">Full Verified -->
+                                <!-- Profile</label> -->
+                        </div>
+                        <div class="col-2">
+                            {{item.role}} <br>
+                        </div>
+                        <div class="col-2">
+                            Ratings <br>
+                        </div>
+                        <div class="col-2">
+                            <a *ngIf="item.slmcVerified" button class="btn btn-success" type="submit"
+                                style="text-decoration: aliceblue;">View</a>
+                            <a *ngIf="!item.slmcVerified" button class="btn btn-danger" type="submit">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
