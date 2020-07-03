@@ -1,5 +1,5 @@
 .container-fluid{
-    background-color: #16d6f0;
+    background-color:#E3F2FD;
     width: 102%;
     margin-top: -0.9%;
     height: max-content;
@@ -62,17 +62,17 @@
     min-height: 260px;
   }
   #dark.card{
-    background-color:#a970b1;
+    background-color:#2196F3;
   }
   #light.card{
-    background-color:#dca6e4;
+    background-color:#90CAF9;
   }
   #space.card{
     margin-top: 10px;
   }
   .btn{
     height: 38px;
-    background-color: #820fd4;
+    background-color: #2364ce;
     color: aliceblue;
     width: fit-content;
     align-self: center;

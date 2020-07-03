@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
-
   UpdateProfileForm: FormGroup;
 
   foods = ["Vegitarian", "Non-vegitarian"];
@@ -35,6 +34,7 @@ export class EditProfileComponent implements OnInit {
       weight: ["", Validators.required],
       food: ["", Validators.required],
     });
+
   }
   add1() {
     this.viewcol1 = true;
