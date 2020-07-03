@@ -8,12 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./patient-dashboard.component.css']
 })
 export class PatientDashboardComponent implements OnInit {
+  userid: string;
 
   constructor(public auth:AuthService,
                       private router:Router) { 
   }
 
   ngOnInit(): void {
+    this.auth.getUserState().subscribe(res=>{
+      this.userid = res.uid
+      this.auth.updateLastlogin(this.userid)
+    })
   }
   joinlc() {
     this.router.navigate(['/patients/waiting-room'])
