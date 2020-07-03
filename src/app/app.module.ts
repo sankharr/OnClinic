@@ -59,9 +59,16 @@ import { DoctorverificationComponent } from './doctorverification/doctorverifica
 import { MailVerificationComponent } from './mail-verification/mail-verification.component';
 import { AddressVerifyComponent } from './address-verify/address-verify.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { PatientRegistration2Component } from './patient-registration2/patient-registration2.component';
+import { ModeratorNavbarComponent } from './shared/moderator-navbar/moderator-navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { MatTabsModule } from '@angular/material/tabs';
+import { PatientRegistration2Component } from './patient-registration2/patient-registration2.component';
+
+import {ModeratorPipe} from './pipes/moderator.pipe';
+import { ViewPatientsComponent } from './moderator/view-patients/view-patients.component';
+import { ModeratorPatientPipe } from './pipes/moderator-patient.pipe';
+import { ModeratorDashboardComponent } from './moderator/moderator-dashboard/moderator-dashboard.component';
+import { PatientverificationComponent } from './patientverification/patientverification.component';
+import { SelectionPipe } from './pipes/selection.pipe';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -101,6 +108,13 @@ var firebaseConfig = {
     DoctorBookComponent,
     PaymentComponent,
     DoctorRegistration2Component,
+    ModeratorNavbarComponent,
+    ModeratorPipe,
+    ViewPatientsComponent,
+    ModeratorPatientPipe,
+    ModeratorDashboardComponent,
+    PatientverificationComponent,
+    SelectionPipe,
     PatientRegistration2Component
   ],
   imports: [
@@ -113,6 +127,7 @@ var firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    BrowserAnimationsModule,
     AngularFireStorageModule,
     CoreModule,
     PatientsRoutingModule,

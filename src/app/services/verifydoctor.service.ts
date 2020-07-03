@@ -29,7 +29,7 @@ export class VerifydoctorService {
   sendPhoneOtp(id,otp){
      return this.http.post('api/phoneotp',[id,otp])
   }
-  
+// https://onclinic-test.herokuapp.com/api check server status:
   sendOtpText(message,phoneNumber){
     return this.http.post('api/sendtextmessage',[message,phoneNumber])
   }

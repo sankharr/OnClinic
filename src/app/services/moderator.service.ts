@@ -15,5 +15,8 @@ export class ModeratorService {
   getAllUsers(){
     return this.db.collection('Users').valueChanges();
   }
+  getDoctor(doctorId){
+    return this.db.collection("Users",(ref)=>(ref.where("email","==","saman@gmail.com"))).snapshotChanges()
+  }
 }
 
