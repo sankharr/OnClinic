@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { VerifydoctorService } from '../services/verifydoctor.service';
 import { CoreAuthService } from '../core/core-auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { trigger, transition, animate, style } from '@angular/animations';
+import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-address-verify',
-  templateUrl: './address-verify.component.html',
-  styleUrls: ['./address-verify.component.css'],
+  selector: 'app-patientverification',
+  templateUrl: './patientverification.component.html',
+  styleUrls: ['./patientverification.component.scss'],
   animations: [
     trigger('fade', [
       transition('void => *', [
@@ -18,18 +18,16 @@ import { trigger, transition, animate, style } from '@angular/animations';
     ])
   ]
 })
-export class AddressVerifyComponent implements OnInit {
-  touched:boolean = false
+export class PatientverificationComponent implements OnInit {
   user: firebase.User;
-  send:boolean=true;
-  sent:boolean=false;
-  // div3:boolean=true;
   data: any;
+  flag: any;
+  mailFlag: any;
+
   constructor(
-    private router: Router,
-    private _router: ActivatedRoute,
-    private doctorService: VerifydoctorService,
+    private verify: VerifydoctorService,
     private coreAuth: CoreAuthService,
+    private auth: AuthService,
     private db: AngularFirestore
   ) { }
 
@@ -37,33 +35,28 @@ export class AddressVerifyComponent implements OnInit {
     this.coreAuth.getUserState()    //getting the user data for the homepage
       .subscribe(user => {
         this.user = user;
+        this.auth.usersignupDetails(this.user.uid)
         // console.log(this.user)
         var docRef = this.db.collection("Users").doc(this.user.uid);
         docRef.valueChanges()
           .subscribe(result => {
             this.data = result;
-            console.log(result)
+            // console.log(this.user.uid)
+
           })
       })
   }
-// uid,token,name,address
-  sendToken(){
-    var otp = Math.floor(1000000 + Math.random() * 9000000)
-    this.doctorService.sendToken(this.user.uid,otp,this.user.displayName,['address']).subscribe(res=>{
+  sendEmail() {
+    var otpCode = '';
+    length = 30;
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      otpCode += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    this.verify.sendEmail(this.user.uid, [otpCode, this.user.email]).subscribe(res => {
       console.log(res)
     })
   }
-
-  verifyToken(){
-    this.doctorService.verifyAddress(this.user.uid);
-    this.router.navigate(['/welcomepage'])
-
-  }
-_touched(){
-  setTimeout(()=>{
-    this.touched = true;
-}, 2000);
-  
-}
 
 }
