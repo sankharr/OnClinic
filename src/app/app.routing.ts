@@ -15,6 +15,8 @@ import { TestingComponent } from './testing/testing.component';
 import { DoctorsComponent } from './layouts/doctors/doctors.component';
 import { DoctorsListComponent } from './doctors-list/doctors-list.component';
 import { DoctorsRoutingModule } from './layouts/doctors/doctors.routing';
+
+
 import { DoctorBookComponent } from './doctor-book/doctor-book.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
@@ -31,23 +33,20 @@ import { AddressVerifyComponent } from './address-verify/address-verify.componen
 import { PatientverificationComponent } from './patientverification/patientverification.component';
 import { PatientRegistration2Component } from './patient-registration2/patient-registration2.component';
 
-
-
-
-const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'homepage', component: HomepageComponent },
-  { path: 'user-profile', component: ProfileComponent },
-  { path: 'register', component: SignupComponent },
-  { path: 'landing', component: LandingComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'patients', component: PatientsComponent, canActivate: [AuthGuard] },
-  { path: 'doctors', component: DoctorsComponent },
-  { path: 'testing', component: TestingComponent },
-  { path: 'doctors-list', component: DoctorsListComponent },
-  { path: 'doctor-book', component: DoctorBookComponent },
-  { path: 'payment', component: PaymentComponent },
-  { path: 'doctor-completeProfile', component: DoctorRegistration2Component },
+const routes: Routes =[
+  { path: 'home',             component: HomeComponent },
+  { path: 'homepage',             component: HomepageComponent },
+  { path: 'user-profile',     component: ProfileComponent },
+  { path: 'register',           component: SignupComponent },
+  { path: 'landing',          component: LandingComponent },
+  { path: 'login',          component: LoginComponent },
+  { path: 'patients',          component: PatientsComponent, canActivate: [AuthGuard] },
+  { path: 'doctors',          component: DoctorsComponent },
+  { path: 'doctors-list',          component: DoctorsListComponent },
+  { path: 'doctor-book/:id',          component: DoctorBookComponent, canActivate: [AuthGuard] },
+  { path: 'payment',          component: PaymentComponent },
+  { path: 'testing', component:TestingComponent},
+  { path: 'doctor-completeProfile', component:DoctorRegistration2Component},
   { path: 'patient-completeProfile', component:PatientRegistration2Component},
   { path: 'ml', component: MlComponent },
   { path: 'patientverification',component:PatientverificationComponent },
@@ -60,6 +59,11 @@ const routes: Routes = [
   { path: 'addressverificatoin', component: AddressVerifyComponent },
   { path: 'welcomepage', component: WelcomeComponent },
   { path: '', redirectTo: 'homepage', pathMatch: 'full' }
+
+
+
+
+
 ];
 
 @NgModule({

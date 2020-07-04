@@ -1,10 +1,9 @@
 <!--Upper block-->
 <section class="section section-lg section-shaped pt-lg-3 pb-300" >
-  <div class="container" >
-      <div class="row justify-content-center">
+  <div class="container-fluid" >
+      <div class="row justify-content-center" >
         <div class="col-lg-12">
-          <div class="col-lg-12">
-            <div class="card shadow border-0" style="background-color:#a970b1;">
+            <div class="card shadow border-0" style="background-color:#2196F3; margin-top: 10px;">
               <div class="pt-0 text-center">
                 <div class="card-body py-20"> 
                   <div class="row row-grid">
@@ -19,7 +18,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card shadow border-0" style="background-color:#dab3ff">
+                          <div class="card shadow border-0" style="background-color:#90CAF9">
                             <div class="pt-0 text-center">
                               <div class="card-body py-20" style="height:280px">
                                 
@@ -31,8 +30,8 @@
                                         <div class="card-body">
                                               <p>Patient name: D.V.M.Pavithrani</p>
                                               <p>Date: 2020.07.14</p>
-                                              <p>TIme: 17:15 </p>
-                                              <button type="button" class="btn btn-success" style="margin-top: 10px;">Start</button>
+                                              <p>Time: 17:15 </p>
+                                              <a href="/doctors/waitingroomdoctorview" button class="btn btn-success" type="submit" >Start</a>
                                         </div>
                                       </div>
                                   </div>
@@ -58,7 +57,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="card shadow border-0" style="background-color:#dab3ff">
+                          <div class="card shadow border-0" style="background-color:#90CAF9">
                             <div class="pt-0 text-center">
                               <div class="card-body py-20" style="height:280px">
                                 
@@ -87,49 +86,55 @@
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
   </div>
 </section>
 <!--end of Upper block-->
-
+                
 
 <!--second block-->
 <section class="section section-lg pt-lg-3 mt--300">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-12">
         <div class="row row-grid">
           
           <div class="col-lg-12">
-            <div class="card shadow border-0" style="background-color:#a970b1">
+            <div class="card shadow border-0" style="background-color:#2196F3">
               <div class="pt-0 text-center">
                 <div class="card-body py-20" style="">
+
                   <div class="card shadow border-0" style="background-color:#e6e6e6">
-                    <div class="pt-0 text-center">
+                    
                       <div class="card-body py-1">
                         <span class="d-block mb-1">Channeling Log</span>
                       </div>
-                    </div>
+                    
                   </div>
-                  <div class="card shadow border-0" style="background-color:#dab3ff">
+
+                  <div class="card shadow border-0" style="background-color:#90CAF9">
                     <div class="pt-0 text-center">
                       <div class="card-body py-20" style="">
                         
-
                         <div class="card shadow" id="space">
                           <div class="card">
                 
                               <div class="card card-stats mb-4 mb-lg-0">
                                 <div class="card-body">
-                                  <mat-tab-group animationDuration="0ms">
-                                    <mat-tab label="Upcoming Channelings">
 
+                                  <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                      <a class="nav-item nav-link active" id="nav-upcoming-tab" data-toggle="tab" href="#nav-upcoming" role="tab" aria-controls="nav-home" aria-selected="true">Upcoming Channelings</a>
+                                      <a class="nav-item nav-link" id="nav-previous-tab" data-toggle="tab" href="#nav-previous" role="tab" aria-controls="nav-profile" aria-selected="false">Previous Channelings</a>
+                                      
+                                    </div>
+                                  </nav>
+                                  <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab"> 
 
                                       <div class="table-responsive">
                                         <table class="table align-items-center table-flush">
-
+                                  
                                           <tbody>
                                             <tr>
                                               <td>
@@ -139,16 +144,10 @@
                                                 In 12hours 
                                               </td>
                                               <td>
-                                                  <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
-                                              </td>
-                                              <td>
-                                                  <button type="button" class="btn btn-primary">View Details</button>
-                                              </td>
-                                              <td>
-                                                  <button type="button" class="btn btn-info">View Recipt</button>  
-                                              </td>                
+                                                  <button type="button" class="btn btn-primary" style="background-color: #2364ce">View Details</button>
+                                              </td>               
                                             </tr>
-
+                                  
                                             <tr>
                                               <td>
                                                   <span class="mb-0 text-sm">Appoinment with user : User name 2</span> 
@@ -157,14 +156,8 @@
                                                 In 12hours 
                                               </td>
                                               <td>
-                                                  <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
-                                              </td>
-                                              <td>
-                                                  <button type="button" class="btn btn-primary">View Details</button>
-                                              </td>
-                                              <td>
-                                                  <button type="button" class="btn btn-info">View Recipt</button>  
-                                              </td>                
+                                                  <button type="button" class="btn btn-primary" style="background-color: #2364ce">View Details</button>
+                                              </td>               
                                             </tr>
                                             
                                             <tr>
@@ -175,29 +168,21 @@
                                                 In 12hours 
                                               </td>
                                               <td>
-                                                  <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
-                                              </td>
-                                              <td>
-                                                  <button type="button" class="btn btn-primary">View Details</button>
-                                              </td>
-                                              <td>
-                                                  <button type="button" class="btn btn-info">View Recipt</button>  
-                                              </td>                
+                                                  <button type="button" class="btn btn-primary" style="background-color: #2364ce">View Details</button>
+                                              </td>               
                                             </tr>
-
+                                  
                                           </tbody>
                                         </table>
                                       </div>
-                                      
-                                    
-                                    
 
-                                    </mat-tab>
-                                    <mat-tab label="Previous Chanelings">
+                                    </div>
+                                    
+                                    <div class="tab-pane fade" id="nav-previous" role="tabpanel" aria-labelledby="nav-previous-tab">
 
                                       <div class="table-responsive">
                                         <table class="table align-items-center table-flush">
-
+                                  
                                           <tbody>
                                             <tr>
                                               <td>
@@ -207,16 +192,13 @@
                                                 12hours ago
                                               </td>
                                               <td>
-                                                  <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
-                                              </td>
-                                              <td>
-                                                  <button type="button" class="btn btn-primary">View Details</button>
+                                                  <button type="button" class="btn btn-primary" style="background-color: #2364ce">View Details</button>
                                               </td>
                                               <td>
                                                   <button type="button" class="btn btn-info">View Recipt</button>  
                                               </td>                
                                             </tr>
-
+                                  
                                             <tr>
                                               <td>
                                                   <span class="mb-0 text-sm">Appoinment with user : User name 2</span> 
@@ -225,10 +207,7 @@
                                                 12hours ago
                                               </td>
                                               <td>
-                                                  <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
-                                              </td>
-                                              <td>
-                                                  <button type="button" class="btn btn-primary">View Details</button>
+                                                  <button type="button" class="btn btn-primary" style="background-color: #2364ce">View Details</button>
                                               </td>
                                               <td>
                                                   <button type="button" class="btn btn-info">View Recipt</button>  
@@ -243,24 +222,22 @@
                                                 12hours ago 
                                               </td>
                                               <td>
-                                                  <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
-                                              </td>
-                                              <td>
-                                                  <button type="button" class="btn btn-primary">View Details</button>
+                                                  <button type="button" class="btn btn-primary" style="background-color: #2364ce">View Details</button>
                                               </td>
                                               <td>
                                                   <button type="button" class="btn btn-info">View Recipt</button>  
                                               </td>                
                                             </tr>
-
+                                  
                                           </tbody>
                                         </table>
                                       </div>
-                                      
 
-                                    </mat-tab>
+
+                                    </div>
+                                  </div>
+
                                     
-                                  </mat-tab-group>
                                 </div>
                               </div>
                           </div>
@@ -274,7 +251,6 @@
             </div>
           
           </div>
-        </div>
       </div>
     </div>
   </div>
