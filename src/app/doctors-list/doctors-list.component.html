@@ -1,53 +1,76 @@
 <app-navbar></app-navbar>
 <div class="section">
-<div class="container">
-  
-  <div class="row">
-    <div class="col-4">
-      <h1>Doctors List</h1>
-    </div>
-    <div class="col-4">
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Sort By
-        </button>
-        <div class="dropdown-menu" aria-labelledby="Sort_By">
-          <a class="dropdown-item" href="doctors-list">Ratings</a>
-          <a class="dropdown-item" href="doctors-list">Accending</a>
-          <a class="dropdown-item" href="doctors-list">Decending</a>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-4">
+        <h1>Doctors List</h1>
+      </div>
+      <div class="col-4">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Sort By
+          </button>
+          <div class="dropdown-menu" aria-labelledby="Sort_By">
+            <a class="dropdown-item" href="doctors-list">Ratings</a>
+            <a class="dropdown-item" href="doctors-list">Accending</a>
+            <a class="dropdown-item" href="doctors-list">Decending</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-4">
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Specialized in
-        </button>
-        <div class="dropdown-menu" aria-labelledby="Specialized_in">
-          <a class="dropdown-item" href="doctors-list">Physiological</a>
-          <a class="dropdown-item" href="doctors-list">Psychological</a>
-          <a class="dropdown-item" href="doctors-list">Genaral</a>
+      <div class="col-4">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Specialized in
+          </button>
+          <div class="dropdown-menu" aria-labelledby="Specialized_in">
+            <a class="dropdown-item" href="doctors-list"> </a>
+            <!-- <a class="dropdown-item" href="doctors-list"> aaaaa</a> -->
+            <a class="dropdown-item" href="doctors-list">General Physician </a>
+            <a class="dropdown-item" href="doctors-list">Family practice physician" </a>
+            <a class="dropdown-item" href="doctors-list"> Pediatricians </a>
+            <a class="dropdown-item" href="doctors-list">Allergists </a>
+            <a class="dropdown-item" href="doctors-list"> Dermatologists </a>
+            <a class="dropdown-item" href="doctors-list"> Infectious disease doctors </a>
+            <a class="dropdown-item" href="doctors-list"> Ophthalmologists </a>
+            <a class="dropdown-item" href="doctors-list"> Obstetrician/gynecologists </a>
+            <a class="dropdown-item" href="doctors-list"> Cardiologists </a>
+            <a class="dropdown-item" href="doctors-list"> Endocrinologists </a>
+            <a class="dropdown-item" href="doctors-list"> Gastroenterologists </a>
+            <a class="dropdown-item" href="doctors-list"> Nephrologists </a>
+            <a class="dropdown-item" href="doctors-list"> Urologists </a>
+            <a class="dropdown-item" href="doctors-list"> Pulmonologists </a>
+            <a class="dropdown-item" href="doctors-list"> Otolaryngologists </a>
+          </div>
         </div>
       </div>
+
     </div>
+    <div class="list-group">
+      <div class="list-group-item" *ngFor="let item of items">
+        <div class="row">
+          <div class="col-7">
+            {{item.payload.doc.data().name}} <br>
+            {{item.payload.doc.data().email}}
 
-</div>
-  <div class="list-group">
-    <div class="list-group-item" *ngFor="let item of items">
-      <div class="row">
-        <div class="col-8">
-          {{item.payload.doc.data().name}} <br>
-          category
+          </div>
+          <div class="col-2">
+            Ratings : {{item.payload.doc.data().averageRating}}<br>
+            <star-rating value={{item.payload.doc.data().averageRating}} checkedcolor="red" uncheckedcolor="black"
+              size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+          </div>
+          <div class="col-1">
+            <button routerLink="/doctor-book/{{ item.payload.doc.id }}" button class="btn btn-primary">View</button>
 
-        </div> 
-        <div class="col-2">
-          Ratings <br>
-        </div>
-        <div class="col-2">
-          <a href="doctor-book" button class="btn btn-primary" type="submit" >Book Now</a>
+          </div>
+          <div class="col-2">
+            <button routerLink="/doctor-book/{{ item.payload.doc.id }}" button class="btn btn-primary">Book Now</button>
+
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
