@@ -1,11 +1,12 @@
 :host {
   display: block;    
-  background-color: #66e9e9;
-  margin:-3%;
+  background-color: #E3F2FD;
+  margin-left:-2%;
+  margin-top: -1%;
 }
 body{
 
-  background-image: url("src/assets/img/theme/doctor3.jpg");
+  background-image: url("src/assets/img/theme/doctor4.jpg");
   background-size: cover;
   height: 800px; 
 
