@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { getAllLifecycleHooks } from '@angular/compiler/src/lifecycle_reflector';
 import { map } from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-doctors-list',
   templateUrl: './doctors-list.component.html',
