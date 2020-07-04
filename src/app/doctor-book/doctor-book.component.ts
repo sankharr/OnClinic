@@ -14,6 +14,7 @@ export class DoctorBookComponent implements OnInit {
   document: any;
   id: any;
   data: any;
+  
   private routeSub: Subscription;
   constructor(
     public auth: AuthService,
