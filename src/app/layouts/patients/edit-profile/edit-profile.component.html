@@ -9,7 +9,7 @@
         </div>
     </div>
     <!--Form Begins-->
-    <form [formGroup]="UpdateProfileForm" novalidate>
+    <form [formGroup]="updateProfileForm" novalidate>
         <!--Feedback Handling-->
         <div *ngIf="submitError" class="alert alert-danger">
             Update Failed! Please check whether you have filled all the required fields and try again!
@@ -103,7 +103,8 @@
             <!--submit button-->
             <div class="row">
                 <div class="col-12">
-                    <button class="btn" type="submit" (click)="updateProfilePatient()">Update</button>
+                    <button class="btn" id="bottom" type="submit" (click)="updateProfilePatient()">Update</button>
+                    <button class="btn" id="bottom" type="submit" (click)="back()">Back</button>
                 </div>
             </div>
         </div>

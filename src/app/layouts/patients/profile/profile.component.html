@@ -14,7 +14,7 @@
                                     <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
                                     <hr>
                                     <h5><b>{{result.name}}</b></h5>
-                                    <h6><b>Age : {{result.age}} years</b></h6>
+                                    <h6>Age : {{result.age}} years</h6>
                                 </div>
                             </div>
                             <!--end of first grid-->
@@ -98,12 +98,12 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="card" id="center">
-                                <h6><b>Height : 145cm</b></h6>
+                                <h6><b>Height : {{result.height}}</b></h6>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="card" id="center">
-                                <h6><b>Weight : 60kg</b></h6>
+                                <h6><b>Weight : {{result.weight}}</b></h6>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -128,8 +128,7 @@
                                 <div class="card">
                                     <h6 style="text-align: left;">
                                         <ul>
-                                            <li>Diabities</li>
-                                            <li>High Blood Pressure</li>
+                                            <li *ngFor="let long of lgdis">{{long}}</li>
                                         </ul>
                                     </h6>
                                 </div>
@@ -143,6 +142,7 @@
                                 <div class="card">
                                     <h6 style="text-align: left;">
                                         <ul>
+                                            <li *ngFor="let alergy of alergies">{{alergy}}</li>
                                         </ul>
                                     </h6>
                                 </div>

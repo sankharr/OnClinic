@@ -1,5 +1,5 @@
 .container-fluid{
-    background-color: #ffffff;
+    background-color: #E3F2FD;
     width: 102%;
     margin-top: -0.9%;
     height: max-content;
@@ -11,17 +11,17 @@
     min-height: max-content;
 }
 .card{
-    background-color: rgb(219, 186, 203);
+    background-color: #90CAF9;
     padding: 5px;
     margin-top: 5px;
 }
 #dark.card{
-    background-color: rgb(165, 74, 218);
+    background-color: #2196F3;
     text-align: center;
 }
 .btn{
     height: 38px;
-    background-color: #820fd4;
+    background-color: #2364ce;
     color: aliceblue;
     width: fit-content;
     align-self: center;
@@ -29,6 +29,9 @@
     padding-left: 10px;
     padding-right: 10px;
     float: right;
+  }
+  #bottom.btn{
+    margin-right: 5px;
   }
 
   @media screen and (max-width: 1366px){
