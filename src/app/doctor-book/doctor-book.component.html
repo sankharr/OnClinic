@@ -1,16 +1,18 @@
 <app-navbar></app-navbar>
 <div class="section">
-
+  <div class="row">
+ <h2>Dr {{data.name}} </h2>
+</div>
   <div class="row">
     <div class="col-4">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">{{data.name}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">2020.10.10</h6>
+          <h5 class="card-title">Wednesday</h5>
+          <h6 class="card-subtitle mb-2 text-muted">2020.7.8</h6>
           <p class="card-text">
-            {{data.saturdayTime}} <br>
+            7.00 pm - 9.00 pm <br>
             Specialized in :{{data.speciality}} <br>
-            Description : aaaaaaa bbbbbbbbbbbb cccccccc dddddd eeee<br>
+            Description : MBBS qulified in University of Colombo 2002<br>
             Total channel count :{{data.numberOfAppointments}}
 
           </p>
@@ -25,13 +27,13 @@
     <div class="col-4">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">Monday</h5>
-          <h6 class="card-subtitle mb-2 text-muted">2020.10.10</h6>
+          <h5 class="card-title">Friday</h5>
+          <h6 class="card-subtitle mb-2 text-muted">2020.7.10</h6>
           <p class="card-text">
             7.00 pm - 9.00 pm <br>
             Specialized in : <br>
-            Description : aaaaaaa bbbbbbbbbbbb cccccccc dddddd eeee<br>
-            Total channel count :
+            Description :  MBBS qulified in University of Colombo 2002<br>
+            Total channel count : {{data.numberOfAppointments}}
 
           </p>
           <a href="#RegistrationDialogBox" class="card-link" data-toggle="modal">Book Now</a>
@@ -45,13 +47,13 @@
     <div class="col-4">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">Monday</h5>
-          <h6 class="card-subtitle mb-2 text-muted">2020.10.10</h6>
+          <h5 class="card-title">Sunday</h5>
+          <h6 class="card-subtitle mb-2 text-muted">2020.10.12</h6>
           <p class="card-text">
             7.00 pm - 9.00 pm <br>
             Specialized in : <br>
-            Description : aaaaaaa bbbbbbbbbbbb cccccccc dddddd eeee<br>
-            Total channel count :
+            Description :  MBBS qulified in University of Colombo 2002<br>
+            Total channel count : {{data.numberOfAppointments}}
 
           </p>
           <a href="#RegistrationDialogBox" class="card-link" data-toggle="modal">Book Now</a>
@@ -63,6 +65,72 @@
 
 
   </div>
+  <!-- ---------- -->
+
+  <div class="row">
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Wednesday</h5>
+          <h6 class="card-subtitle mb-2 text-muted">2020.10.15</h6>
+          <p class="card-text">
+            7.00 pm - 9.00 pm  <br>
+            Specialized in :{{data.speciality}} <br>
+            Description : MBBS qulified in University of Colombo 2002<br>
+
+            Total channel count :{{data.numberOfAppointments}}
+
+          </p>
+          <a href="#RegistrationDialogBox" class="card-link" data-toggle="modal">Book Now</a>
+          <a href="doctors-list" class="card-link">Cancel</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- -------------------- -->
+
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Friday</h5>
+          <h6 class="card-subtitle mb-2 text-muted">2020.10.17</h6>
+          <p class="card-text">
+            7.00 pm - 9.00 pm <br>
+            Specialized in : <br>
+            Description :  MBBS qulified in University of Colombo 2002<br>
+            Total channel count : {{data.numberOfAppointments}}
+
+          </p>
+          <a href="#RegistrationDialogBox" class="card-link" data-toggle="modal">Book Now</a>
+          <a href="doctors-list" class="card-link">Cancel</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ----------------- -->
+
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Sunday</h5>
+          <h6 class="card-subtitle mb-2 text-muted">2020.10.19</h6>
+          <p class="card-text">
+            7.00 pm - 9.00 pm <br>
+            Specialized in : <br>
+            Description :  MBBS qulified in University of Colombo 2002<br>
+            Total channel count : {{data.numberOfAppointments}}
+
+          </p>
+          <a href="#RegistrationDialogBox" class="card-link" data-toggle="modal">Book Now</a>
+          <a href="doctors-list" class="card-link">Cancel</a>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
 </div>
 
 
