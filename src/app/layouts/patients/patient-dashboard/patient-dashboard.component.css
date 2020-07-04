@@ -11,9 +11,9 @@
   align-content: center;
   min-height: max-content;
 }
-.mainRow{
-  margin-top:30px;
-}/*block 2*/
+#notfirst.row{
+  margin-top:1px;
+}
 
 .card{
   padding: 2%;
@@ -49,6 +49,17 @@ ejs-calendar{
   max-width: fit-content;
   min-width: fit-content;
 }
+
+@media screen and (max-width: 1366px){
+  .container-fluid{   
+    width: 105%; 
+    margin-top: -1.5%;
+    margin-left: -3%;
+    padding-left: -2%;
+  }
+
+}
+
 @media screen and (max-width: 500px){
   .container-fluid{   
     width: 105%; 
@@ -60,8 +71,13 @@ ejs-calendar{
   .row{
     padding: 5%;
   }
-  .card{
+  #notfirst.row{
+    margin-top: -5%;
+  }
+  #dark.card{
     margin-top: 10px;
   }
 }
+
+
   

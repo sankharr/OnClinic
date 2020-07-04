@@ -44,6 +44,9 @@ import { NgxAgoraModule } from 'ngx-agora';
 import { PaymentComponent } from './payment/payment.component';
 
 
+import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
+
+
 
 
 var firebaseConfig = {
@@ -74,7 +77,9 @@ var firebaseConfig = {
     LiveConsultationComponent,
     DoctorsListComponent,
     DoctorBookComponent,
-    PaymentComponent
+    PaymentComponent,
+    DoctorRegistration2Component
+
   ],
   imports: [
     BrowserModule,

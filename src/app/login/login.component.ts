@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
         this.coreAuth.getUserState()
           .subscribe(user => {
             this.userk = user;
-            console.log(user.uid)
+            console.log("user doc id - ",user.uid)
             localStorage.setItem("uid",user.uid)
             var docref = this.db.collection('Users').doc(this.userk.uid);
             docref.snapshotChanges()
