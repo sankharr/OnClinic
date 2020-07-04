@@ -1,0 +1,175 @@
+<main>
+    <div class="position-relative">
+        <!-- Hero for FREE version -->
+        <section class="section section-lg section-hero section-shaped">
+            <!-- Background circles -->
+            <div class="shape shape-style-1 shape-primary"> 
+                <span class="span-150"></span>
+                <span class="span-50"></span>
+                <span class="span-50"></span>
+                <span class="span-75"></span>
+                <span class="span-100"></span>
+                <span class="span-75"></span>
+                <span class="span-50"></span>
+                <span class="span-100"></span>
+                <span class="span-50"></span>
+                <span class="span-100"></span>
+            </div>
+
+            <div class="container shape-container d-flex align-items-center py-lg">
+                <div class="col px-0">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-6 text-center">
+
+                            <!-- <img src="./assets/img/brand/onclinic-logo.png" style="width: 200px;" class="img-fluid"> -->
+                            <!-- <p class="lead text-white" *ngIf="user"> Hii {{ user?.displayName }}</p> -->
+
+                            <div *ngIf="user?.displayName; then authenticated else guest">
+                            </div>
+
+                            <!-- <ng-template #guest>
+                                <h3>Yo Doca</h3>
+                            </ng-template> -->
+                            <div class="lds-spinner" *ngIf="!data">
+                                <div></div> 
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+
+                            <div class="container2" *ngIf="data && !mailFlag" id="slmcok_div">
+                                <div class="alert alert-success" role="alert" *ngIf="data.slmcVerified">
+                                    <h4 class="alert-heading">Account Successfully Verified by SLMC</h4>
+                                    <p>Your account Successfully verified we will send verification code via post</p>
+                                    <p>Thank you</p>
+                                    <hr>
+                                    <p>This is your username for further login</p>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username"
+                                            aria-label="Username" aria-describedby="basic-addon1" value={{data.email}}
+                                            disabled>
+                                    </div>
+                                    <!-- <button class="btn btn-primary" (click)="[sendEmail()]" id="slmcok">Continue</button> -->
+                                    <button (click)="[sendEmail()]" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-new">
+                                        Continue
+                                      </button>
+
+                                </div>
+                                
+                                <!-- <div id="dynamicCheck">
+                                    <input type="button" value="Create Element" onclick="createNewElement();" />
+                                </div>
+
+                                <div id="newElementId">New inputbox goes here:</div> -->
+
+                                <div class="alert alert-danger" role="alert" *ngIf="!data.slmcVerified && !mailFlag">
+                                    <h4 class="alert-heading">Verification faield:</h4>
+                                    <p>No Doctor data associated with this credintials</p>
+                                    <hr>
+                                    <p class="mb-0">Thank you</p>
+                                    <p class="btn btn-link">Ask why?</p>
+                                </div>
+                            </div>
+                            <!-- <button >Continue</button> -->
+                            
+                            <div class="alert alert-success" role="alert" id="div1" style="display: none;">
+                                <h4 class="alert-heading">Enter OTP Here.</h4>
+                                <p>We send OTP to <label class="label label-primary"> {{data.email}}</label></p>
+                                <hr>
+                                <p>Submit your otp here</p>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">OTP</span>
+                                    </div>
+                                    <input type="text" class="form-control" 
+                                        aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <p class="btn btn-primary" (click)=onComplete(Username.values)>Continue</p>
+                            </div>
+
+                            <!-- <ng-template #authenticated> -->
+                            <!-- <div *ngIf="user"> -->
+                            <!-- <h3>Doctor verification page</h3> -->
+                            <!-- <p> {{flag}}</p> -->
+                            <!-- <img [src]="user.photoURL" style="width: 100px; height: 100px;">
+                    <p style="color: black; font-weight: bold;">UID: {{ data.telno }}</p>
+                  </div> -->
+                            <!-- <p class="btn btn-primary" (click)="verifyDoctor()">Verify Account</p> -->
+                            <!-- </ng-template> -->
+
+                            <!-- <div class="btn-wrapper mt-5">
+                    <a href="https://www.creative-tim.com/product/argon-design-system-angular?ref=adsa-index-header" class="btn btn-lg btn-white btn-icon mb-3 mb-sm-0">
+                      <span class="btn-inner--icon"><i class="ni ni-cloud-download-95"></i></span>
+                      <span class="btn-inner--text">Download Angular</span>
+                    </a>
+                    <a href="https://github.com/creativetimofficial/argon-design-system-angular?ref=adsa-index-header" class="btn btn-lg btn-github btn-icon mb-3 mb-sm-0" target="_blank">
+                      <span class="btn-inner--icon"><i class="fa fa-github"></i></span>
+                      <span class="btn-inner--text">
+                        <span class="text-warning">Star us</span> on Github</span>
+                    </a>
+                  </div> -->
+
+                            <!-- <div class="mt-5">
+                    <small class="text-white font-weight-bold mb-0 mr-2">*proudly coded by</small>
+                    <img src="./assets/img/brand/creativetim-white-slim.png" style="height: 28px;">
+                  </div> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SVG separator -->
+            <div class="separator separator-bottom separator-skew zindex-100">
+                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+        </section>
+    </div>
+    <!-- <app-sections></app-sections> -->
+    <div class="modal fade bs-example-modal-new" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  
+        <div class="modal-dialog">
+          
+          <!-- Modal Content: begins -->
+          <div class="modal-content">
+            
+            <!-- Modal Header -->
+            <!-- <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">Your Headings</h4>
+            </div> -->
+          
+            <!-- Modal Body -->  
+            <div class="modal-body">
+              <div class="body-message">
+                <h4 style="text-align: center;">Mail Sent!</h4>
+                <p style="text-align: center;">Check your inbox</p>
+              </div>
+            </div>
+          
+            <!-- Modal Footer -->
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div> -->
+          
+          </div>
+          <!-- Modal Content: ends -->
+          
+        </div>
+        
+      </div>
+</main>

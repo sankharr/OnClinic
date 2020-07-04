@@ -9,6 +9,8 @@ import { LiveConsultationComponent } from 'src/app/live-consultation/live-consul
 import { DoctorPaymentsComponent } from './doctor-payments/doctor-payments.component';
 import { DoctorLogComponent } from './doctor-log/doctor-log.component';
 import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
+import { DoctorChannelingComponent } from './doctor-channeling/doctor-channeling.component';
+import { WaitingroomDoctorviewComponent } from './waitingroom-doctorview/waitingroom-doctorview.component';
 
 // import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 // import { PatientsComponent } from './patients.component';
@@ -32,6 +34,9 @@ const routes: Routes =[
         { path: 'payments', component: DoctorPaymentsComponent},
         { path: 'log', component: DoctorLogComponent},
         { path: 'ppv', component: ProfilePatientviewComponent},
+        { path: 'channeling', component: DoctorChannelingComponent},
+        { path: 'waitingroomdoctorview', component: WaitingroomDoctorviewComponent}
+
         // { path: 'doctors', redirectTo: 'dashboard', pathMatch: 'full' }
      ] },  
     // { path: '', redirectTo: 'dashboard', pathMatch: 'full' }

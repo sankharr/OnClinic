@@ -5,11 +5,16 @@ import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorv
 import { PatientsRoutingModule } from './patients.routing';
 import { PatientPaymentsComponent } from './patient-payments/patient-payments.component';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
+import { ChannelingComponent } from './channeling/channeling.component';
+import { MyhealthComponent } from './myhealth/myhealth.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 
 @NgModule({
-  declarations: [PatientDashboardComponent , ProfileDoctorviewComponent, PatientPaymentsComponent],
+  declarations: [PatientDashboardComponent , ProfileDoctorviewComponent, PatientPaymentsComponent, WaitingRoomComponent, ChannelingComponent, MyhealthComponent, ProfileComponent, EditProfileComponent],
   imports: [
     CommonModule,
     CalendarModule

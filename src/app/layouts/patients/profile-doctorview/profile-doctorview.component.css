@@ -35,11 +35,15 @@
   margin-top: 10px;
 }
 .btn{
-  height: 35px;
+  height: 38px;
   background-color: #820fd4;
   color: aliceblue;
   width: fit-content;
   align-self: center;
+  padding: 0%;
+  padding-left: 10px;
+  padding-right: 10px;
+  /*padding-bottom: 30px;*/
 }
 
 .image-man{

@@ -1,0 +1,173 @@
+<div class="container-fluid">
+    <div class="col-lg-12">
+       <!--Main Box-->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card shadow" id="dark">
+                    <div class="card">
+                        <div class="card" id="light">
+                            <h2 style="text-align:center;"><b>Channeling Log</b></h2>
+                        </div>    
+                    </div>
+                    <div class="card" id="space">
+                        <div class="row"  id="lessmargin">
+                            <div class="col-lg-12">
+                                <!--Search bar-->
+
+                                <div class="card" id="space">
+                                        <div class="col-lg-12">
+                                            <div class="topnav">
+                                                <div class="search-container">
+                                                  <form action="/action_page.php">
+                                                    <input type="text" placeholder="Search.." name="search">
+                                                    <button type="submit">Search</button>
+                                                  </form>
+                                                </div>
+                                              </div>
+                                        </div> 
+                                </div>
+                                <!--first bar-->
+                                <div class="card" id="space">
+                                    <div class="card shadow" id="light">
+                                        <div class="col-lg-12">
+                                            <div class="row" id="fixsize">
+                                                <div class="col-lg-4">
+                                                    <h6><b>Dr.Kamal Perera</b></h6>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <h6><b>2 Days ago</b></h6>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                        <h6><b>Rs.1200.00</b></h6>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn" type="submit" (click)="startCall()">view Recipt</button>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <a href="#InquiryDialogBox" class="btn" data-toggle="modal">Inqury</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <!--Second bar-->
+                                <div class="card" id="space">
+                                    <div class="card shadow" id="light">
+                                        <div class="col-lg-12">
+                                            <div class="row" id="fixsize">
+                                                <div class="col-lg-4">
+                                                    <h6><b>Dr.Kamal Perera</b></h6>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <h6><b>2 Days ago</b></h6>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                        <h6><b>Rs.1200.00</b></h6>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn" type="submit" (click)="startCall()">view Recipt</button>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <a href="#InquiryDialogBox" class="btn" data-toggle="modal">Inqury</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <!--Third bar-->
+                                <div class="card" id="space">
+                                    <div class="card shadow" id="light">
+                                        <div class="col-lg-12">
+                                            <div class="row" id="fixsize">
+                                                <div class="col-lg-4">
+                                                    <h6><b>Dr.Kamal Perera</b></h6>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <h6><b>2 Days ago</b></h6>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                        <h6><b>Rs.1200.00</b></h6>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn" type="submit" (click)="startCall()">view Recipt</button>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <a href="#InquiryDialogBox" class="btn" data-toggle="modal">Inqury</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <!--end of payment bars-->
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end of main box-->
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="InquiryDialogBox" tabindex="-1" role="dialog" aria-labelledby="InquryDialogBox"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Title">Appoinment Registration Form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- --------------- -->
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="InquiryDate">Date of Inquary</label>
+              <input type="date" class="form-control" id="InquiryDate" placeholder="Date of inquiry">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="ConsultDate">Date of Consultation</label>
+              <input type="date" class="form-control" id="ConsultDate" placeholder="Date of consultation">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="DoctorName">Doctor Name</label>
+              <input type="text" class="form-control" id="DoctorName" placeholder="Doctor Name">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="Reason">Reason</label>
+              <input type="text" class="form-control" id="Reason" placeholder="Enter your reason here">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="AppoinmnetID">Appoinment ID</label>
+              <input type="text" class="form-control" id="AppoinmnetID">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="TotalAmount">Paid Amount Rs</label>
+              <input type="text" class="form-control" id="Amount">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="ChannelNo">Channel No</label>
+              <input type="text" class="form-control" id="ChannelNo">
+            </div>
+          </div>
+
+        </form>
+
+        <!-- -------------------------- -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="payment" type="button" class="btn btn-primary">Submit</a>
+      </div>
+    </div>
+  </div>
+</div>

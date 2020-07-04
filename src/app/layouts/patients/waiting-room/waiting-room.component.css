@@ -1,0 +1,107 @@
+.container-fluid{
+    background-color: #16d6f0;
+    width: 102%;
+    margin-top: -0.9%;
+    height: max-content;
+    margin-left: -2%;
+  }
+  
+  .row{
+    padding: 1.5%;
+    align-content: center;
+    min-height: max-content;
+  }
+  #notfirst.row{
+    margin-top:1px;
+  }
+  .card{
+    padding: 2%;
+    text-align: center;
+    align-content: center;
+    font-size: xx-large;
+    margin-top: 10px;
+  }
+  #dark.card{
+    background-color:#b132c2;
+  }
+  #light.card{
+    background-color:#dca6e4;
+  }
+  #grey.card{
+    background-color:#9f9da0;
+  }
+  #tablecol.card{
+    background-color:#d6c1e0;
+    margin: -5px;
+    padding-bottom: 0;
+  }
+  #green.card{
+    background-color:#0de454;
+    margin: -5px;
+    padding-bottom: 0;
+  }
+  #red.card{
+    background-color:#e43a2e;
+    margin: -5px;
+    padding-bottom: 0;
+  }
+  #orange.card{
+    background-color:#f1a67a;
+    margin: -5px;
+    padding-bottom: 0;
+  }
+  #nspace.card{
+    margin-top: 0px;
+  }
+  .btn{
+    align-self: center;
+    margin-top: 10px;
+    background-color: #820fd4;
+
+  }
+  #orange.btn{
+    background-color: #f1a67a;
+  }
+  #green.btn{
+    background-color: #13bb4b;
+  }
+
+
+.topnav {
+  overflow: hidden;
+  padding-left: 30px;
+  padding-top: 15px;
+}
+
+
+  @media screen and (max-width: 1366px){
+    .container-fluid{   
+      width: 105%; 
+      margin-top: -1.5%;
+      margin-left: -3%;
+      padding-left: -2%;
+    }
+  
+  }
+  
+  @media screen and (max-width: 500px){
+    .container-fluid{   
+      width: 105%; 
+      margin-left: -6%;
+      margin-top: -6%; 
+      padding-left: 0%;  
+      padding-right: 0%;
+    }
+    .row{
+      padding: 5%;
+    }
+    #notfirst.row{
+      margin-top: -5%;
+    }
+    #dark.card{
+      margin-top: 10px;
+    }
+  }
+  
+  
+    

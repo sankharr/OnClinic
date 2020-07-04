@@ -1,13 +1,21 @@
 <!-- <div class="full-height">
 
 </div> -->
+<app-navbar></app-navbar>
 <div class="container">
     <div class="row">
-        <div *ngIf="user?.displayName; then authenticated else guest">
+        <div *ngIf="showThis">
+            <div *ngIf="user">
+                <h3> Yo {{ user.displayName }}</h3>
+                <img [src]="user.photoURL" style="width: 100px; height: 100px;">
+                <p>UID: {{ user.uid }}</p>
+            </div>
 
         </div>
 
-        <ng-template #guest>
+        <button class="btn btn-primary" (click)="buttonPress()">Press Me</button>
+
+        <!-- <ng-template #guest>
             <h3>Yo guest</h3>
         </ng-template>
 
@@ -17,6 +25,22 @@
                 <img [src]="user.photoURL" style="width: 100px; height: 100px;">
                 <p>UID: {{ user.uid }}</p>
             </div>
-        </ng-template>
+        </ng-template> -->
+    </div>
+
+    <!-- <div class="row">
+        <div class="col">
+            <div class="card">
+                <p>{{ result?.name }}</p>
+                <p>{{ result?.age }}</p>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="list-group">
+        <div class="list-group-item" *ngFor="let tile of result">
+            <p>{{ tile.name }}</p>
+            <p>{{ tile.age }}</p>
+        </div>
     </div>
 </div>

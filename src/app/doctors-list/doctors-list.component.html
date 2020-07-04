@@ -40,7 +40,7 @@
           {{item.payload.doc.data().name}} <br>
          {{item.payload.doc.data().email}}
 
-        </div>
+        </div> 
         <div class="col-2">
           Ratings : {{item.payload.doc.data().averageRating}}<br>
           <star-rating value= {{item.payload.doc.data().averageRating}} checkedcolor="red" uncheckedcolor="black" size="24px"    readonly="false" (rate)="onRate($event)"></star-rating>

@@ -1,0 +1,63 @@
+.img-box {
+    text-align: center;
+  }
+  .box {
+    width: 24em; /* Without a width `auto` won’t work */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  ul li {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .banner {
+    position: relative;
+  }
+  
+  .content {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  body{
+    font-family: "Courier New", monospace;
+      text-align: center;
+    
+    }
+    
+    button{
+      font-family: "Courier New", monospace;
+    }
+    
+    html, body, .wrapper{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding:0;
+      margin:0;
+    }
+    
+
+
+    
+    button{
+      width: 128px;
+      height: 44px;
+      border-radius: 8px;
+      border: none;
+      background: #0251e5;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    button:hover{
+      opacity:0.95;
+    }
+    
+    .popup button{
+      width: 100%;
+      background: #0dcb2f;
+    }

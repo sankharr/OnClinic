@@ -183,7 +183,8 @@ export class AuthService {
         if (role == "doctor") {
           this.insertDoctorData(userCredential)
             .then(() => {
-              this.router.navigate(['/doctor-completeProfile']);
+              // this.router.navigate(['/doctor-completeProfile']);
+              this.router.navigate(['/doctorverification']);
             });
         }
 
@@ -275,5 +276,20 @@ export class AuthService {
     console.log("sgdsddddddddddddddd - ", this.last_doctorID)
     return this.last_doctorID;
   }
+
+  updateLastlogin(uid){
+    var datetime = new Date().toLocaleString();
+    return this.db.doc(`Users/${uid}`).update({
+      'lastlogin':datetime
+    });
+  }
+
+  usersignupDetails(uid){
+    var datetime = new Date().toLocaleString();
+    return this.db.doc(`Users/${uid}`).update({
+      'accountcreation':datetime
+    });
+  }
+
 
 }

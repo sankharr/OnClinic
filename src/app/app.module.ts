@@ -25,6 +25,12 @@ import { PatientsComponent } from './layouts/patients/patients.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {
+  AngularFireStorageModule,
+  AngularFireStorageReference,
+  AngularFireUploadTask  
+} from "@angular/fire/storage";
+// import { StorageBucket } from "@angular/fire/"
 // import { AuthService } from './services/auth.service';
 import { CoreModule } from './core/core.module';
 
@@ -42,12 +48,27 @@ import { LiveConsultationComponent } from './live-consultation/live-consultation
 import { environment } from 'src/environments/environment';
 import { NgxAgoraModule } from 'ngx-agora';
 import { PaymentComponent } from './payment/payment.component';
-
-
 import { DoctorRegistration2Component } from './doctor-registration2/doctor-registration2.component';
 
+import {HttpModule} from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { MlComponent } from './ml/ml.component';
+import { DiseaseComponent } from './disease/disease.component';
+import { ModeratorComponent } from './moderator/moderator.component';
+import { DoctorverificationComponent } from './doctorverification/doctorverification.component';
+import { MailVerificationComponent } from './mail-verification/mail-verification.component';
+import { AddressVerifyComponent } from './address-verify/address-verify.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { ModeratorNavbarComponent } from './shared/moderator-navbar/moderator-navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PatientRegistration2Component } from './patient-registration2/patient-registration2.component';
 
-
+import {ModeratorPipe} from './pipes/moderator.pipe';
+import { ViewPatientsComponent } from './moderator/view-patients/view-patients.component';
+import { ModeratorPatientPipe } from './pipes/moderator-patient.pipe';
+import { ModeratorDashboardComponent } from './moderator/moderator-dashboard/moderator-dashboard.component';
+import { PatientverificationComponent } from './patientverification/patientverification.component';
+import { SelectionPipe } from './pipes/selection.pipe';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -78,8 +99,25 @@ var firebaseConfig = {
     DoctorsListComponent,
     DoctorBookComponent,
     PaymentComponent,
-    DoctorRegistration2Component
-
+    MlComponent,
+    DiseaseComponent,
+    ModeratorComponent,
+    DoctorverificationComponent,
+    MailVerificationComponent,
+    AddressVerifyComponent,
+    WelcomeComponent,
+    DoctorsListComponent,
+    DoctorBookComponent,
+    PaymentComponent,
+    DoctorRegistration2Component,
+    ModeratorNavbarComponent,
+    ModeratorPipe,
+    ViewPatientsComponent,
+    ModeratorPatientPipe,
+    ModeratorDashboardComponent,
+    PatientverificationComponent,
+    SelectionPipe,
+    PatientRegistration2Component
   ],
   imports: [
     BrowserModule,
@@ -91,6 +129,8 @@ var firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    BrowserAnimationsModule,
+    AngularFireStorageModule,
     CoreModule,
     PatientsRoutingModule,
     ReactiveFormsModule,
@@ -98,7 +138,11 @@ var firebaseConfig = {
     PatientsModule,
     DoctorsRoutingModule,
     CalendarModule,
-    NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
+    NgxAgoraModule.forRoot({ AppID: environment.agora.appId }),
+    HttpModule,
+    HttpClientModule,
+    BrowserAnimationsModule, 
+    // MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

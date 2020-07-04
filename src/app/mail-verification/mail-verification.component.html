@@ -1,0 +1,66 @@
+
+<!-- Alert -->
+<div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="touched" style="margin-top: 10px;">
+    <strong>Succsess!</strong> Your email succsessfuly verified!Thanks for your corporation😘
+    <a type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </a>
+</div>
+
+<!-- Base image -->
+<figure class="img-box">
+    <img src="../../assets/svg/1.svg" alt=""
+        style="height: 400px;width:100%;background-repeat: no-repeat;background-size: contain;">
+</figure>
+
+<!-- Send phone verification card -->
+<div class="card text-center" *ngIf="!touched">
+    <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <button (click)="[_touched(),phoneOtp()]" type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#buffer">Send SMS</button>
+    </div>
+</div>
+
+<!-- When send -->
+<div class="card text-center" *ngIf="touched">
+    <img class="card-img-top" src="../../assets/svg/message.svg" alt="Card image cap" style="  display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 10%;">
+    <div class="card-body">
+        <h5 class="card-title">Message Sent!</h5>
+        <p class="card-text">Check your phone and add opt</p>
+        <button *ngIf="touched" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+            data-whatever="@mdo">ENTER OTP</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">SUBMIT OTP</h5>
+                <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Enter your one time password:</label>
+                        <input type="number" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" data-backdrop="false">
+                <a type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
+                <button *ngIf="data.role=='doctor'" type="button" class="btn btn-primary" (click)="[phoneVerify()]" data-dismiss="modal" [routerLink]="['/addressverificatoin']">Submit</button>
+                <button *ngIf="data.role=='patient'" type="button" class="btn btn-primary" (click)="[phoneVerify()]" data-dismiss="modal" [routerLink]="['/patients/dashboard']">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
