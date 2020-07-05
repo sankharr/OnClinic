@@ -1,9 +1,19 @@
+body{
+
+  background-image: url("src/assets/img/theme/Capture.png");
+  width: 750px;
+  height: 350px; 
+  margin-top: 20px;
+
+
+}
+
 .container-fluid{
-  background-color: #16d6f0;
+  background-color: #E3F2FD;
   width: 102%;
-  margin-top: -0.9%;
+  margin-top: -2%;
   height: max-content;
-  margin-left: -2%;
+  margin-left: -3%;
 }
 
 .row{
@@ -22,22 +32,17 @@
   font-size: xx-large;
 }
 #dark.card{
-  background-color:#a970b1;
+  background-color: #2196F3;
+
 }
 #light.card{
-  background-color:#dca6e4;
+  background-color: #90CAF9;
 }
 #differ.card{
   margin: 20px;
 }
 #space.card{
   margin-top: 10px;
-}
-
-.image-man{
-  width: 150px;
-  height: 350px;
-  align-self: center;
 }
 .rounded-circle{
   width: 120px;
@@ -64,4 +69,3 @@ ejs-calendar{
     margin-top: 10px;
   }
 }
-  

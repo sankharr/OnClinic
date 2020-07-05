@@ -7,14 +7,20 @@ import { PatientPaymentsComponent } from './patient-payments/patient-payments.co
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { WaitingRoomComponent } from './waiting-room/waiting-room.component';
 import { ChannelingComponent } from './channeling/channeling.component';
+import { MyhealthComponent } from './myhealth/myhealth.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms'
 
 
 
 @NgModule({
-  declarations: [PatientDashboardComponent , ProfileDoctorviewComponent, PatientPaymentsComponent, WaitingRoomComponent, ChannelingComponent],
+  declarations: [PatientDashboardComponent , ProfileDoctorviewComponent, PatientPaymentsComponent, WaitingRoomComponent, ChannelingComponent, MyhealthComponent, ProfileComponent, EditProfileComponent],
   imports: [
     CommonModule,
-    CalendarModule
+    CalendarModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PatientsModule { }

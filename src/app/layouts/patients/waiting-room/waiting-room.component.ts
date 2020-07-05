@@ -16,5 +16,8 @@ export class WaitingRoomComponent implements OnInit {
     this.router.navigate(['patients/dashboard'])
   }
   ready(){
+    this.router.navigate(['patients/lcp']) 
+  }
+  submit(){
   }
 }
