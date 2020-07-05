@@ -70,6 +70,7 @@ import { ModeratorDashboardComponent } from './moderator/moderator-dashboard/mod
 import { PatientverificationComponent } from './patientverification/patientverification.component';
 import { SelectionPipe } from './pipes/selection.pipe';
 import { AdminComponent } from './admin/admin.component';
+import { SystemUsersComponent } from './admin/system-users/system-users.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -119,7 +120,8 @@ var firebaseConfig = {
     PatientverificationComponent,
     SelectionPipe,
     PatientRegistration2Component,
-    AdminComponent
+    AdminComponent,
+    SystemUsersComponent
   ],
   imports: [
     BrowserModule,

@@ -156,6 +156,9 @@ export class AuthService {
               if (this.role == "doctor") {
                 this.router.navigate(['/doctors/dashboard']);
               }
+              if (this.role == "admin") {
+                this.router.navigate(['/admin/systemUsers']);
+              }
             })
         }
       })

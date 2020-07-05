@@ -12,4 +12,8 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openSidebar() {
+    (<HTMLInputElement>document.getElementById("sidebar")).style.display = "inline";    
+  }
+
 }
