@@ -24,6 +24,7 @@ export class HomepageComponent implements OnInit {
       .subscribe(user => {
         this.user = user;
         console.log(this.user)
+        console.log("name - ",this.user.displayName)
         var docRef = this.db.collection("Users").doc(this.user.uid);
         docRef.valueChanges()
           .subscribe(result => {
