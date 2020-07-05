@@ -1,6 +1,63 @@
-main{
-    margin-top: 84px;
+@font-face {
+  font-family: welcomeFontThin;
+  src: url(../../assets/fonts/Roboto-Thin.ttf);
 }
+
+@font-face {
+  font-family: welcomeFontBold;
+  src: url(../../assets/fonts/Roboto-Bold.ttf);
+}
+
+.container-fluid{
+    margin-top: -7%;
+    background-image: url(../../assets/img/homepage/header.svg);
+    background-size: cover;
+    width: 100%;
+    height: 101%
+}
+
+.welcome{
+  margin-top: 20%;
+  margin-left: 10%;
+}
+
+#welcomeText{
+  color: white;
+  font-weight: 100;
+  font-size: 300%;
+  font-family: welcomeFontThin;
+}
+
+#welcomeText2{
+  margin-top: -8%;
+  color: white;
+  font-weight: 100;
+  font-size: 500%;
+  font-family: welcomeFontBold;
+}
+
+#headerImg{
+  top: 28%;
+  right: 5%;
+  position: absolute;
+  width: 35%;
+}
+
+@media screen and (max-width: 1366px){
+  .container-fluid{
+    margin-top: -4%;
+  }
+
+  #welcomeText{
+    font-size: 200%;
+  }
+
+  #welcomeText2{
+    font-size: 400%;
+  }
+}
+
+
 
 @media screen and (max-width: 990px){
 
@@ -17,3 +74,37 @@ main{
       display: inline;
     }
   } */
+
+  .animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  @-webkit-keyframes fadeInLeft {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .fadeInLeft {
+    -webkit-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+  }

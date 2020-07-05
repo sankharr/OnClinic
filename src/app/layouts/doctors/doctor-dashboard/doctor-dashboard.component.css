@@ -1,9 +1,19 @@
+body{
+
+  background-image: url("src/assets/img/theme/Capture.png");
+  width: 750px;
+  height: 350px; 
+  margin-top: 20px;
+
+
+}
+
 .container-fluid{
   background-color: #E3F2FD;
   width: 102%;
-  margin-top: -0.9%;
+  margin-top: -2%;
   height: max-content;
-  margin-left: -2%;
+  margin-left: -3%;
 }
 
 .row{
@@ -23,6 +33,7 @@
 }
 #dark.card{
   background-color: #2196F3;
+
 }
 #light.card{
   background-color: #90CAF9;
@@ -58,4 +69,3 @@ ejs-calendar{
     margin-top: 10px;
   }
 }
-  
