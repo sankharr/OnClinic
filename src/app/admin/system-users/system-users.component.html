@@ -1,0 +1,18 @@
+<div class="container-fluid">    
+    <div class="col-10">
+        <h1 id="heading">System Users</h1>
+        <div class="list-group">
+            <div class="list-group-item" *ngFor='let user of results'>
+                <div class="row" *ngIf="user.role != 'admin'">
+                    <div class="col-10">
+                        <b>{{user.name}}</b>
+                        <p>Role : {{user.role}}</p>
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-primary">Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,7 +7,15 @@ html, body {
   }
 
 nav{
-  z-index: -1;
+  z-index: 1;
+}
+
+#navlogo{
+  margin-top: -1%;
+  height: 1%;
+  width: 30%;
+  margin-left: 3%;
+  margin-bottom: -1%;
 }
 
 // .sidebar{

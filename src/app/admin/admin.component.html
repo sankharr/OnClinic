@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="sidebar" id="sidebar">
+    <app-sidebar></app-sidebar>
+</div>
+
+<button class="sidebarToggler" type="button" (click)="openSidebar()">
+    <i class="material-icons">menu_open</i>
+</button>
+<div class="main-panel" id="main-panel">
+    <router-outlet>
+
+    </router-outlet>
+</div>

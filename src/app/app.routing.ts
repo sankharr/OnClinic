@@ -32,6 +32,8 @@ import { ModeratorComponent } from './moderator/moderator.component';
 import { AddressVerifyComponent } from './address-verify/address-verify.component';
 import { PatientverificationComponent } from './patientverification/patientverification.component';
 import { PatientRegistration2Component } from './patient-registration2/patient-registration2.component';
+import { AdminComponent } from './admin/admin.component';
+import { SystemUsersComponent } from './admin/system-users/system-users.component';
 
 const routes: Routes =[
   { path: 'home',             component: HomeComponent },
@@ -58,6 +60,10 @@ const routes: Routes =[
   { path: 'emailverify', component: MailVerificationComponent },
   { path: 'addressverificatoin', component: AddressVerifyComponent },
   { path: 'welcomepage', component: WelcomeComponent },
+  { path: 'admin', component: AdminComponent,
+  children:[
+    { path: 'systemUsers', component: SystemUsersComponent },
+  ] },
   { path: '', redirectTo: 'homepage', pathMatch: 'full' }
 
 
