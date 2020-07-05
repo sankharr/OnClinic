@@ -5,14 +5,14 @@
   </div>
 
   <!-- Start bookings list -->
-  <div class="row">
-    <div class="col-4">
+  <div *ngFor="let row of availableAppointments" class="row">
+    <div *ngFor="let item of row" class="col-4">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">Wednesday</h5>
-          <h6 class="card-subtitle mb-2 text-muted">2020.7.8</h6>
+          <h5 class="card-title">{{ item.day }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ item.date }}</h6>
           <p class="card-text">
-            7.00 pm - 9.00 pm <br />
+            {{ item.time }} <br />
             Specialized in :{{ data.speciality }} <br />
             Description : MBBS qulified in University of Colombo 2002<br />
             Total channel count :{{ data.numberOfAppointments }}
@@ -26,7 +26,6 @@
     </div>
   </div>
   <!-- End booking list -->
-
 </div>
 
 <!-- Modal -->
