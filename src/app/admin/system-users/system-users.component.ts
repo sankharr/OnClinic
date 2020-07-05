@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-system-users',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./system-users.component.css']
 })
 export class SystemUsersComponent implements OnInit {
+  results: any[];
 
-  constructor() { }
+  constructor(
+    private db: AngularFirestore
+  ) { }
 
   ngOnInit(): void {
+    this.db.collection("Users").valueChanges()
+    .subscribe(output => {
+      this.results = output;
+    })
   }
 
 }
