@@ -8,7 +8,7 @@
             <button class="btn btn-primary" type="submit" (click)="startCall()">Join</button>
         </div>
         <div class="col-1">
-            <button class="btn btn-primary" type="submit" (click)="endCall()">Leave</button>
+            <button class="btn btn-primary" type="submit" [routerLink]="['/patients/waiting-room']" (click)="endCall()">Leave</button>
         </div>
     </div>
 </form>
