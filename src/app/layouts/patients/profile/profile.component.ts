@@ -10,6 +10,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class ProfileComponent implements OnInit {
   uid:any;
   result:any;
+  lgdis:any[];
+  alergies:any[];
   constructor(
     private router:Router,
     private db:AngularFirestore) { }
@@ -19,7 +21,10 @@ export class ProfileComponent implements OnInit {
     this.db.collection("Users").doc(this.uid).valueChanges()
     .subscribe(output =>{
         this.result=output;
-        console.log("result-",this.result)
+        this.lgdis=this.result.longTermDiseases;
+        console.log("result-",this.result.longTermDiseases)
+        this.alergies=this.result.allergies;
+        console.log("result-",this.result.allergies)
     })
   }
   edit() {

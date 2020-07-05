@@ -1,20 +1,27 @@
+.container-fluid{
+    background-color: #E3F2FD;
+    width: 102%;
+    margin-top: -0.9%;
+    height: max-content;
+    margin-left: -2%;
+  }
 .row{
     padding: 1.5%;
     align-content: center;
     min-height: max-content;
 }
 .card{
-    background-color: rgb(219, 186, 203);
+    background-color: #90CAF9;
     padding: 5px;
     margin-top: 5px;
 }
 #dark.card{
-    background-color: rgb(165, 74, 218);
+    background-color: #2196F3;
     text-align: center;
 }
 .btn{
     height: 38px;
-    background-color: #820fd4;
+    background-color: #2364ce;
     color: aliceblue;
     width: fit-content;
     align-self: center;
@@ -22,4 +29,37 @@
     padding-left: 10px;
     padding-right: 10px;
     float: right;
+  }
+  #bottom.btn{
+    margin-right: 5px;
+  }
+
+  @media screen and (max-width: 1366px){
+    .container-fluid{   
+      width: 105%; 
+      margin-top: -1.5%;
+      margin-left: -3%;
+      padding-left: -2%;
+    }
+  
+  }
+
+
+  @media screen and (max-width: 500px){
+    .container-fluid{   
+      width: 105%; 
+      margin-left: -6%;
+      margin-top: -6%; 
+      padding-left: 0%;  
+      padding-right: 0%;
+    }
+    .row{
+      padding: 5%;
+    }
+    #notfirst.row{
+      margin-top: -5%;
+    }
+    #dark.card{
+      margin-top: 10px;
+    }
   }

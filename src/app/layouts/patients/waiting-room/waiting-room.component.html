@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <!--button row-->
         <div class="topnav">
-            <button class="btn" id="green" type="submit" (click)="ready()">I'm Ready</button>
+            <button class="btn" id="green" type="submit" (click)="ready()">Join vedio</button>
             <button class="btn" type="submit" id="orange" (click)="leave()">Leave</button>
         </div>
         <!--end of Button row-->
@@ -26,7 +26,8 @@
                                 <li>Ready your device with full charge</li>
                                 <li>Make sure you have proper internet connection</li>
                                 <li>Be alret on your time</li>
-                            </ul>  
+                                <li><b>Click on 'Join Video' once you ready</b></li>
+                            </ul>
                         </h6>
                     </div>
                 </div>
@@ -45,7 +46,7 @@
                 <div class="card">
                     <h3><b>Next Channeling : 2Min 1Sec</b></h3>
                 </div>
-                    
+
                 <div class="col-lg-12">
                     <div class="card shadow" id="dark">
                         <div class="card">
@@ -68,15 +69,15 @@
                             </div>
                         </div>
                         <div class="card">
-                            <div class="row"  id="lessmargin">
+                            <div class="row" id="lessmargin">
                                 <div class="col-lg-4">
                                     <div class="card" id="tablecol">
-                                        <h6>Chathu Perera</h6>
+                                        <h6>Sahan Perera</h6>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="card" id="tablecol">
-                                        <h6>2.40-3.00PM</h6>
+                                        <h6>3.00-3.20PM</h6>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -87,15 +88,15 @@
                             </div>
                         </div>
                         <div class="card">
-                            <div class="row"  id="lessmargin">
+                            <div class="row" id="lessmargin">
                                 <div class="col-lg-4">
                                     <div class="card" id="tablecol">
-                                        <h6>Chathu Perera</h6>
+                                        <h6>Nimali gamage</h6>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="card" id="tablecol">
-                                        <h6>2.40-3.00PM</h6>
+                                        <h6>3.20-3.40PM</h6>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -113,26 +114,26 @@
 </div>
 
 <div class="modal fade" id="UploadDialogBox" tabindex="-1" role="dialog" aria-labelledby="UploadDialogBox"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="Title">Upload Your Report</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- --------------- -->
-        <form action="/action_page.php">
-            <input type="file" id="myFile" name="filename">
-        </form>
-        <!-- -------------------------- -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn" data-dismiss="modal" (click)="submit()">Submit</button>
-      </div>
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Title">Upload Your Report</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- --------------- -->
+                <form action="/action_page.php">
+                    <input type="file" id="myFile" name="filename">
+                </form>
+                <!-- -------------------------- -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn" data-dismiss="modal" (click)="submit()">Submit</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
