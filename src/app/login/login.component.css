@@ -1,14 +1,128 @@
-main{
-    margin-top: -10%;
-    background-image: url(../../assets/img/homepage/header.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-
-    height: 110%;
-}
-
-.signForm{
-    margin-right: -5%;
+@font-face {
+    font-family: welcomeFontThin;
+    src: url(../../assets/fonts/Roboto-Thin.ttf);
+  }
+  
+  @font-face {
+    font-family: welcomeFontBold;
+    src: url(../../assets/fonts/Roboto-Bold.ttf);
+  }
+  
+  .container-fluid{
+      margin-top: -1%;
+      background-image: url(../../assets/img/homepage/header.svg);
+      background-size: cover;
+      width: 100%;
+      height: 101%;
+      z-index: -1;
+    
+  }
+  
+  .welcome{
     margin-top: 20%;
-}
+    margin-left: 10%;
+  }
+  
+  #welcomeText{
+    color: white;
+    font-weight: 100;
+    font-size: 300%;
+    font-family: welcomeFontThin;
+  }
+  
+  #welcomeText2{
+    /* margin-top: -8%; */
+    color: white;
+    font-weight: 100;
+    font-size: 150%;
+    font-family: welcomeFontBold;
+  }
+  
+  #headerImg{
+      /* margin-top: 20%; */
+    position: relative;
+    top: 30%;
+    left: 70%;
+    /* height: 70%; */
+    /* top: 100%; */
+    /* left: 10%; */
+    /* right: -15%; */
+    
+    width: 23%;
+  }
+
+  .headTxt{
+      position: absolute;
+      top: 30%;
+      left: 10%;
+  }
+
+  #bigText{
+
+  }
+  
+  @media screen and (max-width: 1366px){
+    .container-fluid{
+      margin-top: -4%;
+    }
+  
+    #welcomeText{
+      font-size: 200%;
+    }
+  
+    #welcomeText2{
+      font-size: 400%;
+    }
+  }
+  
+  
+  
+  @media screen and (max-width: 990px){
+  
+      main{
+          margin-top: 72px;
+      }
+      /* #clsbtn{
+        display: inline;
+      } */
+    }
+    
+    /* @media screen and (max-width: 320px){
+      #clsbtn{
+        display: inline;
+      }
+    } */
+  
+    .animated {
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+    
+    @-webkit-keyframes fadeInLeft {
+      0% {
+        opacity: 0;
+        -webkit-transform: translateX(-20px);
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+      }
+    }
+    
+    @keyframes fadeInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .fadeInLeft {
+      -webkit-animation-name: fadeInLeft;
+      animation-name: fadeInLeft;
+    }
