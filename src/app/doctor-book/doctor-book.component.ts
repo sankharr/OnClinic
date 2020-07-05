@@ -110,6 +110,7 @@ export class DoctorBookComponent implements OnInit {
 
     let dateObjects: Array<Date> = new Array();
     while (curCount < count) {
+      if(offset > 6 && dateObjects.length == 0) return;
       const dayNum: number = i % 7;
       if (data[this.definitions[dayNum]]) {
         const hourAndMinute = this.getHourAndMinutes(
