@@ -1,107 +1,109 @@
 <div class="container-fluid">
     <div class="col-lg-12">
-  
-      <!-- 1st row -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card" id="dark">
-            <div class="row">
-  
-              <!--First grid - Patient Summary-->
-              <div class="col-lg-4">
+
+        <!-- 1st row -->
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card" id="dark">
-                    <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
-                    <hr>
-                    <h5><b>{{result.name}}</b></h5>
-                    <h6><b>Age : {{result.age}} years</b></h6>
+                    <div class="card">
+                        <div class="row">
+
+                            <!--First grid - Patient Summary-->
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
+                                    <hr>
+                                    <h5><b>{{result.name}}</b></h5>
+                                    <h6>Age : {{result.age}} years</h6>
+                                </div>
+                            </div>
+                            <!--end of first grid-->
+                            <!--Third grid - latest update-->
+                            <div class="col-lg-8">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="card" id="light">
+                                                <h6><b>Address</b></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="card" id="light">
+                                                <h6><b>{{result.address}}</b></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="card" id="light">
+                                                <h6><b>NIC Number</b></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="card" id="light">
+                                                <h6><b>966630586v</b></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="card" id="light">
+                                                <h6><b>Contact Nunmber</b></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="card" id="light">
+                                                <h6><b>{{result.telno}}</b></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="card" id="light">
+                                                <h6><b>Email</b></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="card" id="light">
+                                                <h6><b>{{result.email}}</b></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="card" id="light">
+                                                <h6><b>Birthday</b></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="card" id="light">
+                                                <h6><b>1994.05.26</b></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end of third grid-->
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <!--end of first grid-->
-              <!--Third grid - latest update-->
-                <div class="col-lg-8">
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card" id="light">
-                                <h6><b>Address</b></h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="card" id="light">
-                                <h6><b>{{result.address}}</b></h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card" id="light">
-                                <h6><b>NIC Number</b></h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="card" id="light">
-                                <h6><b>966630586v</b></h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card" id="light">
-                                <h6><b>Contact Nunmber</b></h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="card" id="light">
-                                <h6><b>{{result.telno}}</b></h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card" id="light">
-                                <h6><b>Email</b></h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="card" id="light">
-                                <h6><b>{{result.email}}</b></h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card" id="light">
-                                <h6><b>Birthday</b></h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="card" id="light">
-                                <h6><b>1994.05.26</b></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>    
-                </div>
-              <!--end of third grid-->
             </div>
-          </div>
+            <!--End of Health details-->
         </div>
-        <!--End of Health details-->
-      </div>
-      <!-- end of 1st row -->
-      <!--Height weight-->
+        <!-- end of 1st row -->
+        <!--Height weight-->
         <div class="row">
             <div class="col-lg-12">
                 <div class="card" id="dark">
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="card" id="center">
-                                <h6><b>Height : 145cm</b></h6>
+                                <h6><b>Height : {{result.height}}</b></h6>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="card" id="center">
-                                <h6><b>Weight : 60kg</b></h6>
+                                <h6><b>Weight : {{result.weight}}</b></h6>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -126,9 +128,8 @@
                                 <div class="card">
                                     <h6 style="text-align: left;">
                                         <ul>
-                                            <li>Diabities</li>
-                                            <li>High Blood Pressure</li>
-                                        </ul>  
+                                            <li *ngFor="let long of lgdis">{{long}}</li>
+                                        </ul>
                                     </h6>
                                 </div>
                             </div>
@@ -141,7 +142,8 @@
                                 <div class="card">
                                     <h6 style="text-align: left;">
                                         <ul>
-                                        </ul>  
+                                            <li *ngFor="let alergy of alergies">{{alergy}}</li>
+                                        </ul>
                                     </h6>
                                 </div>
                             </div>
@@ -170,7 +172,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>
@@ -178,7 +180,7 @@
             <div class="col-lg-12">
                 <button class="btn" type="submit" (click)="edit()">
                     <span class="btn-inner--icon">
-                    <i class="fa fa-edit mr-2"></i>
+                        <i class="fa fa-edit mr-2"></i>
                     </span>Edit Profile
                 </button>
             </div>
