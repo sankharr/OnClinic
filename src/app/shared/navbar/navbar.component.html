@@ -2,7 +2,7 @@
   class="navbar navbar-main navbar-expand navbar-transparent bg-default navbar-dark">
   <div class="container-fluid">
     <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
-      <img src="./assets/img/brand/onclinic-logo.png">
+      <img src="./assets/img/brand/hclogo.png" id="navlogo">
     </a>
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
@@ -168,7 +168,7 @@
           </a>
         </li>
         <li *ngIf="user" class="nav-item d-lg-block ml-lg-4" style="margin-top: 5px;">
-          <a href="login" class="btn btn-neutral btn-icon" (click)="logout()">
+          <a href="homepage" class="btn btn-neutral btn-icon" (click)="logout()">
             <span class="btn-inner--icon">
               <i class="fa fa-sign-out mr-2"></i>
             </span>

@@ -1,0 +1,66 @@
+.main-panel{
+    margin-left: 280px;
+    margin-top: 100px;
+}
+
+.sidebar{
+    margin-top: 5%;
+    /* z-index: -5; */
+    /* display: none; */
+}
+
+button{
+    display: none;
+}
+
+/* @media screen and (max-width: 320px){
+    button{
+        display: inline;
+        position: absolute;
+        right: 25%;
+        top: 3.5%;
+        z-index: 1;
+    }
+
+    .sidebar{
+        width: 0px;
+    }
+} */
+
+@media screen and (max-width: 990px){
+    button{
+        display: inline;
+        position: absolute;
+        right: 25%;
+        top: 17px;
+        z-index: 5;
+    }
+
+    .sidebar{
+        /* margin-top: -10px; */
+        display: none;
+    }
+
+    .main-panel{
+        margin-left: 5%;
+    }
+}
+
+@media screen and (max-width: 320px){
+    button{
+        display: inline;
+        position: absolute;
+        right: 25%;
+        top: 3.5%;
+        z-index: 1;
+    }
+
+    .sidebar{
+        /* margin-top: -10px; */
+        display: none;
+    }
+
+    .main-panel{
+        margin-left: 5%;
+    }
+}
