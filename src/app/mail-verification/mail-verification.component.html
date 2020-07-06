@@ -8,7 +8,7 @@
 
 <div class="alert alert-success alert-dismissible fade show"
     style="position:fixed;top:0;width:100%;z-index:100;text-align: center;" role="alert" *ngIf="emailverify">
-    <strong>Success!</strong>  Your email succsessfuly verified!Thanks for your corporation😘
+    <strong>Success!</strong>  Your email succsessfuly verified! Thanks for your corporation
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -62,7 +62,7 @@
             <div class="login d-flex align-items-center py-5">
                 <div class="container">
                     <div class="row">
-                        <h2 align=center><span class="badge badge-pill badge-success" style="margin-left: 240px;">Step 3
+                        <h2 *ngIf="!touched && emailverify" align=center><span class="badge badge-pill badge-success" style="margin-left: 200px;">Step 3
                                 of 3</span></h2>
                     </div>
                     <div class="row">
@@ -97,6 +97,9 @@
                                     <button (click)="[_touched(),phoneOtp()]" type="button" class="btn btn-primary"
                                         data-toggle="modal" data-target="#buffer">Send SMS</button>
                                 </div>
+                            </div>
+                            <div *ngIf="!emailverify" align=center>
+                                <img src="../../assets/svg/Spinner-1s-200px.svg" alt="">
                             </div>
 
                             <!-- When send -->

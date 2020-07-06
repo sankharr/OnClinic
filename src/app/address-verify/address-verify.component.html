@@ -1,7 +1,7 @@
 <!-- Alert -->
 <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="touched" style="margin-top: 10px;"
     @fade>
-    <strong>Succsess!</strong> Your email succsessfuly verified!Thanks for your corporation😘
+    <strong>Succsess!</strong> Your email succsessfuly verified!Thanks for your corporation
     <a type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </a>
@@ -51,7 +51,7 @@
             <div class="login d-flex align-items-center py-5">
                 <div class="container">
                     <div class="row">
-                        <h2 align=center><span class="badge badge-pill badge-success" style="margin-left: 210px;">Step 2
+                        <h2 align=center><span class="badge badge-pill badge-success" style="margin-left: 279px;">Step 2
                                 of 3</span></h2>
                     </div>
                     <div class="row">
@@ -63,7 +63,7 @@
                             <div>
                                 <div style="position:absalute;height: 10px;">
                                     <div>
-                                        <div *ngIf="!touched" @fade>
+                                        <!-- <div *ngIf="!touched" @fade>
                                             <div>
                                                 <h5>Special title treatment</h5>
                                                 <p>With supporting text below as a natural lead-in to
@@ -72,17 +72,32 @@
                                                     class="btn btn-primary" data-toggle="modal"
                                                     data-target="#buffer">Send Token</button>
                                             </div>
+                                        </div> -->
+                                        <div *ngIf="!touched" align=center>
+                                            <div>
+                                                <h4 style="color: rgb(149, 41, 212);"><span
+                                                        class="badge badge-pill badge-primary">Address Verification</span></h4>
+                                                <br>
+                                                <p>With supporting text below as a natural lead-in to additional
+                                                    content.</p>
+                                                    <button (click)="[_touched(),sendToken()]" type="button"
+                                                    class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#buffer">Send Token</button>
+                                            </div>
                                         </div>
+                                        <!-- <div *ngIf="!emailverify" align=center>
+                                            <img src="../../assets/svg/Spinner-1s-200px.svg" alt="">
+                                        </div> -->
 
                                         <!-- When send -->
                                         <div *ngIf="touched">
-                                            <img @fade src="../../assets/svg/mailSent.svg" style="  display: block;
+                                            <!-- <img @fade src="../../assets/svg/mailSent.svg" style="  display: block;
                                                 margin-left: auto;
                                                 margin-right: auto;
-                                                width: 10%;">
-                                            <div>
-                                                <h5>Mail Sent!</h5>
-                                                <p>Check your mailBox</p>
+                                                width: 10%;"> -->
+                                            <div align=center>
+                                                <h5 align=center>Mail Sent!</h5>
+                                                <p align =center>Check your mailBox</p>
                                                 <button *ngIf="touched" type="button" class="btn btn-primary"
                                                     data-toggle="modal" data-target="#exampleModal"
                                                     data-whatever="@mdo">ENTER CODE</button>
