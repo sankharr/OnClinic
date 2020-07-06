@@ -1,7 +1,7 @@
 .container-fluid{
   background-color: #E3F2FD;
   width: 102%;
-  margin-top: -3%;
+  margin-top: -1%;
   height: max-content;
   margin-left: -3%;
 }
@@ -56,5 +56,6 @@ body{
   background-image: url("src/assets/img/theme/doctor5.PNG");
   background-size: cover;
   height: 800px; 
+
 
 }
