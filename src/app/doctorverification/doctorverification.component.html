@@ -45,7 +45,7 @@
                                 <div></div>
                             </div>
 
-                            <div class="container2" *ngIf="data && !mailFlag" id="slmcok_div">
+                            <div class="container2" *ngIf="initialFlg" id="slmcok_div">
                                 <div class="alert alert-success" role="alert" *ngIf="data.slmcVerified">
                                     <h4 class="alert-heading">Account Successfully Verified by SLMC</h4>
                                     <p>Your account Successfully verified we will send verification code via post</p>
@@ -73,7 +73,7 @@
 
                                 <div id="newElementId">New inputbox goes here:</div> -->
 
-                                <div class="alert alert-danger" role="alert" *ngIf="!data.slmcVerified && !mailFlag">
+                                <div class="alert alert-danger" role="alert" *ngIf="!data.slmcVerified">
                                     <h4 class="alert-heading">Verification failed:</h4>
                                     <p>No Doctor data associated with this credentials</p>
                                     <hr>
@@ -83,7 +83,7 @@
                             </div>
                             <!-- <button >Continue</button> -->
                             
-                            <div class="alert alert-success" role="alert" id="div1" style="display: none;">
+                            <!-- <div class="alert alert-success" role="alert" id="div1" style="display: none;">
                                 <h4 class="alert-heading">Enter OTP Here.</h4>
                                 <p>We send OTP to <label class="label label-primary"> {{data.email}}</label></p>
                                 <hr>
@@ -96,7 +96,7 @@
                                         aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                                 <p class="btn btn-primary" (click)=onComplete(Username.values)>Continue</p>
-                            </div>
+                            </div> -->
 
                             <!-- <ng-template #authenticated> -->
                             <!-- <div *ngIf="user"> -->

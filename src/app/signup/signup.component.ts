@@ -53,13 +53,14 @@ export class SignupComponent implements OnInit {
         
     }
 
-    createDoctor(frm) {
+     createDoctor(frm) {
         // this.auth.createUser(frm.value, "doctor")
         if(this.user){
             console.log("at createDoctor with USER");   //getting registered with google account
             frm.value.email = this.user.email;
             console.log(frm.value);
             this.auth.insertGoogleDoctorData(frm.value,this.user.uid);
+            console.log("After insert google doctor data");
             // this.auth.usersignupDetails(this.user.uid)
             this.router.navigate(['/doctorverification'])
         }
@@ -67,7 +68,8 @@ export class SignupComponent implements OnInit {
             console.log("at create patient TS");
             this.auth.createUser(frm.value, "doctor")  //getting registerd without google account
             // this.auth.usersignupDetails(this.user.uid)
-            this.router.navigate(['/doctorverification'])
+            console.log("After insert google doctor data");
+            // this.router.navigate(['/doctorverification'])
         }
     }
 }
