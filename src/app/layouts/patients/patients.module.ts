@@ -10,6 +10,7 @@ import { ChannelingComponent } from './channeling/channeling.component';
 import { MyhealthComponent } from './myhealth/myhealth.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms'
 
 
 
@@ -17,7 +18,9 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
   declarations: [PatientDashboardComponent , ProfileDoctorviewComponent, PatientPaymentsComponent, WaitingRoomComponent, ChannelingComponent, MyhealthComponent, ProfileComponent, EditProfileComponent],
   imports: [
     CommonModule,
-    CalendarModule
+    CalendarModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PatientsModule { }

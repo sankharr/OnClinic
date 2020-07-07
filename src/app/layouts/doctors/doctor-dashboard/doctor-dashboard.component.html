@@ -4,25 +4,35 @@
     <!-- 1st row -->
     <div class="row">
       <div class="col-lg-8">
-        <div class="card bg-default">
-          <div class="card-body">
-            <div class="chart">
-              <!-- Chart wrapper -->
-              <canvas id="chart-sales" class="chart-canvas" ></canvas>
+        <div class="card shadow" id="dark">
+          <div class="card-body"> 
+            <div class="card" id="light" style="height: 45px;">
+              <h6><b>Daily Income</b></h6>
             </div>
+            <div class="card" id="space" style="height: 255px;">
+              <div #chart> 
+
+              </div>
+              
+            </div>
+            
+            <!-- <div class="chart">
+            
+              <canvas id="chart-sales" class="chart-canvas" >
+                
+              </canvas>
+            </div>-->
           </div>
-        </div>
+        </div> 
       </div>
       <!--End of Health details-->
 
       <!--Calander-->
       <div class="col-lg-4">
         <div class="card shadow" id="dark">
-            <div class="card shadow">
               <div class="card" id="light">
                 <h6><b>Calender</b></h6>
               </div>
-            </div>
             <div class="card" id="space">
               <ejs-calendar id=calendar [values]='value' [isMultiSelection]='multiselect' ></ejs-calendar>
             </div>
@@ -51,7 +61,7 @@
                         <h5>Ryan Tompson</h5>
                         <h6>Cardiologist</h6>
                         <h6 class="text-primary"><b>in 15 Mins</b></h6>
-                        <a href="javascript:void(0)" class="btn btn-primary mt-4" style="background-color: #2364ce">Join</a>
+                        <a href="/doctors/waitingroomdoctorview" class="btn btn-primary mt-4" style="background-color: #2364ce">Join</a>
                       </div>
                   </div>
                 </div>
@@ -59,11 +69,11 @@
                 <div class="col-lg-4">
                   <div class="card shadow">
                       <div class="card" id="differ">
-                        <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
+                        <img class="rounded-circle" src="./assets/img/theme/team-4-800x800.jpg">
                         <h5>Ryan Tompson</h5>
                         <h6>Cardiologist</h6>
                         <h6 class="text-primary"><b>in 15 Mins</b></h6>
-                        <a href="javascript:void(0)" class="btn btn-primary mt-4" style="background-color: #2364ce">Join</a>
+                        <a href="/doctors/waitingroomdoctorview" class="btn btn-primary mt-4" style="background-color: #2364ce">Join</a>
                       </div>
                   </div>
                 </div>
@@ -71,11 +81,11 @@
                 <div class="col-lg-4">
                   <div class="card shadow">
                       <div class="card" id="differ">
-                        <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
+                        <img class="rounded-circle" src="./assets/img/theme/team-3-800x800.jpg">
                         <h5>Ryan Tompson</h5>
                         <h6>Cardiologist</h6>
                         <h6 class="text-primary"><b>in 15 Mins</b></h6>
-                        <a href="javascript:void(0)" class="btn btn-primary mt-4" style="background-color: #2364ce">Join</a>
+                        <a href="/doctors/waitingroomdoctorview" class="btn btn-primary mt-4" style="background-color: #2364ce">Join</a>
                       </div>
                   </div>
                 </div>
@@ -90,67 +100,31 @@
         <div class="card shadow" id="dark">
 
           <div class="card shadow" id="space">
-            <div class="card">
-
-              <div style="">
                 <div class="card card-stats mb-4 mb-lg-0">
                   <div class="card-body">
-                    <div class="row">
-                      
                         <h5 class="card-title text-uppercase  text-muted mb-0">Total Patients</h5>
-                        
-
-                        <div class="icon icon-shape bg-primary text-white rounded-circle shadow" style="background-color:#2364ce ;">
-                          <span class="h2 font-weight-bold mb-0">3</span>
-                        </div>  
+                        <span class="h2 font-weight-bold mb-0">3</span>
                     </div> 
-                </div>
-              </div>
-            
-            </div>
+                </div>         
         </div>
 
         <div class="card shadow" id="space">
-          <div class="card">
-
-            <div style="">
               <div class="card card-stats mb-4 mb-lg-0">
                 <div class="card-body">
-                  <div class="row">
-                    
                       <h5 class="card-title text-uppercase text-muted mb-0">Total Channelings</h5>
-                      
-
-                      <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
                         <span class="h2 font-weight-bold mb-0">3</span>
-                      </div>  
-                  </div> 
+                      
               </div>
-            </div>
-          
-          </div>
       </div>
-
-      <div class="card shadow" id="space">
-        <div class="card">
-
-          <div style="">
+</div>
+        <div class="card shadow" id="space">
+        
             <div class="card card-stats mb-4 mb-lg-0">
               <div class="card-body">
-                <div class="row">
-                  
                     <h5 class="card-title text-uppercase text-muted mb-0">Average Channeling Fee</h5>
-                    
-
-                    <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
-                      <span class="h2 font-weight-bold mb-0">3</span>
-                    </div>  
-                </div> 
+                      <span class="h2 font-weight-bold mb-0">1500</span>
+              </div>
             </div>
-          </div>
-        
-        </div>
-    </div>
 
         </div>
       </div> 
@@ -158,6 +132,7 @@
       
     </div>
     <!-- end of 2nd row -->
-
   </div>
 </div>
+
+

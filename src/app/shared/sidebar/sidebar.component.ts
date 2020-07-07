@@ -40,6 +40,13 @@ export const patientROUTES: RouteInfo[] = [
   // { path: '/admin-notifications', title: 'Notifications', icon: 'notifications', class: '' },
 ];
 
+//admin routings
+export const adminROUTES: RouteInfo[] = [
+  { path: '/admin/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
+  { path: '/admin/systemUsers', title: 'System Users', icon: 'profile', class: '' },
+  { path: '/admin/settings', title: 'Settings', icon: 'profile', class: '' },  
+];
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -78,6 +85,12 @@ export class SidebarComponent implements OnInit {
 
     else if (localStorage.getItem('role') == 'patient') {
       this.menuItems = patientROUTES.filter(listTitle => listTitle);
+      console.log("from localStorage - ",localStorage.getItem('role'));
+      // this.route_link = "/artist-notifications";
+    }
+
+    else if (localStorage.getItem('role') == 'admin') {
+      this.menuItems = adminROUTES.filter(listTitle => listTitle);
       console.log("from localStorage - ",localStorage.getItem('role'));
       // this.route_link = "/artist-notifications";
     }
