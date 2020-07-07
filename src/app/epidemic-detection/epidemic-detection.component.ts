@@ -44,7 +44,9 @@ export class EpidemicDetectionComponent implements OnInit {
   async getMarker() {
     const snapshot = await firebase.firestore().collection('diseases').get()
     var data = snapshot.docs.map(doc => doc.data());
-    console.log(data)
+
+    this.specificMap(data)
+    // console.log(data)
     // this.geolocation.sendReq(data).subscribe(res=>{
     //   console.log(res)
     // })
@@ -55,7 +57,7 @@ export class EpidemicDetectionComponent implements OnInit {
 
     // csv += header + '\n' + values;
     // console.log(csv)
-    this.toCsv(data)
+    // this.toCsv(data)
 
   }
   toCsv(data: any) {
@@ -64,8 +66,8 @@ export class EpidemicDetectionComponent implements OnInit {
     let csv = data.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
     csv.unshift(header.join(','));
     let csvArray = csv.join('\r\n');
-    console.log(csvArray)
-    // this.specificMap(csvArray)
+    // console.log(data['name'])
+    // this.specificMap(data)
 
     // var blob = new Blob([csvArray], {type: 'charset=utf-8' })
     // saveAs(blob, "myFile.csv");
@@ -133,14 +135,15 @@ export class EpidemicDetectionComponent implements OnInit {
 
     Plotly.newPlot('chart', data, layout, config);
     // Plotly.newPlot('usa',data1,layout,config)
-    this.specificMap()
+    // this.specificMap()
   }
 
-  specificMap() {
-    Plotly.d3.csv('../assets/csv/myFile.csv', function (err, rows) {
+  specificMap(rows) {
+    // Plotly.d3.csv('../assets/csv/myFile.csv', function (err, rows) {
 
-      var classArray = unpack(rows, 'diseases');
+      var classArray = unpack(rows, 'class');
       var classes = [...new Set(classArray)];
+      console.log(classes)
 
       function unpack(rows, key) {
         return rows.map(function (row) { return row[key]; });
@@ -148,11 +151,12 @@ export class EpidemicDetectionComponent implements OnInit {
 
       var data = classes.map(function (classes) {
         var rowsFiltered = rows.filter(function (row) {
-          return (row.diseases === classes);
+          return (row.class === classes);
         });
+        console.log(rowsFiltered)
         return {
           type: 'scattermapbox',
-          mode: 'markers', marker: { size: 20 },
+          mode: 'markers', marker: { size: 25 },
           name: classes,
           lat: unpack(rowsFiltered, 'reclat'),
           lon: unpack(rowsFiltered, 'reclong')
@@ -160,7 +164,7 @@ export class EpidemicDetectionComponent implements OnInit {
       });
 
       var layout = {
-        title: 'Meteorite Landing Locations',
+        title: 'Epidemic Detection',
         font: {
           color: 'white'
         },
@@ -193,8 +197,7 @@ export class EpidemicDetectionComponent implements OnInit {
           y: 0,
           xref: 'paper',
           yref: 'paper',
-          text: 'Source: <a href="https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh" style="color: rgb(255,255,255)">NASA</a>',
-          showarrow: false
+          showarrow: true
         }]
       };
 
@@ -203,7 +206,7 @@ export class EpidemicDetectionComponent implements OnInit {
       });
 
       Plotly.newPlot('usa', data, layout);
-    });
+    // });
   }
 }
 
