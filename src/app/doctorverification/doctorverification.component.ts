@@ -16,6 +16,7 @@ export class DoctorverificationComponent implements OnInit {
   data: any;
   flag: any;
   mailFlag:any;
+  initialFlg: boolean = false;
 
   constructor(
     private auth: AuthService,
@@ -29,13 +30,17 @@ export class DoctorverificationComponent implements OnInit {
     .subscribe(user => {
       this.user = user;
       this.auth.usersignupDetails(this.user.uid)
-      // console.log(this.user)
+      console.log(this.user.uid)
       var docRef = this.db.collection("Users").doc(this.user.uid);
       docRef.valueChanges()
         .subscribe(result => {
           this.data = result;
+          console.log("doc refff "+result)
           this.verifyDoctor()
           console.log(this.data.slmcVerified+" :Slmc verification status")
+          if(this.data.slmcVerified){
+            this.initialFlg = true;
+          }
         })
     })
   }

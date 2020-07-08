@@ -23,12 +23,30 @@ export interface IAlert {
 })
 export class MailVerificationComponent implements OnInit {
   touched:boolean = false
+  // response : {
+  //   "MessageId": "3520243c-5554-534c-bb6f-734a3d22648e",
+  //   "ResponseMetadata": {
+  //     "HTTPHeaders": {
+  //       "content-length": "294",
+  //       "content-type": "text/xml",
+  //       "date": "Wed, 01 Jul 2020 10:32:22 GMT",
+  //       "x-amzn-requestid": "fd94acdb-7838-5998-8cba-fbad104efe5a"
+  //     },
+  //     "HTTPStatusCode": 200,
+  //     "RequestId": "fd94acdb-7838-5998-8cba-fbad104efe5a",
+  //     "RetryAttempts": 0
+  //   }
+  // }
   user: firebase.User;
   @Input()
   public alerts: Array<IAlert> = [];
   private backup: Array<IAlert>;
   data: any;
   flsg: false;
+  status: Object;
+  emailverify: boolean;
+  metaData: Object;
+  phoneVerified: boolean;
   // flag: true;
 
   constructor(
@@ -81,7 +99,15 @@ export class MailVerificationComponent implements OnInit {
   verifyEmail(id, code) {
     console.log('verify')
     this.doctorService.verifyEmail(id, code).subscribe(res => {
+      // this.status = res
       console.log(res)
+      if(res=="email verified"){
+        // console.log("verified")
+        this.emailverify = true
+      }else{
+        console.log("Unverified")
+        this.emailverify = false
+      }
     })
   }
   // phoneVerify(){
@@ -111,12 +137,16 @@ export class MailVerificationComponent implements OnInit {
     var message = "Hello this is your verification code: "+ otp;
     this.doctorService.sendPhoneOtp(this.user.uid,otp).subscribe(res=>{
       this.doctorService.sendOtpText(message,this.data.telno).subscribe(res=>{
-        console.log(res)
+        // this.metaData = res
+        console.log(res["ResponseMetadata"]["HTTPStatusCode"])
+        if (res["ResponseMetadata"]["HTTPStatusCode"]===200){
+          this.phoneVerified = true
+        }else{
+          console.log("error")
+          this.phoneVerified = false
+        }
       })
     });
   }
-  // changeFlag(){
-  //   this.flag = false
-  // }
 
 }
