@@ -4,6 +4,7 @@ import { VerifydoctorService } from '../services/verifydoctor.service';
 import { CoreAuthService } from '../core/core-auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
+import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-patientverification',
@@ -19,10 +20,13 @@ import { AuthService } from '../services/auth.service';
   ]
 })
 export class PatientverificationComponent implements OnInit {
+  sent:boolean = false
   user: firebase.User;
   data: any;
   flag: any;
   mailFlag: any;
+  emalstatus: Object;
+  emailOtp:string;
 
   constructor(
     private verify: VerifydoctorService,
@@ -41,7 +45,7 @@ export class PatientverificationComponent implements OnInit {
         docRef.valueChanges()
           .subscribe(result => {
             this.data = result;
-            // console.log(this.user.uid)
+            console.log(this.data)
 
           })
       })
@@ -55,7 +59,13 @@ export class PatientverificationComponent implements OnInit {
       otpCode += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     this.verify.sendEmail(this.user.uid, [otpCode, this.user.email]).subscribe(res => {
-      console.log(res)
+      this.emalstatus = res
+      // console.log(this.emalstatus[0])
+      if(this.emalstatus[1]===true){
+        this.sent = true
+      }else{
+        console.log("error")
+      }
     })
   }
 
