@@ -23,12 +23,12 @@
     z-index: 1;
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #FFFFFF; /* White*/
+    background-color: rgba(21, 226, 226, 0.3); 
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-    box-shadow: 10px 10px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
+    box-shadow: 10px 10px 8px 0 rgba(62, 84, 207, 0.2);
+    background-image: linear-gradient(to right, rgb(191, 191, 221) , white);
   }
   
   /* The navigation menu links */
@@ -39,21 +39,27 @@
     color: #000000;
     display: block;
     transition: 0.3s;
-    font-family:cursive;
-
+    font-family:Lucida Console;
+   
+  }
+  /* colour clicked linked */
+  .sidenav a:hover, .sidenav a:focus {
+    color: #0ea7ee;
   }
   
+  
+  
   /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
-    color: #001AFF;
+  /* .sidenav a:hover {
+    color: #248506;
     
-  }
+  } */
 
   /* change selected button color */
-  .sidenav a:active {
+  /* .sidenav a:active {
     color: yellow;
     
-  }
+  } */
  
   /* Position and style the close button (top right corner) */
   .sidenav .closebtn {
