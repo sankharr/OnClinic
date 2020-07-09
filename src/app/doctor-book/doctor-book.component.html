@@ -1,17 +1,23 @@
 <app-navbar></app-navbar>
+<div class="body">
 <div class="section">
   <div class="row">
-    <h2>Dr {{ data.name }}</h2>
+    <div class="col-10">
+    <h2 style="color: white;">Dr {{ data.name }}</h2>
+  </div>
+  <div class="col-2">
+    <a href="doctors-list" class="btn btn-outline-success">Back</a>
+  </div>
   </div>
 
   <!-- Start bookings list -->
   <div *ngFor="let row of availableAppointments" class="row">
-    <div *ngFor="let item of row" class="col-4">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{ item.day }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{ item.date }}</h6>
-          <p class="card-text">
+    <div *ngFor="let item of row" class="col-4" >
+      <div class="card" style="width: 20rem; background-color: #0c0933; margin-bottom: 1rem; opacity: 0.7;">
+        <div class="card-body" style="padding: 16;">
+          <h5 class="card-title" style="color: white;">{{ item.day }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted" style="color: white;">{{ item.date }}</h6>
+          <p class="card-text" style="color: white;">
             {{ item.time }} <br />
             Specialized in :{{ data.speciality }} <br />
             Description : MBBS qulified in University of Colombo 2002<br />
@@ -135,4 +141,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
