@@ -1,15 +1,69 @@
 <!-- <div class="responsive" style="top: 100px;left: 100px;">
         <img src='../../assets/svg/welcome.svg' style="width: 100%; height: auto;">
     </div> -->
-    <figure class="img-box" @fade>
-        <img src='../../assets/svg/email-p.svg' alt=""
-            style="height: 400px;width:100%;background-repeat: no-repeat;background-size: contain;">
-    </figure>
-    
-    <div class="card text-center" style="top: 100px;">
-        <div class="card-body">
-            <h5 class="card-title">Confirm your email</h5>
-            <p class="card-text">Confirm your email</p>
-            <a class="btn btn-primary" (click)="sendEmail()">Send Email</a>
+<!-- <div class="card text-center" style="position:absalute;height: 100px;">
+    <div class="card-body">
+        <h3 class="card-title" style="color: rgba(94, 88, 180, 0.938);"><span
+                class="badge badge-pill badge-success">Step 2 of 3</span></h3>
+        <p class="card-text"></p>
+    </div>
+</div> -->
+<!-- <figure class="img-box" @fade>
+    <img src='../../assets/svg/email-p.svg' alt=""
+        style="height: 400px;width:100%;background-repeat: no-repeat;background-size: contain;">
+</figure><br><br><br><br> -->
+
+
+<div class="alert alert-success alert-dismissible fade show"
+    style="position:fixed;top:0;width:100%;z-index:100;text-align: center;" role="alert" *ngIf="sent">
+    <strong>Success!</strong> Mail sent!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+        <div class="col-md-8 col-lg-6">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <h2 align=center><span class="badge badge-pill badge-success" style="margin-left: 210px;">Step 2
+                                of 3</span></h2>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-9 col-lg-8 mx-auto">
+                            <!-- Welcome <div> -->
+                            <!-- <h2 align = center ><span
+                                        class="badge badge-pill badge-success">Step 2 of 3</span></h2> -->
+                            <div>
+                                <div style="position:absalute;height: 10px;">
+                                    <div>
+
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="position:absalute;height: 100px;" align=center>
+                                <div class="card-body">
+                                    <h4 class="card-title" style="color: rgb(149, 41, 212);"><span
+                                            class="badge badge-pill badge-primary">Email Verification</span></h4><br>
+                                    <p class="card-text">In order to better service we use your emails to send event
+                                        reminders,special promotions
+                                        and other site related matters.Also this email is the username for your
+                                        furter login,So make sure to enter
+                                        correct email</p><br>
+                                    <a class="btn btn-primary" *ngIf="!this.data.emailOtp" style="color:aliceblue;" (click)="sendEmail()">Send
+                                        email confirmation</a>
+                                    <a  class="btn btn-primary disabled" *ngIf="this.data.emailOtp" style="color:aliceblue;" (click)="sendEmail()">Email Sent!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>

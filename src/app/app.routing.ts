@@ -34,6 +34,7 @@ import { PatientverificationComponent } from './patientverification/patientverif
 import { PatientRegistration2Component } from './patient-registration2/patient-registration2.component';
 import { AdminComponent } from './admin/admin.component';
 import { SystemUsersComponent } from './admin/system-users/system-users.component';
+import { EpidemicDetectionComponent } from './epidemic-detection/epidemic-detection.component';
 
 const routes: Routes =[
   { path: 'home',             component: HomeComponent },
@@ -60,6 +61,7 @@ const routes: Routes =[
   { path: 'emailverify', component: MailVerificationComponent },
   { path: 'addressverificatoin', component: AddressVerifyComponent },
   { path: 'welcomepage', component: WelcomeComponent },
+  {path:'map',component:EpidemicDetectionComponent},
   { path: 'admin', component: AdminComponent,
   children:[
     { path: 'systemUsers', component: SystemUsersComponent },

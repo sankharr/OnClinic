@@ -70,6 +70,7 @@ export class PatientRegistration2Component implements OnInit {
       operationName: ["", Validators.required],
       reportDate: ["", Validators.required],
       reportName: ["", Validators.required],
+      dietaryRestrictions: ["", Validators.required],
     });
 
     this.uid = localStorage.getItem("uid");
@@ -80,23 +81,25 @@ export class PatientRegistration2Component implements OnInit {
 
     var i;
 
-    // var speciality = this.completeProfilePatientForm.controls["speciality"].value;
-    // var doctorFee = this.completeProfilePatientForm.controls["doctorFee"].value;
-    // var numberOfAppointments = this.completeProfilePatientForm.controls["numberOfAppointments"].value;
-    // var averageConsulationTime = this.completeProfilePatientForm.controls["averageConsulationTime"].value;
+    var weight= this.completeProfilePatientForm.controls["weight"].value;
+    var height= this.completeProfilePatientForm.controls["height"].value;
+
+    var bmi = weight / Math.pow((height/100),2);
 
     var newData = {
       weight: this.completeProfilePatientForm.controls["weight"].value,
       height: this.completeProfilePatientForm.controls["height"].value,
       longTermDiseases: this.selectedLTDs,
       allergies: this.selectedAllergies,
-      operations: this.finalOperationsList   //<--------------assign this as an object   
+      operations: this.finalOperationsList,   //<--------------assign this as an object
+      dietaryRestrictions: this.completeProfilePatientForm.controls["dietaryRestrictions"].value,
+      bmi: bmi.toFixed(1)   
       // doctorID:
     }
 
     if (localStorage.getItem("role") == "patient") {
       // this.submitError = false;
-      console.log(newData);
+      console.log("From patient-registration2, updating profile - ",newData);
       this.db.collection("Users").doc(this.uid).update(newData)
         .then(() => {
           this.submitSuccess = true;

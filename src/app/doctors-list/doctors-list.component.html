@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
+<div class="body">
 <div class="section">
-  <div class="container">
+  
+  <div class="container" >
 
     <div class="row">
       <div class="col-4">
@@ -49,14 +51,14 @@
 
     </div>
     <div class="list-group">
-      <div class="list-group-item" *ngFor="let item of items">
+      <div class="list-group-item" *ngFor="let item of items" style="background-color:#0c0933; opacity: 0.7;">
         <div class="row">
-          <div class="col-7">
+          <div class="col-7" style="color: white;">
             {{item.payload.doc.data().name}} <br>
             {{item.payload.doc.data().email}}
 
           </div>
-          <div class="col-2">
+          <div class="col-2" style="color: white;" >
             Ratings : {{item.payload.doc.data().averageRating}}<br>
             <star-rating value={{item.payload.doc.data().averageRating}} checkedcolor="red" uncheckedcolor="black"
               size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
@@ -73,4 +75,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
