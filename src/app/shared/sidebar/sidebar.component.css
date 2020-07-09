@@ -10,11 +10,8 @@
 }
   
 .pdata {
-/* margin-top: 5%;
-margin-left: 5%; */
-padding-top: 10%;
-padding-left: 5%;
-padding-right: 5%;
+color: grey;
+text-align: center;
 }
 
 /* .nav{

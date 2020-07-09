@@ -60,7 +60,8 @@ export class SidebarComponent implements OnInit {
   route_link: any;
   user_details: any = [];
   user: any;
-
+  results: any;
+  
   constructor(
     private db: AngularFirestore,
     private afAuth: AngularFireAuth
@@ -76,7 +77,11 @@ export class SidebarComponent implements OnInit {
 
     // this.db.collection("Users")
     // console.log(this.user.uid);
-
+    this.db.collection('Users').doc(localStorage.getItem('uid')).valueChanges()
+      .subscribe(output => {
+        this.results = output;
+        console.log("side bara retrived data - ",this.results)
+      })
     if (localStorage.getItem('role') == 'doctor') {
       this.menuItems = doctorROUTES.filter(listTitle => listTitle);
       console.log("from localStorage - ",localStorage.getItem('role'));
