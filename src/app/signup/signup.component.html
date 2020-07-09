@@ -201,6 +201,17 @@
               <ng-template #patientReg>
                 <h6 style="text-align: center; margin-top: -20px; margin-bottom: 20px;">Patient's Registration</h6>
                 <form role="form" #userRegForm="ngForm" (ngSubmit)="createPatient(userRegForm)">
+
+                  <div class="form-group" [ngClass]="{'focused':focus===true}">
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                      </div>
+                      <input [(ngModel)]="userRegForm.name" name="name" class="form-control" placeholder="Name"
+                        type="text" (focus)="focus=true" (blur)="focus=false">
+                    </div>
+                  </div>
+
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group" [ngClass]="{'focused':focus===true}">
@@ -208,7 +219,7 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                           </div>
-                          <input [(ngModel)]="userRegForm.name" name="name" class="form-control" placeholder="Name"
+                          <input [(ngModel)]="userRegForm.nic" name="nic" class="form-control" placeholder="NIC"
                             type="text" (focus)="focus=true" (blur)="focus=false">
                         </div>
                       </div>
@@ -248,8 +259,8 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                           </div>
-                          <input [(ngModel)]="userRegForm.age" name="age" class="form-control" value="age9"
-                            placeholder="Date of Birth" type="text" (focus)="focus=true" (blur)="focus=false">
+                          <input [(ngModel)]="userRegForm.dob" name="dob" class="form-control"
+                            placeholder="Date of Birth" type="date" (focus)="focus=true" (blur)="focus=false">
                         </div>
                       </div>
                     </div>
@@ -264,7 +275,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>                  
 
                   <div class="form-group" [ngClass]="{'focused':focus===true}">
                     <div class="input-group input-group-alternative mb-3">
@@ -283,6 +294,16 @@
                       </div>
                       <input [(ngModel)]="userRegForm.password" name="password" class="form-control"
                         placeholder="Password" type="password" (focus)="focus2=true" (blur)="focus2=false">
+                    </div>
+                  </div>
+
+                  <div *ngIf="!user" class="form-group" [ngClass]="{'focused':focus2===true}">
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                      </div>
+                      <input [(ngModel)]="userRegForm.retypePassword" name="retypePassword" class="form-control"
+                        placeholder="Retype Password" type="password" (focus)="focus2=true" (blur)="focus2=false">
                     </div>
                   </div>
 
