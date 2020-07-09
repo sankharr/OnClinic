@@ -13,6 +13,8 @@ export class DoctorBookComponent implements OnInit {
   document: any;
   id: any;
   data: any;
+  results:any;
+
   availableAppointments: Array<AvailableAppointment>;
   definitions = [
     "sundayTime",
@@ -42,6 +44,12 @@ export class DoctorBookComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.db.collection('Users').doc(localStorage.getItem('uid')).valueChanges()
+    .subscribe(output => {
+      this.results = output;
+      console.log("doctor booking retrived data - ",this.results)
+    })
+
     this.id = this.route.snapshot.paramMap.get("id");
 
     this.db
