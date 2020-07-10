@@ -160,18 +160,23 @@
                         <div class="card" id="center">
                             <h6><b>Operations</b></h6>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="card" id="center">
-                                    <h6><b>Operation 01-name</b></h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card" id="center">
-                                    <h6><b>year</b></h6>
+                        <div class="list-group">
+                            <div class="list-group-item" *ngFor="let operation of operations">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="card" id="center">
+                                            <h6><b>{{operation.operationName}}</b></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card" id="center">
+                                            <h6><b>{{operation.operationDate}}</b></h6>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
