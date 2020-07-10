@@ -16,7 +16,7 @@ export class EditProfileComponent implements OnInit {
   operations:any[];
   updateProfileForm: FormGroup;
 
-  foods = ["Vegitarian", "Non-vegitarian"];
+  foods = ["Vegetarian", "Non-vegetarian"];
   longTermDiseasesList = ["", "ALS", "Alzheimer's Disease", "Arthritis", "Asthma", "Cancer", "Chronic kidney disease", "Dementia", "Depression", "Diabetes", "Eating Disorders", "Heart Disease", "Migraine", "Obesity", "Oral Health", "Osteoporosis", "Parkinson’s disease"]
   allergiesList = ["", "Food Allergy", "Skin Allergy", "Dust Allergy", "Insect Sting Allergy", "Pet Allergy", "Eye Allergy", "Mold Allergy", "Sinus Infection", "Cockroach Allergy"]
   viewcol1: boolean = false;
@@ -60,12 +60,12 @@ export class EditProfileComponent implements OnInit {
     this.updateProfileForm.setValue({
       name:value.name,
       address:value.address,
-      nic:"966623548v",
+      nic: value.nic,
       contact:value.telno,
       email: value.email,
       height: value.height,
       weight: value.weight,
-      food: "Vegitarian",
+      food: value.dietaryRestrictions,
       long:value.lgdis
     })
   }
