@@ -11,9 +11,14 @@ import { Router } from '@angular/router';
 export class EditProfileComponent implements OnInit {
   uid:any;
   result:any;
+  lgdis:any[];
+  alergies:any[];
+  operations:any[];
   updateProfileForm: FormGroup;
 
   foods = ["Vegitarian", "Non-vegitarian"];
+  longTermDiseasesList = ["", "ALS", "Alzheimer's Disease", "Arthritis", "Asthma", "Cancer", "Chronic kidney disease", "Dementia", "Depression", "Diabetes", "Eating Disorders", "Heart Disease", "Migraine", "Obesity", "Oral Health", "Osteoporosis", "Parkinson’s disease"]
+  allergiesList = ["", "Food Allergy", "Skin Allergy", "Dust Allergy", "Insect Sting Allergy", "Pet Allergy", "Eye Allergy", "Mold Allergy", "Sinus Infection", "Cockroach Allergy"]
   viewcol1: boolean = false;
   viewcol2: boolean = false;
   submitError: boolean = false;
@@ -38,9 +43,15 @@ export class EditProfileComponent implements OnInit {
     });
     this.uid=localStorage.getItem("uid");
     this.db.collection("Users").doc(this.uid).valueChanges()
+
     .subscribe(output =>{
         this.result=output;
-        console.log("result-",this.result)
+        this.lgdis=this.result.longTermDiseases;
+        console.log("result-",this.result.longTermDiseases)
+        this.alergies=this.result.allergies;
+        console.log("result-",this.result.allergies)
+        this.operations=this.result.operations;
+        console.log("result-",this.result.operations)
         this.setResult(this.result)
     })
 
@@ -54,15 +65,16 @@ export class EditProfileComponent implements OnInit {
       email: value.email,
       height: value.height,
       weight: value.weight,
-      food: "Vegitarian"
+      food: "Vegitarian",
+      long:value.lgdis
     })
   }
-  add1() {
-    this.viewcol1 = true;
-  }
-  add2() {
-    this.viewcol2 = true;
-  }
+  // add1() {
+  //   this.viewcol1 = true;
+  // }
+  // add2() {
+  //   this.viewcol2 = true;
+  // }
   back() {
     this.router.navigate(['/patients/profile'])
   }
