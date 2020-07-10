@@ -256,7 +256,7 @@
               </div>
             </div>
             <div class="col-lg-4">
-                  <a href="#UploadDialogBox" class="btn" id="upload" data-toggle="modal">Upload</a>
+              <a href="#UploadDialogBox" class="btn" id="upload" data-toggle="modal">Upload</a>
             </div>
           </div>
         </div>
@@ -278,27 +278,29 @@
       </div>
       <div class="modal-body">
         <!-- --------------- -->
-        <form  [formGroup]="uploadReportForm" novalidate>
+        <form [formGroup]="uploadReportForm" novalidate>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="reportDate">Date</label>
-              <input type="date" class="form-control" id="reportDate" placeholder="Date of report">
+              <input type="date" class="form-control" formControlName="reportDate" placeholder="Date of report">
             </div>
             <div class="form-group col-md-6">
               <label for="reportName">Report name</label>
-              <input type="text" class="form-control" id="reportName" placeholder="Ex:-Blood Report">
+              <input type="text" class="form-control" formControlName="reportName" placeholder="Ex:-Blood Report">
             </div>
           </div>
+          <progress max="100" [value]="(uploadProgress | async)"></progress>
+          <form action="/action_page.php">
+            <input type="file" id="myFile" name="filename" (change)="detectFiles($event)"
+              accept=".png,.jpg,.pdf,.jpeg" />
+          </form>
+          <!-- -------------------------- -->
         </form>
-
-        <form action="/action_page.php">
-          <input type="file" id="myFile" name="filename">
-        </form>
-        <!-- -------------------------- -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn" data-dismiss="modal" (click)="upload(uploadReportForm.controls['reportDate'].value,uploadReportForm.controls['reportName'].value)">Submit</button>
+        <button type="submit" class="btn" data-dismiss="modal"
+          (click)="upload(uploadReportForm.controls['reportDate'].value,uploadReportForm.controls['reportName'].value)">Submit</button>
       </div>
     </div>
   </div>
