@@ -4,7 +4,7 @@
   width: 102%;
   margin-top: -1%;
   height: max-content;
-  margin-left: -2%;
+  margin-left: -3%;
 }
 
 .row{
@@ -27,6 +27,11 @@
 }
 #light.card{
   background-color:#90CAF9;
+  height: 45px;
+}
+
+#input.card{
+  height: 45px;
 }
 
 .rounded-circle{

@@ -10,6 +10,7 @@ import { ProfilePatientviewComponent } from './profile-patientview/profile-patie
 import { DoctorChannelingComponent } from './doctor-channeling/doctor-channeling.component';
 import { FormsModule } from '@angular/forms';
 import { WaitingroomDoctorviewComponent } from './waitingroom-doctorview/waitingroom-doctorview.component';
+import { EditDoctorprofileComponent } from './edit-doctorprofile/edit-doctorprofile.component';
 
 // import {MatTabsModule} from '@angular/material/tabs';
 
@@ -18,7 +19,7 @@ import { WaitingroomDoctorviewComponent } from './waitingroom-doctorview/waiting
 
 
 @NgModule({
-  declarations: [DoctorDashboardComponent, DoctorProfileComponent, DoctorPaymentsComponent, DoctorLogComponent, ProfilePatientviewComponent, DoctorChannelingComponent, WaitingroomDoctorviewComponent,],
+  declarations: [DoctorDashboardComponent, DoctorProfileComponent, DoctorPaymentsComponent, DoctorLogComponent, ProfilePatientviewComponent, DoctorChannelingComponent, WaitingroomDoctorviewComponent, EditDoctorprofileComponent,],
   imports: [
     CommonModule,
     DoctorsRoutingModule,
