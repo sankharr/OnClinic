@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { GeolocationService } from '../services/geolocation.service';
 // import { setTimeout } from 'timers';
 
 class Operation {
@@ -54,7 +55,8 @@ export class PatientRegistration2Component implements OnInit {
     private _formbuilder: FormBuilder,
     private db: AngularFirestore,
     private router: Router,
-    private afStorage: AngularFireStorage
+    private afStorage: AngularFireStorage,
+    private geolocation: GeolocationService,
   ) { }
 
   ngOnInit(): void {
@@ -73,7 +75,19 @@ export class PatientRegistration2Component implements OnInit {
     });
 
     this.uid = localStorage.getItem("uid");
+    this.getPossition()
 
+  }
+
+  getPossition(){
+    this.geolocation.getPosition().then(pos=>{
+      // console.log(pos)
+      var lat: number = +pos["lat"]
+      var lng: number = +pos["lng"]
+      console.log(lat,lng)
+    })
+
+    // console.log(lat,lng)
   }
 
   updateProfilePatient() {
