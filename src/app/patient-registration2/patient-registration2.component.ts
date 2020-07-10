@@ -21,6 +21,7 @@ export class PatientRegistration2Component implements OnInit {
 
   completeProfilePatientForm: FormGroup;
 
+  bloodGroups = ["","A+","A-","B+","B-","O+","O-","AB+","AB-"];
   longTermDiseasesList = ["", "ALS", "Alzheimer's Disease", "Arthritis", "Asthma", "Cancer", "Chronic kidney disease", "Dementia", "Depression", "Diabetes", "Eating Disorders", "Heart Disease", "Migraine", "Obesity", "Oral Health", "Osteoporosis", "Parkinson’s disease"]
   allergiesList = ["", "Food Allergy", "Skin Allergy", "Dust Allergy", "Insect Sting Allergy", "Pet Allergy", "Eye Allergy", "Mold Allergy", "Sinus Infection", "Cockroach Allergy"]
   selectedLTDs = [];
@@ -58,7 +59,7 @@ export class PatientRegistration2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    
     this.completeProfilePatientForm = this._formbuilder.group({
       weight: ["", Validators.required],
       height: ["", Validators.required],
@@ -71,6 +72,7 @@ export class PatientRegistration2Component implements OnInit {
       reportDate: ["", Validators.required],
       reportName: ["", Validators.required],
       dietaryRestrictions: ["", Validators.required],
+      bloodGroup: ["", Validators.required],
     });
 
     this.uid = localStorage.getItem("uid");
@@ -93,7 +95,8 @@ export class PatientRegistration2Component implements OnInit {
       allergies: this.selectedAllergies,
       operations: this.finalOperationsList,   //<--------------assign this as an object
       dietaryRestrictions: this.completeProfilePatientForm.controls["dietaryRestrictions"].value,
-      bmi: bmi.toFixed(1)   
+      bmi: bmi.toFixed(1),
+      bloodGroup: this.completeProfilePatientForm.controls["bloodGroup"].value   
       // doctorID:
     }
 
@@ -252,7 +255,9 @@ export class PatientRegistration2Component implements OnInit {
             this.db.collection('Users').doc(this.uid).collection("Reports").doc(`${repDate}_${repName}`).set({
               reportDate: repDate,
               reportName: repName,
-              reportURL:this.fb
+              reportURL:this.fb,
+              uploadedAt: new Date(),
+              status: 'Active'
             })
             setTimeout(()=>{
               this.completeProfilePatientForm.controls['reportDate'].reset();
