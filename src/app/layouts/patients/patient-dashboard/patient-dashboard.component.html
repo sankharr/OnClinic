@@ -17,8 +17,8 @@
             <!--Second grid - last updates and limits-->
             <div class="col-lg-5">
               <div class="card shadow">
-                <h6>Last Health Data Update</h6>
-                <h6 style="color:red;">27.05.2020</h6>
+                <h6>Last Profile Update</h6>
+                <h6 style="color:red;">{{result.lastlogin}}</h6>
                 <h6>Last Report Upolad</h6>
                 <h6 style="color:red;">27.05.2020</h6>
                 <hr>
@@ -34,16 +34,16 @@
             <div class="col-lg-4">
               <div class="card shadow">
                 <h6>Weight</h6>
-                <h6 style="color:blueviolet;"><b>136 cm</b></h6>
+                <h6 style="color:blueviolet;"><b>{{result.weight}} kg</b></h6>
                 <h6>Height</h6>
-                <h6 style="color:blueviolet;"><b>45 kg</b></h6>
+                <h6 style="color:blueviolet;"><b>{{result.height}} cm</b></h6>
                 <h5>BMI</h5>
-                <h4 style="color:blue;"><b>18.5</b></h4>
+                <h4 style="color:blue;"><b>{{result.bmi}}</b></h4>
                 <h4 style="color:green;font-family: sans-serif;"><b>NORMAL</b></h4>
                 <!--<h6 style="color:red;">OVER WEIGHT</h6>
                     <h6 style="color:red;">UNDER WEIGHT</h6>-->
                 <h6>Normal BMI Range</h6>
-                <h6>18-22</h6>
+                <h6>18.5-24.9</h6>
               </div>
             </div>
             <!--end of third grid-->

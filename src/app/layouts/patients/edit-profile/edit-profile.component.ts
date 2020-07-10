@@ -79,6 +79,9 @@ export class EditProfileComponent implements OnInit {
     this.router.navigate(['/patients/profile'])
   }
   updateProfilePatient(){
+    var weight= this.updateProfileForm.controls["weight"].value;
+    var height= this.updateProfileForm.controls["height"].value;
+    var bmi = weight / Math.pow((height/100),2);
     var upload = {
       name:this.updateProfileForm.controls["name"].value,
       address:this.updateProfileForm.controls["address"].value,
@@ -86,6 +89,7 @@ export class EditProfileComponent implements OnInit {
       email:this.updateProfileForm.controls["email"].value,
       height:this.updateProfileForm.controls["height"].value,
       weight:this.updateProfileForm.controls["weight"].value,
+      bmi: bmi.toFixed(1) 
     }
     this.db.collection("Users").doc(this.uid).update(upload)
     .then(()=>{
