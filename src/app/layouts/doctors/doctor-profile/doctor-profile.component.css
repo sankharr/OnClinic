@@ -35,6 +35,11 @@
   height: 40px;
 }
 
+#topic.card{
+  background-color:#e6e6e6;
+  height: 45px;
+}
+
 .rounded-circle{
   width: 120px;
   align-self: center;

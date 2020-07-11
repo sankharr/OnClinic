@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="col-md-12">
-    <div class="card shadow"  id="dark">
+    
 
     <h2 style="text-align: center; padding-top: 15px;">Update Details</h2>
 
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-md-1"> </div>
   
       <div class="col-md-10">
@@ -105,17 +105,17 @@
                 </div>
               </div>
 
-              <p id="days">Select the starting time of the session in each day</p>
+              <p id="days" style="text-align: center;">Select the starting time of the session in each day</p>
           
               <div class="row">
-                <div class="col-10">
+                <div class="col-12">
                   <ul style="list-style: none;">
                     <li>
                       <div class="row">
-                        <div class="col-5">
+                        <div class="col-4">
                           <p id="days" style="font-weight: bold;">Day of the week</p>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                           <p id="days" style="font-weight: bold;">Starting Time</p>
                         </div>
                       </div>
@@ -123,12 +123,12 @@
           
                     <li>
                       <div class="row">
-                        <div class="col-5">
+                        <div class="col-4">
                           <div class="card" id="light">
                             <p><b>Monday </b></p>
                         </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                           <select class="form-control" formControlName="mondayTime">
                             <option *ngFor="let time of times">{{time}}</option>
                           </select>
@@ -138,12 +138,12 @@
           
                     <li>
                       <div class="row">
-                        <div class="col-5">
+                        <div class="col-4">
                           <div class="card" id="light">
                             <p><b>Tuesday </b></p>
                         </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                           <select class="form-control" formControlName="tuesdayTime">
                             <option *ngFor="let time of times">{{time}}</option>
                           </select>
@@ -153,12 +153,12 @@
           
                     <li>
                       <div class="row">
-                        <div class="col-5">
+                        <div class="col-4">
                           <div class="card" id="light">
                             <p><b>Wednesday </b></p>
                         </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                           <select class="form-control" formControlName="wednesdayTime">
                             <option *ngFor="let time of times">{{time}}</option>
                           </select>
@@ -168,12 +168,12 @@
           
                     <li>
                       <div class="row">
-                        <div class="col-5">
+                        <div class="col-4">
                           <div class="card" id="light">
                             <p><b>Thursday </b></p>
                         </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                           <select class="form-control" formControlName="thursdayTime">
                             <option *ngFor="let time of times">{{time}}</option>
                           </select>
@@ -183,12 +183,12 @@
           
                     <li>
                       <div class="row">
-                        <div class="col-5">
+                        <div class="col-4">
                           <div class="card" id="light">
                             <p><b>Friday </b></p>
                         </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                           <select class="form-control" formControlName="fridayTime">
                             <option *ngFor="let time of times">{{time}}</option>
                           </select>
@@ -198,12 +198,12 @@
           
                     <li>
                       <div class="row">
-                        <div class="col-5">
+                        <div class="col-4">
                           <div class="card" id="light">
                             <p><b>Saturday </b></p>
                         </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                           <select class="form-control" formControlName="saturdayTime">
                             <option *ngFor="let time of times">{{time}}</option>
                           </select>
@@ -213,12 +213,12 @@
           
                     <li>
                       <div class="row">
-                        <div class="col-5">
+                        <div class="col-4">
                           <div class="card" id="light">
                             <p><b>Sunday </b></p>
                         </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                           <select class="form-control" formControlName="sundayTime">
                             <option *ngFor="let time of times">{{time}}</option>
                           </select>
@@ -233,7 +233,7 @@
               
               <!--submit button-->
               <div class="row">
-                  <div class="col-12">
+                  <div class="col-12" style="margin-left: 400px;">
                       <button class="btn" id="bottom" style="background-color: #2364ce;" type="submit" (click)="updateProfileDoctor()">Update</button>
                       <button class="btn" id="bottom" style="background-color: #2364ce;" type="submit" (click)="back()">Back</button>
 
@@ -246,7 +246,6 @@
       </div>
   
       <div class="col-md-1">  </div>
-    </div>
 
     </div>
 
