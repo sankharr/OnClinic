@@ -11,6 +11,7 @@
   padding: 1.5%;
   align-content: center;
   min-height: max-content;
+  margin-top: -10px;
 }
 .mainRow{
   margin-top:30px;
@@ -27,11 +28,11 @@
 }
 #light.card{
   background-color:#90CAF9;
-  height: 45px;
+  height: 40px;
 }
 
 #input.card{
-  height: 45px;
+  height: 40px;
 }
 
 .rounded-circle{
@@ -50,6 +51,7 @@
   }
   .row{
     padding: 5%;
+    
   }
   .card{
     margin-top: 10px;
