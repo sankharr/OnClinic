@@ -71,6 +71,8 @@ import { PatientverificationComponent } from './patientverification/patientverif
 import { SelectionPipe } from './pipes/selection.pipe';
 import { AdminComponent } from './admin/admin.component';
 import { SystemUsersComponent } from './admin/system-users/system-users.component';
+import { PaymentCompletedComponent } from './payment-completed/payment-completed.component';
+import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
 import { EpidemicDetectionComponent } from './epidemic-detection/epidemic-detection.component';
 import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
 import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
@@ -125,6 +127,8 @@ var firebaseConfig = {
     PatientRegistration2Component,
     AdminComponent,
     SystemUsersComponent,
+    PaymentCompletedComponent,
+    PaymentFailedComponent,
     EpidemicDetectionComponent,
     InquiriesComponent,
     SocialRespComponent
