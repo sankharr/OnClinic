@@ -17,7 +17,7 @@ export const doctorROUTES: RouteInfo[] = [
   { path: '/doctors/profile', title: 'Profile', icon: 'content_paste', class: '' },
   { path: '/doctors/lcd', title: 'Live Consultation', icon: 'content_paste', class: '' },
   { path: '/doctors/payments', title: 'Payments', icon: 'content_paste', class: '' },
-  { path: '/doctors/log', title: 'Log', icon: 'content_paste', class: '' },
+  // { path: '/doctors/log', title: 'Log', icon: 'content_paste', class: '' },
   { path: '/doctors/ppv', title: 'Profile Patient View', icon: 'content_paste', class: '' },
   { path: '/doctors/channeling', title: 'Channeling', icon: 'content_paste', class: '' },
 
