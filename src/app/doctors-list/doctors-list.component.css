@@ -2,3 +2,14 @@
   margin-top:5%;
 
 }
+.body{
+  background-image: url("../../assets/img/background/doctor_list_bg_1.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100%;
+  height:max-content;
+}
+.bg{
+  background-color: grey;
+}

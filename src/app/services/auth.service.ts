@@ -179,7 +179,8 @@ export class AuthService {
         if (role == "patient") {
           this.insertPatientData(userCredential)
             .then(() => {
-              this.router.navigate(['/patient/dashboard']);
+              console.log("From AUTH SERVICE - Data successfully saved")
+              this.router.navigate(['/patients/dashboard']);
             });
         }
 
@@ -202,19 +203,20 @@ export class AuthService {
     return this.db.doc(`Users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
       name: this.newUser.name,
-      age: this.newUser.age,
+      nic:this.newUser.nic,      
+      dob: this.newUser.dob,
       telno: this.newUser.telno,
       address: this.newUser.address,
       role: 'patient'
-    })
-    
+    })    
   }
 
   insertGooglePatientData(formValue: any,uID: any) {
     return this.db.doc(`Users/${uID}`).set({
       email: formValue.email,
       name: formValue.name,
-      age: formValue.age,
+      nic:formValue.nic,    
+      dob: formValue.dob,
       telno: formValue.telno,
       address: formValue.address,
       role: 'patient'
