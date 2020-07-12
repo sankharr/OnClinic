@@ -35,6 +35,8 @@ import { PatientRegistration2Component } from './patient-registration2/patient-r
 import { AdminComponent } from './admin/admin.component';
 import { SystemUsersComponent } from './admin/system-users/system-users.component';
 import { EpidemicDetectionComponent } from './epidemic-detection/epidemic-detection.component';
+import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
+import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
 
 const routes: Routes =[
   { path: 'home',             component: HomeComponent },
@@ -54,9 +56,22 @@ const routes: Routes =[
   { path: 'ml', component: MlComponent },
   { path: 'patientverification',component:PatientverificationComponent },
   { path: 'disease', component: DiseaseComponent },
-  { path: 'moderator/doctors', component: ModeratorComponent },
-  { path: 'moderator/patients', component: ViewPatientsComponent },
-  { path: 'moderator/dashboard', component: ModeratorDashboardComponent },
+  // { path: 'moderator/doctors', component: ModeratorComponent },
+  // { path: 'moderator/patients', component: ViewPatientsComponent },
+  {path:'moderator',component:ModeratorDashboardComponent},
+  {path:'moderator/doctors',component:ModeratorComponent},
+  {path:'moderator/patients',component:ViewPatientsComponent},
+  {path:'moderator/inquiries',component:InquiriesComponent},
+  {path:'moderator/socialworks',component:SocialRespComponent},
+
+  // children:[
+  //   {path:'doctors',component:ModeratorComponent},
+  //   {path:'patients',component:ViewPatientsComponent},
+  //   {path:'inquiries',component:InquiriesComponent},
+  //   {path:'socialworks',component:SocialRespComponent}
+  // ]
+  // },
+  // { path: 'moderator/dashboard', component: ModeratorDashboardComponent },
   { path: 'doctorverification', component: DoctorverificationComponent },
   { path: 'emailverify', component: MailVerificationComponent },
   { path: 'addressverificatoin', component: AddressVerifyComponent },
