@@ -71,6 +71,8 @@ import { PatientverificationComponent } from './patientverification/patientverif
 import { SelectionPipe } from './pipes/selection.pipe';
 import { AdminComponent } from './admin/admin.component';
 import { SystemUsersComponent } from './admin/system-users/system-users.component';
+import { PaymentCompletedComponent } from './payment-completed/payment-completed.component';
+import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -121,7 +123,9 @@ var firebaseConfig = {
     SelectionPipe,
     PatientRegistration2Component,
     AdminComponent,
-    SystemUsersComponent
+    SystemUsersComponent,
+    PaymentCompletedComponent,
+    PaymentFailedComponent
   ],
   imports: [
     BrowserModule,
