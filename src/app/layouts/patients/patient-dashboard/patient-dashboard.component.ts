@@ -11,7 +11,7 @@ export class PatientDashboardComponent implements OnInit {
   userid: string;
 
   constructor(public auth:AuthService,
-                      private router:Router) { 
+              private router:Router) { 
   }
 
   ngOnInit(): void {

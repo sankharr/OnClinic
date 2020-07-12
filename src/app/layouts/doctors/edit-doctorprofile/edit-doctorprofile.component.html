@@ -1,0 +1,115 @@
+<div class="container-fluid">
+  <div class="col-md-12">
+    <div class="card shadow"  id="dark">
+
+    <h2 style="text-align: center; padding-top: 15px;">Update Details</h2>
+
+    <div class="row">
+      <div class="col-md-1"> </div>
+  
+      <div class="col-md-10">
+
+        <form [formGroup]="updateProfileForm" novalidate>
+          <!--Feedback Handling-->
+          <div *ngIf="submitError" class="alert alert-danger">
+              Update Failed! Please check whether you have filled all the required fields and try again!
+          </div>
+  
+          <div *ngIf="submitSuccess" class="alert alert-success">
+              Succesfully Updated!
+          </div>
+          <!--edit Values-->
+          <div>
+              <div class="row">
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <div class="col-lg-4">
+                        <div class="card" id="light">
+                          <p><b> Name </b></p>
+                      </div>
+                      </div>
+                      <div class="col-lg-8">
+                      <input class="form-control" type="text" placeholder="" formControlName="name" required>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-12">
+                    <div class="form-group row">
+                      <div class="col-lg-4">
+                        <div class="card" id="light">
+                          <p><b> Address </b></p>
+                      </div>
+                      </div>
+                      <div class="col-lg-8">
+                      <input class="form-control" type="text" placeholder="" formControlName="address" required>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <div class="col-lg-4">
+                      <div class="card" id="light">
+                          <p><b> Email </b></p>
+                      </div>
+                  </div>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" placeholder="" formControlName="email" required>
+              </div>
+                  </div>
+                </div>
+                 <div class="col-md-6">
+                  <div class="form-group row">
+                    <div class="col-lg-4">
+                      <div class="card" id="light">
+                          <p><b> Phone </b></p>
+                      </div>
+                  </div>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" placeholder="" formControlName="telno" required>
+              </div>
+                </div>  
+              </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <div class="col-lg-4">
+                      <div class="card" id="light">
+                          <p><b> Age </b></p>
+                      </div>
+                  </div>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" placeholder="" formControlName="age" required>
+              </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!--submit button-->
+              <div class="row">
+                  <div class="col-12">
+                      <button class="btn" id="bottom" style="background-color: #2364ce;" type="submit" (click)="updateProfileDoctor()">Update</button>
+                      <button class="btn" id="bottom" style="background-color: #2364ce;" type="submit" (click)="back()">Back</button>
+
+                      <!-- <button class="btn" id="bottom" type="submit" (click)="back()">Back</button> -->
+                  </div>
+              </div>
+          </div>
+        </form>
+
+      </div>
+  
+      <div class="col-md-1">  </div>
+    </div>
+
+    </div>
+
+  <hr>
+</div>

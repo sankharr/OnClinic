@@ -42,7 +42,8 @@ export class AddressVerifyComponent implements OnInit {
         docRef.valueChanges()
           .subscribe(result => {
             this.data = result;
-            console.log(result)
+
+            console.log(this.data.addressTokenVerified)
           })
       })
   }

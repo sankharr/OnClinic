@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-doctor-profile',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./doctor-profile.component.css']
 })
 export class DoctorProfileComponent implements OnInit {
+  userId: any;
+  result: any;
+  
 
-  constructor() { }
+  constructor(
+    private db: AngularFirestore
+  ) { }
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem("uid");
+    this.db.collection("Users").doc(this.userId).valueChanges()
+    .subscribe(output=>{
+      this.result = output;
+      console.log(this.result);
+    })
   }
 
 }

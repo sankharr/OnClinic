@@ -29,12 +29,12 @@ export const doctorROUTES: RouteInfo[] = [
 //patient routings
 export const patientROUTES: RouteInfo[] = [
   { path: '/patients/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
-  { path: '/patients/profileDoctorView', title: 'Profile-Dotorview', icon: 'profile', class: '' },
+  // { path: '/patients/profileDoctorView', title: 'Profile-Dotorview', icon: 'profile', class: '' },
   { path: '/patients/profile', title: 'Profile', icon: 'profile', class: '' },
   { path: '/patients/payments', title: 'Payments', icon: 'payments', class: '' },
   { path: '/patients/channeling', title: 'Channeling', icon: 'channeling', class: '' },
   { path: '/patients/myhealth', title: 'My Health', icon: 'myhealth', class: '' },
-  { path: '/patients/lcp', title: 'Live Consultation', icon: 'content_paste', class: '' },
+  // { path: '/patients/lcp', title: 'Live Consultation', icon: 'content_paste', class: '' },
   // { path: '/add-new-moderator', title: 'Add New Moderator', icon: 'add', class: '' },
   // { path: '/maps', title: 'Maps', icon: 'location_on', class: '' },
   // { path: '/admin-notifications', title: 'Notifications', icon: 'notifications', class: '' },

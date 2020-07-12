@@ -10,10 +10,10 @@
             <!--left column-->
             <div class="col-lg-4">
                 <div class="card">
-                    <h3><b>12.12.04PM</b></h3>
+                    <h3><b>{{currentDate | date:'hh:mm:ss a'}}</b></h3>
                 </div>
                 <div class="card">
-                    <h3><b>24, May 2020</b></h3>
+                    <h3><b>{{currentDate | date:'yyyy-MM-dd'}}</b></h3>
                 </div>
                 <div class="card" id="dark">
                     <div class="card" id="light">
@@ -113,27 +113,43 @@
     </div>
 </div>
 
+<!--Dialog box-->
 <div class="modal fade" id="UploadDialogBox" tabindex="-1" role="dialog" aria-labelledby="UploadDialogBox"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="Title">Upload Your Report</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="Title">Upload Your Report</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- --------------- -->
+        <form [formGroup]="uploadReportForm" novalidate>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="reportDate">Date</label>
+              <input type="date" class="form-control" formControlName="reportDate" placeholder="Date of report">
             </div>
-            <div class="modal-body">
-                <!-- --------------- -->
-                <form action="/action_page.php">
-                    <input type="file" id="myFile" name="filename">
-                </form>
-                <!-- -------------------------- -->
+            <div class="form-group col-md-6">
+              <label for="reportName">Report name</label>
+              <input type="text" class="form-control" formControlName="reportName" placeholder="Ex:-Blood Report">
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn" data-dismiss="modal" (click)="submit()">Submit</button>
-            </div>
-        </div>
+          </div>
+          <progress max="100" [value]="(uploadProgress | async)"></progress>
+          <form action="/action_page.php">
+            <input type="file" id="myFile" name="filename" (change)="detectFiles($event)"
+              accept=".png,.jpg,.pdf,.jpeg" />
+          </form>
+          <!-- -------------------------- -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn" data-dismiss="modal"
+          (click)="upload(uploadReportForm.controls['reportDate'].value,uploadReportForm.controls['reportName'].value)">Submit</button>
+      </div>
     </div>
+  </div>
 </div>
