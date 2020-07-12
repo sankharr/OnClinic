@@ -35,6 +35,7 @@ import { PatientRegistration2Component } from './patient-registration2/patient-r
 import { AdminComponent } from './admin/admin.component';
 import { SystemUsersComponent } from './admin/system-users/system-users.component';
 import { PaymentCompletedComponent } from './payment-completed/payment-completed.component';
+import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
 
 const routes: Routes =[
   { path: 'home',             component: HomeComponent },
@@ -49,6 +50,7 @@ const routes: Routes =[
   { path: 'doctor-book/:id',          component: DoctorBookComponent, canActivate: [AuthGuard] },
   { path: 'payment',          component: PaymentComponent },
   { path: 'payment-completed',    component:PaymentCompletedComponent},
+  {path: 'payment-failed',  component:PaymentFailedComponent},
   { path: 'testing', component:TestingComponent},
   { path: 'doctor-completeProfile', component:DoctorRegistration2Component},
   { path: 'patient-completeProfile', component:PatientRegistration2Component},
