@@ -75,6 +75,48 @@
       </div>
     </div>
 
+    <div class="row mb-lg-4">
+      <div class="col-7">
+        <label for="coption"><b>Educational Qualifications</b></label>
+        <input class="form-control" type="text" placeholder="" formControlName="eduQualifications" required>
+
+        <div
+          *ngIf="completeProfileDoctorForm.controls['eduQualifications'].invalid && (completeProfileDoctorForm.controls['eduQualifications'].dirty || completeProfileDoctorForm.controls['eduQualifications'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="completeProfileDoctorForm.controls['eduQualifications'].errors.required">
+            This field is required.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-1">
+        <button class="btn btn-primary addbtn"
+          (click)="addQualifications(completeProfileDoctorForm.controls['eduQualifications'].value)"><i
+            style="font-size: larger;" class="fa fa-plus"></i></button>
+      </div>
+    </div>
+
+    <div class="row mb-lg-4">
+      <div class="col-7">
+   
+          <div class="list-group">
+            <div class="list-group-item" *ngFor="let item of qualificationsArray">
+              <div class="row">
+                <div class="col-9">
+                  {{item}}
+                </div>
+                <div class="col-3">
+                  <button class="btn btn-primary" (click)="removeQualifications(item)">Remove</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+   
+
     <p id="days" style="font-weight: 900; font-size:larger;">Select the starting time of the session in each day</p>
     <div class="card impo">
       IMPORTANT! - &nbsp; Select the times only in the days that you can do the consultations
