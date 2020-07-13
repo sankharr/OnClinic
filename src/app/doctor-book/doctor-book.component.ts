@@ -245,6 +245,7 @@ export class DoctorBookComponent implements OnInit {
  }
 
  payNow(){
+  var appointmentDatex = this.datePipe.transform(this.selectedAppointmentDate, "yyyy-MM-dd");
    console.log("results from paynow() - ",this.results);
    if (this.results.role == 'doctor'){
      this.currentUserID = this.results.doctorID;
@@ -281,7 +282,7 @@ export class DoctorBookComponent implements OnInit {
   //    console.log("successfully updated - patient Appointments")
   //  })
 
-   this.db.collection('Users').doc(localStorage.getItem('selectedDocID')).collection('Appointments').doc(this.selectedAppointmentDate).collection('dayAppointments').doc(this.appointmentID).set(data)
+   this.db.collection('Users').doc(localStorage.getItem('selectedDocID')).collection('Appointments').doc(appointmentDatex.toString()).collection('dayAppointments').doc(this.appointmentID).set(data)
    .then(()=>{
      console.log("successfully updated - doctor Appointments")
    })
