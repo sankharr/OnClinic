@@ -21,14 +21,17 @@ export class DoctorsListComponent implements OnInit {
     private db: AngularFirestore
   ) { }
 
+  viewDocId(id){
+    localStorage.setItem("viewedDocId",id);
+
+  }
+
   ngOnInit(): void {
     this.db.collection("Users", (ref) => (ref.where("role", "==", "doctor"))).snapshotChanges()
       .subscribe(result => {
         this.items = result;
         console.log(this.items);
       })
-
-
 
 
   }

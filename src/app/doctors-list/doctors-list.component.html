@@ -64,7 +64,7 @@
               size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
           </div>
           <div class="col-1">
-            <button routerLink="/doctor-book/{{ item.payload.doc.id }}" button class="btn btn-primary">View</button>
+            <button routerLink="/doctors/ppv" button class="btn btn-primary" (click)=viewDocId(item.payload.doc.id) >View </button>
 
           </div>
           <div class="col-2">

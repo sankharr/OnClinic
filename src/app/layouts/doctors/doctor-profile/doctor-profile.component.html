@@ -1,10 +1,9 @@
 <div class="container-fluid">
   <div class="col-md-12">
-    <div class="card shadow"  id="dark">
 
     <h2 style="text-align: center; padding-top: 15px;">General Details</h2>
 
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-md-1"> </div>
   
       <div class="col-md-10">
@@ -27,7 +26,7 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row"> 
             <div class="col-md-12">
               <div class="form-group row">
                 <div class="col-lg-4">
@@ -79,28 +78,167 @@
             <div class="col-md-6">
               <div class="form-group row">
                 <div class="col-lg-4">
-                  <div class="card" id="light">
-                      <p><b> Age </b></p>
+                  <div class="card" id="light" style="height: 57px;">
+                      <p><b><small>Daily num of appointments</small> </b></p>
                   </div>
               </div>
             <div class="col-lg-8">
               <div class="card" id="input">
-                  <p><b> {{result.age}} </b></p>
+                  <p><b> {{result.numberOfAppointments}} </b></p>
+              </div>
+          </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-lg-4">
+                  <div class="card" id="light" style="height: 57px;">
+                      <p><b><small>Avg time per consultation </small> </b></p>
+                  </div>
+              </div>
+            <div class="col-lg-8">
+              <div class="card" id="input">
+                  <p><b> {{result.averageConsulationTime}} </b></p>
               </div>
           </div>
               </div>
             </div>
             </div>
+
+            <h5 id="days" style="text-align: center;">Starting time of the session in each day</h5>
+
+    <div class="row">
+      <div class="col-12">
+        <ul style="list-style: none;">
+          <li>
+            <div class="row">
+              <div class="col-4">
+                <p id="days" style="font-weight: bold;">Day of the week</p>
+              </div>
+              <div class="col-6">
+                <p id="days" style="font-weight: bold;">Starting Time</p>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-4">
+                <div class="card" id="light">
+                  <p><b>Monday </b></p>
+              </div>
+              </div>
+              <div class="col-6">
+                <div class="card" id="input">
+                  <p><b> {{result.mondayTime}} </b></p>
+              </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-4">
+                <div class="card" id="light">
+                  <p><b>Tuesday </b></p>
+              </div>
+              </div>
+              <div class="col-6">
+                <div class="card" id="input">
+                  <p><b> {{result.tuesdayTime}} </b></p>
+              </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-4">
+                <div class="card" id="light">
+                  <p><b>Wednesday </b></p>
+              </div>
+              </div>
+              <div class="col-6">
+                <div class="card" id="input">
+                  <p><b> {{result.wednesdayTime}} </b></p>
+              </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-4">
+                <div class="card" id="light">
+                  <p><b>Thursday </b></p>
+              </div>
+              </div>
+              <div class="col-6">
+                <div class="card" id="input">
+                  <p><b> {{result.thuresdayTime}} </b></p>
+              </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-4">
+                <div class="card" id="light">
+                  <p><b>Friday </b></p>
+              </div>
+              </div>
+              <div class="col-6">
+                <div class="card" id="input">
+                  <p><b> {{result.fridayTime}} </b></p>
+              </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-4">
+                <div class="card" id="light">
+                  <p><b>Saturday </b></p>
+              </div>
+              </div>
+              <div class="col-6">
+                <div class="card" id="input">
+                  <p><b> {{result.saturdayTime}} </b></p>
+              </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="col-4">
+                <div class="card" id="light">
+                  <p><b>Sunday </b></p>
+              </div>
+              </div>
+              <div class="col-6">
+                <div class="card" id="input">
+                  <p><b> {{result.sundayTime}} </b></p>
+              </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        
+      </div>
+
+    </div>
              
 
-          <a href="/doctors/editdoctorprofile" button class="btn btn-success" style="background-color: #2364ce;" type="submit" >Update Details</a>  
+          <a href="/doctors/editdoctorprofile" button class="btn btn-success" style="background-color: #2364ce; margin-left: 400px;" type="submit" >Update Details</a>  
           
 
       </div>
   
       <div class="col-md-1">  </div>
-    </div>
-
     </div>
 
   <hr>
@@ -109,7 +247,7 @@
 
   <div class="col-md-12">
     
-          <div class="card shadow border-0" style="background-color:#90CAF9">
+          <div class="card shadow border-0" style="background-color:#90CAF9; margin-bottom:30px ;">
             <div class="pt-0">
               <div class="card-body py-20" style="height:80px">
                 <p style="text-align: left;">Note: Registration details are protected and can't edit once your account is created. If you want to make some changes on registration details please contact us!</p> 
@@ -134,7 +272,7 @@
                 </div>
             </div>
           <div class="col-lg-8">
-            <div class="card" id="input">
+            <div class="card" id="topic">
                 <p><b> {{result.actNum}} </b></p>
             </div>
         </div>
@@ -148,7 +286,7 @@
                 </div>
             </div>
           <div class="col-lg-8">
-            <div class="card" id="input">
+            <div class="card" id="topic">
                 <p><b> {{result.SLMC_ID}} </b></p>
             </div>
         </div>
@@ -165,7 +303,7 @@
                 </div>
             </div>
           <div class="col-lg-8">
-            <div class="card" id="input">
+            <div class="card" id="topic">
                 <p><b> {{result.doctorID}} </b></p>
             </div>
         </div>
@@ -182,7 +320,7 @@
                 </div>
             </div>
           <div class="col-lg-8">
-            <div class="card" id="input">
+            <div class="card" id="topic">
                 <p><b> {{result.speciality}} </b></p>
             </div>
         </div>

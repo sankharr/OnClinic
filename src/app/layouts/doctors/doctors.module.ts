@@ -4,7 +4,6 @@ import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.co
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { DoctorsRoutingModule } from './doctors.routing';
 import { DoctorPaymentsComponent } from './doctor-payments/doctor-payments.component';
-import { DoctorLogComponent } from './doctor-log/doctor-log.component';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
 import { DoctorChannelingComponent } from './doctor-channeling/doctor-channeling.component';
@@ -15,11 +14,8 @@ import { EditDoctorprofileComponent } from './edit-doctorprofile/edit-doctorprof
 // import {MatTabsModule} from '@angular/material/tabs';
 
 
-
-
-
 @NgModule({
-  declarations: [DoctorDashboardComponent, DoctorProfileComponent, DoctorPaymentsComponent, DoctorLogComponent, ProfilePatientviewComponent, DoctorChannelingComponent, WaitingroomDoctorviewComponent, EditDoctorprofileComponent,],
+  declarations: [DoctorDashboardComponent, DoctorProfileComponent, DoctorPaymentsComponent, ProfilePatientviewComponent, DoctorChannelingComponent, WaitingroomDoctorviewComponent, EditDoctorprofileComponent,],
   imports: [
     CommonModule,
     DoctorsRoutingModule,
