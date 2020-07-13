@@ -15,13 +15,16 @@
     padding: 5px;
     margin-top: 5px;
 }
+#list.card{
+  background-color: #E3F2FD;
+}
 #dark.card{
     background-color: #2196F3;
     text-align: center;
 }
 .btn{
     height: 38px;
-    background-color: #2364ce;
+    background-color: #8281ff;
     color: aliceblue;
     width: fit-content;
     align-self: center;
@@ -32,6 +35,10 @@
   }
   #bottom.btn{
     margin-right: 5px;
+    background-color: #2364ce;
+  }
+  #down.btn{
+    margin-top: 25%;
   }
 
   @media screen and (max-width: 1366px){

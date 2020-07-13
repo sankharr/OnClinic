@@ -3,6 +3,16 @@ import { AuthService } from '../services/auth.service';
 import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
+// class SignupDoctor {
+//     constructor(
+//         public firstName: string = '',
+//         public lastName: string = '',
+//         public email: string = '',
+//         public password: string = '',
+//         public language: string = '') {
+//     }
+// }
+
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html',
@@ -20,7 +30,7 @@ export class SignupComponent implements OnInit {
     doctorVal: any = 0;
     user: firebase.User;
 
-    constructor(private auth: AuthService,private router: Router) { }
+    constructor(private auth: AuthService, private router: Router) { }
 
     ngOnInit() {
         this.auth.eventAuthErrors$.subscribe(data => {  //getting the errors of the fields
@@ -36,38 +46,40 @@ export class SignupComponent implements OnInit {
 
     createPatient(frm) {
         // console.log("frm function - ",this.user.email);
-        if(this.user){                                     
+        if (this.user) {
             console.log("at create patient with USER");   //getting registered with google account
             frm.value.email = this.user.email;
             console.log(frm.value);
-            this.auth.insertGooglePatientData(frm.value,this.user.uid)
+            this.auth.insertGooglePatientData(frm.value, this.user.uid)
             // this.auth.usersignupDetails(this.user.uid)
-            this.router.navigate(['/patientverification'])
+            // this.router.navigate(['/patientverification'])
         }
-        else{
-            console.log("at create patient TS");
+        else {
+            console.log("at create patient TS - ",frm.value);
             this.auth.createUser(frm.value, "patient")  //getting registerd without google account
             // this.auth.usersignupDetails(this.user.uid)
-            this.router.navigate(['/patientverification'])
+            // this.router.navigate(['/patientverification'])
         }
-        
+
     }
 
     createDoctor(frm) {
         // this.auth.createUser(frm.value, "doctor")
-        if(this.user){
+        if (this.user) {
             console.log("at createDoctor with USER");   //getting registered with google account
             frm.value.email = this.user.email;
             console.log(frm.value);
-            this.auth.insertGoogleDoctorData(frm.value,this.user.uid);
+            this.auth.insertGoogleDoctorData(frm.value, this.user.uid);
+            console.log("After insert google doctor data");
             // this.auth.usersignupDetails(this.user.uid)
             this.router.navigate(['/doctorverification'])
         }
-        else{
+        else {
             console.log("at create patient TS");
             this.auth.createUser(frm.value, "doctor")  //getting registerd without google account
             // this.auth.usersignupDetails(this.user.uid)
-            this.router.navigate(['/doctorverification'])
+            console.log("After insert google doctor data");
+            // this.router.navigate(['/doctorverification'])
         }
     }
 }

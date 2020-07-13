@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   result:any;
   lgdis:any[];
   alergies:any[];
+  operations:any[];
   constructor(
     private router:Router,
     private db:AngularFirestore) { }
@@ -25,6 +26,8 @@ export class ProfileComponent implements OnInit {
         console.log("result-",this.result.longTermDiseases)
         this.alergies=this.result.allergies;
         console.log("result-",this.result.allergies)
+        this.operations=this.result.operations;
+        console.log("result-",this.result.operations)
     })
   }
   edit() {

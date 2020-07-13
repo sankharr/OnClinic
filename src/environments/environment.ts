@@ -6,6 +6,9 @@ export const environment = {
   production: false,
   agora: {
     appId: '54de43c2a29944539bb9e032d6917ad7'
+  },
+  mapbox:{
+    accessToken: 'pk.eyJ1IjoiaG9zcGl0YWxjb3JlIiwiYSI6ImNrYzBuOWJzZDBrdGQyc29lczc3NjNsZGgifQ.lOaMJP5AOSt4spWFz9XIoQ'
   }
 };
 
