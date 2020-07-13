@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { GeolocationService } from '../services/geolocation.service';
 // import { setTimeout } from 'timers';
 
 class Operation {
@@ -21,6 +22,7 @@ export class PatientRegistration2Component implements OnInit {
 
   completeProfilePatientForm: FormGroup;
 
+  bloodGroups = ["","A+","A-","B+","B-","O+","O-","AB+","AB-"];
   longTermDiseasesList = ["", "ALS", "Alzheimer's Disease", "Arthritis", "Asthma", "Cancer", "Chronic kidney disease", "Dementia", "Depression", "Diabetes", "Eating Disorders", "Heart Disease", "Migraine", "Obesity", "Oral Health", "Osteoporosis", "Parkinson’s disease"]
   allergiesList = ["", "Food Allergy", "Skin Allergy", "Dust Allergy", "Insect Sting Allergy", "Pet Allergy", "Eye Allergy", "Mold Allergy", "Sinus Infection", "Cockroach Allergy"]
   selectedLTDs = [];
@@ -54,11 +56,12 @@ export class PatientRegistration2Component implements OnInit {
     private _formbuilder: FormBuilder,
     private db: AngularFirestore,
     private router: Router,
-    private afStorage: AngularFireStorage
+    private afStorage: AngularFireStorage,
+    private geolocation: GeolocationService,
   ) { }
 
   ngOnInit(): void {
-
+    
     this.completeProfilePatientForm = this._formbuilder.group({
       weight: ["", Validators.required],
       height: ["", Validators.required],
@@ -71,10 +74,23 @@ export class PatientRegistration2Component implements OnInit {
       reportDate: ["", Validators.required],
       reportName: ["", Validators.required],
       dietaryRestrictions: ["", Validators.required],
+      bloodGroup: ["", Validators.required],
     });
 
     this.uid = localStorage.getItem("uid");
+    this.getPossition()
 
+  }
+
+  getPossition(){
+    this.geolocation.getPosition().then(pos=>{
+      // console.log(pos)
+      var lat: number = +pos["lat"]
+      var lng: number = +pos["lng"]
+      console.log(lat,lng)
+    })
+
+    // console.log(lat,lng)
   }
 
   updateProfilePatient() {
@@ -93,7 +109,8 @@ export class PatientRegistration2Component implements OnInit {
       allergies: this.selectedAllergies,
       operations: this.finalOperationsList,   //<--------------assign this as an object
       dietaryRestrictions: this.completeProfilePatientForm.controls["dietaryRestrictions"].value,
-      bmi: bmi.toFixed(1)   
+      bmi: bmi.toFixed(1),
+      bloodGroup: this.completeProfilePatientForm.controls["bloodGroup"].value   
       // doctorID:
     }
 
@@ -252,7 +269,9 @@ export class PatientRegistration2Component implements OnInit {
             this.db.collection('Users').doc(this.uid).collection("Reports").doc(`${repDate}_${repName}`).set({
               reportDate: repDate,
               reportName: repName,
-              reportURL:this.fb
+              reportURL:this.fb,
+              uploadedAt: new Date(),
+              status: 'Active'
             })
             setTimeout(()=>{
               this.completeProfilePatientForm.controls['reportDate'].reset();

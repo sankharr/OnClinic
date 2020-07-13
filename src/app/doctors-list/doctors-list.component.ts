@@ -36,5 +36,9 @@ export class DoctorsListComponent implements OnInit {
 
   }
 
+  toDoctorDates(uid){
+    localStorage.setItem("selectedDocID",uid);
+    //this.router.navigate('/doctor-book')
+  }
 
 }

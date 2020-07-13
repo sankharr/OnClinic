@@ -16,6 +16,7 @@ export class DoctorRegistration2Component implements OnInit {
   days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   times = ["Not Selected", "12.00 AM", "1.00 AM", "2.00 AM", "3.00 AM", "4.00 AM", "5.00 AM", "6.00 AM", "7.00 AM", "8.00 AM", "9.00 AM", "10.00 AM", "11.00 AM", "12.00 PM", "1.00 PM", "2.00 PM", "3.00 PM", "4.00 PM", "5.00 PM", "6.00 PM", "7.00 PM", "8.00 PM", "9.00 PM", "10.00 PM", "11.00 PM", "12.00 AM"];
   numberOfAppointments = ["", "No Limit", "5", "10", "15", "20", "30", "40"];
+  qualificationsArray = []
 
   last_doctorID: any;
   submitError: boolean = false;
@@ -41,6 +42,7 @@ export class DoctorRegistration2Component implements OnInit {
       doctorFee: ["", Validators.required],
       numberOfAppointments: ["", Validators.required],
       averageConsulationTime: ["", Validators.required],
+      eduQualifications: ["", Validators.required],
     });
     
 
@@ -54,35 +56,29 @@ export class DoctorRegistration2Component implements OnInit {
     // this.generateNewDoctorID();
   }
 
-  // generateNewDoctorID(){
+  addQualifications(qualifi){
+    this.qualificationsArray.push(qualifi);
+    this.completeProfileDoctorForm.controls['eduQualifications'].reset()  
+  }
 
-  //   var last_docID;
-
-  //   this.db.collection("system_variables").doc("system_variables").snapshotChanges()
-  //     .subscribe(result => {
-  //       console.log("latest_doctorID - ", result.payload.get("last_doctorID"));
-  //       last_docID = result.payload.get("last_doctorID");        
-  //     })
-
-  //   console.log("last_docID - ", last_docID);
-  //   var i : number;
-  //   var splitted =  last_docID.split("d",2);
-
-  //   var lastIDInt: number = +splitted[1];
-  //   var newDocIDString = (lastIDInt+1).toString();
-  //   for (i = 0; i < (7-newDocIDString.length) + 4; i++){
-  //     newDocIDString = 0 + newDocIDString;
-  //   }
-  //   newDocIDString = "d"+newDocIDString;
-  //   console.log(newDocIDString);
-  // }
-
-  // generatex() {
-  //   let temp = this.generateNewDoctorID();
-  //   console.log("temp - ", temp);
-  // }
+  removeQualifications(val){
+    var index = this.qualificationsArray.indexOf(val);
+    this.qualificationsArray.splice(index,1);
+    console.log("from removeQualifications, val index qualificationsArray - ",val,index,this.qualificationsArray)
+  }  
 
   updateProfileDoctor() {
+
+    var finalQualiObjectsArray = [];
+
+    this.qualificationsArray.forEach(function (value) {
+      var temp = {
+        qualification: value,
+        status: 'Active'
+      }
+      finalQualiObjectsArray.push(temp);
+      console.log(value);
+    }); 
 
     var speciality = this.completeProfileDoctorForm.controls["speciality"].value;
     var doctorFee = this.completeProfileDoctorForm.controls["doctorFee"].value;
@@ -102,8 +98,11 @@ export class DoctorRegistration2Component implements OnInit {
       numberOfAppointments: this.completeProfileDoctorForm.controls["numberOfAppointments"].value,
       averageConsulationTime: this.completeProfileDoctorForm.controls["averageConsulationTime"].value,
       averageRating: ((Math.random() * 5) + 1).toFixed(1),
+      qualifications: finalQualiObjectsArray
       // doctorID:
     }
+
+    console.log(newData);
 
     if (localStorage.getItem("role") == "doctor" && speciality && doctorFee && numberOfAppointments && averageConsulationTime) {
       this.submitError = false;
