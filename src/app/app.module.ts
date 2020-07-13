@@ -73,6 +73,7 @@ import { AdminComponent } from './admin/admin.component';
 import { SystemUsersComponent } from './admin/system-users/system-users.component';
 import { PaymentCompletedComponent } from './payment-completed/payment-completed.component';
 import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
+import {DatePipe} from '@angular/common';
 import { EpidemicDetectionComponent } from './epidemic-detection/epidemic-detection.component';
 import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
 import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
@@ -158,7 +159,7 @@ var firebaseConfig = {
     BrowserAnimationsModule, 
     // MatTabsModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
