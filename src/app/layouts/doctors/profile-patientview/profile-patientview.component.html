@@ -74,7 +74,7 @@
 
 
                         <div class="card shadow" id="space">
-                          <div class="card">
+                        
                 
                               <div class="card card-stats mb-4 mb-lg-0">
                                 <div class="card-body">
@@ -82,19 +82,16 @@
                                       <h3>80%</h3>
                                 </div>
                               </div>
-                          </div>
+                      
                         </div>
 
                         <div class="card shadow" id="space">
-                          <div class="card">
-                
                               <div class="card card-stats mb-4 mb-lg-0">
                                 <div class="card-body">
                                       <h5 class="card-title">No  of Channelings</h5> 
                                       <h3>20</h3>
                                 </div>
                               </div>
-                          </div>
                         </div>
 
                       </div>
@@ -114,14 +111,29 @@
                   <div class="card shadow border-0" id="topic">
                   
                       <div class="card-body py-1">
-                        <span class="d-block mb-1">Comments</span>
+                        <span class="d-block mb-1">Available days and times</span>
                       </div>
                   
                   </div>
                   <div class="card shadow border-0" id="light">
-                  
                       <div class="card-body py-20" style="height:390px">
-                        <p>Great Service</p>
+
+                        <div class="card shadow" id="space">
+                          <div class="card card-stats mb-4 mb-lg-0">
+                            <div class="card-body">
+                              <div *ngIf="result.mondayTime!==''" > <h5> Monday : {{result.mondayTime}} </h5> </div>
+                              <div *ngIf="result.tuesdayTime!==''" ><h5> Tuesday : {{result.tuesdayTime}} </h5></div>
+                              <div *ngIf="result.wednesdayTime!==''" ><h5> Wednesday : {{result.wednesdayTime}} </h5></div>
+                              <div *ngIf="result.thursdayTime!==''" ><h5> Thursday : {{result.thursdayTime}} </h5></div>
+                              <div *ngIf="result.fridayTime!==''" ><h5> Friday : {{result.fridayTime}} </h5></div>
+                              <div *ngIf="result.saturdayTime!==''" ><h5> Saturday : {{result.saturdayTime}} </h5></div>
+                              <div *ngIf="result.sundayTime!==''" ><h5> Sunday : {{result.sundayTime}} </h5></div>
+
+                            </div>
+                          </div>
+                        </div>
+
+
                       </div>
               
                   </div>
@@ -149,15 +161,12 @@
                         
 
                         <div class="card shadow" id="space">
-                          <div class="card">
-                
                               <div class="card card-stats mb-4 mb-lg-0">
                                 <div class="card-body">
-                                      <h5 class="card-title">Avg Fee</h5> 
+                                      <h5 class="card-title">Channeling Fee</h5> 
                                       <h3>2500.00</h3>
                                 </div>
                               </div>
-                          </div>
                         </div>
 
                         <button type="button" class="btn btn-success" style="margin-top: 40px;">Book Now</button>
