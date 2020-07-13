@@ -34,7 +34,11 @@ import { PatientverificationComponent } from './patientverification/patientverif
 import { PatientRegistration2Component } from './patient-registration2/patient-registration2.component';
 import { AdminComponent } from './admin/admin.component';
 import { SystemUsersComponent } from './admin/system-users/system-users.component';
+import { PaymentCompletedComponent } from './payment-completed/payment-completed.component';
+import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
 import { EpidemicDetectionComponent } from './epidemic-detection/epidemic-detection.component';
+import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
+import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
 
 const routes: Routes =[
   { path: 'home',             component: HomeComponent },
@@ -48,15 +52,30 @@ const routes: Routes =[
   { path: 'doctors-list',          component: DoctorsListComponent },
   { path: 'doctor-book/:id',          component: DoctorBookComponent, canActivate: [AuthGuard] },
   { path: 'payment',          component: PaymentComponent },
+  { path: 'payment-completed',    component:PaymentCompletedComponent},
+  {path: 'payment-failed',  component:PaymentFailedComponent},
   { path: 'testing', component:TestingComponent},
   { path: 'doctor-completeProfile', component:DoctorRegistration2Component},
   { path: 'patient-completeProfile', component:PatientRegistration2Component},
   { path: 'ml', component: MlComponent },
   { path: 'patientverification',component:PatientverificationComponent },
   { path: 'disease', component: DiseaseComponent },
-  { path: 'moderator/doctors', component: ModeratorComponent },
-  { path: 'moderator/patients', component: ViewPatientsComponent },
-  { path: 'moderator/dashboard', component: ModeratorDashboardComponent },
+  // { path: 'moderator/doctors', component: ModeratorComponent },
+  // { path: 'moderator/patients', component: ViewPatientsComponent },
+  {path:'moderator',component:ModeratorDashboardComponent},
+  {path:'moderator/doctors',component:ModeratorComponent},
+  {path:'moderator/patients',component:ViewPatientsComponent},
+  {path:'moderator/inquiries',component:InquiriesComponent},
+  {path:'moderator/socialworks',component:SocialRespComponent},
+
+  // children:[
+  //   {path:'doctors',component:ModeratorComponent},
+  //   {path:'patients',component:ViewPatientsComponent},
+  //   {path:'inquiries',component:InquiriesComponent},
+  //   {path:'socialworks',component:SocialRespComponent}
+  // ]
+  // },
+  // { path: 'moderator/dashboard', component: ModeratorDashboardComponent },
   { path: 'doctorverification', component: DoctorverificationComponent },
   { path: 'emailverify', component: MailVerificationComponent },
   { path: 'addressverificatoin', component: AddressVerifyComponent },

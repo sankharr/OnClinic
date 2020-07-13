@@ -68,8 +68,8 @@
 
           </div>
           <div class="col-2">
-            <button routerLink="/doctor-book/{{ item.payload.doc.id }}" button class="btn btn-primary">Book Now</button>
-
+            <!-- <button routerLink="/doctor-book/{{ item.payload.doc.id }}" button class="btn btn-primary">Book Now</button> -->
+            <button routerLink="/doctor-book/{{ item.payload.doc.id }}" (click)="toDoctorDates(item.payload.doc.id)"  class="btn btn-primary">Book Now</button>
           </div>
         </div>
       </div>

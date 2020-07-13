@@ -3,6 +3,8 @@ import { AuthService } from "src/app/services/auth.service";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: "app-doctor-book",
@@ -13,8 +15,15 @@ export class DoctorBookComponent implements OnInit {
   document: any;
   id: any;
   data: any;
-  results:any;
+  results: any;
+  appointmentNo: any;
+  avgTime: any;
+  finalEstimatedAppointmentTime: any;
+  appointmentID: any;
+  hospitalCoreCharges = 200;
 
+  appointmentForm: FormGroup;
+   
   availableAppointments: Array<AvailableAppointment>;
   definitions = [
     "sundayTime",
@@ -37,17 +46,25 @@ export class DoctorBookComponent implements OnInit {
   ];
 
   private routeSub: Subscription;
+  selectedAppointmentDate: any;
+  appointmentsCount: any;
+  resultz: any;
+  currentUserID: any;
+  totalFee: any;
+
   constructor(
     public auth: AuthService,
     private db: AngularFirestore,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private _formbuilder: FormBuilder,
+    private datePipe: DatePipe
+  ) { }
 
   ngOnInit(): void {
     this.db.collection('Users').doc(localStorage.getItem('uid')).valueChanges()
     .subscribe(output => {
       this.results = output;
-      console.log("doctor booking retrived data - ",this.results)
+      console.log("doctor booking retrived data - ", this.results)
     })
 
     this.id = this.route.snapshot.paramMap.get("id");
@@ -61,7 +78,216 @@ export class DoctorBookComponent implements OnInit {
         this.getAvailableAppointmentDates(this.data);
         this.availableAppointments = this.chunk(this.availableAppointments, 3);
       });
+
+    this.appointmentForm = this._formbuilder.group({
+      first_name: ["", Validators.required],
+      last_name: ["", Validators.required],
+      email: ["", Validators.required],
+      phone: ["", Validators.required],
+      address: ["", Validators.required],
+      city: ["", Validators.required],
+      country: ["", Validators.required],
+      // doctorName: ["", Validators.required],
+      // appointmentDate: ["", Validators.required],
+      // estimatedTime: ["", Validators.required],
+      // appointmentID: ["", Validators.required],
+      // totalAmount: ["", Validators.required],
+      // channelNo: ["", Validators.required],
+    });
   }
+
+ appointmentIDGenerator(){
+
+ } 
+
+ setResult(date) {
+   var hours: number = 0;
+   let finalEstimatedTime;
+  //  let appointmentNo = 5;
+  let avgTime = parseInt(this.data.averageConsulationTime)
+  let datex: Date = new Date(date);
+  let minsString;
+  let appointmentDate;
+  let resultz;
+  var appoCount;
+  this.totalFee = this.hospitalCoreCharges + parseInt(this.data.doctorFee);
+
+  appointmentDate = this.datePipe.transform(datex, "yyyy-MM-dd");
+  console.log("appointmentDate -", appointmentDate);
+
+  if (this.results.role == 'doctor') {
+    this.currentUserID = this.results.doctorID;
+
+  }
+  else if (this.results.role == 'patient') {
+    this.currentUserID = this.results.patientID;
+  }
+
+  var docRef = this.db.collection('Users').doc(this.id).collection('appointmentCounts').doc(appointmentDate);
+  docRef.valueChanges().subscribe(doc => {
+
+    if (doc){
+      resultz = doc;
+      appoCount = resultz.patientsCount + 1;
+      console.log("new appointmentsCount - ", appoCount);
+      //sessionStorage.setItem("currentAppointmentsCount",doc.get("patientsCount"));
+      console.log("Document data:", resultz.patientsCount);
+
+      this.appointmentsCount = appoCount;
+
+      this.selectedAppointmentDate = date;
+      console.log("time - ", datex.getHours())
+
+      hours = datex.getHours()
+      let estTimeTotMins = (appoCount - 1) * avgTime;
+      let extraHours = estTimeTotMins / 60;
+      let mins = estTimeTotMins % 60;
+      if (mins < 10) {
+        minsString = '0' + mins;
+      }
+      else{
+        minsString = mins;
+      }
+      // var intvalue = Math.floor( floatvalue )
+      hours = Math.floor(hours + extraHours);
+      if(hours > 12){
+        hours = hours % 12;
+        this.finalEstimatedAppointmentTime = hours + ':' + minsString + ' PM';
+      }
+      else {
+        this.finalEstimatedAppointmentTime = hours + ':' + minsString + ' AM';
+      }
+      console.log("finalEstimateTime - ", finalEstimatedTime);
+
+      this.appointmentID = appointmentDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
+      console.log("appointmentID - ", this.appointmentID);
+
+      this.setFormData();
+
+      // sessionStorage.setItem("appointmentNo", this.appointmentsCount);
+      // sessionStorage.setItem("estimatedTime", finalEstimatedTime);
+      // sessionStorage.setItem("appointmentDate", this.selectedAppointmentDate);
+   
+    }
+
+
+
+  else {
+    appoCount = 1;
+    console.log("new appointmentsCount - ", appoCount);
+    // sessionStorage.setItem("currentAppointmentsCount","0");
+    console.log("No such document");
+
+    this.appointmentsCount = appoCount;
+
+    this.selectedAppointmentDate = date;
+    console.log("time - ", datex.getHours())
+
+    hours = datex.getHours()
+    let estTimeTotMins = (appoCount - 1 ) * avgTime;
+    let extraHours = estTimeTotMins / 60;
+    let mins = estTimeTotMins % 60;
+    if (mins < 10) {
+      minsString = '0' + mins;
+    }
+    else{
+      minsString = mins;
+    }
+     // var intvalue = Math.floor( floatvalue )
+     hours = Math.floor(hours + extraHours);
+     if(hours > 12){
+       hours = hours % 12;
+       this.finalEstimatedAppointmentTime = hours + ':' + minsString + ' PM';
+     }
+     else {
+       this.finalEstimatedAppointmentTime = hours + ':' + minsString + ' AM';
+     }
+     console.log("finalEstimateTime - ", finalEstimatedTime);
+        
+
+     this.appointmentID = appointmentDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
+     console.log("appointmentID - ", this.appointmentID);
+
+     this.setFormData();
+
+      // sessionStorage.setItem("appointmentNo", this.appointmentsCount);
+      // sessionStorage.setItem("estimatedTime", finalEstimatedTime);
+      // sessionStorage.setItem("appointmentDate", this.selectedAppointmentDate);
+
+  }
+  });
+
+ }
+
+ setFormData(){
+
+  var splitted = this.results.name.split(" ", 2);
+  console.log("splitted names - ", splitted);
+
+  this.appointmentForm.setValue({
+    // appointmentID:this.appointmentID,
+    first_name:splitted[0],
+    last_name:splitted[1],
+    city:'Nugegoda',
+    country:'Sri Lanka',
+    email:this.results.email,
+    phone:this.results.telno,
+    address:this.results.address,
+    // patientID:this.results.patientID,
+    // patientName:this.results.name,
+    // doctorID:this.data.doctorID,
+    // doctorName:this.data.name,
+    // appointmentDate:this.selectedAppointmentDate,
+    // appointmentTime:this.finalEstimatedAppointmentTime,
+    // totalFee:this.data.doctorFee,
+    // appointmentNo:this.appointmnetsCount,
+  })
+ }
+
+ payNow(){
+   console.log("results from paynow() - ",this.results);
+   if (this.results.role == 'doctor'){
+     this.currentUserID = this.results.doctorID;
+
+   }
+   else if(this.results.role == 'patient'){
+    this.currentUserID = this.results.patientID;
+   }
+   var data = {
+     appointmentID:this.appointmentID,
+     patientID:this.currentUserID,
+     patientName:this.results.name,
+     doctorID:this.data.doctorID,
+     doctorName:this.data.name,
+     appointmentDate:this.selectedAppointmentDate,
+     appointmentTime:this.finalEstimatedAppointmentTime,
+     totalFee:this.totalFee,
+     appointmentNo:this.appointmentsCount,
+     status:'Active'
+   }
+
+   this.db.collection('Appointments').doc(this.appointmentID).set(data)
+   .then(()=>{
+     console.log("successfully updated - Appointments")
+     this.db.collection('Users').doc(localStorage.getItem("selectedDocID")).collection('appointmentCounts').doc(this.datePipe.transform(this.selectedAppointmentDate, "yyyy-MM-dd")).set({
+       patientsCount:this.appointmentsCount
+     }).then(()=>{
+       console.log("successfully updated - doctor appointments count")
+     });
+   });
+
+  //  this.db.collection('Users').doc(localStorage.getItem('uid')).collection('Appointments').doc(this.appointmentID).set(data)
+  //  .then(()=>{
+  //    console.log("successfully updated - patient Appointments")
+  //  })
+
+   this.db.collection('Users').doc(localStorage.getItem('selectedDocID')).collection('Appointments').doc(this.selectedAppointmentDate).collection('dayAppointments').doc(this.appointmentID).set(data)
+   .then(()=>{
+     console.log("successfully updated - doctor Appointments")
+   })
+
+   console.log("data to be saved from paynow() - ",data);
+ }
 
   ngOnDestroy() {
     this.routeSub.unsubscribe();
@@ -71,7 +297,7 @@ export class DoctorBookComponent implements OnInit {
     const timeNow = new Date();
     this.availableAppointments = new Array<AvailableAppointment>();
 
-    const dateObjects = this.getDateObjectsFromToday(data, 14);
+    const dateObjects = this.getDateObjectsFromToday(data, 7);
 
     let initialDate = dateObjects[0];
     if (initialDate < timeNow) {

@@ -255,7 +255,7 @@ export class AuthService {
     return this.db.doc(`Users/${uID}`).set({
       email: formValue.email,
       name: formValue.name,
-      age: formValue.age,
+      actNumber: formValue.age,
       telno: formValue.telno,
       address: formValue.address,
       docID: formValue.docID,
