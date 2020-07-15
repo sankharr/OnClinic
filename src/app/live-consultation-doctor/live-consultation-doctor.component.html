@@ -1,0 +1,5 @@
+<button class="btn btn-primary" type="submit" [routerLink]="['/doctors/dashboard']" (click)="endCall()">Leave</button>
+
+<div [id]="localCallId" class="local"></div>
+
+<div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>

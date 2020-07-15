@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from 'ngx-agora';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 
 @Component({
-  selector: 'app-live-consultation',
-  templateUrl: './live-consultation.component.html',
-  styleUrls: ['./live-consultation.component.css']
+  selector: 'app-live-consultation-doctor',
+  templateUrl: './live-consultation-doctor.component.html',
+  styleUrls: ['./live-consultation-doctor.component.css']
 })
-export class LiveConsultationComponent implements OnInit {
-
-  // channelForm: FormGroup;
+export class LiveConsultationDoctorComponent implements OnInit {
 
   localCallId = 'agora_local';
   remoteCalls: any[] = []
@@ -23,28 +19,13 @@ export class LiveConsultationComponent implements OnInit {
 
   constructor(
     private ngxAgoraService: NgxAgoraService,
-    private formbuilder: FormBuilder,
+    // private formbuilder: FormBuilder,
     ) {
     this.uid = Math.floor(Math.random() * 100);
   }
 
-  ngOnInit() {
-
-    this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
-
-    // this.channelForm = this.formbuilder.group({
-    //   channelid: ["", Validators.required]      
-    // });
-
-    // this.client = this.ngxAgoraService.createClient({ mode: 'rtc', codec: 'h264' });
-    // this.assignClientHandlers();
-
-    // // Added in this step to initialize the local A/V stream
-    // this.localStream = this.ngxAgoraService.createStream({ streamID: this.uid, audio: true, video: true, screen: false });
-    // this.assignLocalStreamHandlers();
-    // // this.initLocalStream();
-    // this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-
+  ngOnInit(): void {
+    this.startCall(localStorage.getItem('selectedAppointmentID_doctor'));
   }
 
   startCall(appoID) {

@@ -85,10 +85,10 @@
               <div class="card shadow">
                 <div class="card" id="differ">
                   <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
-                  <h5>Dr.Ryan Tompson</h5>
+                  <h5>{{result2[0]?.doctorName}}</h5>
                   <h6>Cardiologist</h6>
-                  <h6 class="text-primary"><b>in 15 Mins</b></h6>
-                  <button class="btn" type="submit" (click)="joinlc()">Join</button>
+                  <h6 class="text-primary"><b>{{result2[0]?.appointmentTime}}</b></h6>
+                  <button class="btn" type="submit" (click)="joinlc(result2[0]?.appointmentID)">Join</button>
                   <!--<a href="waiting-room" button class="btn" type="submit">Learn more</a>-->
                 </div>
               </div>

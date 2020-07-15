@@ -51,6 +51,7 @@ export class DoctorBookComponent implements OnInit {
   resultz: any;
   currentUserID: any;
   totalFee: any;
+  appointmentShortDate: string;
 
   constructor(
     public auth: AuthService,
@@ -88,7 +89,7 @@ export class DoctorBookComponent implements OnInit {
       city: ["", Validators.required],
       country: ["", Validators.required],
       // doctorName: ["", Validators.required],
-      // appointmentDate: ["", Validators.required],
+      // this.appointmentShortDate: ["", Validators.required],
       // estimatedTime: ["", Validators.required],
       // appointmentID: ["", Validators.required],
       // totalAmount: ["", Validators.required],
@@ -107,13 +108,13 @@ export class DoctorBookComponent implements OnInit {
   let avgTime = parseInt(this.data.averageConsulationTime)
   let datex: Date = new Date(date);
   let minsString;
-  let appointmentDate;
+  // let this.appointmentShortDate;
   let resultz;
   var appoCount;
   this.totalFee = this.hospitalCoreCharges + parseInt(this.data.doctorFee);
 
-  appointmentDate = this.datePipe.transform(datex, "yyyy-MM-dd");
-  console.log("appointmentDate -", appointmentDate);
+  this.appointmentShortDate = this.datePipe.transform(datex, "yyyy-MM-dd");
+  console.log("this.appointmentShortDate -", this.appointmentShortDate);
 
   if (this.results.role == 'doctor') {
     this.currentUserID = this.results.doctorID;
@@ -123,7 +124,7 @@ export class DoctorBookComponent implements OnInit {
     this.currentUserID = this.results.patientID;
   }
 
-  var docRef = this.db.collection('Users').doc(this.id).collection('appointmentCounts').doc(appointmentDate);
+  var docRef = this.db.collection('Users').doc(this.id).collection('appointmentCounts').doc(this.appointmentShortDate);
   docRef.valueChanges().subscribe(doc => {
 
     if (doc){
@@ -159,14 +160,14 @@ export class DoctorBookComponent implements OnInit {
       }
       console.log("finalEstimateTime - ", finalEstimatedTime);
 
-      this.appointmentID = appointmentDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
+      this.appointmentID = this.appointmentShortDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
       console.log("appointmentID - ", this.appointmentID);
 
       this.setFormData();
 
       // sessionStorage.setItem("appointmentNo", this.appointmentsCount);
       // sessionStorage.setItem("estimatedTime", finalEstimatedTime);
-      // sessionStorage.setItem("appointmentDate", this.selectedAppointmentDate);
+      // sessionStorage.setItem("this.appointmentShortDate", this.selectedAppointmentDate);
    
     }
 
@@ -205,14 +206,14 @@ export class DoctorBookComponent implements OnInit {
      console.log("finalEstimateTime - ", finalEstimatedTime);
         
 
-     this.appointmentID = appointmentDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
+     this.appointmentID = this.appointmentShortDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
      console.log("appointmentID - ", this.appointmentID);
 
      this.setFormData();
 
       // sessionStorage.setItem("appointmentNo", this.appointmentsCount);
       // sessionStorage.setItem("estimatedTime", finalEstimatedTime);
-      // sessionStorage.setItem("appointmentDate", this.selectedAppointmentDate);
+      // sessionStorage.setItem("this.appointmentShortDate", this.selectedAppointmentDate);
 
   }
   });
@@ -237,7 +238,7 @@ export class DoctorBookComponent implements OnInit {
     // patientName:this.results.name,
     // doctorID:this.data.doctorID,
     // doctorName:this.data.name,
-    // appointmentDate:this.selectedAppointmentDate,
+    // this.appointmentShortDate:this.selectedAppointmentDate,
     // appointmentTime:this.finalEstimatedAppointmentTime,
     // totalFee:this.data.doctorFee,
     // appointmentNo:this.appointmnetsCount,
@@ -260,10 +261,14 @@ export class DoctorBookComponent implements OnInit {
      patientName:this.results.name,
      doctorID:this.data.doctorID,
      doctorName:this.data.name,
-     appointmentDate:this.selectedAppointmentDate,
+     appointmentDate:new Date(this.selectedAppointmentDate),
+    //  appointmentShortDate:new Date(this.appointmentShortDate),
      appointmentTime:this.finalEstimatedAppointmentTime,
      totalFee:this.totalFee,
      appointmentNo:this.appointmentsCount,
+     doctorSpeciality:this.data.speciality,
+     doctorPhone:this.data.telno,
+     doctorEmail:this.data.email,
      status:'Active'
    }
 

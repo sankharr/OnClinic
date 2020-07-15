@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -9,9 +10,12 @@ import { Router } from '@angular/router';
 })
 export class PatientDashboardComponent implements OnInit {
   userid: string;
+  userData: any;
+  result2: any[];
 
   constructor(public auth:AuthService,
-              private router:Router) { 
+              private router:Router,
+              private db: AngularFirestore) { 
   }
 
   ngOnInit(): void {
@@ -19,8 +23,22 @@ export class PatientDashboardComponent implements OnInit {
       this.userid = res.uid
       this.auth.updateLastlogin(this.userid)
     })
+
+    this.db.collection('Users').doc(localStorage.getItem("uid")).valueChanges()
+    .subscribe(output => {
+      this.userData = output;
+      console.log("userData from patients dashboard - ",this.userData);
+      this.db.collection('Appointments',ref => ref.where("status","==","Active").where("patientID","==",this.userData.patientID).orderBy("appointmentDate")).valueChanges()
+      .subscribe(output2 => {
+        this.result2 = output2;
+        console.log("JOIN data from patients dashboard - ",this.result2);
+      })
+    })
+
+    
   }
-  joinlc() {
+  joinlc(appoID) {
+    localStorage.setItem('selectedAppointmentID_patient',appoID);
     this.router.navigate(['/patients/waiting-room'])
   }
 

@@ -1,7 +1,6 @@
-<form [formGroup]="channelForm">
+<!-- <form [formGroup]="channelForm">
     <div class="row">
         <div class="col-3">
-            <!-- <label for="coption"><b>Teacher Id</b></label> -->
             <input class="form-control" type="text" placeholder="Channel ID" formControlName="channelid">
         </div>
         <div class="col-1">
@@ -11,8 +10,10 @@
             <button class="btn btn-primary" type="submit" [routerLink]="['/patients/waiting-room']" (click)="endCall()">Leave</button>
         </div>
     </div>
-</form>
+</form> -->
 <!-- </div> -->
+
+<button class="btn btn-primary" type="submit" [routerLink]="['/patients/waiting-room']" (click)="endCall()">Leave</button>
 
 <div [id]="localCallId" class="local"></div>
 
