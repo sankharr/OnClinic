@@ -33,6 +33,7 @@ export class AuthService {
   // user: Observable<User>;
   role: any;
   last_doctorID: any;
+  last_patientID: any;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -53,10 +54,14 @@ export class AuthService {
 
     this.db.collection("system_variables").doc("system_variables").snapshotChanges()
       .subscribe(result => {
-        console.log("latest_doctorID - ", result.payload.get("last_doctorID"));
+        console.log("latest_doctorID DATABASE - ", result.payload.get("last_doctorID"));
+        console.log("latest_patientID DATABASE - ", result.payload.get("last_patientID"));
         this.last_doctorID = result.payload.get("last_doctorID");
         sessionStorage.setItem("last_doctorID", this.last_doctorID);
-      })
+        sessionStorage.setItem("last_patientID", result.payload.get("last_patientID"));
+      });
+
+      // setTimeout(()=>{this.generateNewPatientID()},2000);
 
     // var temp = this.generateNewDoctorID();
     // console.log("temp - ",temp);
@@ -179,8 +184,11 @@ export class AuthService {
         if (role == "patient") {
           this.insertPatientData(userCredential)
             .then(() => {
+              localStorage.setItem("role","patient");
               console.log("From AUTH SERVICE - Data successfully saved")
-              this.router.navigate(['/patients/dashboard']);
+              // setTimeout(this.router.navigate(['/patients/dashboard']),500);
+              setTimeout(()=>{this.router.navigate(['/patients/dashboard'])},1000);
+              // this.router.navigate(['/patients/dashboard']);
             });
         }
 
@@ -188,7 +196,9 @@ export class AuthService {
           this.insertDoctorData(userCredential)
             .then(() => {
               // this.router.navigate(['/doctor-completeProfile']);
-              this.router.navigate(['/doctorverification']);
+              localStorage.setItem("role","doctor");
+              // this.router.navigate(['/doctorverification']);
+              setTimeout(()=>{this.router.navigate(['/doctorverification'])},1000);
             });
         }
 
@@ -207,7 +217,8 @@ export class AuthService {
       dob: this.newUser.dob,
       telno: this.newUser.telno,
       address: this.newUser.address,
-      role: 'patient'
+      role: 'patient',
+      patientID: this.generateNewPatientID(),
     })    
   }
 
@@ -219,7 +230,8 @@ export class AuthService {
       dob: formValue.dob,
       telno: formValue.telno,
       address: formValue.address,
-      role: 'patient'
+      role: 'patient',
+      patientID: this.generateNewPatientID()
     })
     
   }
@@ -243,11 +255,12 @@ export class AuthService {
     return this.db.doc(`Users/${uID}`).set({
       email: formValue.email,
       name: formValue.name,
-      age: formValue.age,
+      actNumber: formValue.age,
       telno: formValue.telno,
       address: formValue.address,
       docID: formValue.docID,
-      role: 'doctor'
+      role: 'doctor',
+      doctorID: this.generateNewDoctorID()
     })
     
   }
@@ -280,6 +293,32 @@ export class AuthService {
 
     console.log("sgdsddddddddddddddd - ", this.last_doctorID)
     return this.last_doctorID;
+  }
+
+  generateNewPatientID(): string {
+
+    this.last_patientID = sessionStorage.getItem("last_patientID");
+    console.log("last_docID - ", this.last_patientID);
+    var i: number;
+    var splitted = this.last_patientID.split("p", 2);
+
+    var lastIDInt: number = +splitted[1];
+    var newDocIDString = (lastIDInt + 1).toString();
+    for (i = 0; i < (7 - newDocIDString.length) + 4; i++) {
+      newDocIDString = 0 + newDocIDString;
+    }
+    this.last_patientID = "p" + newDocIDString;
+    console.log(this.last_patientID);
+
+    this.db.collection("system_variables").doc("system_variables").update({
+      last_patientID: this.last_patientID
+    })
+      .then(() => {
+        console.log("Successfully updated system variables - last_doctorID");
+      })
+
+    console.log("sgdsddddddddddddddd - ", this.last_patientID)
+    return this.last_patientID;
   }
 
   updateLastlogin(uid){

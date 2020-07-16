@@ -1,145 +1,210 @@
 <app-navbar></app-navbar>
 <div class="body">
-<div class="section">
-  <div class="row">
-    <div class="col-10">
-    <h2 style="color: white;">Dr {{ data.name }}</h2>
-  </div>
-  <div class="col-2">
-    <a href="doctors-list" class="btn btn-outline-success">Back</a>
-  </div>
-  </div>
+  <div class="section">
+    <div class="row">
+      <div class="col-10">
+        <h2 style="color: white;">Dr {{ data?.name }}</h2>
+      </div>
+      <div class="col-2">
+        <a href="doctors-list" class="btn btn-outline-success">Back</a>
+      </div>
+    </div>
 
-  <!-- Start bookings list -->
-  <div *ngFor="let row of availableAppointments" class="row">
-    <div *ngFor="let item of row" class="col-4" >
-      <div class="card" style="width: 20rem; background-color: #0c0933; margin-bottom: 1rem; opacity: 0.7;">
-        <div class="card-body" style="padding: 16;">
-          <h5 class="card-title" style="color: white;">{{ item.day }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted" style="color: white;">{{ item.date }}</h6>
-          <p class="card-text" style="color: white;">
-            {{ item.time }} <br />
-            Specialized in :{{ data.speciality }} <br />
-            Description : MBBS qulified in University of Colombo 2002<br />
-            Total channel count :{{ data.numberOfAppointments }}
-          </p>
-          <a href="#RegistrationDialogBox" class="card-link" data-toggle="modal"
-            >Book Now</a
-          >
-          <a href="doctors-list" class="card-link">Cancel</a>
+    <!-- Start bookings list -->
+    <div *ngFor="let row of availableAppointments" class="row">
+      <div *ngFor="let item of row" class="col-4">
+        <div class="card" style="width: 20rem; background-color: #0c0933; margin-bottom: 1rem; opacity: 0.7;">
+          <div class="card-body" style="padding: 16;">
+            <h5 class="card-title" style="color: white;">{{ item.day }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted" style="color: white;">{{ item.date | date: 'y MMMM d ' }}</h6>
+            <p class="card-text" style="color: white;">
+              Starting at {{ item.date | date: "h:00 a"}}
+              Specialized in :{{ data.speciality }}
+              Total channel count :{{data.numberOfAppointments}}
+            </p>
+            <a href="#RegistrationDialogBox" class="card-link" data-toggle="modal" (click)="setResult(item.date)">Book
+              Now
+            </a>
+          </div>
         </div>
       </div>
     </div>
+    <!-- End booking list -->
   </div>
-  <!-- End booking list -->
-</div>
 
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="RegistrationDialogBox"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="RegistrationDialogBox"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="Title">Appoinment Registration Form</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- --------------- -->
-        <form>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="PatientName">Patient</label>
-              <input
-                type="text"
-                class="form-control"
-                id="PatientName"
-                placeholder="{{results.name}}"
-              />
-            </div>
-            <div class="form-group col-md-6">
-              <label for="DoctorName">Doctor</label>
-              <input
-                type="text"
-                class="form-control"
-                id="DoctorName"
-                placeholder="{{ data.name }}"
-              />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="AppoinmentDate">Appoinment Date</label>
-              <input
-                type="text"
-                class="form-control"
-                id="AppoinmentDate"
-                placeholder="2020.10.1"
-              />
-            </div>
-            <div class="form-group col-md-6">
-              <label for="EstimatedTime">Estimated Time</label>
-              <input
-                type="text"
-                class="form-control"
-                id="EstimatedTime"
-                placeholder="7.50 am"
-              />
-            </div>
-          </div>
+  <!-- Modal -->
+  <div class="modal fade" id="RegistrationDialogBox" tabindex="-1" role="dialog" aria-labelledby="RegistrationDialogBox"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="Title">Appointment Registration Form</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- --------------- -->
 
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              <label for="AppoinmnetID">Appoinment ID</label>
-              <input
-                type="text"
-                class="form-control"
-                id="AppoinmnetID"
-                placeholder="AP00058"
-              />
+          <form [formGroup]="appointmentForm">
+            <h6><b>Patient's Details</b></h6>
+
+            <input type="hidden" class="form-control" formControlname="merchant_id" name="merchant_id" value="121XXXX">
+            <input type="hidden" class="form-control" formControlname="return_url" name="return_url"
+              value="http://sample.com/return" />
+            <input type="hidden" class="form-control" formControlname="cancel_url" name="cancel_url"
+              value="http://sample.com/cancel" />
+            <input type="hidden" class="form-control" formControlname="notify_url" name="notify_url"
+              value="http://sample.com/notify" />
+            <input type="hidden" class="form-control" formControlname="order_id" name="order_id" />
+            <input type="hidden" class="form-control" formControlname="items" name="items" value="items" /><br>
+            <input type="hidden" class="form-control" formControlname="currency" name="currency" value="LKR" />
+
+            <input type="hidden" class="form-control" formControlname="appointmentID" name="appointmentID" />
+
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="PatientName">First Name</label>
+                <input type="text" class="form-control" formControlName="first_name" name="first_name" />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="DoctorName">Last Name</label>
+                <input type="text" class="form-control" formControlName="last_name" name="last_name" />
+              </div>
             </div>
-            <div class="form-group col-md-4">
-              <label for="TotalAmount">Total Amount Rs</label>
-              <input
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="PatientName">Email</label>
+                <input type="text" class="form-control" disabled formControlName="email" name="email" />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="DoctorName">Phone Number</label>
+                <input type="text" class="form-control" disabled formControlName="phone" name="phone" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="PatientName">Address</label>
+                <input type="text" class="form-control" disabled formControlName="address" name="address" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="PatientName">City</label>
+                <input type="text" class="form-control" disabled formControlName="city" name="city" />
+              </div>
+              <div class="form-group col-md-6">
+                <label for="DoctorName">Country</label>
+                <input type="text" class="form-control" disabled formControlName="country" name="country" />
+              </div>
+            </div>
+
+            <h6><b>Appointment Details</b></h6>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="TotalAmount">Doctor Name</label>
+                <p>{{ data?.name }}</p>
+                <!-- <input
                 type="text"
                 class="form-control"
                 id="TotalAmount"
                 placeholder="1600"
-              />
+              /> -->
+              </div>
+              <!-- <div class="form-group col-md-6">
+              <label for="TotalAmount">Total Amount Rs</label>
+              <p>{{ data?.doctorFee }}</p> -->
+              <!-- <input
+                type="text"
+                class="form-control"
+                id="TotalAmount"
+                placeholder="1600"
+              /> -->
+              <!-- </div> -->
+              <div class="form-group col-md-4">
+                <label for="ChannelNo">Channel No</label>
+                <p>{{ appointmentsCount }}</p>
+              </div>
             </div>
-            <div class="form-group col-md-4">
-              <label for="ChannelNo">Channel No</label>
-              <input
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="AppointmentDate">Appointment Date</label>
+                <p>{{ selectedAppointmentDate | date: "MMM d, y" }}</p>
+                <!-- <input
                 type="text"
                 class="form-control"
                 id="ChannelNo"
                 placeholder="06"
-              />
-            </div>
-          </div>
-        </form>
+              /> -->
+              </div>
+              <div class="form-group col-md-6">
+                <label for="EstimatedTime">Estimated Time</label>
+                <p>{{ finalEstimatedAppointmentTime }}</p>
+                <!-- <input
+                type="text"
+                class="form-control"
+                id="ChannelNo"
+                placeholder="06"
+              /> -->
+              </div>
+              <!-- <div class="form-group col-md-4">
+              <label for="ChannelNo">Channel No</label>
+              <p>{{ appointmentsCount }}</p>
+               <input
+                type="text"
+                class="form-control"
+                id="ChannelNo"
+                placeholder="06"
+              /> 
+            </div> -->
+            </div> 
+            <h6><b>Charges</b></h6>
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="TotalAmount">Doctor Fee</label>
+                  <p>Rs. {{ data?.doctorFee }}</p>
+                  <!-- <input
+                  type="text"
+                  class="form-control"
+                  id="ChannelNo"
+                  placeholder="06"
+                /> -->
+                </div>
+                <div class="form-group col-md-5">
+                  <label for="TotalAmount">HospitalCore Charges</label>
+                  <p>Rs. {{hospitalCoreCharges}}</p>
+                  <!-- <input
+                  type="text"
+                  class="form-control"
+                  id="ChannelNo"
+                  placeholder="06"
+                /> -->
 
-        <!-- -------------------------- -->
-      </div>
-      <div class="modal-footer">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="TotalAmount">Total Amount</label>
+                  <p><b>Rs. {{ totalFee }}</b></p>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="payNow()">Pay Now</button>
+              </div>
+          </form>
+
+          <!-- -------------------------- -->
+        </div>
+        <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-        <a href="#" type="button" class="btn btn-primary">Pay Now</a>
+        <button type="submit" class="btn btn-primary" (click)="payNow()">Pay Now</button>
+      </div> -->
       </div>
     </div>
   </div>
-</div>
 </div>

@@ -9,6 +9,8 @@ import * as _ from 'lodash';
 })
 export class DoctorDashboardComponent implements OnInit {
   @ViewChild('chart') el: ElementRef;
+  @ViewChild('pieChart') el2: ElementRef;
+
   userid: string;
 
   constructor(private auth: AuthService) {}
@@ -17,13 +19,14 @@ export class DoctorDashboardComponent implements OnInit {
     this.auth.getUserState().subscribe((res) => {
       this.userid = res.uid;
       this.auth.updateLastlogin(this.userid);
-      this.basicChart();
+      this.lineChart();
+      this.pieChart();
     });
    
   }
 
-  basicChart() {
-    let element = this.el.nativeElement;
+  lineChart() {
+    const element = this.el.nativeElement;
 
     const data = [
       {
@@ -40,5 +43,24 @@ export class DoctorDashboardComponent implements OnInit {
     };
 
     Plotly.newPlot(element, data, style);
+  }
+
+  pieChart(){
+    const element = this.el2.nativeElement;
+
+    const data = [{
+      values: [19, 26],
+      labels: ['Treated', 'All'],
+      type: 'pie'
+    }];
+
+    var layout = {
+      height: 300,
+      width: 320,
+    
+    };
+
+    Plotly.newPlot(element, data, layout);
+
   }
 }

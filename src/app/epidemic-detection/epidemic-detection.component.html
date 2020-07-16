@@ -1,27 +1,36 @@
 <div id="chart">
 
 </div>
+<div id='map'></div>
 
-<div id="usa">
-
-</div>
-
-<form [formGroup]="myform" role="form" #frm="ngForm" (ngSubmit)="addDisease(frm)">
+<div class="container">
     <div class="row">
-        <div class="col-6">
-            <div class="form-group">
-                <input type="text" [(ngModel)]="frm.displayName" name="displayName" class="form-control"
-                    formControlName="displayName" placeholder="Name">
-                <input type="text" [(ngModel)]="frm.disease" name="disease" class="form-control"
-                    formControlName="disease" placeholder="disease">
-                <input type="text" [(ngModel)]="frm.latitude" name="latitude" class="form-control"
-                    formControlName="latitude" placeholder="latitude">
-                <input type="text" [(ngModel)]="frm.longitude" name="longitude" class="form-control"
-                    formControlName="longitude" placeholder="longitude">
+        <div style="width: 800px;height: 400px;" id="usa">
+
+        </div>
+
+        <form [formGroup]="myform" role="form" #frm="ngForm" (ngSubmit)="addDisease(frm)">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="frm.displayName" name="displayName" class="form-control"
+                            formControlName="displayName" placeholder="Name">
+                        <input type="text" [(ngModel)]="frm.disease" name="disease" class="form-control"
+                            formControlName="disease" placeholder="disease">
+                        <input type="text" [(ngModel)]="frm.latitude" name="latitude" class="form-control"
+                            formControlName="latitude" placeholder="latitude">
+                        <input type="text" [(ngModel)]="frm.longitude" name="longitude" class="form-control"
+                            formControlName="longitude" placeholder="longitude">
+                        <div id='map'></div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-primary" type="submit">Add</button>
+                </div>
             </div>
-        </div>
-        <div class="col-6">
-            <button class="btn btn-primary" type="submit">Add</button>
-        </div>
+        </form>
     </div>
-</form>
+</div>
+<!-- <div class="container">
+    <div id='map'></div>
+</div> -->
