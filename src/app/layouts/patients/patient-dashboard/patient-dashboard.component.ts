@@ -11,6 +11,8 @@ export class PatientDashboardComponent implements OnInit {
   userid: string;
   uid:any;
   result:any;
+  reports: any;
+  lastupload: any;
 
   constructor(public auth:AuthService,
               private router:Router,
@@ -26,6 +28,11 @@ export class PatientDashboardComponent implements OnInit {
     this.db.collection("Users").doc(this.uid).valueChanges()
     .subscribe(output =>{
         this.result=output;
+    })
+    this.db.collection("Users").doc(this.uid).collection("Reports",ref=>(ref.orderBy("uploadedAt","desc").limit(1))).valueChanges()
+    .subscribe(output =>{
+        this.reports=output;
+        this.lastupload=this.reports[0].uploadedAt
     })
   }
   joinlc() {

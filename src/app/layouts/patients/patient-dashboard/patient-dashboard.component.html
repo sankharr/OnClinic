@@ -18,9 +18,9 @@
             <div class="col-lg-5">
               <div class="card shadow">
                 <h6>Last Profile Update</h6>
-                <h6 style="color:red;">{{result.lastlogin}}</h6>
+                <h6 style="color:red;">{{result.lastlogin | date:"medium"}}</h6>
                 <h6>Last Report Upolad</h6>
-                <h6 style="color:red;">27.05.2020</h6>
+                <h6 style="color:red;">{{lastupload.toDate() | date:"medium"}}</h6>
                 <hr>
                 <h6>Required Sugar level</h6>
                 <h6 style="color:rgb(175, 136, 7);">70-110 mg/dl</h6>
