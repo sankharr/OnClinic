@@ -18,9 +18,9 @@
             <div class="col-lg-5">
               <div class="card shadow">
                 <h6>Last Profile Update</h6>
-                <h6 style="color:red;">{{result.lastlogin | date:"medium"}}</h6>
+                <h6 style="color:red;">{{userData?.lastlogin | date:"medium"}}</h6>
                 <h6>Last Report Upolad</h6>
-                <h6 style="color:red;">{{lastupload.toDate() | date:"medium"}}</h6>
+                <h6 style="color:red;">{{lastupload?.toDate() | date:"medium"}}</h6>
                 <hr>
                 <h6>Required Sugar level</h6>
                 <h6 style="color:rgb(175, 136, 7);">70-110 mg/dl</h6>
@@ -34,11 +34,11 @@
             <div class="col-lg-4">
               <div class="card shadow">
                 <h6>Weight</h6>
-                <h6 style="color:blueviolet;"><b>{{result.weight}} kg</b></h6>
+                <h6 style="color:blueviolet;"><b>{{userData?.weight}} kg</b></h6>
                 <h6>Height</h6>
-                <h6 style="color:blueviolet;"><b>{{result.height}} cm</b></h6>
+                <h6 style="color:blueviolet;"><b>{{userData?.height}} cm</b></h6>
                 <h5>BMI</h5>
-                <h4 style="color:blue;"><b>{{result.bmi}}</b></h4>
+                <h4 style="color:blue;"><b>{{userData?.bmi}}</b></h4>
                 <h4 style="color:green;font-family: sans-serif;"><b>NORMAL</b></h4>
                 <!--<h6 style="color:red;">OVER WEIGHT</h6>
                     <h6 style="color:red;">UNDER WEIGHT</h6>-->
@@ -85,11 +85,10 @@
               <div class="card shadow">
                 <div class="card" id="differ">
                   <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
-                  <h5>Dr.Ryan Tompson</h5>
+                  <h5>{{result2[0]?.doctorName}}</h5>
                   <h6>Cardiologist</h6>
                   <h6 class="text-primary"><b>in 15 Mins</b></h6>
-                  <button class="btn" type="submit" (click)="joinlc()">Join</button>
-                  <!--<a href="waiting-room" button class="btn" type="submit">Learn more</a>-->
+                  <button class="btn" type="submit" (click)="joinlc(result2[0].appointmentID)">Join</button>
                 </div>
               </div>
             </div>
@@ -98,7 +97,7 @@
               <div class="card shadow">
                 <div class="card" id="differ">
                   <img class="rounded-circle" src="./assets/img/theme/team-4-800x800.jpg">
-                  <h5>Dr.Nayana Dissanayaka</h5>
+                  <h5>{{result2[1]?.doctorName}}</h5>
                   <h6>Allergist</h6>
                   <h6 class="text-primary"><b>in 12 hrs</b></h6>
                   <a href="#MoreDialogBox" class="btn" type="button" data-toggle="modal">More</a>
@@ -110,7 +109,7 @@
               <div class="card shadow">
                 <div class="card" id="differ">
                   <img class="rounded-circle" src="./assets/img/theme/team-4-800x800.jpg">
-                  <h5>Dr.Piyumi Perera</h5>
+                  <h5>{{result2[2]?.doctorName}}</h5>
                   <h6>Cardiologist</h6>
                   <h6 class="text-primary"><b>in 2 days</b></h6>
                   <a href="#MoreDialogBox" class="btn" type="button" data-toggle="modal">More</a>

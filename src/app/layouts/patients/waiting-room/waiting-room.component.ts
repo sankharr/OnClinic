@@ -5,6 +5,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize, map, tap } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -21,20 +22,27 @@ export class WaitingRoomComponent implements OnInit {
   selectedFile: File = null;  //file selected to upload
   uid: any;
   fb;
+  todayDate: string;
+  result: any;
   task: AngularFireUploadTask;
    constructor(
     private _formbuilder: FormBuilder,
     private db: AngularFirestore,
     private router: Router,
-    private afStorage: AngularFireStorage
-   ) { }
+    private afStorage: AngularFireStorage,
+    private datePipe: DatePipe
+   ) { this.uid=localStorage.getItem("uid");}
 
   ngOnInit(): void {
-    this.uid=localStorage.getItem("uid");
     this.uploadReportForm = this._formbuilder.group({
       reportDate: ["", Validators.required],
       reportName: ["", Validators.required],
     });
+    // this.todayDate=this.datePipe.transform(new Date(),"yyyy-MM-dd");
+    // this.db.collection("Users").doc(this.uid).collection("Appointments").doc(this.todayDate).collection("dayAppointments",ref=>ref.where("status","==","Active").orderBy("appointmentNo")).valueChanges()
+    // .subscribe(output=>{
+    //   this.result=output;
+    // })
   }
   detectFiles(event){
     this.selectedFile = event.target.files[0];
@@ -78,6 +86,7 @@ export class WaitingRoomComponent implements OnInit {
     this.router.navigate(['patients/dashboard'])
   }
   ready(){
+    // console.log("selected appointmentID from  ")
     this.router.navigate(['patients/lcp']) 
   }
   submit(){
