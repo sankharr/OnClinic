@@ -18,8 +18,11 @@ export class MyhealthComponent implements OnInit {
   downloadURL: Observable<string>; //firebase url of the uploaded document
   selectedFile: File = null;  //file selected to upload
   uid: any;
+  result:any;
   fb;
+  reports: any[];
   task: AngularFireUploadTask;
+  
    constructor(
     private _formbuilder: FormBuilder,
     private db: AngularFirestore,
@@ -33,6 +36,12 @@ export class MyhealthComponent implements OnInit {
       reportDate: ["", Validators.required],
       reportName: ["", Validators.required],
     });
+    this.db.collection("Users").doc(this.uid).collection("Reports",ref=>
+    (ref.orderBy("uploadedAt","desc"))).valueChanges()
+    .subscribe(output =>{
+        this.reports=output;
+        console.log("result-",this.reports)
+    })
   }
   view() {
   }
