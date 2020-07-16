@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from 'ngx-agora';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { timer, Observable, observable } from 'rxjs';
 
 
 @Component({
@@ -13,38 +15,82 @@ export class LiveConsultationComponent implements OnInit {
   // channelForm: FormGroup;
 
   localCallId = 'agora_local';
-  remoteCalls: any[] = []
+  remoteCalls: any[] = [1]
 
   private client: AgoraClient;
   private localStream: Stream;
   private uid: number;
   private channelid: any;
+  appointmentID: any;
+  appointmentData: any;
+  timerDisplay: any;
+  time: any;
+
+  timeObservable: any;
+  hours = 0;
+  minutes = 0;
+  seconds= 0;
 
 
   constructor(
     private ngxAgoraService: NgxAgoraService,
     private formbuilder: FormBuilder,
+    private db: AngularFirestore
     ) {
     this.uid = Math.floor(Math.random() * 100);
   }
 
   ngOnInit() {
 
-    this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
+    this.appointmentID = localStorage.getItem("selectedAppointmentID_patient");
+    // this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
+    this.db.collection("Appointments").doc(this.appointmentID).valueChanges()
+    .subscribe(output => {
+      this.appointmentData = output;
+      console.log("appointment Data - ",this.appointmentData);
+      if(this.appointmentData.consultationStarted === "true"){
+        console.log("start the timer");
+        this.timeObservable = timer(0,1000)
+        this.timeObservable.subscribe(x => {
+          // this.seconds = x;
+          this.displayTime()
+        });
+        // timer(0, 1000).subscribe(ec => {
+        //   this.time++;
+        //   this.timerDisplay = this.getDisplayTimer(this.time);
+        // });
+      }
+    })
+    
+  }
 
-    // this.channelForm = this.formbuilder.group({
-    //   channelid: ["", Validators.required]      
-    // });
+  displayTime(){
+    if(this.seconds < 59){
+      this.seconds = this.seconds + 1;
+    }
+    else{
+      if(this.minutes < 59){
+        this.minutes = this.minutes + 1;
+        this.seconds = 0;
+      }
+      else{
+        this.hours = this.hours + 1;
+        this.minutes = 0;
+        this.seconds = 0;
+      }
+    }
+  }
 
-    // this.client = this.ngxAgoraService.createClient({ mode: 'rtc', codec: 'h264' });
-    // this.assignClientHandlers();
+  getDisplayTimer(time: number) {
+    const hours = '0' + Math.floor(time / 3600);
+    const minutes = '0' + Math.floor(time % 3600 / 60);
+    const seconds = '0' + Math.floor(time % 3600 % 60);
 
-    // // Added in this step to initialize the local A/V stream
-    // this.localStream = this.ngxAgoraService.createStream({ streamID: this.uid, audio: true, video: true, screen: false });
-    // this.assignLocalStreamHandlers();
-    // // this.initLocalStream();
-    // this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-
+    return {
+      hours: { digit1: hours.slice(-2, -1), digit2: hours.slice(-1) },
+      minutes: { digit1: minutes.slice(-2, -1), digit2: minutes.slice(-1) },
+      seconds: { digit1: seconds.slice(-2, -1), digit2: seconds.slice(-1) },
+    };
   }
 
   startCall(appoID) {

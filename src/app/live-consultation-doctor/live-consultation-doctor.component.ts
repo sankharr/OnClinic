@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from 'ngx-agora';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-live-consultation-doctor',
@@ -19,6 +20,7 @@ export class LiveConsultationDoctorComponent implements OnInit {
 
   constructor(
     private ngxAgoraService: NgxAgoraService,
+    private db: AngularFirestore
     // private formbuilder: FormBuilder,
     ) {
     this.uid = Math.floor(Math.random() * 100);
@@ -29,6 +31,10 @@ export class LiveConsultationDoctorComponent implements OnInit {
   }
 
   startCall(appoID) {
+
+    this.db.collection("Appointments").doc(appoID).update({
+      consultationStarted:"true"
+    });
 
     // let channelID = this.channelForm.controls["channelid"].value;
     let channelID = appoID;

@@ -269,6 +269,7 @@ export class DoctorBookComponent implements OnInit {
      doctorSpeciality:this.data.speciality,
      doctorPhone:this.data.telno,
      doctorEmail:this.data.email,
+     consultationStarted:"false",
      status:'Active'
    }
 

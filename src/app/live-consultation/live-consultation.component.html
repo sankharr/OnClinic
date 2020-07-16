@@ -12,9 +12,43 @@
     </div>
 </form> -->
 <!-- </div> -->
+<div class="container-fluid">
+    <div id="topBar">
+        <div class="row">
+            <div class="col">
+                <h3>Current Number</h3>
+            </div>
+            <div class="col">
+                <h3>0{{hours}}:<span *ngIf="minutes < 10">0</span>{{minutes}}:<span *ngIf="seconds < 10">0</span>{{seconds}}</h3>
+            </div>
+        </div>
 
-<button class="btn btn-primary" type="submit" [routerLink]="['/patients/waiting-room']" (click)="endCall()">Leave</button>
+    </div>
+    <div class="row">
+        <div class="col-9">
+            <div [id]="localCallId" class="local"></div>
+            <!-- <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div> -->
+            <div class="remote"></div>
+        </div>
+        <!-- <div class="col-2">
+            <button class="btn btn-danger" type="submit" [routerLink]="['/patients/waiting-room']"
+                (click)="endCall()">Leave</button>                
+        </div> -->
+    </div>
+    <div id="newSidebar">
+        <button class="btn btn-danger" type="submit" [routerLink]="['/patients/waiting-room']"
+            (click)="endCall()">Leave</button>
 
-<div [id]="localCallId" class="local"></div>
+        <button class="btn btn-neutral" type="submit" [routerLink]="['/patients/waiting-room']"
+            >Download <br> Prescription</button>
+        <!-- <div class="row newSidebarRow">
 
-<div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+        </div>
+        <div class="row newSidebarRow">
+
+        </div> -->
+
+    </div>
+
+
+</div>
