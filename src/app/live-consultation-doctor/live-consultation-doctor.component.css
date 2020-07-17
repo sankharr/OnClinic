@@ -1,7 +1,8 @@
 .local {
-    position: fixed;
-    right: 20%;
-    bottom: 1rem;
+    position: absolute;
+    right: -13.7%;
+    margin-top: 51%;
+    /* bottom: 3rem; */
     width: 20vw;
     height: 20vh;
     border-radius: 5px;
@@ -13,16 +14,78 @@
 }
 
 .remote {
-    position: fixed;
-    top: 20%;
-    left: 15%;
-    width: 65vw;
+    position: absolute;
+    margin-top: 8%;
+    /* top: 60%; */
+    /* margin-left: -3%; */
+    width: 70vw;
     height: 75vh;
     border-style: solid;
     border-width: 2px;
     border-color: black;
 }
 
-.row{
+.row {
     width: 100%;
 }
+
+.col-2 {
+    /* background-color:burlywood; */
+    align-self: center;
+    left: 8%;
+    flex-direction: column;
+}
+
+#newSidebar {
+    padding-left: 1%;   
+    text-align: center;
+    position: absolute;
+    border-radius: 40px 0px 0px 40px;
+    padding-top: 3%;
+    background-color: burlywood;
+    width: 12vw;
+    height: 81.5vh;
+    top: 14%;
+    right: 0%;
+    /* overflow: hidden; */
+    /* flex-direction: row; */
+    /* margin-top: -10%; */
+}
+
+.newSidebarRow{
+    margin-top: 20%;
+}
+
+#topBar {
+    position: absolute;
+    width: 70vw;
+    height: 8vh;
+    background-color: dodgerblue;
+    border-radius: 50px 50px 0 0;
+    top: 13%;
+    padding: 1%;
+    padding-left: 2%;
+    text-align: center;
+}
+
+.sidebtn{
+    margin-top: 20%;
+}
+
+.basicDetails{
+    text-align: left;
+}
+
+form{
+    margin-bottom: 3%;
+}
+
+.delbtn{
+    width: 40px;
+    height: 35px;
+    padding: 0;
+}
+
+/* .header-part{
+    text-align: center;
+} */

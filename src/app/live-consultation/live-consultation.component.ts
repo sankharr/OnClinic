@@ -3,6 +3,7 @@ import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from '
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { timer, Observable, observable } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -30,19 +31,22 @@ export class LiveConsultationComponent implements OnInit {
   hours = 0;
   minutes = 0;
   seconds= 0;
+  prescriptions: any;
 
 
   constructor(
     private ngxAgoraService: NgxAgoraService,
     private formbuilder: FormBuilder,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private modalService: NgbModal
     ) {
     this.uid = Math.floor(Math.random() * 100);
+    this.appointmentID = localStorage.getItem("selectedAppointmentID_patient");
   }
 
   ngOnInit() {
 
-    this.appointmentID = localStorage.getItem("selectedAppointmentID_patient");
+   
     // this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
     this.db.collection("Appointments").doc(this.appointmentID).valueChanges()
     .subscribe(output => {
@@ -60,8 +64,26 @@ export class LiveConsultationComponent implements OnInit {
         //   this.timerDisplay = this.getDisplayTimer(this.time);
         // });
       }
+      this.db.collection('Users').doc(localStorage.getItem('uid')).collection('Prescriptions',ref => ref.where("uploadedAt",">=",this.appointmentData.consultationStartedAt)).valueChanges()
+      .subscribe(output2 => {
+        this.prescriptions = output2;
+        console.log("available prescriptions - ",this.prescriptions);
+      })
     })
+
     
+    
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { 
+      centered: true,
+      size: 'lg'
+    });
+  }
+
+  viewPrescription(url){    
+    window.open(url, "myWindow","height=900,width=1000");
   }
 
   displayTime(){

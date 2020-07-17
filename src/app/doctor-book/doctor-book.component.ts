@@ -262,7 +262,7 @@ export class DoctorBookComponent implements OnInit {
      doctorID:this.data.doctorID,
      doctorName:this.data.name,
      appointmentDate:new Date(this.selectedAppointmentDate),
-    //  appointmentShortDate:new Date(this.appointmentShortDate),
+     appointmentShortDate:this.appointmentShortDate,
      appointmentTime:this.finalEstimatedAppointmentTime,
      totalFee:this.totalFee,
      appointmentNo:this.appointmentsCount,
