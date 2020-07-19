@@ -16,6 +16,8 @@ export class PatientDashboardComponent implements OnInit {
   result2: any[];
   userData: any;
   result3: any[];
+  bmiRange: any;
+  bmi_val: any;
 
   constructor(
     public auth: AuthService,
@@ -34,6 +36,8 @@ export class PatientDashboardComponent implements OnInit {
       .subscribe(output => {
         this.userData = output;
         console.log("userData from patients dashboard - ", this.userData);
+        this.bmi_val = parseFloat(this.userData.bmi);
+        this.bmi(this.bmi_val);
         this.db.collection('Appointments', ref => ref.where("status", "==", "Active").where("patientID", "==", this.userData.patientID).orderBy("appointmentDate")).valueChanges()
           .subscribe(output2 => {
             this.result2 = output2;
@@ -56,16 +60,21 @@ export class PatientDashboardComponent implements OnInit {
     console.log(appoid);
     this.router.navigate(['/patients/waiting-room'])  
   }
-  bmi(bmi){
-    if(bmi<18.5){
-      print; "Under-Weight"
-    }else if(bmi<=24.9 && bmi>18.5){
-      print; "Normal"
-    }else if(bmi<=29.9 && bmi>24.9){
-      print; "Over-Weight"
+  bmi(bmi_val){
+    console.log("from BMI function-",bmi_val)
+    if(bmi_val<18.5){
+      this.bmiRange = "Under-Weight",
+      (<HTMLInputElement>document.getElementById("bmi")).style.color = "red";
+    }else if(bmi_val<=24.9 && bmi_val>18.5){
+      this.bmiRange = "Normal"
+    }else if(bmi_val<=29.9 && bmi_val>24.9){
+      this.bmiRange = "Over-Weight",
+      (<HTMLInputElement>document.getElementById("bmi")).style.color = "red";
     }else{
-      print; "Obese"
+      this.bmiRange = "Obese",
+      (<HTMLInputElement>document.getElementById("bmi")).style.color = "darkred";
     }
+    
   }
 
 }

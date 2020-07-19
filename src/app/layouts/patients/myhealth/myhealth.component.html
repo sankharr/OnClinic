@@ -44,24 +44,36 @@
                       <div class="row">
                         <div class="col-lg-6">
                           <div class="card" id="grey">
-                            <h6 class="small">Blood Glucose</h6>
+                            <h6 class="small">Pulse Rate</h6>
                           </div>
                         </div>
                         <div class="col-lg-6">
                           <div class="card" id="green">
-                            <h6 class="small">70 - 110 mg/dl</h6>
+                            <h6 class="small"> 60 – 100 beats per min</h6>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-lg-6">
                           <div class="card" id="grey">
-                            <h6 class="small">Blood Glucose</h6>
+                            <h6 class="small">Respiratory Rate</h6>
                           </div>
                         </div>
                         <div class="col-lg-6">
                           <div class="card" id="green">
-                            <h6 class="small">70 - 110 mg/dl</h6>
+                            <h6 class="small">12 to 16 breaths per min</h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="card" id="grey">
+                            <h6 class="small">Cholesterol Rate</h6>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="card" id="green">
+                            <h6 class="small">125 to 200mg/dL</h6>
                           </div>
                         </div>
                       </div>
@@ -159,9 +171,14 @@
                       <div class="list-group">
                         <div class="list-group-item" *ngFor="let report of reports">
                           <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                               <div class="card" id="light">
                                 <h6>{{report.reportDate}}</h6>
+                              </div>
+                            </div>
+                            <div class="col-lg-3">
+                              <div class="card" id="light">
+                                <h6>{{report.reportName}}</h6>
                               </div>
                             </div>
                             <div class="col-lg-2">
@@ -186,8 +203,6 @@
                           </div>
                         </div>
                       </div>
-                      
-                  
                     </div>
                   </div>
                 </div>
