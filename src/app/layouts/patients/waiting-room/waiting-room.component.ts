@@ -25,6 +25,7 @@ export class WaitingRoomComponent implements OnInit {
   todayDate: string;
   result: any;
   task: AngularFireUploadTask;
+  reports: any;
    constructor(
     private _formbuilder: FormBuilder,
     private db: AngularFirestore,
@@ -38,11 +39,12 @@ export class WaitingRoomComponent implements OnInit {
       reportDate: ["", Validators.required],
       reportName: ["", Validators.required],
     });
-    // this.todayDate=this.datePipe.transform(new Date(),"yyyy-MM-dd");
-    // this.db.collection("Users").doc(this.uid).collection("Appointments").doc(this.todayDate).collection("dayAppointments",ref=>ref.where("status","==","Active").orderBy("appointmentNo")).valueChanges()
-    // .subscribe(output=>{
-    //   this.result=output;
-    // })
+    this.db.collection("Users").doc(this.uid).collection("Reports",ref=>
+    (ref.orderBy("uploadedAt","desc"))).valueChanges()
+    .subscribe(output =>{
+        this.reports=output;
+        console.log("result-",this.reports)
+    })
   }
   detectFiles(event){
     this.selectedFile = event.target.files[0];
