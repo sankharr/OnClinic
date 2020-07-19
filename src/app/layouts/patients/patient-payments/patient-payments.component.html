@@ -29,76 +29,31 @@
                 <div class="card" id="space">
                   <div class="card shadow" id="light">
                     <div class="col-lg-12">
-                      <div class="row" id="fixsize">
-                        <div class="col-lg-4">
-                          <h6><b>Dr.Kamal Perera</b></h6>
-                        </div>
-                        <div class="col-lg-2">
-                          <h6><b>2 Days ago</b></h6>
-                        </div>
-                        <div class="col-lg-2">
-                          <h6><b>Rs.1200.00</b></h6>
-                        </div>
-                        <div class="col-lg-2">
-                          <button class="btn" type="submit" (click)="startCall()">view Recipt</button>
-                        </div>
-                        <div class="col-lg-2">
-                          <a href="#InquiryDialogBox" class="btn" data-toggle="modal">Inqury</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--Second bar-->
-                <div class="card" id="space">
-                  <div class="card shadow" id="light">
-                    <div class="col-lg-12">
-                      <div class="row" id="fixsize">
-                        <div class="col-lg-4">
-                          <h6><b>Dr.Chamara Karunathilaka</b></h6>
-                        </div>
-                        <div class="col-lg-2">
-                          <h6><b>5 Days ago</b></h6>
-                        </div>
-                        <div class="col-lg-2">
-                          <h6><b>Rs.1200.00</b></h6>
-                        </div>
-                        <div class="col-lg-2">
-                          <button class="btn" type="submit" (click)="startCall()">view Recipt</button>
-                        </div>
-                        <div class="col-lg-2">
-                          <a href="#InquiryDialogBox" class="btn" data-toggle="modal">Inqury</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--Third bar-->
-                <div class="card" id="space">
-                  <div class="card shadow" id="light">
-                    <div class="col-lg-12">
-                      <div class="row" id="fixsize">
-                        <div class="col-lg-4">
-                          <h6><b>Dr.Parami Jayasinghe</b></h6>
-                        </div>
-                        <div class="col-lg-2">
-                          <h6><b>2 Weeks ago</b></h6>
-                        </div>
-                        <div class="col-lg-2">
-                          <h6><b>Rs.1200.00</b></h6>
-                        </div>
-                        <div class="col-lg-2">
-                          <button class="btn" type="submit" (click)="startCall()">view Recipt</button>
-                        </div>
-                        <div class="col-lg-2">
-                          <a href="#InquiryDialogBox" class="btn" data-toggle="modal">Inqury</a>
+                      <div class="list-group">
+                        <div class="list-group-item" *ngFor="let item of result">
+                          <div class="row" id="fixsize">
+                            <div class="col-lg-4">
+                              <h6><b>{{item.doctorName}}</b></h6>
+                            </div>
+                            <div class="col-lg-2">
+                              <h6><b>{{item.appointmentDate.toDate()|date:'yyyy-MM-dd'}}</b></h6>
+                            </div>
+                            <div class="col-lg-2">
+                              <h6><b>Rs.{{item.totalFee}}</b></h6>
+                            </div>
+                            <div class="col-lg-2">
+                              <button class="btn" type="submit" (click)="startCall()">view Recipt</button>
+                            </div>
+                            <div class="col-lg-2">
+                              <a href="#InquiryDialogBox" class="btn" data-toggle="modal">Inqury</a>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <!--end of payment bars-->
-
               </div>
             </div>
           </div>
