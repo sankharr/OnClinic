@@ -15,6 +15,7 @@ export class PatientDashboardComponent implements OnInit {
   lastupload: any;
   result2: any[];
   userData: any;
+  result3: any[];
 
   constructor(
     public auth: AuthService,
@@ -37,6 +38,11 @@ export class PatientDashboardComponent implements OnInit {
           .subscribe(output2 => {
             this.result2 = output2;
             console.log("JOIN data from patients dashboard - ", this.result2);
+          })
+        this.db.collection('Appointments', ref => ref.where("status", "==", "Success").where("patientID", "==", this.userData.patientID).orderBy("appointmentDate")).valueChanges()
+          .subscribe(output3 => {
+            this.result3 = output3;
+            console.log("JOIN data from patients dashboard - ", this.result3);
           })
       })
     this.db.collection("Users").doc(this.uid).collection("Reports",ref=>(ref.orderBy("uploadedAt","desc").limit(1))).valueChanges()
