@@ -39,7 +39,7 @@
                 <h6 style="color:blueviolet;"><b>{{userData?.height}} cm</b></h6>
                 <h5>BMI</h5>
                 <h4 style="color:blue;"><b>{{userData?.bmi}}</b></h4>
-                <h4 style="color:green;font-family: sans-serif;"><b>NORMAL</b></h4>
+                <h4 style="color:green;font-family: sans-serif;"><b>Normal</b></h4>
                 <!--<h6 style="color:red;">OVER WEIGHT</h6>
                     <h6 style="color:red;">UNDER WEIGHT</h6>-->
                 <h6>Normal BMI Range</h6>
@@ -132,7 +132,7 @@
           <div class="card shadow" id="space">
             <div class="card">
               <p>Date </p>
-              <p><b>{{result3[0]?.appointmentDate}}</b></p>
+              <p><b>{{result3[0]?.appointmentDate.toDate()|date:"medium"}}</b></p>
               <p>Doctor </p>
               <p><b>{{result3[0]?.doctorName}}</b></p>
             </div>
@@ -140,7 +140,7 @@
           <div class="card shadow" id="space">
             <div class="card">
               <p>Date </p>
-              <p><b>{{result3[1]?.appointmentDate}}</b></p>
+              <p><b>{{result3[1]?.appointmentDate.toDate()|date:"medium"}}</b></p>
               <p>Doctor </p>
               <p><b>{{result3[1]?.doctorName}}</b></p>
             </div>

@@ -23,16 +23,16 @@ export class ChannelingComponent implements OnInit {
     this.db.collection('Users').doc(this.uid).valueChanges()
       .subscribe(output => {
         this.userData = output;
-        console.log("userData from patients dashboard - ", this.userData);
+        console.log("userData of patients - ", this.userData);
         this.db.collection('Appointments', ref => ref.where("status", "==", "Active").where("patientID", "==", this.userData.patientID).orderBy("appointmentDate")).valueChanges()
           .subscribe(output2 => {
             this.result2 = output2;
-            console.log("JOIN data from patients dashboard - ", this.result2);
+            console.log("Get All Upcomming channelings - ", this.result2);
           })
         this.db.collection('Appointments', ref => ref.where("status", "==", "Success").where("patientID", "==", this.userData.patientID).orderBy("appointmentDate")).valueChanges()
           .subscribe(output3 => {
             this.result3 = output3;
-            console.log("JOIN data from patients dashboard - ", this.result3);
+            console.log("Get All Past Channelings - ", this.result3);
           })
       })
   }

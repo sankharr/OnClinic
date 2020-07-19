@@ -54,8 +54,18 @@ export class PatientDashboardComponent implements OnInit {
   joinlc(appoid) {
     localStorage.setItem("selectedAppointmentID_patient",appoid)
     console.log(appoid);
-    this.router.navigate(['/patients/waiting-room'])
-     
+    this.router.navigate(['/patients/waiting-room'])  
+  }
+  bmi(bmi){
+    if(bmi<18.5){
+      print; "Under-Weight"
+    }else if(bmi<=24.9 && bmi>18.5){
+      print; "Normal"
+    }else if(bmi<=29.9 && bmi>24.9){
+      print; "Over-Weight"
+    }else{
+      print; "Obese"
+    }
   }
 
 }
