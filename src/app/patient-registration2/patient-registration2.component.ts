@@ -10,7 +10,7 @@ import { GeolocationService } from '../services/geolocation.service';
 
 class Operation {
   operationDate: any;
-  operationName: string; 
+  operationName: string;
 }
 
 @Component({
@@ -22,7 +22,7 @@ export class PatientRegistration2Component implements OnInit {
 
   completeProfilePatientForm: FormGroup;
 
-  bloodGroups = ["","A+","A-","B+","B-","O+","O-","AB+","AB-"];
+  bloodGroups = ["", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
   longTermDiseasesList = ["", "ALS", "Alzheimer's Disease", "Arthritis", "Asthma", "Cancer", "Chronic kidney disease", "Dementia", "Depression", "Diabetes", "Eating Disorders", "Heart Disease", "Migraine", "Obesity", "Oral Health", "Osteoporosis", "Parkinson’s disease"]
   allergiesList = ["", "Food Allergy", "Skin Allergy", "Dust Allergy", "Insect Sting Allergy", "Pet Allergy", "Eye Allergy", "Mold Allergy", "Sinus Infection", "Cockroach Allergy"]
   selectedLTDs = [];
@@ -48,6 +48,9 @@ export class PatientRegistration2Component implements OnInit {
   percentage: Observable<number>;
   snapshot: Observable<any>;
   finalReportsList = [];
+  selectedProPic: File = null;
+  uploadProPicProgress: Observable<number>;
+  taskProPic: AngularFireUploadTask;
   // downloadURL: string;
   // selectedFile: File;
   // tempArray: any;
@@ -61,7 +64,7 @@ export class PatientRegistration2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
     this.completeProfilePatientForm = this._formbuilder.group({
       weight: ["", Validators.required],
       height: ["", Validators.required],
@@ -82,12 +85,12 @@ export class PatientRegistration2Component implements OnInit {
 
   }
 
-  getPossition(){
-    this.geolocation.getPosition().then(pos=>{
+  getPossition() {
+    this.geolocation.getPosition().then(pos => {
       // console.log(pos)
       var lat: number = +pos["lat"]
       var lng: number = +pos["lng"]
-      console.log(lat,lng)
+      console.log(lat, lng)
     })
 
     // console.log(lat,lng)
@@ -95,12 +98,14 @@ export class PatientRegistration2Component implements OnInit {
 
   updateProfilePatient() {
 
+    this.uploadProPic();
+
     var i;
 
-    var weight= this.completeProfilePatientForm.controls["weight"].value;
-    var height= this.completeProfilePatientForm.controls["height"].value;
+    var weight = this.completeProfilePatientForm.controls["weight"].value;
+    var height = this.completeProfilePatientForm.controls["height"].value;
 
-    var bmi = weight / Math.pow((height/100),2);
+    var bmi = weight / Math.pow((height / 100), 2);
 
     var newData = {
       weight: this.completeProfilePatientForm.controls["weight"].value,
@@ -110,28 +115,28 @@ export class PatientRegistration2Component implements OnInit {
       operations: this.finalOperationsList,   //<--------------assign this as an object
       dietaryRestrictions: this.completeProfilePatientForm.controls["dietaryRestrictions"].value,
       bmi: bmi.toFixed(1),
-      bloodGroup: this.completeProfilePatientForm.controls["bloodGroup"].value   
+      bloodGroup: this.completeProfilePatientForm.controls["bloodGroup"].value
       // doctorID:
     }
 
     if (localStorage.getItem("role") == "patient") {
       // this.submitError = false;
-      console.log("From patient-registration2, updating profile - ",newData);
+      console.log("From patient-registration2, updating profile - ", newData);
       this.db.collection("Users").doc(this.uid).update(newData)
         .then(() => {
           this.submitSuccess = true;
           this.completeProfilePatientForm.reset();
           setTimeout(() => { this.router.navigate(['/patients/dashboard']) }, 2000);
         })
-      
-     
+
+
       // for(i = 0; i < this.finalOperationsList.length; i){
       //   this.db.collection('Users').doc(this.uid).collection('Operations').doc(`${this.finalOperationsList[i][0]}_${this.finalOperationsList[i][1]}`).set({
       //     operationDate: this.finalOperationsList[i][0],
       //     operationName: this.finalOperationsList[i][1]
       //   })
       // }
-      
+
     }
 
     else {
@@ -152,14 +157,14 @@ export class PatientRegistration2Component implements OnInit {
 
   newLTDAddList(option) {
     console.log("selected disease DD - ", option);
-    if(option == "" || option == null){
-     
+    if (option == "" || option == null) {
+
     }
-    else{
+    else {
       this.selectedLTDs.push(option);
     }
     this.completeProfilePatientForm.controls['longTermDiseases'].reset()
-    this.completeProfilePatientForm.controls['newLTDisease'].reset()  
+    this.completeProfilePatientForm.controls['newLTDisease'].reset()
     // setTimeout(() => { this.completeProfilePatientForm.controls['longTermDiseases'].reset() }, 200)
     // this.completeProfilePatientForm.controls['longTermDiseases'].reset();
   }
@@ -177,20 +182,20 @@ export class PatientRegistration2Component implements OnInit {
 
   newAllergyAddList(option) {
     console.log("selected disease DD - ", option);
-    if(option == "" || option == null){
-     
+    if (option == "" || option == null) {
+
     }
-    else{
+    else {
       this.selectedAllergies.push(option);
     }
     this.completeProfilePatientForm.controls['allergies'].reset()
-    this.completeProfilePatientForm.controls['newAllergy'].reset()  
+    this.completeProfilePatientForm.controls['newAllergy'].reset()
     // setTimeout(() => { this.completeProfilePatientForm.controls['longTermDiseases'].reset() }, 200)
     // this.completeProfilePatientForm.controls['longTermDiseases'].reset();
   }
 
-  addOperation(opDate,opName){
-    console.log(opDate," ++  ",opName);
+  addOperation(opDate, opName) {
+    console.log(opDate, " ++  ", opName);
     // var tempOperation = [];
     // tempOperation.push(opDate,opName);
     let operationTemp = {
@@ -201,27 +206,27 @@ export class PatientRegistration2Component implements OnInit {
     // operationTemp.operationName = opName;
     this.finalOperationsList.push(operationTemp);
     this.completeProfilePatientForm.controls['operationDate'].reset()
-    this.completeProfilePatientForm.controls['operationName'].reset()      
+    this.completeProfilePatientForm.controls['operationName'].reset()
   }
 
-  addFilesSessionStorage(event){
+  addFilesSessionStorage(event) {
     const file = event.target.files[0];
     // var tempArray = []
     var retrievedData = localStorage.getItem("tempFileArray");
-    console.log("retrievedData - ",retrievedData); 
+    console.log("retrievedData - ", retrievedData);
 
-    if (retrievedData.length != 0){
+    if (retrievedData.length != 0) {
       this.tempArray = JSON.parse(retrievedData)
-      console.log("parsed tempArray - ",this.tempArray); 
+      console.log("parsed tempArray - ", this.tempArray);
     }
-   
+
     this.tempArray.push[file]
-    localStorage.setItem("tempFileArray",JSON.stringify(this.tempArray));
-    console.log("latest status of tempArray - ",this.tempArray); 
+    localStorage.setItem("tempFileArray", JSON.stringify(this.tempArray));
+    console.log("latest status of tempArray - ", this.tempArray);
     // const file = event.target.files[0];
     // this.tempFileArray.push[file]
     // sessionStorage.setItem()
-    console.log(event.target.files[0].name," added to tempFileArray")
+    console.log(event.target.files[0].name, " added to tempFileArray")
   }
 
   // filesUpload(){
@@ -233,22 +238,60 @@ export class PatientRegistration2Component implements OnInit {
   //   }
   // }
 
-  detectFiles(event){
+  detectFiles(event) {
     this.selectedFile = event.target.files[0];
   }
 
-  addReport(rDate,rName){
-    console.log(rDate," ++  ",rName);
+  detectFilesProPic(event) {
+    this.selectedProPic = event.target.files[0];
+  }
+
+  addReport(rDate, rName) {
+    console.log(rDate, " ++  ", rName);
     var tempReport = [];
-    tempReport.push(rDate,rName);
-    this.finalReportsList.push(tempReport);    
+    tempReport.push(rDate, rName);
+    this.finalReportsList.push(tempReport);
+  }
+
+  uploadProPic() {
+
+    const file = this.selectedProPic;
+    const filePath = `${this.uid}/propic`;
+    const fileRef = this.afStorage.ref(filePath);
+    this.taskProPic = this.afStorage.upload(filePath, file);
+    this.uploadProPicProgress = this.taskProPic.percentageChanges();
+
+    this.taskProPic
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log("url from finalize - ", this.fb);
+            this.db.collection('Users').doc(this.uid).update({
+              proPicURL: this.fb,
+            })
+            setTimeout(() => {
+              this.uploadProPicProgress = null;
+            }, 500)
+          });
+        }),
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log("url from subscribe - ", url);
+        }
+      });
   }
 
 
-  upload(repDate,repName) {
+  upload(repDate, repName) {
 
     // this.addReport(repDate,repName);
-  
+
     // var n = Date.now();
     const file = this.selectedFile;
     const filePath = `${this.uid}/${repDate}_${repName}`;
@@ -269,16 +312,16 @@ export class PatientRegistration2Component implements OnInit {
             this.db.collection('Users').doc(this.uid).collection("Reports").doc(`${repDate}_${repName}`).set({
               reportDate: repDate,
               reportName: repName,
-              reportURL:this.fb,
+              reportURL: this.fb,
               uploadedAt: new Date(),
               status: 'Active'
             })
-            setTimeout(()=>{
+            setTimeout(() => {
               this.completeProfilePatientForm.controls['reportDate'].reset();
               this.completeProfilePatientForm.controls['reportName'].reset();
               this.uploadProgress = null;
-              this.addReport(repDate,repName);
-            },500)
+              this.addReport(repDate, repName);
+            }, 500)
           });
         }),
       )
@@ -288,19 +331,19 @@ export class PatientRegistration2Component implements OnInit {
         }
       });
 
-      
+
   }
 
-  deleteReport(repDate,repName) {
+  deleteReport(repDate, repName) {
 
     let docRef = this.db.collection('Users').doc(this.uid).collection('Reports').doc(`${repDate}_${repName}`);
 
     docRef.valueChanges()
-    .subscribe(docValues =>{
-      console.log("url of the reported needed to be deleted - ",docValues)
-    })
+      .subscribe(docValues => {
+        console.log("url of the reported needed to be deleted - ", docValues)
+      })
 
   }
-  
+
 
 }

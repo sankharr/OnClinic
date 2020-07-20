@@ -13,6 +13,19 @@
         </div>
 
         <div class="row mb-lg-4">
+            <div class="col-3">
+                <h6><b>Profile Picture Upload</b></h6>
+                <!-- <label for="file">Report Upload</label> -->
+                <input id="file" type="file" (change)="detectFilesProPic($event)" accept=".png,.jpg,.jpeg" />
+
+                <progress max="100" [value]="(uploadProPicProgress | async)"></progress>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-primary mt-4" (click)="uploadProPic()">Upload</button>
+            </div>
+        </div>
+
+        <div class="row mb-lg-4">
             <div class="col-2">
                 <label for="coption"><b>Weight (kg)</b></label>
                 <input class="form-control" type="text" placeholder="" formControlName="weight">
@@ -40,7 +53,7 @@
 
             <div class="col-2">
                 <label for="coption"><b>Dietary Restrictions</b></label>
-                <select class="form-control" formControlName="dietaryRestrictions" >
+                <select class="form-control" formControlName="dietaryRestrictions">
                     <option #veg>Vegetarian</option>
                     <option #nonVeg>Non - Vegetarian</option>
                 </select>
@@ -56,8 +69,8 @@
 
             <div class="col-2">
                 <label for="coption"><b>Blood Group</b></label>
-                <select class="form-control" formControlName="bloodGroup" >
-                    <option *ngFor="let bloodType of bloodGroups" >{{bloodType}}</option>
+                <select class="form-control" formControlName="bloodGroup">
+                    <option *ngFor="let bloodType of bloodGroups">{{bloodType}}</option>
                     <!-- <option >A-</option> -->
                 </select>
 
@@ -70,7 +83,7 @@
 
             </div>
 
-            
+
 
         </div>
 
@@ -214,17 +227,17 @@
                 <input class="form-control" type="text" placeholder="Ex:- Blood Report" formControlName="reportName">
             </div>
             <div class="col-3">
-                
+
                 <label for="file">Report Upload</label>
                 <input id="file" type="file" (change)="detectFiles($event)" accept=".png,.jpg,.pdf,.jpeg" />
 
-                <progress max="100" [value]="(uploadProgress | async)"></progress>   
+                <progress max="100" [value]="(uploadProgress | async)"></progress>
 
             </div>
             <div class="col-2 mt-4">
                 <button class="btn btn-primary addbtn"
                     (click)="upload(completeProfilePatientForm.controls['reportDate'].value,completeProfilePatientForm.controls['reportName'].value)">
-                        Add Report</button>
+                    Add Report</button>
             </div>
         </div>
 
@@ -254,16 +267,17 @@
                             </div>
                             <div class="col">
                                 <div class="row">
-                                    <button class="btn btn-danger" (click)="deleteReport(rep[0],rep[1])"><i class="fa fa-trash" style="font-size: larger;"></i></button>
+                                    <button class="btn btn-danger" (click)="deleteReport(rep[0],rep[1])"><i
+                                            class="fa fa-trash" style="font-size: larger;"></i></button>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-2">
                 <button class="btn btn-primary" type="submit" (click)="updateProfilePatient()">Save</button>
@@ -273,7 +287,7 @@
                     Succesfully Submited!
                 </div>
             </div>
-            
+
         </div>
 
     </form>
