@@ -2,7 +2,9 @@
     <div id="topBar">
         <div class="row">
             <div class="col">
-                <h3>Current Number</h3>
+                <div class="appoNumBox" *ngIf="appointmentCountDoc?.currentNumber">
+                    <h3>{{appointmentCountDoc?.currentNumber}}</h3>
+                </div> 
             </div>
             <div class="col">
                 <h3>0{{hours}}:<span *ngIf="minutes < 10">0</span>{{minutes}}:<span
@@ -14,8 +16,10 @@
     <div class="row">
         <div class="col-9">
             <div [id]="localCallId" class="local"></div>
-            <!-- <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div> -->
-            <div class="remote"></div>
+            <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+            <div *ngIf="remoteCalls.length === 0" class="waitingScreen">
+                <h1 class="waitingText">Waiting for the Doctor</h1>
+            </div>
         </div>
         <!-- <div class="col-2">
             <button class="btn btn-danger" type="submit" [routerLink]="['/patients/waiting-room']"

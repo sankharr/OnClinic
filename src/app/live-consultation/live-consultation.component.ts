@@ -5,7 +5,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { timer, Observable, observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-
 @Component({
   selector: 'app-live-consultation',
   templateUrl: './live-consultation.component.html',
@@ -16,7 +15,7 @@ export class LiveConsultationComponent implements OnInit {
   // channelForm: FormGroup;
 
   localCallId = 'agora_local';
-  remoteCalls: any[] = [1]
+  remoteCalls: any[] = []
 
   private client: AgoraClient;
   private localStream: Stream;
@@ -30,8 +29,9 @@ export class LiveConsultationComponent implements OnInit {
   timeObservable: any;
   hours = 0;
   minutes = 0;
-  seconds= 0;
+  seconds = 0;
   prescriptions: any;
+  appointmentCountDoc: any;
 
 
   constructor(
@@ -39,63 +39,75 @@ export class LiveConsultationComponent implements OnInit {
     private formbuilder: FormBuilder,
     private db: AngularFirestore,
     private modalService: NgbModal
-    ) {
+  ) {
     this.uid = Math.floor(Math.random() * 100);
     this.appointmentID = localStorage.getItem("selectedAppointmentID_patient");
   }
 
   ngOnInit() {
 
-   
-    // this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
-    this.db.collection("Appointments").doc(this.appointmentID).valueChanges()
-    .subscribe(output => {
-      this.appointmentData = output;
-      console.log("appointment Data - ",this.appointmentData);
-      if(this.appointmentData.consultationStarted === "true"){
-        console.log("start the timer");
-        this.timeObservable = timer(0,1000)
-        this.timeObservable.subscribe(x => {
-          // this.seconds = x;
-          this.displayTime()
-        });
-        // timer(0, 1000).subscribe(ec => {
-        //   this.time++;
-        //   this.timerDisplay = this.getDisplayTimer(this.time);
-        // });
-      }
-      this.db.collection('Users').doc(localStorage.getItem('uid')).collection('Prescriptions',ref => ref.where("uploadedAt",">=",this.appointmentData.consultationStartedAt)).valueChanges()
-      .subscribe(output2 => {
-        this.prescriptions = output2;
-        console.log("available prescriptions - ",this.prescriptions);
-      })
-    })
 
+    this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
     
-    
+    this.db.collection("Appointments").doc(this.appointmentID).valueChanges()
+      .subscribe(output => {
+        this.appointmentData = output;
+        console.log("appointment Data - ", this.appointmentData);
+        
+        if (this.appointmentData?.consultationStarted === "true") {
+          console.log("start the timer");
+          this.timeObservable = timer(0, 1000)
+          this.timeObservable.subscribe(x => {
+            // this.seconds = x;
+            this.displayTime()
+          });
+          // timer(0, 1000).subscribe(ec => {
+          //   this.time++;
+          //   this.timerDisplay = this.getDisplayTimer(this.time);
+          // });
+        }
+        this.db.collection("Users").doc(localStorage.getItem("selectedAppointmentDoctorUID")).collection("appointmentCounts").doc(this.appointmentData.appointmentShortDate).valueChanges()
+        .subscribe(output2 => {
+          this.appointmentCountDoc = output2;
+          console.log("appointmentCountDoc - ",this.appointmentCountDoc)
+        })
+        // this.db.collection('Users').doc(localStorage.getItem('uid')).collection('Prescriptions',ref => ref.where("uploadedAt",">=",this.appointmentData.consultationStartedAt)).valueChanges()
+        // .subscribe(output2 => {
+        //   this.prescriptions = output2;
+        //   console.log("available prescriptions - ",this.prescriptions);
+        // })
+      })
+
+
+
   }
 
   openVerticallyCentered(content) {
-    this.modalService.open(content, { 
+    this.modalService.open(content, {
       centered: true,
       size: 'lg'
     });
+    this.db.collection('Users').doc(localStorage.getItem('uid')).collection('Prescriptions', ref => ref.where("uploadedAt", ">=", this.appointmentData.consultationStartedAt)).valueChanges()
+      .subscribe(output2 => {
+        this.prescriptions = output2;
+        console.log("available prescriptions - ", this.prescriptions);
+      })
   }
 
-  viewPrescription(url){    
-    window.open(url, "myWindow","height=900,width=1000");
+  viewPrescription(url) {
+    window.open(url, "myWindow", "height=900,width=1000");
   }
 
-  displayTime(){
-    if(this.seconds < 59){
+  displayTime() {
+    if (this.seconds < 59) {
       this.seconds = this.seconds + 1;
     }
-    else{
-      if(this.minutes < 59){
+    else {
+      if (this.minutes < 59) {
         this.minutes = this.minutes + 1;
         this.seconds = 0;
       }
-      else{
+      else {
         this.hours = this.hours + 1;
         this.minutes = 0;
         this.seconds = 0;
@@ -119,7 +131,7 @@ export class LiveConsultationComponent implements OnInit {
 
     // let channelID = this.channelForm.controls["channelid"].value;
     let channelID = appoID;
-    console.log("Channel ID - ",channelID);
+    console.log("Channel ID - ", channelID);
 
     this.channelid = channelID;
 
@@ -131,13 +143,13 @@ export class LiveConsultationComponent implements OnInit {
     this.assignLocalStreamHandlers();
     // this.initLocalStream();
     this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-    
+
   }
 
   endCall() {
-    this.client.leave(()=> {
+    this.client.leave(() => {
 
-      if(this.localStream.isPlaying()) {
+      if (this.localStream.isPlaying()) {
         this.localStream.stop()
       }
       this.localStream.close();
@@ -145,7 +157,7 @@ export class LiveConsultationComponent implements OnInit {
       for (let i = 0; i < this.remoteCalls.length; i++) {
         var stream = this.remoteCalls.shift();
         var id = stream.getId()
-        if(stream.isPlaying()) {
+        if (stream.isPlaying()) {
           stream.stop()
         }
         // removeView(id)

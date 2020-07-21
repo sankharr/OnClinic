@@ -21,6 +21,7 @@ export class WaitingroomDoctorviewComponent implements OnInit {
     private router: Router
   ) {
     this.todayDate = this.datePipe.transform(new Date(), "yyyy-MM-dd");
+    // (<HTMLButtonElement>document.getElementById("joinBtn")).disabled = true;
    }
 
   ngOnInit(): void {
@@ -30,9 +31,13 @@ export class WaitingroomDoctorviewComponent implements OnInit {
     this.db.collection('Users').doc(localStorage.getItem("uid")).valueChanges()
     .subscribe(output => {
       this.doctorData = output;
-      this.db.collection('Appointments',ref => ref.where("status","==","Active").where("doctorID","==",this.doctorData.doctorID).where("appointmentShortDate","==",this.todayDate).orderBy("appointmentNo")).valueChanges()
+      this.db.collection('Appointments',ref => ref.where("status","==","Active").where("doctorID","==",this.doctorData.doctorID).orderBy("appointmentDate").orderBy("appointmentNo")).valueChanges()
       .subscribe(output => {
         this.currentAppointment = output[0];
+        if(this.currentAppointment?.appointmentID != null){
+          console.log("buttonVisible");
+          (<HTMLButtonElement>document.getElementById("joinBtn")).disabled = false;
+        }
         console.log("available appointments (waitingroom-doctorView) - ",this.currentAppointment);
       })
       

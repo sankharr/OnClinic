@@ -9,7 +9,7 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { DatePipe } from '@angular/common';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 // pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -20,7 +20,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class LiveConsultationDoctorComponent implements OnInit {
 
-  @ViewChild('htmlData') htmlData:ElementRef;
+  @ViewChild('htmlData') htmlData: ElementRef;
 
   localCallId = 'agora_local';
   remoteCalls: any[] = []
@@ -43,6 +43,12 @@ export class LiveConsultationDoctorComponent implements OnInit {
   fb;
   patientUID: string;
 
+  timeObservable: any;
+  hours = 0;
+  minutes = 0;
+  seconds = 0;
+  doctorUID: string;
+
 
   constructor(
     private ngxAgoraService: NgxAgoraService,
@@ -52,58 +58,67 @@ export class LiveConsultationDoctorComponent implements OnInit {
     private datePipe: DatePipe,
     private afStorage: AngularFireStorage
     // private formbuilder: FormBuilder,
-    ) {
+  ) {
     this.uid = Math.floor(Math.random() * 100);
+    this.doctorUID = localStorage.getItem('uid');
     this.channelID = localStorage.getItem('selectedAppointmentID_doctor');
     this.dateToday = this.datePipe.transform(new Date(), "yyyy-MM-dd");
-    
+
   }
 
   ngOnInit(): void {
+
     this.prescriptionForm = this.formBuilder.group({
       content: ["", Validators.required],
       otherNotes: ["", Validators.required],
     })
     this.db.collection('Appointments').doc(this.channelID).valueChanges()
-    .subscribe(output => {
-      this.appointmentData = output;
-    })    
+      .subscribe(output => {
+        this.appointmentData = output;
+      })
+
     this.startCall(this.channelID);
+
+    this.timeObservable = timer(0, 1000)
+    this.timeObservable.subscribe(x => {
+      // this.seconds = x;
+      this.displayTime()
+    });
 
   }
 
-  addOtherNotes(){
+  addOtherNotes() {
     this.otherNotesArray.push(this.prescriptionForm.controls['otherNotes'].value)
     // console.log("prescriptionContentArray - ",this.prescriptionContent);
     this.prescriptionForm.reset();
   }
 
-  removeNote(val){
+  removeNote(val) {
     var index = this.otherNotesArray.indexOf(val);
-    this.otherNotesArray.splice(index,1);
+    this.otherNotesArray.splice(index, 1);
     // console.log("from removeQualifications, val index qualificationsArray - ",val,index,this.qualificationsArray)
-  }  
+  }
 
-  addPrescriptionLines(){
+  addPrescriptionLines() {
     this.prescriptionContent.push(this.prescriptionForm.controls['content'].value)
-    console.log("prescriptionContent Array - ",this.prescriptionContent);
+    console.log("prescriptionContent Array - ", this.prescriptionContent);
     this.prescriptionForm.reset();
   }
 
-  removePrescriptionLines(val){
+  removePrescriptionLines(val) {
     var index = this.prescriptionContent.indexOf(val);
-    this.prescriptionContent.splice(index,1);
+    this.prescriptionContent.splice(index, 1);
     // console.log("from removeQualifications, val index qualificationsArray - ",val,index,this.qualificationsArray)
-  }  
+  }
 
   openVerticallyCentered(content) {
-    this.modalService.open(content, { 
+    this.modalService.open(content, {
       centered: true,
       size: 'lg'
     });
   }
 
-  formReset(){
+  formReset() {
     this.prescriptionForm.reset();
     this.prescriptionContent = [];
     this.otherNotesArray = [];
@@ -126,13 +141,13 @@ export class LiveConsultationDoctorComponent implements OnInit {
 
     // doc.save('angular-demo.pdf');
 
-    this.db.collection('Users',ref => ref.where("patientID","==",this.appointmentData.patientID)).snapshotChanges()
-    .subscribe(output =>{
-      this.patientUID = output[0].payload.doc.id;
-      console.log("patient UID - ",this.patientUID);
-    })
+    this.db.collection('Users', ref => ref.where("patientID", "==", this.appointmentData.patientID)).snapshotChanges()
+      .subscribe(output => {
+        this.patientUID = output[0].payload.doc.id;
+        console.log("patient UID - ", this.patientUID);
+      })
 
-    const doc = new jsPDF('p','pt', 'a5')
+    const doc = new jsPDF('p', 'pt', 'a5')
     const ta = document.getElementById('htmlData');
     doc.fromHTML(ta, 20, 20);
     // doc.sav e('demo.pdf')
@@ -156,17 +171,17 @@ export class LiveConsultationDoctorComponent implements OnInit {
             this.db.collection('Users').doc(this.patientUID).collection("Prescriptions").add({
               // reportDate: repDate,
               // reportName: repName,
-              prescriptionID:this.dateToday+'_'+this.appointmentData.doctorName,
+              prescriptionID: this.dateToday + '_' + this.appointmentData.doctorName,
               doctorName: this.appointmentData.doctorName,
               doctorID: this.appointmentData.doctorID,
-              prescriptionURL:this.fb,
+              prescriptionURL: this.fb,
               uploadedAt: new Date(),
               status: 'Active'
             })
-            setTimeout(()=>{
+            setTimeout(() => {
               this.prescriptionContent = []
               this.otherNotesArray = []
-            },500)
+            }, 500)
           });
         }),
       )
@@ -184,21 +199,41 @@ export class LiveConsultationDoctorComponent implements OnInit {
     // let doc = new jsPDF('p','pt', 'a4');
     // doc.fromHTML(DATA.innerHTML,15,15);
     // doc.save('demo.pdf');
-    
-}
+
+  }
+
+  displayTime() {
+    if (this.seconds < 59) {
+      this.seconds = this.seconds + 1;
+    }
+    else {
+      if (this.minutes < 59) {
+        this.minutes = this.minutes + 1;
+        this.seconds = 0;
+      }
+      else {
+        this.hours = this.hours + 1;
+        this.minutes = 0;
+        this.seconds = 0;
+      }
+    }
+  }
 
 
 
   startCall(appoID) {
 
     this.db.collection("Appointments").doc(appoID).update({
-      consultationStarted:"true",
-      consultationStartedAt:new Date()
+      consultationStarted: "true",
+      consultationStartedAt: new Date()
     });
+    // this.db.collection("Users").doc(this.doctorUID).collection("appointmentCounts").doc(this.appointmentData.appointmentShortDate).update({
+    //   currentNumber:this.appointmentData.appointmentNo
+    // })
 
     // let channelID = this.channelForm.controls["channelid"].value;
     let channelID = appoID;
-    console.log("Channel ID - ",channelID);
+    console.log("Channel ID - ", channelID);
 
     this.channelid = channelID;
 
@@ -210,16 +245,18 @@ export class LiveConsultationDoctorComponent implements OnInit {
     this.assignLocalStreamHandlers();
     // this.initLocalStream();
     this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-    
+
   }
 
   endCall() {
     this.db.collection("Appointments").doc(this.channelID).update({
-      status: "Success"
+      // status: "Success"
+      consultationStarted: "false",
+      consultationStartedAt: null
     });
-    this.client.leave(()=> {
+    this.client.leave(() => {
 
-      if(this.localStream.isPlaying()) {
+      if (this.localStream.isPlaying()) {
         this.localStream.stop()
       }
       this.localStream.close();
@@ -227,7 +264,7 @@ export class LiveConsultationDoctorComponent implements OnInit {
       for (let i = 0; i < this.remoteCalls.length; i++) {
         var stream = this.remoteCalls.shift();
         var id = stream.getId()
-        if(stream.isPlaying()) {
+        if (stream.isPlaying()) {
           stream.stop()
         }
         // removeView(id)

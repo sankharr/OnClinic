@@ -22,14 +22,17 @@ export class WaitingRoomComponent implements OnInit {
   uid: any;
   fb;
   task: AngularFireUploadTask;
+  appoID: string;
    constructor(
     private _formbuilder: FormBuilder,
     private db: AngularFirestore,
     private router: Router,
     private afStorage: AngularFireStorage
-   ) { }
+   ) {
+     this.appoID = localStorage.getItem("selectedAppointmentID_patient");
+    }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
     this.uid=localStorage.getItem("uid");
     this.uploadReportForm = this._formbuilder.group({
       reportDate: ["", Validators.required],

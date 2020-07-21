@@ -2,20 +2,31 @@
     <div id="topBar">
         <div class="row">
             <div class="col">
-                <h3>Current Number</h3>
+                <!-- <small>Current Number</small> -->
+                <div class="appoNumBox" *ngIf="appointmentData?.appointmentNo">
+                    <h3>{{appointmentData?.appointmentNo}}</h3>
+                </div>               
             </div>
             <div class="col">
-                <!-- <h3>0{{hours}}:<span *ngIf="minutes < 10">0</span>{{minutes}}:<span
-                        *ngIf="seconds < 10">0</span>{{seconds}}</h3> -->
+                <h3 id="timer">0{{hours}}:<span *ngIf="minutes < 10">0</span>{{minutes}}:<span
+                    *ngIf="seconds < 10">0</span>{{seconds}}</h3>                
             </div>
         </div>
 
     </div>
+
     <div class="row">
         <div class="col-9">
             <div [id]="localCallId" class="local"></div>
-            <!-- <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div> -->
-            <div class="remote"></div>
+            <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+
+            <div *ngIf="remoteCalls.length === 0"  class="waitingScreen">
+                <h1 class="waitingText">Waiting for the Patient</h1>
+                <!-- <div class="row">
+                    
+                </div> -->
+            </div>
+
         </div>
         <!-- <div class="col-2">
             <button class="btn btn-danger" type="submit" [routerLink]="['/patients/waiting-room']"
@@ -178,8 +189,18 @@
                 <h6>No.4/25, Deans Road, Colombo 08. Tel: 011 2792456</h6>
             </div>
             <p>-----------------------------------------------------------------------------------------------</p>
-            <p>Date : {{dateToday}}</p>
-            <br>
+            <div class="row">
+                <div class="col" style="font-size: 14px;">
+                    Date : {{dateToday}}                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" style="font-size: 14px;">
+                    Doctor's Name : {{appointmentData?.doctorName}}                  
+                </div>
+            </div>
+            <div class="row" style="color: white;">ghfghfg</div>
+            <!-- <div class="row">Date : {{appointmentData?.doctorName}}</div> -->
             <h6><b><u>Patient's Details</u></b></h6>
             <div class="row">
                 <div class="col">
@@ -228,6 +249,6 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="formReset()">Reset</button>
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-        <button type="button" class="btn btn-success" (click)="htmlToPdf()">Save</button>
+        <button type="submit" class="btn btn-success" (click)="htmlToPdf()">Save</button>
     </div>
 </ng-template>

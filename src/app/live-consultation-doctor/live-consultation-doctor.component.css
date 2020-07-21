@@ -86,6 +86,70 @@ form{
     padding: 0;
 }
 
+.appoNumBox{
+    background-color: white;
+    width: 10%;
+    text-align: center;
+    margin-left: 50%;
+    border-radius: 10px;
+    padding-top: 1%;
+    padding-bottom: 0.1%;
+    margin-top: -1.5%;
+
+}
+
+/* .timerBox{
+    background-color: white;
+    width: 30%;
+    text-align: center;
+    margin-left: 35%;
+    border-radius: 10px;
+    padding-top: 1%;
+    padding-bottom: 0.1%;
+    margin-top: -1.5%;
+
+} */
+
+.waitingScreen{
+    /* display: ; */
+    position: absolute;
+    margin-top: 8%;
+    /* top: 60%; */
+    /* margin-left: -3%; */
+    width: 70vw;
+    height: 75vh;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    background-color: black;
+    vertical-align: middle;
+}
+
+.waitingText{
+    /* font-size: 300%; */
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    line-height: 75vh;
+    animation: waitingText 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes waitingText{
+    from {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+
+}
+
 /* .header-part{
     text-align: center;
 } */

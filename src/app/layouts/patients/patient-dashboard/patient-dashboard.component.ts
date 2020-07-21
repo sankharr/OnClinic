@@ -12,6 +12,8 @@ export class PatientDashboardComponent implements OnInit {
   userid: string;
   userData: any;
   result2: any[];
+  firstAppointment: any;
+  doctorUID: string;
 
   constructor(public auth:AuthService,
               private router:Router,
@@ -31,6 +33,12 @@ export class PatientDashboardComponent implements OnInit {
       this.db.collection('Appointments',ref => ref.where("status","==","Active").where("patientID","==",this.userData.patientID).orderBy("appointmentDate")).valueChanges()
       .subscribe(output2 => {
         this.result2 = output2;
+        this.firstAppointment = output2[0]
+        this.db.collection("Users",ref => ref.where("doctorID","==",this.firstAppointment.doctorID)).snapshotChanges()
+        .subscribe(output3 => {
+          this.doctorUID = output3[0].payload.doc.id;
+          localStorage.setItem("selectedAppointmentDoctorUID",this.doctorUID);
+        })
         console.log("JOIN data from patients dashboard - ",this.result2);
       })
     })
