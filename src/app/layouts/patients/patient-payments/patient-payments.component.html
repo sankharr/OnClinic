@@ -35,18 +35,18 @@
                             <div class="col-lg-4">
                               <h6><b>{{item.doctorName}}</b></h6>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                               <h6><b>{{item.appointmentDate.toDate()|date:'yyyy-MM-dd'}}</b></h6>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                               <h6><b>Rs.{{item.totalFee}}</b></h6>
                             </div>
                             <div class="col-lg-2">
                               <button class="btn" type="submit" (click)="startCall()">view Recipt</button>
                             </div>
-                            <div class="col-lg-2">
+                            <!-- <div class="col-lg-2">
                               <a href="#InquiryDialogBox" class="btn" data-toggle="modal">Inqury</a>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
@@ -54,6 +54,11 @@
                   </div>
                 </div>
                 <!--end of payment bars-->
+                <div class="row">
+                  <div class="col-12">
+                    <a href="#InquiryDialogBox" class="btn" id="bottom" data-toggle="modal">Inqury</a>
+                  </div>
+              </div>
               </div>
             </div>
           </div>
