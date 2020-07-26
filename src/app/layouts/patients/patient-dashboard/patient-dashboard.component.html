@@ -84,10 +84,10 @@
             <div class="col-lg-4">
               <div class="card shadow">
                 <div class="card" id="differ">
-                  <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
+                  <!-- <img class="rounded-circle" [src]=result2[0].proPicURL> -->
                   <h5>{{result2[0]?.doctorName}}</h5>
                   <h6>{{result2[0]?.doctorSpeciality}}</h6>
-                  <h6 class="text-primary"><b>in 15 Mins</b></h6>
+                  <h6 class="text-primary"><b>{{result2[0]?.appointmentDate.toDate()|date:"medium"}}</b></h6>
                   <button class="btn" type="submit" (click)="joinlc(result2[0].appointmentID)">Join</button>
                 </div>
               </div>
@@ -96,11 +96,11 @@
             <div class="col-lg-4">
               <div class="card shadow">
                 <div class="card" id="differ">
-                  <img class="rounded-circle" src="./assets/img/theme/team-4-800x800.jpg">
+                  <!-- <img class="rounded-circle" [src]=result2[1].proPicURL> -->
                   <h5>{{result2[1]?.doctorName}}</h5>
                   <h6>{{result2[1]?.doctorSpeciality}}</h6>
-                  <h6 class="text-primary"><b>in 12 hrs</b></h6>
-                  <a href="#MoreDialogBox" class="btn" type="button" data-toggle="modal">More</a>
+                  <h6 class="text-primary"><b>{{result2[1]?.appointmentDate.toDate()|date:"medium"}}</b></h6>
+                  <a href="#More1DialogBox" class="btn" type="button" data-toggle="modal">More</a>
                 </div>
               </div>
             </div>
@@ -108,11 +108,11 @@
             <div class="col-lg-4">
               <div class="card shadow">
                 <div class="card" id="differ">
-                  <img class="rounded-circle" src="./assets/img/theme/team-4-800x800.jpg">
+                  <!-- <img class="rounded-circle" [src]=result2[2].proPicURL> -->
                   <h5>{{result2[2]?.doctorName}}</h5>
                   <h6>{{result2[2]?.doctorSpeciality}}</h6>
-                  <h6 class="text-primary"><b>in 2 days</b></h6>
-                  <a href="#MoreDialogBox" class="btn" type="button" data-toggle="modal">More</a>
+                  <h6 class="text-primary"><b>{{result2[2]?.appointmentDate.toDate()|date:"medium"}}</b></h6>
+                  <a href="#More2DialogBox" class="btn" type="button" data-toggle="modal">More</a>
                 </div>
               </div>
             </div>
@@ -155,7 +155,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="MoreDialogBox" tabindex="-1" role="dialog" aria-labelledby="MoreDialogBox"
+<div class="modal fade" id="More1DialogBox" tabindex="-1" role="dialog" aria-labelledby="MoreDialogBox"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -168,7 +168,7 @@
       <div class="modal-body">
         <!-- --------------- -->
         <div class="card">
-          <img class="rounded-circle" src="./assets/img/theme/team-4-800x800.jpg">
+          <!-- <img class="rounded-circle" [src]=result2[1].proPicURL> -->
           <h5>{{result2[1]?.doctorName}}</h5>
           <h6>{{result2[1]?.doctorSpeciality}}</h6>
         </div>
@@ -206,6 +206,70 @@
             <div class="col-lg-6">
               <div class="card" id="light">
                 <h6><b>{{result2[1]?.appointmentNo}}</b></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- -------------------------- -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- dialog box 2 -->
+<div class="modal fade" id="More2DialogBox" tabindex="-1" role="dialog" aria-labelledby="MoreDialogBox"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- --------------- -->
+        <div class="card">
+          <!-- <img class="rounded-circle" [src]=result2[2].proPicURL> -->
+          <h5>{{result2[2]?.doctorName}}</h5>
+          <h6>{{result2[2]?.doctorSpeciality}}</h6>
+        </div>
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card" id="light">
+                <h6><b>Date</b></h6>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card" id="light">
+                <h6><b>{{result2[2]?.appointmentDate}}</b></h6>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card" id="light">
+                <h6><b>Time</b></h6>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card" id="light">
+                <h6><b>{{result2[2]?.appointmentTime}}</b></h6>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card" id="light">
+                <h6><b>Appoinment no.</b></h6>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card" id="light">
+                <h6><b>{{result2[2]?.appointmentNo}}</b></h6>
               </div>
             </div>
           </div>
