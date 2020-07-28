@@ -18,6 +18,9 @@ export class PatientDashboardComponent implements OnInit {
   result3: any[];
   bmiRange: any;
   bmi_val: any;
+  currentappData: any;
+  nextappData1: any;
+  nextappData2: any;
 
   constructor(
     public auth: AuthService,
@@ -41,9 +44,12 @@ export class PatientDashboardComponent implements OnInit {
         this.db.collection('Appointments', ref => ref.where("status", "==", "Active").where("patientID", "==", this.userData.patientID).orderBy("appointmentDate")).valueChanges()
           .subscribe(output2 => {
             this.result2 = output2;
+            this.currentappData = this.result2[0]
+            this.nextappData1 = this.result2[1]
+            this.nextappData2 = this.result2[2]
             console.log("JOIN data from patients dashboard - ", this.result2);
           })
-        this.db.collection('Appointments', ref => ref.where("status", "==", "Success").where("patientID", "==", this.userData.patientID).orderBy("appointmentDate")).valueChanges()
+        this.db.collection('Appointments', ref => ref.where("status", "==", "Success").where("patientID", "==", this.userData.patientID).orderBy("appointmentDate").limit(2)).valueChanges()
           .subscribe(output3 => {
             this.result3 = output3;
             console.log("JOIN data from patients dashboard - ", this.result3);
@@ -58,6 +64,8 @@ export class PatientDashboardComponent implements OnInit {
   joinlc(appoid) {
     localStorage.setItem("selectedAppointmentID_patient",appoid)
     console.log(appoid);
+    localStorage.setItem("selectedAppointment_doctorID",this.result2[0].doctorID);
+    localStorage.setItem("selectedAppointment_appointmentDate",this.result2[0].appointmentDate);
     this.router.navigate(['/patients/waiting-room'])  
   }
   bmi(bmi_val){
