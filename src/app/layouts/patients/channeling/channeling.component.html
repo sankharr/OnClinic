@@ -104,7 +104,7 @@
                         <div class="list-group-item" *ngFor="let item of result3">
                           <div class="row" id="fixsize">
                             <div class="col-lg-3">
-                              <h6><b>{{item.doctorName}}</b></h6>
+                              <h6><b>{{item?.doctorName}}</b></h6>
                             </div>
                             <div class="col-lg-2">
                               <h6><b>{{item.appointmentDate.toDate()|date:'yyyy-MM-dd'}}</b></h6>
@@ -116,7 +116,7 @@
                               <h6><b>Rs.{{item.totalFee}}</b></h6>
                             </div>
                             <div class="col-lg-3">
-                              <button class="btn" id="more" type="submit" (click)="startCall()">Prescription</button>
+                              <button class="btn" id="more" type="submit" (click)="viewPrescription(item?.prescriptionURL)">Prescription</button>
                             </div>
                           </div>
                         </div>

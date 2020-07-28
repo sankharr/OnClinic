@@ -43,7 +43,8 @@ export class MyhealthComponent implements OnInit {
         console.log("result-",this.reports)
     })
   }
-  view() {
+  view(url) {
+    window.open(url, "myWindow", "height=900,width=1000");
   }
   detectFiles(event){
     this.selectedFile = event.target.files[0];

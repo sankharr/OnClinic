@@ -50,7 +50,9 @@ export class PatientPaymentsComponent implements OnInit {
       })
 
   }
-
+  viewRecipt(url){
+    window.open(url, "myWindow", "height=900,width=1000");
+  }
   submit() {
    
     var data = {

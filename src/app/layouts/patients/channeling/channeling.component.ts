@@ -14,36 +14,35 @@ export class ChannelingComponent implements OnInit {
   result3: any[];
   moreView: any;
   constructor(
-    private router:Router,
+    private router: Router,
     private db: AngularFirestore
-  ) { 
+  ) {
     this.uid = localStorage.getItem("uid")
   }
 
   ngOnInit(): void {
-    this.db.collection('Users').doc(this.uid).valueChanges()
-      .subscribe(output => {
-        this.userData = output;
-        console.log("userData of patients - ", this.userData);
-        this.db.collection('Appointments', ref => ref.where("status", "==", "Active").where("patientID", "==", this.userData.patientID).orderBy("appointmentDate")).valueChanges()
+        this.db.collection('Appointments', ref => ref.where("status", "==", "Active").where("patientID", "==", localStorage.getItem("loggedPatientID")).orderBy("appointmentDate")).valueChanges()
           .subscribe(output2 => {
             this.result2 = output2;
             console.log("Get All Upcomming channelings - ", this.result2);
           })
-        this.db.collection('Appointments', ref => ref.where("status", "==", "Success").where("patientID", "==", this.userData.patientID).orderBy("appointmentDate")).valueChanges()
+        this.db.collection('Users').doc(this.uid).collection("Prescriptions").valueChanges()
           .subscribe(output3 => {
             this.result3 = output3;
             console.log("Get All Past Channelings - ", this.result3);
           })
-      })
+      
   }
   joinlc() {
     this.router.navigate(['/patients/waiting-room'])
   }
-  moreview(appoID){
-this.db.collection("Appointments").doc(appoID).valueChanges()
-.subscribe(value=>{
-  this.moreView = value;
-})
+  moreview(appoID) {
+    this.db.collection("Appointments").doc(appoID).valueChanges()
+      .subscribe(value => {
+        this.moreView = value;
+      })
+  }
+  viewPrescription(url){
+    window.open(url, "myWindow", "height=900,width=1000");
   }
 }

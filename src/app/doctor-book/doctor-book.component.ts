@@ -51,6 +51,7 @@ export class DoctorBookComponent implements OnInit {
   resultz: any;
   currentUserID: any;
   totalFee: any;
+  appointmentShortDate: string;
 
   constructor(
     public auth: AuthService,
@@ -112,7 +113,7 @@ export class DoctorBookComponent implements OnInit {
   var appoCount;
   this.totalFee = this.hospitalCoreCharges + parseInt(this.data.doctorFee);
 
-  appointmentDate = this.datePipe.transform(datex, "yyyy-MM-dd");
+  this.appointmentShortDate = this.datePipe.transform(datex, "yyyy-MM-dd");
   console.log("appointmentDate -", appointmentDate);
 
   if (this.results.role == 'doctor') {
@@ -123,7 +124,7 @@ export class DoctorBookComponent implements OnInit {
     this.currentUserID = this.results.patientID;
   }
 
-  var docRef = this.db.collection('Users').doc(this.id).collection('appointmentCounts').doc(appointmentDate);
+  var docRef = this.db.collection('Users').doc(this.id).collection('appointmentCounts').doc(this.appointmentShortDate);
   docRef.valueChanges().subscribe(doc => {
 
     if (doc){
@@ -159,7 +160,7 @@ export class DoctorBookComponent implements OnInit {
       }
       console.log("finalEstimateTime - ", finalEstimatedTime);
 
-      this.appointmentID = appointmentDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
+      this.appointmentID = this.appointmentShortDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
       console.log("appointmentID - ", this.appointmentID);
 
       this.setFormData();
@@ -205,7 +206,7 @@ export class DoctorBookComponent implements OnInit {
      console.log("finalEstimateTime - ", finalEstimatedTime);
         
 
-     this.appointmentID = appointmentDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
+     this.appointmentID = this.appointmentShortDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
      console.log("appointmentID - ", this.appointmentID);
 
      this.setFormData();
@@ -261,11 +262,14 @@ export class DoctorBookComponent implements OnInit {
      doctorID:this.data.doctorID,
      doctorName:this.data.name,
      appointmentDate:new Date(this.selectedAppointmentDate),
+     doctorProPic:this.data.proPicURL,
      appointmentTime:this.finalEstimatedAppointmentTime,
      totalFee:this.totalFee,
+     appointmentShortDate:this.appointmentShortDate,
      appointmentNo:this.appointmentsCount,
      doctorSpeciality:this.data.speciality,
      consultationStarted:"false",
+     availabilityStatus:'Absent',
      status:'Active'
    }
 
