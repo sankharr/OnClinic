@@ -1,74 +1,89 @@
 <div class="container-fluid">
-    <div class="col-lg-12">
-        <!--button row-->
-        <div class="topnav">
-            <button class="btn" id="green" type="submit" (click)="ready()">Join vedio</button>
-            <button class="btn" type="submit" id="orange" (click)="leave()">Leave</button>
+  <div class="col-lg-12">
+    <!--button row-->
+    <div class="topnav">
+      <button class="btn" id="green" type="submit" (click)="ready()">Join vedio</button>
+      <button class="btn" type="submit" id="orange" (click)="leave()">Leave</button>
+    </div>
+    <!--end of Button row-->
+    <div class="row">
+      <!--left column-->
+      <div class="col-lg-4">
+        <div class="card">
+          <h3><b>{{currentDate | date:'hh:mm:ss a'}}</b></h3>
         </div>
-        <!--end of Button row-->
-        <div class="row">
-            <!--left column-->
-            <div class="col-lg-4">
-                <div class="card">
-                    <h3><b>{{currentDate | date:'hh:mm:ss a'}}</b></h3>
-                </div>
-                <div class="card">
-                    <h3><b>{{currentDate | date:'yyyy-MM-dd'}}</b></h3>
-                </div>
-                <div class="card" id="dark">
-                    <div class="card" id="light">
-                        <h6><b>Instructions before video Consultation</b></h6>
-                    </div>
-                    <div class="card shadow">
-                        <h6 style="text-align:left;">
-                            <ul>
-                                <li>If any report available upload them</li>
-                                <li>Ready your device with full charge</li>
-                                <li>Make sure you have proper internet connection</li>
-                                <li>Be alret on your time</li>
-                                <li><b>Click on 'Join Video' once you ready</b></li>
-                            </ul>
-                        </h6>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card" id="light">
-                        <h5><b>Upload your medical report here</b></h5>
-                    </div>
-                    <a href="#UploadDialogBox" class="btn" data-toggle="modal">Upload</a>
-                </div>
-            </div>
-            <!--right column-->
-            <div class="col-lg-8">
-                <div class="card">
-                    <h3><b>No of Patients : 12/40</b></h3>
-                </div>
-                <div class="card">
-                    <h3><b>Next Channeling : 2Min 1Sec</b></h3>
-                </div>
+        <div class="card">
+          <h3><b>{{currentDate | date:'yyyy-MM-dd'}}</b></h3>
+        </div>
+        <div class="card" id="dark">
+          <div class="card" id="light">
+            <h6><b>Instructions before video Consultation</b></h6>
+          </div>
+          <div class="card shadow">
+            <h6 style="text-align:left;">
+              <ul>
+                <li>If any report available upload them</li>
+                <li>Ready your device with full charge</li>
+                <li>Make sure you have proper internet connection</li>
+                <li>Be alret on your time</li>
+                <li><b>Click on 'Join Video' once you ready</b></li>
+              </ul>
+            </h6>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card" id="light">
+            <h5><b>Upload your medical report here</b></h5>
+          </div>
+          <a href="#UploadDialogBox" class="btn" data-toggle="modal">Upload</a>
+        </div>
+      </div>
+      <!--right column-->
+      <div class="col-lg-8">
+        <div class="card">
+          <h3><b>No of Patients : 12/40</b></h3>
+        </div>
+        <div class="card">
+          <h3><b>Next Channeling : 2Min 1Sec</b></h3>
+        </div>
 
-                <div class="col-lg-12">
-                    <div class="card shadow" id="dark">
-                        <div class="card">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="card" id="tablecol">
-                                        <h6>Chathu Perera</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card" id="tablecol">
-                                        <h6>2.40-3.00PM</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card" id="green">
-                                        <h6>Ready</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
+        <div class="col-lg-12">
+          <div class="card shadow" id="dark">
+            <div class="list-group">
+              <div class="list-group-item" *ngFor="let item of result1">
+                <div class="card">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="card" id="tablecol">
+                        <h6>{{item.patientName}}</h6>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="card" id="tablecol">
+                        <h6>{{item.appointmentTime}}</h6>
+                      </div>
+                    </div>
+                    <div class="col-lg-4" >
+                      <div class="card" id="change" style="background-color: red;" *ngIf = "item.availabilityStatus === 'Absent'">
+                        <h6>{{item.availabilityStatus}}</h6>
+                      </div> 
+                       <div class="card" id="change" style="background-color: rgb(236, 236, 62);" *ngIf = "item.availabilityStatus === 'Ready'">
+                        <h6>{{item.availabilityStatus}}</h6>
+                      </div>
+                      <div class="card" id="change" style="background-color: green;" *ngIf = "item.availabilityStatus === 'Ongoing'">
+                        <h6>{{item.availabilityStatus}}</h6>
+                      </div>
+                      <div class="card" id="change" style="background-color: purple;" *ngIf = "item.availabilityStatus === 'Finished'">
+                        <h6>{{item.availabilityStatus}}</h6>
+                      </div>
+           
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="card">
                             <div class="row" id="lessmargin">
                                 <div class="col-lg-4">
                                     <div class="card" id="tablecol">
@@ -81,13 +96,13 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="card" id="orange">
+                                    <div class="card" id="change">
                                         <h6>Ready</h6>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card">
+                        </div> -->
+            <!-- <div class="card">
                             <div class="row" id="lessmargin">
                                 <div class="col-lg-4">
                                     <div class="card" id="tablecol">
@@ -100,26 +115,26 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="card" id="red">
-                                        <h6>Absent</h6>
+                                    <div class="card" id="change">
+                                        <h6>Ready</h6>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card" id="light">
-                        <h5><b>Select from your past medical reports</b></h5>
-                    </div>
-                    <a href="#SelectDialogBox" class="btn" data-toggle="modal">Select</a>
-                    <div class="card">
-
-                    </div>
-                </div>
-            </div>
+                        </div> -->
+          </div>
         </div>
+        <div class="card">
+          <div class="card" id="light">
+            <h5><b>Select from your past medical reports</b></h5>
+          </div>
+          <a href="#SelectDialogBox" class="btn" data-toggle="modal" (click)="displayReports()">Select</a>
+          <div class="card">
+
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!--Dialog box-upload-->
@@ -176,30 +191,30 @@
       </div>
       <div class="modal-body">
         <!-- --------------- -->
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="list-group">
-                        <div class="list-group-item" *ngFor="let report of reports">
-                          <div class="row">
-                            <div class="col-lg-4">
-                              <div class="card" id="light">
-                                <h6>{{report.reportDate}}</h6>
-                              </div>
-                            </div>
-                            <div class="col-lg-5">
-                              <div class="card" id="light">
-                                <h6>{{report.reportName}}</h6>
-                              </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <button class="btn" type="submit" (click)="view()">Select</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="list-group">
+              <div class="list-group-item" *ngFor="let report of reports">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="card" id="light">
+                      <h6>{{report.reportDate}}</h6>
                     </div>
                   </div>
-         <!-- ------------------>
+                  <div class="col-lg-5">
+                    <div class="card" id="light">
+                      <h6>{{report.reportName}}</h6>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <button class="btn" type="submit" (click)="view()">Select</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ------------------>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-dismiss="modal">Close</button>

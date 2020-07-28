@@ -26,28 +26,56 @@ export class WaitingRoomComponent implements OnInit {
   result: any;
   task: AngularFireUploadTask;
   reports: any;
-   constructor(
+  result1: any;
+  appDate: any;
+  docID: string;
+  appID: string;
+  status1:any;
+  status2:any;
+  status3:any;
+  status4:any;
+  currentappData: any;
+  constructor(
     private _formbuilder: FormBuilder,
     private db: AngularFirestore,
     private router: Router,
     private afStorage: AngularFireStorage,
     private datePipe: DatePipe
-   ) { this.uid=localStorage.getItem("uid");}
+  ) {
+    this.uid = localStorage.getItem("uid");
+    // this.appDate = this.datePipe.transform(localStorage.getItem("selectedAppointment_appointmentDate"), "yyyy-MM-dd");
+    this.docID = localStorage.getItem("selectedAppointment_doctorID");
+    this.appID = localStorage.getItem("selectedAppointmentID_patient")
+    console.log(this.currentDate, " --- ", this.docID, "");
+  }
 
   ngOnInit(): void {
     this.uploadReportForm = this._formbuilder.group({
       reportDate: ["", Validators.required],
       reportName: ["", Validators.required],
     });
-    this.db.collection("Users").doc(this.uid).collection("Reports",ref=>
-    (ref.orderBy("uploadedAt","desc"))).valueChanges()
-    .subscribe(output =>{
-        this.reports=output;
-        console.log("result-",this.reports)
+    this.db.collection("Appointments").doc(this.appID).valueChanges()
+    .subscribe(value=>{
+      this.currentappData = value;
+      this.db.collection('Appointments', ref => ref.where("appointmentShortDate", "==", this.currentappData.appointmentShortDate).where("doctorID", "==", this.docID).orderBy("appointmentTime")).valueChanges()
+      .subscribe(output7 => {
+        this.result1 = output7;
+        console.log("Get All Upcomming channelings - ", this.result1);
+      })
     })
+    
   }
-  detectFiles(event){
+  detectFiles(event) {
     this.selectedFile = event.target.files[0];
+  }
+
+  displayReports() {
+    this.db.collection("Users").doc(this.uid).collection("Reports", ref =>
+      (ref.orderBy("uploadedAt", "desc"))).valueChanges()
+      .subscribe(output => {
+        this.reports = output;
+        console.log("result-", this.reports)
+      })
   }
 
   upload(repDate, repName) {
@@ -81,16 +109,20 @@ export class WaitingRoomComponent implements OnInit {
           console.log("url from subscribe - ", url);
         }
       });
-      
+
   }
 
-  leave(){
-    this.router.navigate(['patients/dashboard'])
+  leave() {
+    this.router.navigate(['patients/dashboard']);
   }
-  ready(){
-    // console.log("selected appointmentID from  ")
-    this.router.navigate(['patients/lcp']) 
+  ready() {
+    this.db.collection("Appointments").doc(this.appID).update({
+      availabilityStatus:"Ready"
+    }).then(()=>{
+      this.router.navigate(['patients/lcp']);
+    })
+    
   }
-  submit(){
+  submit() {
   }
 }
