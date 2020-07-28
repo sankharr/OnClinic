@@ -12,6 +12,7 @@ export class ChannelingComponent implements OnInit {
   userData: any;
   result2: any[];
   result3: any[];
+  moreView: any;
   constructor(
     private router:Router,
     private db: AngularFirestore
@@ -38,5 +39,11 @@ export class ChannelingComponent implements OnInit {
   }
   joinlc() {
     this.router.navigate(['/patients/waiting-room'])
+  }
+  moreview(appoID){
+this.db.collection("Appointments").doc(appoID).valueChanges()
+.subscribe(value=>{
+  this.moreView = value;
+})
   }
 }
