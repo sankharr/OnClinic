@@ -12,6 +12,7 @@
           <div class="card" id="space">
             <div class="row" id="lessmargin">
               <div class="col-lg-12">
+                
                 <!--Search bar-->
                 <div class="card" id="space">
                   <div class="col-lg-12">
@@ -26,6 +27,11 @@
                   </div>
                 </div>
                 <!--first bar-->
+                <div class="col-8" *ngIf="inquirySubmitted">
+                  <div class="alert alert-success">
+                    Inquiry Succesfully Submited!
+                  </div>
+                </div>
                 <div class="card" id="space">
                   <div class="card shadow" id="light">
                     <div class="col-lg-12">
@@ -35,18 +41,19 @@
                             <div class="col-lg-4">
                               <h6><b>{{item.doctorName}}</b></h6>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                               <h6><b>{{item.appointmentDate.toDate()|date:'yyyy-MM-dd'}}</b></h6>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-2">
                               <h6><b>Rs.{{item.totalFee}}</b></h6>
                             </div>
                             <div class="col-lg-2">
                               <button class="btn" type="submit" (click)="startCall()">view Recipt</button>
                             </div>
-                            <!-- <div class="col-lg-2">
-                              <a href="#InquiryDialogBox" class="btn" data-toggle="modal">Inqury</a>
-                            </div> -->
+                            <div class="col-lg-2">
+                              <a href="#InquiryDialogBox" class="btn" data-toggle="modal"
+                                (click)="loadInquiryData(item.appointmentID)">Inqury</a>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -55,10 +62,10 @@
                 </div>
                 <!--end of payment bars-->
                 <div class="row">
-                  <div class="col-12">
+                  <!-- <div class="col-12">
                     <a href="#InquiryDialogBox" class="btn" id="bottom" data-toggle="modal">Inqury</a>
-                  </div>
-              </div>
+                  </div> -->
+                </div>
               </div>
             </div>
           </div>
@@ -75,57 +82,27 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="Title">Appoinment Registration Form</h5>
+        <h5 class="modal-title" id="Title">Inquiry Submission Form</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <!-- --------------- -->
-        <form>
+        <form [formGroup]="inquiryForm">
           <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="InquiryDate">Date of Inquary</label>
-              <input type="date" class="form-control" id="InquiryDate" placeholder="Date of inquiry">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="ConsultDate">Date of Consultation</label>
-              <input type="date" class="form-control" id="ConsultDate" placeholder="Date of consultation">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="DoctorName">Doctor Name</label>
-              <input type="text" class="form-control" id="DoctorName" placeholder="Doctor Name">
-            </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
               <label for="Reason">Reason</label>
-              <input type="text" class="form-control" id="Reason" placeholder="Enter your reason here">
+              <input type="text" class="form-control" formControlname="reason" id="Reason"
+                placeholder="Enter your reason here">
             </div>
           </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              <label for="AppoinmnetID">Appoinment ID</label>
-              <input type="text" class="form-control" id="AppoinmnetID">
-            </div>
-            <div class="form-group col-md-4">
-              <label for="TotalAmount">Paid Amount Rs</label>
-              <input type="text" class="form-control" id="Amount">
-            </div>
-            <div class="form-group col-md-4">
-              <label for="ChannelNo">Channel No</label>
-              <input type="text" class="form-control" id="ChannelNo">
-            </div>
-          </div>
-
         </form>
-
         <!-- -------------------------- -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="payment" type="button" class="btn btn-primary">Submit</a>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="submit()">Submit</button>
       </div>
     </div>
   </div>
