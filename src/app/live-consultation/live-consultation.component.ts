@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from 'ngx-agora';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { chunk } from 'lodash';
+// import { createWriteStream } from 'fs';
+declare var MediaRecorder: any;
 
 @Component({
   selector: 'app-live-consultation',
@@ -24,14 +26,14 @@ export class LiveConsultationComponent implements OnInit {
   constructor(
     private ngxAgoraService: NgxAgoraService,
     private formbuilder: FormBuilder,
-    ) {
+  ) {
     this.uid = Math.floor(Math.random() * 100);
   }
 
   ngOnInit() {
 
     this.channelForm = this.formbuilder.group({
-      channelid: ["", Validators.required]      
+      channelid: ["", Validators.required]
     });
 
     // this.client = this.ngxAgoraService.createClient({ mode: 'rtc', codec: 'h264' });
@@ -48,7 +50,7 @@ export class LiveConsultationComponent implements OnInit {
   startCall() {
 
     let channelID = this.channelForm.controls["channelid"].value;
-    console.log("Channel ID - ",channelID);
+    console.log("Channel ID - ", channelID);
 
     this.channelid = channelID;
 
@@ -60,13 +62,13 @@ export class LiveConsultationComponent implements OnInit {
     this.assignLocalStreamHandlers();
     // this.initLocalStream();
     this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-    
+
   }
 
   endCall() {
-    this.client.leave(()=> {
+    this.client.leave(() => {
 
-      if(this.localStream.isPlaying()) {
+      if (this.localStream.isPlaying()) {
         this.localStream.stop()
       }
       this.localStream.close();
@@ -74,7 +76,7 @@ export class LiveConsultationComponent implements OnInit {
       for (let i = 0; i < this.remoteCalls.length; i++) {
         var stream = this.remoteCalls.shift();
         var id = stream.getId()
-        if(stream.isPlaying()) {
+        if (stream.isPlaying()) {
           stream.stop()
         }
         // removeView(id)
@@ -174,5 +176,65 @@ export class LiveConsultationComponent implements OnInit {
   private getRemoteId(stream: Stream): string {
     return `agora_remote-${stream.getId()}`;
   }
+
+  async startRecording() {
+
+    const gdmOptions = {
+      video: {
+        cursor: "always"
+      },
+      audio: {
+        echoCancellation: false,
+        noiseSuppression: false,
+        googAutoGainControl:false,
+        autoGainControl:false,
+        sampleRate: 44100
+      }
+    }
+    const stream = await navigator.mediaDevices.getDisplayMedia(gdmOptions);
+    const recorder = new MediaRecorder(stream);
+
+    const chunks = [];
+    recorder.ondataavailable = e => chunks.push(e.data);
+    recorder.start();
+
+    recorder.onstop = e => {
+      let link = document.createElement('a');
+      var date = new Date();
+      var filename = "My_channeling_on" + date.toLocaleDateString() + ".mp4"
+      // link.download = filename;
+      const completeBlob = new Blob(chunks, { type: "video/mp4" });
+      var x = URL.createObjectURL(completeBlob);
+      // var reader = new FileReader();
+      link.download = filename;
+      link.href = x
+      link.click()
+      // let reader = new FileReader();
+      // reader.readAsDataURL(completeBlob);
+      // reader.onload = function () {
+      //   link.href = reader.result; // data url
+      //   link.click();
+      // }
+    };
+  }
+
+  // downloadFile(url, fileName) {
+  //   return fetch(url).then(res => {
+  //     const fileStream = createWriteStream(fileName);
+  //     const writer = fileStream.getWriter();
+  //     if (res.body.pipeTo) {
+  //       writer.releaseLock();
+  //       return res.body.pipeTo(fileStream);
+  //     }
+
+  //     const reader = res.body.getReader();
+  //     const pump = () =>
+  //       reader
+  //         .read()
+  //         .then(({ value, done }) => (done ? writer.close() : writer.write(value).then(pump)));
+
+  //     return pump();
+  //   });
+  // };
 
 }

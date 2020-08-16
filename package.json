@@ -39,6 +39,7 @@
     "popper.js": "1.14.7",
     "rxjs": "6.5.4",
     "rxjs-compat": "6.5.4",
+    "streamsaver": "^2.0.4",
     "zone.js": "0.10.2"
   },
   "devDependencies": {

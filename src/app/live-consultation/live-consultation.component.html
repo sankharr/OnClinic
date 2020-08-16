@@ -17,3 +17,10 @@
 <div [id]="localCallId" class="local"></div>
 
 <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+
+<div>
+    <a class="btn btn-primary" id="start" (click)="startRecording()">Record</a>
+    <a class="btn btn-primary" id="stop">Stop</a>
+</div>
+
+<div id="video"></div>
