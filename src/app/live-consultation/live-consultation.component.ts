@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from 'ngx-agora';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { chunk } from 'lodash';
+import { RecordingService } from '../services/recording.service';
+import { DomSanitizer } from '@angular/platform-browser';
+// import { chunk } from 'lodash';
+// import * as RecordRTC from 'recordrtc';
 // import { createWriteStream } from 'fs';
-declare var MediaRecorder: any;
+declare var RecordRTC_Extension: any;
 
 @Component({
   selector: 'app-live-consultation',
@@ -11,6 +14,9 @@ declare var MediaRecorder: any;
   styleUrls: ['./live-consultation.component.css']
 })
 export class LiveConsultationComponent implements OnInit {
+  isRecording = false;
+  recordedTime;
+  blobUrl;
 
   channelForm: FormGroup;
 
@@ -21,13 +27,54 @@ export class LiveConsultationComponent implements OnInit {
   private localStream: Stream;
   private uid: number;
   private channelid: any;
+  record_tool: any;
 
 
   constructor(
+    // private recorde_tool: RecordRTC_Extension,
     private ngxAgoraService: NgxAgoraService,
     private formbuilder: FormBuilder,
+    private recorder: RecordingService,
+    private sanitizer: DomSanitizer
   ) {
+    this.record_tool = new RecordRTC_Extension();
     this.uid = Math.floor(Math.random() * 100);
+    this.recorder.recordingFailed().subscribe(() => {
+      this.isRecording = false
+    });
+
+    this.recorder.getRecordedTime().subscribe((time) => {
+      this.recordedTime = time
+    });
+
+    this.recorder.getRecordedBlob().subscribe((data) => {
+      this.blobUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data.blob));
+    });
+  }
+
+  startRecording() {
+    if (!this.isRecording) {
+      this.isRecording = true;
+      this.recorder.startRecording()
+    }
+  }
+
+  abortRecording() {
+    if (this.isRecording) {
+      this.isRecording = false;
+      this.recorder.abortRecording();
+    }
+  }
+
+  stopRecording() {
+    if (this.isRecording) {
+      this.recorder.stopRecording();
+      this.isRecording = false;
+    }
+  }
+
+  clearRecordedData() {
+    this.blobUrl = null;
   }
 
   ngOnInit() {
@@ -44,8 +91,25 @@ export class LiveConsultationComponent implements OnInit {
     // this.assignLocalStreamHandlers();
     // // this.initLocalStream();
     // this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-
+    // this.test()
   }
+
+  // test() {
+  //   this.record_tool.startRecording({
+  //     enableScreen: true,
+  //     enableMicrophone: true,
+  //     enableSpeakers: true
+  //   });
+
+  //   // btnStopRecording.onclick = function () {
+  //     this.record_tool.stopRecording(function (blob) {
+  //       console.log(blob.size, blob);
+  //       var url = URL.createObjectURL(blob);
+  //       // video.src = url;
+  //       console.log(url)
+  //     });
+  //   // }
+  // }
 
   startCall() {
 
@@ -177,64 +241,8 @@ export class LiveConsultationComponent implements OnInit {
     return `agora_remote-${stream.getId()}`;
   }
 
-  async startRecording() {
+  // startRecording() {
 
-    const gdmOptions = {
-      video: {
-        cursor: "always"
-      },
-      audio: {
-        echoCancellation: false,
-        noiseSuppression: false,
-        googAutoGainControl:false,
-        autoGainControl:false,
-        sampleRate: 44100
-      }
-    }
-    const stream = await navigator.mediaDevices.getDisplayMedia(gdmOptions);
-    const recorder = new MediaRecorder(stream);
-
-    const chunks = [];
-    recorder.ondataavailable = e => chunks.push(e.data);
-    recorder.start();
-
-    recorder.onstop = e => {
-      let link = document.createElement('a');
-      var date = new Date();
-      var filename = "My_channeling_on" + date.toLocaleDateString() + ".mp4"
-      // link.download = filename;
-      const completeBlob = new Blob(chunks, { type: "video/mp4" });
-      var x = URL.createObjectURL(completeBlob);
-      // var reader = new FileReader();
-      link.download = filename;
-      link.href = x
-      link.click()
-      // let reader = new FileReader();
-      // reader.readAsDataURL(completeBlob);
-      // reader.onload = function () {
-      //   link.href = reader.result; // data url
-      //   link.click();
-      // }
-    };
-  }
-
-  // downloadFile(url, fileName) {
-  //   return fetch(url).then(res => {
-  //     const fileStream = createWriteStream(fileName);
-  //     const writer = fileStream.getWriter();
-  //     if (res.body.pipeTo) {
-  //       writer.releaseLock();
-  //       return res.body.pipeTo(fileStream);
-  //     }
-
-  //     const reader = res.body.getReader();
-  //     const pump = () =>
-  //       reader
-  //         .read()
-  //         .then(({ value, done }) => (done ? writer.close() : writer.write(value).then(pump)));
-
-  //     return pump();
-  //   });
-  // };
+  // }
 
 }
