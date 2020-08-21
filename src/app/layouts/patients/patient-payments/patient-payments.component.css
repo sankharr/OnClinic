@@ -71,7 +71,12 @@
 #space.card{
   margin-top: 10px;
 }
-
+#bottom.btn{
+  margin-right: 5px;
+  margin-top: 10px;
+  background-color: #2364ce;
+  float: right;
+}
 .btn{
   height: 30px;
   background-color: #2364ce;
