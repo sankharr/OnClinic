@@ -26,6 +26,7 @@ export class DoctorChannelingComponent implements OnInit {
         // console.log(this.result);
         this.test(this.result);
         this.getUserState();
+        this.getTime(this.app);
       });
   }
 
@@ -40,9 +41,6 @@ export class DoctorChannelingComponent implements OnInit {
   }
 
   test(data) {
-    // this.userId = localStorage.getItem("uid");
-    // console.log(this.userId);
-    // var id = toString(this.userId);
     this.userId = localStorage.getItem("uid");
     this.db
       .collection("Users")
@@ -58,5 +56,10 @@ export class DoctorChannelingComponent implements OnInit {
         this.app = grouped[doctorId];
         console.log(this.app);
       });
+  }
+  getTime(details){
+
+
+
   }
 }
