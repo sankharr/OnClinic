@@ -176,6 +176,10 @@ export class LiveConsultationDoctorComponent implements OnInit {
               doctorID: this.appointmentData.doctorID,
               prescriptionURL: this.fb,
               uploadedAt: new Date(),
+              appointmentTime: this.appointmentData.appointmentTime,
+              appointmentDate: this.appointmentData.appointmentDate,
+              appointmentShortDate: this.appointmentData.appointmentShortDate,
+              totalFee: this.appointmentData.totalFee,
               status: 'Active'
             })
             setTimeout(() => {
