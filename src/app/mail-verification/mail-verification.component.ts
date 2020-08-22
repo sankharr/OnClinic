@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, Params, ActivatedRoute, RouterLinkActive } from '@angular/router';
 import { VerifydoctorService } from '../services/verifydoctor.service';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CoreAuthService } from '../core/core-auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClient } from '@angular/common/http';
@@ -22,7 +23,11 @@ export interface IAlert {
   styleUrls: ['./mail-verification.component.css']
 })
 export class MailVerificationComponent implements OnInit {
-  touched:boolean = false
+  codeSubmission_form = new FormGroup({
+    code: new FormControl(''),
+  });
+  // form_verificationCode: FormGroup;
+  touched: boolean = false
   // response : {
   //   "MessageId": "3520243c-5554-534c-bb6f-734a3d22648e",
   //   "ResponseMetadata": {
@@ -47,10 +52,14 @@ export class MailVerificationComponent implements OnInit {
   emailverify: boolean;
   metaData: Object;
   phoneVerified: boolean;
+  verificationCode: number;
+  isPhoneverified:boolean = true;
+  // verificatdionCode: number;
   // flag: true;
 
   constructor(
-     private http: HttpClient,
+    private _formbuilder: FormBuilder,
+    private http: HttpClient,
     private router: Router,
     private _router: ActivatedRoute,
     private doctorService: VerifydoctorService,
@@ -67,6 +76,14 @@ export class MailVerificationComponent implements OnInit {
     this.backup = this.alerts.map((alert: IAlert) => Object.assign({}, alert));
   }
   ngOnInit(): void {
+    // this.form_verificationCode = this._formbuilder.group({
+    //   verificationCode: ["", Validators.required]
+    // });
+
+
+
+
+
     var id = this._router.snapshot.queryParams['key'];
     var code = this._router.snapshot.queryParams['secret']
     console.log(id, code);
@@ -81,7 +98,7 @@ export class MailVerificationComponent implements OnInit {
             this.data = result;
             console.log(this.data.telno);
             // console.log(user.PhoneNumberVerified+"PhoneNumberVerified ")
-            this.contunue(id,user.uid,code)
+            this.contunue(id, user.uid, code)
           })
       })
 
@@ -101,47 +118,66 @@ export class MailVerificationComponent implements OnInit {
     this.doctorService.verifyEmail(id, code).subscribe(res => {
       // this.status = res
       console.log(res)
-      if(res=="email verified"){
+      if (res == "email verified") {
         // console.log("verified")
         this.emailverify = true
-      }else{
+      } else {
         console.log("Unverified")
         this.emailverify = false
       }
     })
   }
-  // phoneVerify(){
+  // phoneVerify(){ 
   //   var otp = 731892
   //   this.doctorService.verifyphone(this.user.uid,otp).subscribe(res=>{
   //     console.log(res+"phone")
   //   })
   // }
 
-  _touched(){
-    setTimeout(()=>{
+  _touched() {
+    setTimeout(() => {
       this.touched = true;
- }, 2000);
-    
+    }, 2000);
+
   }
 
+  // test(val){
+  //   console.log(val)
+  //   if (val==this.verificationCode){
+  //     console.log("same")
+  //   }else{
+  //     console.log(val,this.verificationCode)
+  //   }
+  // }
+
   phoneVerify() {
+    var code = this.codeSubmission_form.value["code"];
+    // console.log(this.codeSubmission_form.value["code"])
     // var otp = 731892
-    // if(otp==) 
-    this.doctorService.verifyphone(this.user.uid,true)
+    if (code == this.verificationCode) {
+      this.doctorService.verifyphone(this.user.uid, true)
+      this.router.navigate(['/addressverificatoin']);
+
+    }else{
+      console.log("Invalid code")
+      this.isPhoneverified = false
+    }
     // this.router.navigate(['/addressverificatoin'])
   }
 
 
   phoneOtp() {
     var otp = Math.floor(100000 + Math.random() * 900000)
-    var message = "Hello this is your verification code: "+ otp;
-    this.doctorService.sendPhoneOtp(this.user.uid,otp).subscribe(res=>{
-      this.doctorService.sendOtpText(message,this.data.telno).subscribe(res=>{
+    var message = "Hello this is your verification code: " + otp;
+    this.doctorService.sendPhoneOtp(this.user.uid, otp).subscribe(res => {
+      this.doctorService.sendOtpText(message, this.data.telno).subscribe(res => {
         // this.metaData = res
         console.log(res["ResponseMetadata"]["HTTPStatusCode"])
-        if (res["ResponseMetadata"]["HTTPStatusCode"]===200){
-          this.phoneVerified = true
-        }else{
+        if (res["ResponseMetadata"]["HTTPStatusCode"] === 200) {
+          this.phoneVerified = true;
+          this.verificationCode = otp
+          console.log(this.verificationCode)
+        } else {
           console.log("error")
           this.phoneVerified = false
         }

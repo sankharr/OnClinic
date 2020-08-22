@@ -45,8 +45,13 @@ export class GeolocationService {
       class: frm.disease,
       name: frm.displayName,
       reclat: lat,
-      reclong: lng
+      reclong: lng,
+      city:frm.city,
     });
+  }
+
+  getAlldesease(){
+    return this.db.collection('diseases').valueChanges();
   }
 
   // buildMap() {

@@ -8,11 +8,21 @@
 
 <div class="alert alert-success alert-dismissible fade show"
     style="position:fixed;top:0;width:100%;z-index:100;text-align: center;" role="alert" *ngIf="emailverify">
-    <strong>Success!</strong>  Your email succsessfuly verified! Thanks for your corporation
+    <strong>Success!</strong> Your email succsessfuly verified! Thanks for your corporation
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
+<div class="alert alert-danger alert-dismissible fade show"
+    style="position:fixed;top:0;width:100%;z-index:100;text-align: center;" role="alert" *ngIf="!isPhoneverified">
+    <strong>Error!</strong> Invalid code!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<!-- <div *ngIf="isPhoneverified">
+
+</div> -->
 
 
 <!-- Modal -->
@@ -27,26 +37,33 @@
                 </a>
             </div>
             <div class="modal-body">
-                <form>
+                <!-- <form>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Enter your one time password:</label>
                         <input type="text" class="form-control">
                     </div>
+                </form> -->
+                <form [formGroup]="codeSubmission_form">
+                    <label for="recipient-name" class="col-form-label">Enter your one time password2:</label>
+                    <!-- <div *ngIf="isPhoneverified" class="alert alert-danger" role="alert">
+                        Invalid code!
+                    </div> -->
+                    <input class="form-control" type="number" placeholder="" formControlName="code">
                 </form>
             </div>
             <div class="modal-footer" data-backdrop="false">
                 <a type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
                 <button *ngIf="data.role=='doctor'" type="button" class="btn btn-primary" (click)="[phoneVerify()]"
-                    data-dismiss="modal" [routerLink]="['/addressverificatoin']">Submit</button>
+                    data-dismiss="modal">Submit</button>
                 <button *ngIf="data.role=='patient'" type="button" class="btn btn-primary" (click)="[phoneVerify()]"
-                    data-dismiss="modal" [routerLink]="['/patients/dashboard']">Submit</button>
+                    data-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>
 </div>
 
 <div class="alert alert-success alert-dismissible fade show"
-    style="position:fixed;top:0;width:100%;z-index:100;text-align: center;" role="alert" *ngIf="phoneVerified">
+    style="position:fixed;top:0;width:100%;z-index:100;text-align: center;" role="alert" *ngIf="phoneVerified && isPhoneverified">
     <strong>Success!</strong> OTP sent to your phone number
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -62,7 +79,8 @@
             <div class="login d-flex align-items-center py-5">
                 <div class="container">
                     <div class="row">
-                        <h2 *ngIf="!touched && emailverify" align=center><span class="badge badge-pill badge-success" style="margin-left: 200px;">Step 3
+                        <h2 *ngIf="!touched && emailverify" align=center><span class="badge badge-pill badge-success"
+                                style="margin-left: 200px;">Step 3
                                 of 3</span></h2>
                     </div>
                     <div class="row">
@@ -121,4 +139,12 @@
             </div>
         </div>
     </div>
+</div>
+
+<div>
+    <!-- <a type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</a> -->
+    <button *ngIf="data.role=='doctor'" type="button" class="btn btn-primary"
+        (click)="[test(verificationCode)]">Submit</button>
+    <!-- <button *ngIf="data.role=='patient'" type="button" class="btn btn-primary" (click)="[phoneVerify()]"
+        data-dismiss="modal" [routerLink]="['/patients/dashboard']">Submit</button> -->
 </div>

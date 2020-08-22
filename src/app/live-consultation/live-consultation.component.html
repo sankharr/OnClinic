@@ -8,12 +8,35 @@
             <button class="btn btn-primary" type="submit" (click)="startCall()">Join</button>
         </div>
         <div class="col-1">
-            <button class="btn btn-primary" type="submit" [routerLink]="['/patients/waiting-room']" (click)="endCall()">Leave</button>
+            <button class="btn btn-primary" type="submit" [routerLink]="['/patients/waiting-room']"
+                (click)="endCall()">Leave</button>
         </div>
     </div>
 </form>
+
+<div id="remote"></div>
+<h1>test</h1>
 <!-- </div> -->
 
-<div [id]="localCallId" class="local"></div>
+<!-- <div [id]="localCallId" class="local"></div>
 
-<div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+<div *ngFor="let callId of remoteCalls" [id]="callId" class="remote" id="remote" #remote></div>
+
+<div>
+    <a class="btn btn-primary" id="start" (click)="startRecording()">Record</a>
+    <a class="btn btn-primary" id="stop">Stop</a>
+</div>
+
+<div id="video"></div> -->
+
+<div >
+    <button class="start-button" *ngIf="!isRecording && !blobUrl" (click)="startRecording()">Start Recording</button>
+    <button class="stop-button" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">Stop Recording</button>
+    <button class="cancel-button" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">Clear Recording</button>
+    <div *ngIf="isRecording && !blobUrl"> {{recordedTime}} </div>
+    <div>
+        <video *ngIf="!isRecording && blobUrl" controls style="width: 500px; height: 300px;">
+            <source [src]="blobUrl" type="video/webm">
+        </video>
+    </div>
+</div>

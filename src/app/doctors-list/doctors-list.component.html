@@ -29,7 +29,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="Specialized_in">
             <a class="dropdown-item" href="doctors-list"> </a>
-            <!-- <a class="dropdown-item" href="doctors-list"> aaaaa</a> -->
+            <!-- <a class="dropdown-item" href="doctors-list"> aaaaa</a>
             <a class="dropdown-item" href="doctors-list">General Physician </a>
             <a class="dropdown-item" href="doctors-list">Family practice physician" </a>
             <a class="dropdown-item" href="doctors-list"> Pediatricians </a>
@@ -44,7 +44,8 @@
             <a class="dropdown-item" href="doctors-list"> Nephrologists </a>
             <a class="dropdown-item" href="doctors-list"> Urologists </a>
             <a class="dropdown-item" href="doctors-list"> Pulmonologists </a>
-            <a class="dropdown-item" href="doctors-list"> Otolaryngologists </a>
+            <a class="dropdown-item" href="doctors-list"> Otolaryngologists </a> -->
+            <option *ngFor="let category of doctorCategories">{{category}}</option>
           </div>
         </div>
       </div>
@@ -69,7 +70,8 @@
           </div>
           <div class="col-2">
             <!-- <button routerLink="/doctor-book/{{ item.payload.doc.id }}" button class="btn btn-primary">Book Now</button> -->
-            <button routerLink="/doctor-book/{{ item.payload.doc.id }}" (click)="toDoctorDates(item.payload.doc.id)"  class="btn btn-primary">Book Now</button>
+            <!-- <button routerLink="/doctor-book/{{ item.payload.doc.id }}" (click)="toDoctorDates(item.payload.doc.id)"  class="btn btn-primary">Book Now</button> -->
+            <button routerLink="/doctor-book/{{ item.payload.doc.id }}" (click)="toDoctorDates(item.payload.doc.id)" class="btn btn-primary">Book Now</button>
           </div>
         </div>
       </div>

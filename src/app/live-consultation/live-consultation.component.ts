@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from 'ngx-agora';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { RecordingService } from '../services/recording.service';
+import { DomSanitizer } from '@angular/platform-browser';
+// import { chunk } from 'lodash';
+// import * as RecordRTC from 'recordrtc';
+// import { createWriteStream } from 'fs';
+declare var RecordRTC_Extension: any;
 
 @Component({
   selector: 'app-live-consultation',
@@ -9,6 +14,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./live-consultation.component.css']
 })
 export class LiveConsultationComponent implements OnInit {
+  isRecording = false;
+  recordedTime;
+  blobUrl;
 
   channelForm: FormGroup;
 
@@ -19,19 +27,60 @@ export class LiveConsultationComponent implements OnInit {
   private localStream: Stream;
   private uid: number;
   private channelid: any;
+  record_tool: any;
 
 
   constructor(
+    // private recorde_tool: RecordRTC_Extension,
     private ngxAgoraService: NgxAgoraService,
     private formbuilder: FormBuilder,
-    ) {
+    private recorder: RecordingService,
+    private sanitizer: DomSanitizer
+  ) {
+    this.record_tool = new RecordRTC_Extension();
     this.uid = Math.floor(Math.random() * 100);
+    this.recorder.recordingFailed().subscribe(() => {
+      this.isRecording = false
+    });
+
+    this.recorder.getRecordedTime().subscribe((time) => {
+      this.recordedTime = time
+    });
+
+    this.recorder.getRecordedBlob().subscribe((data) => {
+      this.blobUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data.blob));
+    });
+  }
+
+  startRecording() {
+    if (!this.isRecording) {
+      this.isRecording = true;
+      this.recorder.startRecording()
+    }
+  }
+
+  abortRecording() {
+    if (this.isRecording) {
+      this.isRecording = false;
+      this.recorder.abortRecording();
+    }
+  }
+
+  stopRecording() {
+    if (this.isRecording) {
+      this.recorder.stopRecording();
+      this.isRecording = false;
+    }
+  }
+
+  clearRecordedData() {
+    this.blobUrl = null;
   }
 
   ngOnInit() {
 
     this.channelForm = this.formbuilder.group({
-      channelid: ["", Validators.required]      
+      channelid: ["", Validators.required]
     });
 
     // this.client = this.ngxAgoraService.createClient({ mode: 'rtc', codec: 'h264' });
@@ -42,13 +91,30 @@ export class LiveConsultationComponent implements OnInit {
     // this.assignLocalStreamHandlers();
     // // this.initLocalStream();
     // this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-
+    // this.test()
   }
+
+  // test() {
+  //   this.record_tool.startRecording({
+  //     enableScreen: true,
+  //     enableMicrophone: true,
+  //     enableSpeakers: true
+  //   });
+
+  //   // btnStopRecording.onclick = function () {
+  //     this.record_tool.stopRecording(function (blob) {
+  //       console.log(blob.size, blob);
+  //       var url = URL.createObjectURL(blob);
+  //       // video.src = url;
+  //       console.log(url)
+  //     });
+  //   // }
+  // }
 
   startCall() {
 
     let channelID = this.channelForm.controls["channelid"].value;
-    console.log("Channel ID - ",channelID);
+    console.log("Channel ID - ", channelID);
 
     this.channelid = channelID;
 
@@ -60,13 +126,13 @@ export class LiveConsultationComponent implements OnInit {
     this.assignLocalStreamHandlers();
     // this.initLocalStream();
     this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-    
+
   }
 
   endCall() {
-    this.client.leave(()=> {
+    this.client.leave(() => {
 
-      if(this.localStream.isPlaying()) {
+      if (this.localStream.isPlaying()) {
         this.localStream.stop()
       }
       this.localStream.close();
@@ -74,7 +140,7 @@ export class LiveConsultationComponent implements OnInit {
       for (let i = 0; i < this.remoteCalls.length; i++) {
         var stream = this.remoteCalls.shift();
         var id = stream.getId()
-        if(stream.isPlaying()) {
+        if (stream.isPlaying()) {
           stream.stop()
         }
         // removeView(id)
@@ -174,5 +240,9 @@ export class LiveConsultationComponent implements OnInit {
   private getRemoteId(stream: Stream): string {
     return `agora_remote-${stream.getId()}`;
   }
+
+  // startRecording() {
+
+  // }
 
 }
