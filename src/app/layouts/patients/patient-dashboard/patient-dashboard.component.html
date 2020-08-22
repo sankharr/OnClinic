@@ -82,19 +82,19 @@
           <div class="row" id="lessmargin">
             <!--First grid-->
             <div class="col-lg-4">
-              <div class="card shadow">
+              <div class="card shadow" *ngIf = "currentappData">
                 <div class="card" id="differ">
                   <!-- <img class="rounded-circle" [src]=result2[0].proPicURL> -->
                   <h5>{{currentappData?.doctorName}}</h5>
                   <h6>{{currentappData?.doctorSpeciality}}</h6>
                   <h6 class="text-primary"><b>{{currentappData?.appointmentDate.toDate()|date:"medium"}}</b></h6>
-                  <button class="btn" type="submit" (click)="joinlc(result2[0].appointmentID)">Join</button>
+                  <button disabled class="btn" id="btndd" type="submit" (click)="joinlc(result2[0].appointmentID)">Join</button>
                 </div>
               </div>
             </div>
             <!--Second grid-->
             <div class="col-lg-4">
-              <div class="card shadow">
+              <div class="card shadow" *ngIf = "nextappData1">
                 <div class="card" id="differ">
                   <!-- <img class="rounded-circle" [src]=result2[1].proPicURL> -->
                   <h5>{{nextappData1?.doctorName}}</h5>
@@ -106,7 +106,7 @@
             </div>
             <!--Third grid-->
             <div class="col-lg-4">
-              <div class="card shadow">
+              <div class="card shadow" *ngIf = "nextappData2">
                 <div class="card" id="differ">
                   <!-- <img class="rounded-circle" [src]=result2[2].proPicURL> -->
                   <h5>{{nextappData2?.doctorName}}</h5>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-patient-dashboard',
   templateUrl: './patient-dashboard.component.html',
@@ -21,13 +22,19 @@ export class PatientDashboardComponent implements OnInit {
   currentappData: any;
   nextappData1: any;
   nextappData2: any;
+  todayDateInt: number;
+  appDateInt: number;
+  activestatus: boolean = false;
 
   constructor(
     public auth: AuthService,
     private router: Router,
+    private datePipe: DatePipe,
     private db: AngularFirestore
   ) {
     this.uid = localStorage.getItem("uid");
+    this.todayDateInt = parseInt(this.datePipe.transform(new Date(), "yyyyMMddhhmmss"));
+    console.log("appointmentBtnDate - ", this.todayDateInt)
   }
   // docref=this.db.collection("Users")
   ngOnInit(): void {
@@ -45,6 +52,9 @@ export class PatientDashboardComponent implements OnInit {
           .subscribe(output2 => {
             this.result2 = output2;
             this.currentappData = this.result2[0]
+            this.appDateInt = parseInt(this.datePipe.transform(this.currentappData.appointmentDate.toDate(), "yyyyMMddhhmmss"));
+            // this.buttonActive();
+            
             this.nextappData1 = this.result2[1]
             this.nextappData2 = this.result2[2]
             console.log("JOIN data from patients dashboard - ", this.result2);
@@ -55,35 +65,45 @@ export class PatientDashboardComponent implements OnInit {
             console.log("JOIN data from patients dashboard - ", this.result3);
           })
       })
-    this.db.collection("Users").doc(this.uid).collection("Reports",ref=>(ref.orderBy("uploadedAt","desc").limit(1))).valueChanges()
-    .subscribe(output =>{
-        this.reports=output;
-        this.lastupload=this.reports[0].uploadedAt
-    })
+    this.db.collection("Users").doc(this.uid).collection("Reports", ref => (ref.orderBy("uploadedAt", "desc").limit(1))).valueChanges()
+      .subscribe(output => {
+        this.reports = output;
+        this.lastupload = this.reports[0].uploadedAt
+      })
   }
   joinlc(appoid) {
-    localStorage.setItem("selectedAppointmentID_patient",appoid)
+    localStorage.setItem("selectedAppointmentID_patient", appoid)
     console.log(appoid);
-    localStorage.setItem("selectedAppointment_doctorID",this.result2[0].doctorID);
-    localStorage.setItem("selectedAppointment_appointmentDate",this.result2[0].appointmentDate);
-    this.router.navigate(['/patients/waiting-room'])  
+    localStorage.setItem("selectedAppointment_doctorID", this.result2[0].doctorID);
+    localStorage.setItem("selectedAppointment_appointmentDate", this.result2[0].appointmentDate);
+    this.router.navigate(['/patients/waiting-room'])
   }
-  bmi(bmi_val){
-    console.log("from BMI function-",bmi_val)
-    if(bmi_val<18.5){
+  bmi(bmi_val) {
+    console.log("from BMI function-", bmi_val)
+    if (bmi_val < 18.5) {
       this.bmiRange = "Under-Weight",
-      (<HTMLInputElement>document.getElementById("bmi")).style.color = "red";
-    }else if(bmi_val<=24.9 && bmi_val>18.5){
+        (<HTMLInputElement>document.getElementById("bmi")).style.color = "red";
+    } else if (bmi_val <= 24.9 && bmi_val > 18.5) {
       this.bmiRange = "Normal"
-    }else if(bmi_val<=29.9 && bmi_val>24.9){
+    } else if (bmi_val <= 29.9 && bmi_val > 24.9) {
       this.bmiRange = "Over-Weight",
-      (<HTMLInputElement>document.getElementById("bmi")).style.color = "red";
-    }else{
+        (<HTMLInputElement>document.getElementById("bmi")).style.color = "red";
+    } else {
       this.bmiRange = "Obese",
-      (<HTMLInputElement>document.getElementById("bmi")).style.color = "darkred";
+        (<HTMLInputElement>document.getElementById("bmi")).style.color = "darkred";
     }
-    
-  }
 
+  }
+  buttonActive() {
+    var timeDif = this.appDateInt - this.todayDateInt;
+    console.log("Time diffrence - ", timeDif)
+    if (timeDif <= 3000) {
+      window.onload = () => {
+        (<HTMLButtonElement>document.getElementById("btndd")).disabled = false;
+      }
+      console.log("time to active....")
+      this.activestatus = true;
+    }
+  }
 }
 
