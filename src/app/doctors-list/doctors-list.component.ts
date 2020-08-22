@@ -16,6 +16,8 @@ export class DoctorsListComponent implements OnInit {
   // doca: any;
   // doca1: any;
 
+  doctorCategories = ["", "General Physician", "Family practice physician", "Pediatricians", "Allergists", "Dermatologists", "Infectious disease doctors", "Ophthalmologists", "Obstetrician/gynecologists", "Cardiologists", "Endocrinologists", "Gastroenterologists", "Nephrologists", "Urologists", "Pulmonologists", "Otolaryngologists", "Neurologists", "Psychiatrists", "Oncologists", "Radiologists", "Rheumatologists", "General surgeons", "Orthopedic surgeons", "Cardiac surgeons", "Anesthesiologists"];
+  
   constructor(
     public auth: AuthService,
     private db: AngularFirestore
