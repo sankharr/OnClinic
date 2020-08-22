@@ -71,7 +71,7 @@ export class WaitingRoomComponent implements OnInit {
 
   displayReports() {
     this.db.collection("Users").doc(this.uid).collection("Reports", ref =>
-      (ref.orderBy("uploadedAt", "desc"))).valueChanges()
+      (ref.where("status","==","Active").orderBy("uploadedAt", "desc"))).valueChanges()
       .subscribe(output => {
         this.reports = output;
         console.log("result-", this.reports)
@@ -99,7 +99,9 @@ export class WaitingRoomComponent implements OnInit {
             this.db.collection('Users').doc(this.uid).collection("Reports").doc(`${repDate}_${repName}`).set({
               reportDate: repDate,
               reportName: repName,
-              reportURL: this.fb
+              reportURL: this.fb,
+              uploadedAt: new Date(),
+              status: 'Active'
             })
           });
         }),

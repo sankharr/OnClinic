@@ -22,6 +22,8 @@ export class MyhealthComponent implements OnInit {
   fb;
   reports: any[];
   task: AngularFireUploadTask;
+  deleteReportName: any;
+  deleteReportDate: any;
   
    constructor(
     private _formbuilder: FormBuilder,
@@ -37,7 +39,7 @@ export class MyhealthComponent implements OnInit {
       reportName: ["", Validators.required],
     });
     this.db.collection("Users").doc(this.uid).collection("Reports",ref=>
-    (ref.orderBy("uploadedAt","desc"))).valueChanges()
+    (ref.where("status","==","Active").orderBy("uploadedAt","desc"))).valueChanges()
     .subscribe(output =>{
         this.reports=output;
         console.log("result-",this.reports)
@@ -70,7 +72,9 @@ export class MyhealthComponent implements OnInit {
             this.db.collection('Users').doc(this.uid).collection("Reports").doc(`${repDate}_${repName}`).set({
               reportDate: repDate,
               reportName: repName,
-              reportURL: this.fb
+              reportURL: this.fb,
+              uploadedAt: new Date(),
+              status: 'Active'
             })
           });
         }),
@@ -81,5 +85,15 @@ export class MyhealthComponent implements OnInit {
         }
       });
       
+  }
+  OpenDeleteBox(reportDate,reportName){
+    this.deleteReportDate = reportDate;
+    this.deleteReportName = reportName;
+  }
+  Delete(){
+    // console.log("date and report name to be deleted- ", date+"----"+name);
+    this.db.collection('Users').doc(this.uid).collection("Reports").doc(`${this.deleteReportDate}_${this.deleteReportName}`).update({
+      status:"Deleted"
+    })
   }
 }
