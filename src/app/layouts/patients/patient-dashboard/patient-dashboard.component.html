@@ -84,7 +84,7 @@
             <div class="col-lg-4">
               <div class="card shadow" *ngIf = "currentappData">
                 <div class="card" id="differ">
-                  <!-- <img class="rounded-circle" [src]=result2[0].proPicURL> -->
+                   <img class="rounded-circle" [src]=currentappData?.doctorProPic> 
                   <h5>{{currentappData?.doctorName}}</h5>
                   <h6>{{currentappData?.doctorSpeciality}}</h6>
                   <h6 class="text-primary"><b>{{currentappData?.appointmentDate.toDate()|date:"medium"}}</b></h6>
@@ -96,7 +96,7 @@
             <div class="col-lg-4">
               <div class="card shadow" *ngIf = "nextappData1">
                 <div class="card" id="differ">
-                  <!-- <img class="rounded-circle" [src]=result2[1].proPicURL> -->
+                  <img class="rounded-circle" [src]=nextappData1?.doctorProPic> 
                   <h5>{{nextappData1?.doctorName}}</h5>
                   <h6>{{nextappData1?.doctorSpeciality}}</h6>
                   <h6 class="text-primary"><b>{{nextappData1?.appointmentDate.toDate()|date:"medium"}}</b></h6>
@@ -108,7 +108,7 @@
             <div class="col-lg-4">
               <div class="card shadow" *ngIf = "nextappData2">
                 <div class="card" id="differ">
-                  <!-- <img class="rounded-circle" [src]=result2[2].proPicURL> -->
+                  <img class="rounded-circle" [src]=nextappData2?.doctorProPic> 
                   <h5>{{nextappData2?.doctorName}}</h5>
                   <h6>{{nextappData2?.doctorSpeciality}}</h6>
                   <h6 class="text-primary"><b>{{nextappData2?.appointmentDate.toDate()|date:"medium"}}</b></h6>
@@ -132,19 +132,10 @@
           <div class="card shadow" id="space" *ngFor="let item of result3">
             <div class="card">
               <p>Date </p>
-              <p><b>{{item?.appointmentDate.toDate()|date:"medium"}}</b></p>
               <p>Doctor </p>
               <p><b>{{item?.doctorName}}</b></p>
             </div>
           </div>
-          <!-- <div class="card shadow" id="space">
-            <div class="card">
-              <p>Date </p>
-              <p><b>{{result3[1]?.appointmentDate.toDate()|date:"medium"}}</b></p>
-              <p>Doctor </p>
-              <p><b>{{result3[1]?.doctorName}}</b></p>
-            </div>
-          </div> -->
         </div>
       </div>
       <!--End of Channeling history-->
@@ -168,7 +159,7 @@
       <div class="modal-body">
         <!-- --------------- -->
         <div class="card">
-          <!-- <img class="rounded-circle" [src]=result2[1].proPicURL> -->
+          <img class="rounded-circle" [src]=nextappData1?.doctorProPic> 
           <h5>{{nextappData1?.doctorName}}</h5>
           <h6>{{nextappData1?.doctorSpeciality}}</h6>
         </div>
@@ -181,7 +172,7 @@
             </div>
             <div class="col-lg-6">
               <div class="card" id="light">
-                <h6><b>{{nextappData1?.appointmentDate}}</b></h6>
+                <h6><b>{{nextappData1?.appointmentDate.toDate()|date:'yyyy-MM-dd'}}</b></h6>
               </div>
             </div>
           </div>
@@ -232,7 +223,7 @@
       <div class="modal-body">
         <!-- --------------- -->
         <div class="card">
-          <!-- <img class="rounded-circle" [src]=result2[2].proPicURL> -->
+          <img class="rounded-circle" [src]=nextappData2?.doctorProPic> 
           <h5>{{nextappData2?.doctorName}}</h5>
           <h6>{{nextappData2?.doctorSpeciality}}</h6>
         </div>
