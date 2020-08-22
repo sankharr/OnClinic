@@ -11,7 +11,7 @@
                             <!--First grid - Patient Summary-->
                             <div class="col-lg-4">
                                 <div class="card">
-                                    <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
+                                    <img class="rounded-circle" [src]=result.proPicURL>
                                     <hr>
                                     <h5><b>{{result.name}}</b></h5>
                                     <h6>Age : {{result.age}} years</h6>
@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="card" id="light">
-                                                <h6><b>966630586v</b></h6>
+                                                <h6><b>{{result.nic}}</b></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +77,19 @@
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="card" id="light">
-                                                <h6><b>1994.05.26</b></h6>
+                                                <h6><b>{{result.dob}}</b></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="card" id="light">
+                                                <h6><b>Blood Group</b></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="card" id="light">
+                                                <h6><b>{{result.bloodGroup}}</b></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -98,17 +110,17 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="card" id="center">
-                                <h6><b>Height : {{result.height}}</b></h6>
+                                <h6><b>Height : {{result.height}} cm</b></h6>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="card" id="center">
-                                <h6><b>Weight : {{result.weight}}</b></h6>
+                                <h6><b>Weight : {{result.weight}} kg</b></h6>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="card" id="green">
-                                <h6><b>Vegitarian</b></h6>
+                                <h6><b>{{result.dietaryRestrictions}}</b></h6>
                             </div>
                         </div>
                     </div>

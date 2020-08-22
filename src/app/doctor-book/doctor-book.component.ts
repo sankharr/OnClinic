@@ -29,6 +29,7 @@ export class DoctorBookComponent implements OnInit {
   avgTime: any;
   finalEstimatedAppointmentTime: any;
   appointmentID: any;
+  hospitalCoreCharges = 200;
   // url = "https://sandbox.payhere.lk/pay/checkout";
 
   appointmentForm: FormGroup;
@@ -58,6 +59,10 @@ export class DoctorBookComponent implements OnInit {
   selectedAppointmentDate: any;
   appointmentsCount: any;
   resultz: any;
+  
+  currentUserID: any;
+  totalFee: any;
+  appointmentShortDate: string;
 
   constructor(
     public auth: AuthService,
@@ -125,11 +130,22 @@ export class DoctorBookComponent implements OnInit {
     let appointmentDate;
     let resultz;
     var appoCount;
+    
+    this.totalFee = this.hospitalCoreCharges + parseInt(this.data.doctorFee);
 
-    appointmentDate = this.datePipe.transform(datex, "yyyy-MM-dd");
+//     appointmentDate = this.datePipe.transform(datex, "yyyy-MM-dd");
+    this.appointmentShortDate = this.datePipe.transform(datex, "yyyy-MM-dd");
     console.log("appointmentdaTE - ", appointmentDate);
+    
+    if (this.results.role == 'doctor') {
+      this.currentUserID = this.results.doctorID;
 
-    var docRef = this.db.collection('Users').doc(this.id).collection('appointmentCounts').doc(appointmentDate);
+    }
+    else if (this.results.role == 'patient') {
+      this.currentUserID = this.results.patientID;
+    }
+
+    var docRef = this.db.collection('Users').doc(this.id).collection('appointmentCounts').doc(this.appointmentShortDate);
     docRef.valueChanges().subscribe(doc => {
 
       if (doc) {
@@ -165,7 +181,7 @@ export class DoctorBookComponent implements OnInit {
         }
         console.log("finalEstimatedTime - ", finalEstimatedTime);
 
-        this.appointmentID = appointmentDate + '_' + this.data.doctorID + '_' + this.results.patientID + '_' + this.appointmentsCount;
+        this.appointmentID = this.appointmentShortDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
         console.log("appointmentID - ", this.appointmentID);
 
         this.setFormData();
@@ -210,7 +226,7 @@ export class DoctorBookComponent implements OnInit {
         }
         console.log("finalEstimatedTime - ", finalEstimatedTime);
 
-        this.appointmentID = appointmentDate + '_' + this.data.doctorID + '_' + this.results.patientID + '_' + this.appointmentsCount;
+        this.appointmentID = this.appointmentShortDate + '_' + this.data.doctorID + '_' + this.currentUserID + '_' + this.appointmentsCount;
         console.log("appointmentID - ", this.appointmentID);
 
         this.setFormData();
@@ -311,16 +327,32 @@ export class DoctorBookComponent implements OnInit {
   }
 
   payNow(){
+    
+    var appointmentDatex = this.datePipe.transform(this.selectedAppointmentDate, "yyyy-MM-dd");
+    console.log("results from paynow() - ",this.results);
+    if (this.results.role == 'doctor'){
+      this.currentUserID = this.results.doctorID;
+
+    }
+    else if(this.results.role == 'patient'){
+      this.currentUserID = this.results.patientID;
+    }
+    
     var data = {
       appointmentID:this.appointmentID,
-      patientID:this.results.patientID,
+      patientID:this.currentUserID,
       patientName:this.results.name,
       doctorID:this.data.doctorID,
       doctorName:this.data.name,
-      appointmentDate:this.selectedAppointmentDate,
+      appointmentDate:new Date(this.selectedAppointmentDate),
+      doctorProPic:this.data.proPicURL,
       appointmentTime:this.finalEstimatedAppointmentTime,
-      totalFee:this.data.doctorFee,
+      totalFee:this.totalFee,
+      appointmentShortDate:this.appointmentShortDate,
       appointmentNo:this.appointmentsCount,
+      doctorSpeciality:this.data.speciality,
+      consultationStarted:"false",
+      availabilityStatus:'Absent',
       paymentStatus:'Pending',
       status:'Active'
     }    
@@ -340,7 +372,7 @@ export class DoctorBookComponent implements OnInit {
     //   console.log("successfully updated - patient Appointments")
     // })
 
-    this.db.collection('Users').doc(localStorage.getItem('selectedDocID')).collection('Appointments').doc(this.appointmentID).set(data)
+    this.db.collection('Users').doc(localStorage.getItem('selectedDocID')).collection('Appointments').doc(appointmentDatex.toString()).collection('dayAppointments').doc(this.appointmentID).set(data)
     .then(()=>{
       console.log("successfully updated - doctor Appointments")
     })

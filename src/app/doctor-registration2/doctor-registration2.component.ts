@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-doctor-registration2',
@@ -21,14 +24,24 @@ export class DoctorRegistration2Component implements OnInit {
   last_doctorID: any;
   submitError: boolean = false;
   submitSuccess: boolean = false;
+  fb;
+
+  selectedProPic: File = null;
+  uploadProPicProgress: Observable<number>;
+  taskProPic: AngularFireUploadTask;
+  uid: any;
+  downloadURL: Observable<string>;
 
   constructor(
     private _formbuilder: FormBuilder,
     private db: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private afStorage: AngularFireStorage,
   ) { }
 
   ngOnInit(): void {
+
+    this.uid = localStorage.getItem("uid");
 
     this.completeProfileDoctorForm = this._formbuilder.group({
       mondayTime: ["", Validators.required],
@@ -68,6 +81,8 @@ export class DoctorRegistration2Component implements OnInit {
   }  
 
   updateProfileDoctor() {
+
+    this.uploadProPic();
 
     var finalQualiObjectsArray = [];
 
@@ -118,6 +133,44 @@ export class DoctorRegistration2Component implements OnInit {
     else {
       this.submitError = true
     }
+  }
+
+  detectFilesProPic(event) {
+    this.selectedProPic = event.target.files[0];
+  }
+
+  uploadProPic() {
+
+    const file = this.selectedProPic;
+    const filePath = `${this.uid}/propic`;
+    const fileRef = this.afStorage.ref(filePath);
+    this.taskProPic = this.afStorage.upload(filePath, file);
+    this.uploadProPicProgress = this.taskProPic.percentageChanges();
+
+    this.taskProPic
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log("url from finalize - ", this.fb);
+            this.db.collection('Users').doc(this.uid).update({
+              proPicURL: this.fb,
+            })
+            setTimeout(() => {
+              this.uploadProPicProgress = null;
+            }, 500)
+          });
+        }),
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log("url from subscribe - ", url);
+        }
+      });
   }
 
 }

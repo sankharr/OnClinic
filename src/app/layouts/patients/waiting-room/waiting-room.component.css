@@ -40,11 +40,10 @@
     margin: -5px;
     padding-bottom: 0;
   }
-  #red.card{
-    background-color:#e43a2e;
+  #change.card{
     margin: -5px;
     padding-bottom: 0;
-  }
+  } 
   #orange.card{
     background-color:#f1a67a;
     margin: -5px;

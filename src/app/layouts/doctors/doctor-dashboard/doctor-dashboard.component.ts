@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import * as _ from 'lodash';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -10,23 +11,39 @@ import * as _ from 'lodash';
 export class DoctorDashboardComponent implements OnInit {
   @ViewChild('chart') el: ElementRef;
   @ViewChild('pieChart') el2: ElementRef;
+  userId: any;
+  result: any;
 
-  userid: string;
+  // +userid: string;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private db: AngularFirestore) {}
 
   ngOnInit(): void {
-    this.auth.getUserState().subscribe((res) => {
-      this.userid = res.uid;
-      this.auth.updateLastlogin(this.userid);
-      this.lineChart();
-      this.pieChart();
-    });
-   
-  }
+    // this.auth.getUserState().subscribe((res) => {
+    //   this.userid = res.uid;
+    //   this.auth.updateLastlogin(this.userid);
+    //   this.lineChart();
+    //   this.pieChart();
+    // });
 
+    this.userId = localStorage.getItem("uid");
+    this.db.collection("Users").doc(this.userId).valueChanges()
+    .subscribe(output=>{
+      this.charts()
+      this.result = output;
+      // console.log(this.result);
+    
+    })
+    
+       
+  }
+charts(){
+  console.log("chart called")
+  this.lineChart()
+  this.pieChart()
+}
   lineChart() {
-    const element = this.el.nativeElement;
+    // const element = this.el.nativeElement;
 
     const data = [
       {
@@ -42,12 +59,12 @@ export class DoctorDashboardComponent implements OnInit {
     
     };
 
-    Plotly.newPlot(element, data, style);
+    Plotly.newPlot("linechart", data, style);
   }
 
   pieChart(){
-    const element = this.el2.nativeElement;
-
+    // const element = this.el2.nativeElement;
+    console.log("Pie chart")
     const data = [{
       values: [19, 26],
       labels: ['Treated', 'All'],
@@ -60,7 +77,7 @@ export class DoctorDashboardComponent implements OnInit {
     
     };
 
-    Plotly.newPlot(element, data, layout);
+    Plotly.newPlot("pie", data, layout);
 
   }
 }
