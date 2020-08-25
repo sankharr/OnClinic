@@ -108,16 +108,11 @@ export class DoctorBookComponent implements OnInit {
       // items: ["", Validators.required],
       // amount: ["", Validators.required],
       // doctorName: ["", Validators.required],
-      // appoinmentDate: ["", Validators.required],
       // estimatedTime: ["", Validators.required],
       // appoinmnetID: ["", Validators.required],
       // totalAmount: ["", Validators.required],
       // channelNo: ["", Validators.required],
     });
-  }
-
-  appointmentIDGenerator() {
-
   }
 
   setResult(date) {
@@ -190,6 +185,7 @@ export class DoctorBookComponent implements OnInit {
         // sessionStorage.setItem("estimatedTime",finalEstimatedTime);
         // sessionStorage.setItem("appointmentDate",this.selectedAppointmentDate);
 
+
       }
 
 
@@ -237,8 +233,8 @@ export class DoctorBookComponent implements OnInit {
 
       }
     });
-
   }
+
 
   setFormData(){
 
@@ -304,6 +300,7 @@ export class DoctorBookComponent implements OnInit {
     form.submit()
   }
 
+
   createForm(data: FormInputData): HTMLFormElement {
     const form: HTMLFormElement = document.createElement('form')
     form.setAttribute('action', `https://sandbox.payhere.lk/pay/checkout`)
@@ -336,8 +333,7 @@ export class DoctorBookComponent implements OnInit {
     }
     else if(this.results.role == 'patient'){
       this.currentUserID = this.results.patientID;
-    }
-    
+    }    
     var data = {
       appointmentID:this.appointmentID,
       patientID:this.currentUserID,
@@ -366,6 +362,7 @@ export class DoctorBookComponent implements OnInit {
         console.log("successfully updated - doctor appointments count")
       });
     });
+
 
     // this.db.collection('Users').doc(localStorage.getItem('uid')).collection('Appointments').doc(this.appointmentID).set(data)
     // .then(()=>{

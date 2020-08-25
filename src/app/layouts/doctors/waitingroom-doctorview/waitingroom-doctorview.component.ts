@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-waitingroom-doctorview',
@@ -7,9 +10,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WaitingroomDoctorviewComponent implements OnInit {
 
-  constructor() { }
+  todayDate:string;
+  result: any;
+  doctorData: any;
+  currentAppointment: any;
+
+  constructor(
+    private datePipe: DatePipe,
+    private db: AngularFirestore,
+    private router: Router
+  ) {
+    this.todayDate = this.datePipe.transform(new Date(), "yyyy-MM-dd");
+    // (<HTMLButtonElement>document.getElementById("joinBtn")).disabled = true;
+   }
 
   ngOnInit(): void {
+    
+    console.log(this.todayDate);
+
+    this.db.collection('Users').doc(localStorage.getItem("uid")).valueChanges()
+    .subscribe(output => {
+      this.doctorData = output;
+      this.db.collection('Appointments',ref => ref.where("status","==","Active").where("doctorID","==",this.doctorData.doctorID).orderBy("appointmentDate").orderBy("appointmentNo")).valueChanges()
+      .subscribe(output => {
+        this.currentAppointment = output[0];
+        if(this.currentAppointment?.appointmentID != null){
+          console.log("buttonVisible");
+          (<HTMLButtonElement>document.getElementById("joinBtn")).disabled = false;
+        }
+        console.log("available appointments (waitingroom-doctorView) - ",this.currentAppointment);
+      })
+      
+    })
+  }
+
+  joinLiveConsultation(appoID){
+    console.log("selected appointmentID from DOCTOR - ",appoID);
+    localStorage.setItem('selectedAppointmentID_doctor',appoID);
+    this.router.navigate(['/doctors/lcd']);
+    // href="/doctors/lcd"
   }
 
 }

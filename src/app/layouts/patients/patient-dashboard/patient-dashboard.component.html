@@ -84,11 +84,13 @@
             <div class="col-lg-4">
               <div class="card shadow">
                 <div class="card" id="differ">
+
                   <!-- <img class="rounded-circle" [src]=result2[0].proPicURL> -->
                   <h5>{{currentappData?.doctorName}}</h5>
                   <h6>{{currentappData?.doctorSpeciality}}</h6>
                   <h6 class="text-primary"><b>{{currentappData?.appointmentDate.toDate()|date:"medium"}}</b></h6>
                   <button class="btn" type="submit" (click)="joinlc(result2[0].appointmentID)">Join</button>
+
                 </div>
               </div>
             </div>

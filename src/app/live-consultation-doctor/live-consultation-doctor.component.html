@@ -1,0 +1,254 @@
+<div class="container-fluid">
+    <div id="topBar">
+        <div class="row">
+            <div class="col">
+                <!-- <small>Current Number</small> -->
+                <div class="appoNumBox" *ngIf="appointmentData?.appointmentNo">
+                    <h3>{{appointmentData?.appointmentNo}}</h3>
+                </div>               
+            </div>
+            <div class="col">
+                <h3 id="timer">0{{hours}}:<span *ngIf="minutes < 10">0</span>{{minutes}}:<span
+                    *ngIf="seconds < 10">0</span>{{seconds}}</h3>                
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-9">
+            <div [id]="localCallId" class="local"></div>
+            <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+
+            <div *ngIf="remoteCalls.length === 0"  class="waitingScreen">
+                <h1 class="waitingText">Waiting for the Patient</h1>
+                <!-- <div class="row">
+                    
+                </div> -->
+            </div>
+
+        </div>
+        <!-- <div class="col-2">
+            <button class="btn btn-danger" type="submit" [routerLink]="['/patients/waiting-room']"
+                (click)="endCall()">Leave</button>                
+        </div> -->
+    </div>
+    <div id="newSidebar">
+        <button class="btn btn-danger sidebtn" type="button" [routerLink]="['/doctors/dashboard']"
+            (click)="endCall()">Leave</button>
+
+        <button class="btn btn-neutral sidebtn" type="button" (click)="openVerticallyCentered(content)">Create <br>
+            Prescription</button>
+
+        <button class="btn btn-neutral sidebtn" type="button" (click)="openVerticallyCentered(content)">Patient's <br>
+            Profile</button>
+
+        <button class="btn btn-neutral sidebtn" type="button" (click)="openVerticallyCentered(content)">Current <br>
+            Health Data</button>
+
+        <!-- <div class="modal fade" id="prescriptionModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="prescriptionModalLabel">Create a Prescription</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="col basicDetails">
+                            <p><b>Patient's Name - </b><span>Sankha</span></p>
+                            <p><b>Patient's Age - </b><span>24</span></p>
+                        </div>
+                        <form [formGroup]="prescriptionForm">
+                            <div class="row">
+                                <div class="col-10">
+                                    <input class="form-control" type="text" placeholder="" formControlName="content">
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-primary" (click)="addPrescriptionLines()"><i
+                                            style="font-size: larger;" class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="list-group">
+                            <div class="list-group-item" *ngFor="let line of prescriptionContent">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <p>{{line}}</p>
+                                    </div>
+                                    <div class="col-1">
+                                        <button class="btn btn-danger"><i style="font-size: larger;"
+                                                class="fa fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Create a Prescription</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <!-- <div class="col basicDetails">
+            <p><b>Patient's Name - </b><span>Sankha</span></p>
+            <p><b>Patient's Age - </b><span>24</span></p>
+        </div> -->
+        <label>Add prescribed medicines</label>
+        <form [formGroup]="prescriptionForm">
+            <div class="row">
+                <div class="col-11">
+                    <input class="form-control" type="text" placeholder="" formControlName="content">
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-primary" (click)="addPrescriptionLines()"><i style="font-size: larger;"
+                            class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            <br>
+            <label>Add other notes</label>
+            <div class="row">
+                <div class="col-11">
+                    <input class="form-control" type="text" placeholder="" formControlName="otherNotes">
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-primary" (click)="addOtherNotes()"><i style="font-size: larger;"
+                            class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </form>
+        <!-- <div class="list-group">
+            <div class="list-group-item" *ngFor="let line of prescriptionContent">
+                <div class="row">
+                    <div class="col-10">
+                        <p>{{line}}</p>
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-danger"><i style="font-size: larger;" class="fa fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col">
+                <label *ngIf="prescriptionContent.length"><b>Added prescribed medicines</b></label>
+                <ul>
+                    <li *ngFor="let line of prescriptionContent">
+                        <div class="row">
+                            <div class="col-10">
+                                <p>{{line}}</p>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-danger delbtn" style="size: 10%;"
+                                    (click)="removePrescriptionLines(line)"><i style="font-size: small;"
+                                        class="fa fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <label *ngIf="otherNotesArray.length"><b>Added other notes</b></label>
+                <ul>
+                    <li *ngFor="let line of otherNotesArray">
+                        <div class="row">
+                            <div class="col-10">
+                                <p>{{line}}</p>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-danger delbtn" style="size: 10%;" (click)="removeNote(line)"><i
+                                        style="font-size: small;" class="fa fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <br>
+        <h4><b>Prescription Preview</b></h4>
+        <br>
+        <div id="htmlData" #htmlData>
+            <div class="header-part">
+                <h2 style="color: dodgerblue;"><b>HospitalCore</b></h2>
+                <h6>No.4/25, Deans Road, Colombo 08. Tel: 011 2792456</h6>
+            </div>
+            <p>-----------------------------------------------------------------------------------------------</p>
+            <div class="row">
+                <div class="col" style="font-size: 14px;">
+                    Date : {{dateToday}}                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" style="font-size: 14px;">
+                    Doctor's Name : {{appointmentData?.doctorName}}                  
+                </div>
+            </div>
+            <div class="row" style="color: white;">ghfghfg</div>
+            <!-- <div class="row">Date : {{appointmentData?.doctorName}}</div> -->
+            <h6><b><u>Patient's Details</u></b></h6>
+            <div class="row">
+                <div class="col">
+                    <h6 style="font-size: 14px;">Name - <span>{{appointmentData?.patientName}}</span></h6>
+                    <h6 style="font-size: 14px;">Age - <span>24</span></h6>
+                </div>
+                <!-- <div class="col">
+                    <p>Date : {{dateToday | date:'yyyy-MM-dd'}}</p>
+                </div> -->
+            </div>
+            <!-- <hr class="solid"> -->
+            <!-- <br><br><br> -->
+            <p style="color: white;">ghfghfg</p>
+            <p></p>
+            <p></p>
+            <h6><b><u>Prescribed Medicines</u></b></h6>
+            <!-- <br> -->
+            <div class="col">
+                <div class="row" *ngFor="let line of prescriptionContent">
+                    {{line}}
+                </div>
+            </div>
+
+
+            <p style="color: white;">ghfghfg</p>
+            <h6><b><u>Other Notes</u></b></h6>
+            <!-- <br> -->
+            <div class="col">
+                <div class="row" *ngFor="let line of otherNotesArray">
+                    {{line}}
+                </div>
+            </div>
+
+
+            <!-- <ul>
+                <li *ngFor="let line of prescriptionContent">
+                    <div class="row">
+                        <div class="col-10">
+                            <p style="font-size: 14px;">{{line}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="formReset()">Reset</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="submit" class="btn btn-success" (click)="htmlToPdf()">Save</button>
+    </div>
+</ng-template>
