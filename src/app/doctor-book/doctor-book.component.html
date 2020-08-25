@@ -16,15 +16,16 @@
         <div class="card" style="width: 20rem; background-color: #0c0933; margin-bottom: 1rem; opacity: 0.7;">
           <div class="card-body" style="padding: 16;">
             <h5 class="card-title" style="color: white;">{{ item.day }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted" style="color: white;">{{ item.date | date: 'y MMMM d ' }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted" style="color: white;">{{ item.date | date: "MMM d, y" }}</h6>
             <p class="card-text" style="color: white;">
-              Starting at {{ item.date | date: "h:00 a"}}
-              Specialized in :{{ data.speciality }}
-              Total channel count :{{data.numberOfAppointments}}
+              Starting at {{ item.date | date:"h:00 a" }} <br />
+              Specialized in :{{ data.speciality }} <br />
+              <!-- Description : MBBS qulified in University of Colombo 2002<br /> -->
+              Total channel count :{{ data.numberOfAppointments }}
             </p>
             <a href="#RegistrationDialogBox" class="card-link" data-toggle="modal" (click)="setResult(item.date)">Book
-              Now
-            </a>
+              Now</a>
+            <a href="doctors-list" class="card-link">Cancel</a>
           </div>
         </div>
       </div>
@@ -38,70 +39,72 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="Title">Appointment Registration Form</h5>
+          <h5 class="modal-title" id="Title">Appoinment Registration Form</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <!-- --------------- -->
-
+          <div style="display:none" id="submit-form-container"></div>
           <form [formGroup]="appointmentForm">
             <h6><b>Patient's Details</b></h6>
 
-            <input type="hidden" class="form-control" formControlname="merchant_id" name="merchant_id" value="121XXXX">
-            <input type="hidden" class="form-control" formControlname="return_url" name="return_url"
-              value="http://sample.com/return" />
-            <input type="hidden" class="form-control" formControlname="cancel_url" name="cancel_url"
-              value="http://sample.com/cancel" />
-            <input type="hidden" class="form-control" formControlname="notify_url" name="notify_url"
-              value="http://sample.com/notify" />
-            <input type="hidden" class="form-control" formControlname="order_id" name="order_id" />
-            <input type="hidden" class="form-control" formControlname="items" name="items" value="items" /><br>
-            <input type="hidden" class="form-control" formControlname="currency" name="currency" value="LKR" />
+            <!-- <input type="hidden" class="form-control" formControlName="merchant_id" name="merchant_id" value="1214679" />
+            <input type="hidden" class="form-control" formControlName="return_url" name="return_url" value="http://localhost:4200/payment-success" />
+            <input type="hidden" class="form-control" formControlName="cancel_url" name="cancel_url" value="http://localhost:4200/payment-failed" />
+            <input type="hidden" class="form-control" formControlName="notify_url" name="notify_url" value="https://us-central1-onclinic-dd11a.cloudfunctions.net/paymentStatus"/>
+            <input type="hidden" class="form-control" formControlName="order_id" name="order_id" value="orderID123" />
+            <input type="hidden" class="form-control" formControlName="currency" name="currency" value="LKR" />
+            <input type="hidden" class="form-control" formControlName="items" name="items" value="testPaymentAppointment"/>
+            <input type="hidden" class="form-control" formControlName="amount" name="amount" value=1200/> -->
 
-            <input type="hidden" class="form-control" formControlname="appointmentID" name="appointmentID" />
-
+            <!-- <input type="hidden" class="form-control" formControlName="appointmentID"/> -->
 
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="PatientName">First Name</label>
+                <!-- <p>{{results?.name}}</p> -->
                 <input type="text" class="form-control" formControlName="first_name" name="first_name" />
               </div>
               <div class="form-group col-md-6">
                 <label for="DoctorName">Last Name</label>
+                <!-- <p>{{data?.name}}</p> -->
                 <input type="text" class="form-control" formControlName="last_name" name="last_name" />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="PatientName">Email</label>
+                <!-- <p>{{results?.name}}</p> -->
                 <input type="text" class="form-control" disabled formControlName="email" name="email" />
               </div>
               <div class="form-group col-md-6">
                 <label for="DoctorName">Phone Number</label>
+                <!-- <p>{{data?.name}}</p> -->
                 <input type="text" class="form-control" disabled formControlName="phone" name="phone" />
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-12">
+              <div class="form-group col-md">
                 <label for="PatientName">Address</label>
+                <!-- <p>{{results?.name}}</p> -->
                 <input type="text" class="form-control" disabled formControlName="address" name="address" />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="PatientName">City</label>
-                <input type="text" class="form-control" disabled formControlName="city" name="city" />
+                <!-- <p>{{results?.name}}</p> -->
+                <input type="text" class="form-control" formControlName="city" name="city" />
               </div>
               <div class="form-group col-md-6">
                 <label for="DoctorName">Country</label>
-                <input type="text" class="form-control" disabled formControlName="country" name="country" />
+                <!-- <p>{{data?.name}}</p> -->
+                <input type="text" class="form-control" formControlName="country" name="country" />
               </div>
             </div>
-
             <h6><b>Appointment Details</b></h6>
-
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="TotalAmount">Doctor Name</label>
@@ -109,101 +112,68 @@
                 <!-- <input
                 type="text"
                 class="form-control"
-                id="TotalAmount"
-                placeholder="1600"
+                formControlName="totalAmount"
+                disabled
               /> -->
               </div>
-              <!-- <div class="form-group col-md-6">
-              <label for="TotalAmount">Total Amount Rs</label>
-              <p>{{ data?.doctorFee }}</p> -->
-              <!-- <input
+              <div class="form-group col-md-6">
+                <label for="TotalAmount">Total Amount Rs</label>
+                <p>{{ data?.doctorFee }}</p>
+                <!-- <input
                 type="text"
                 class="form-control"
-                id="TotalAmount"
-                placeholder="1600"
+                formControlName="totalAmount"
+                disabled
               /> -->
-              <!-- </div> -->
-              <div class="form-group col-md-4">
-                <label for="ChannelNo">Channel No</label>
-                <p>{{ appointmentsCount }}</p>
               </div>
+              
             </div>
+
             <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="AppointmentDate">Appointment Date</label>
+
+              <div class="form-group col-md-4">
+                <label for="AppoinmentDate">Appoinment Date</label>
                 <p>{{ selectedAppointmentDate | date: "MMM d, y" }}</p>
                 <!-- <input
                 type="text"
                 class="form-control"
-                id="ChannelNo"
-                placeholder="06"
+                formControlName="appoinmentDate"
               /> -->
               </div>
-              <div class="form-group col-md-6">
+              
+              <div class="form-group col-md-4">
                 <label for="EstimatedTime">Estimated Time</label>
                 <p>{{ finalEstimatedAppointmentTime }}</p>
                 <!-- <input
                 type="text"
                 class="form-control"
-                id="ChannelNo"
+                formControlName="estimatedTime"
+              /> -->
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="ChannelNo">Channel No</label>
+                <p>{{appointmentsCount}}</p>
+                <!-- <input
+                type="text"
+                class="form-control"
+                formControlName="channelNo"
                 placeholder="06"
               /> -->
               </div>
-              <!-- <div class="form-group col-md-4">
-              <label for="ChannelNo">Channel No</label>
-              <p>{{ appointmentsCount }}</p>
-               <input
-                type="text"
-                class="form-control"
-                id="ChannelNo"
-                placeholder="06"
-              /> 
-            </div> -->
-            </div> 
-            <h6><b>Charges</b></h6>
-              <div class="form-row">
-                <div class="form-group col-md-3">
-                  <label for="TotalAmount">Doctor Fee</label>
-                  <p>Rs. {{ data?.doctorFee }}</p>
-                  <!-- <input
-                  type="text"
-                  class="form-control"
-                  id="ChannelNo"
-                  placeholder="06"
-                /> -->
-                </div>
-                <div class="form-group col-md-5">
-                  <label for="TotalAmount">HospitalCore Charges</label>
-                  <p>Rs. {{hospitalCoreCharges}}</p>
-                  <!-- <input
-                  type="text"
-                  class="form-control"
-                  id="ChannelNo"
-                  placeholder="06"
-                /> -->
-
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="TotalAmount">Total Amount</label>
-                  <p><b>Rs. {{ totalFee }}</b></p>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                  Close
-                </button>
-                <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="payNow()">Pay Now</button>
-              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Close
+              </button>
+              <!-- <button type="submit" class="btn btn-primary" (click)="payNow()">Pay Now</button> -->
+              <button type="submit" class="btn btn-primary" (click)="doPayment()">Pay Now</button>
+            </div>
           </form>
 
           <!-- -------------------------- -->
         </div>
-        <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-        <button type="submit" class="btn btn-primary" (click)="payNow()">Pay Now</button>
-      </div> -->
+        
       </div>
     </div>
   </div>

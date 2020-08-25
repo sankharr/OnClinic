@@ -6,6 +6,14 @@
         <span aria-hidden="true">&times;</span>
     </a>
 </div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="!isAddressverified" style="margin-top: 10px;"
+    @fade>
+    <strong>Error!</strong>Incorrect code!
+    <a type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </a>
+</div>
+
 
 <!-- Base image -->
 <!-- <figure class="img-box">
@@ -28,16 +36,23 @@
                 </a>
             </div>
             <div class="modal-body">
-                <form>
+                <!-- <form>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Enter your Address Verification Code:</label>
                         <input type="number" class="form-control">
                     </div>
+                </form> -->
+                <form [formGroup]="codeSubmission_form">
+                    <label for="recipient-name" class="col-form-label">Enter your Address Verification Code:</label>
+                    <!-- <div *ngIf="isPhoneverified" class="alert alert-danger" role="alert">
+                        Invalid code!
+                    </div> -->
+                    <input class="form-control" type="number" placeholder="" formControlName="code">
                 </form>
             </div>
             <div class="modal-footer" data-backdrop="false">
                 <a type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
-                <button type="button" class="btn btn-primary" [routerLink]="['/welcomepage']" (click)="verifyToken()"
+                <button type="button" class="btn btn-primary" (click)="verifyToken()"
                     data-dismiss="modal">Submit</button>
             </div>
         </div>
@@ -76,11 +91,12 @@
                                         <div *ngIf="!touched" align=center>
                                             <div>
                                                 <h4 style="color: rgb(149, 41, 212);"><span
-                                                        class="badge badge-pill badge-primary">Address Verification</span></h4>
+                                                        class="badge badge-pill badge-primary">Address
+                                                        Verification</span></h4>
                                                 <br>
                                                 <p>With supporting text below as a natural lead-in to additional
                                                     content.</p>
-                                                    <button (click)="[_touched(),sendToken()]" type="button"
+                                                <button (click)="[_touched(),sendToken()]" type="button"
                                                     class="btn btn-primary" data-toggle="modal"
                                                     data-target="#buffer">Send Token</button>
                                             </div>
@@ -97,7 +113,7 @@
                                                 width: 10%;"> -->
                                             <div align=center>
                                                 <h5 align=center>Mail Sent!</h5>
-                                                <p align =center>Check your mailBox</p>
+                                                <p align=center>Check your mailBox</p>
                                                 <button *ngIf="touched" type="button" class="btn btn-primary"
                                                     data-toggle="modal" data-target="#exampleModal"
                                                     data-whatever="@mdo">ENTER CODE</button>

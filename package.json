@@ -41,8 +41,10 @@
     "plotly": "^1.0.6",
     "plotly.js": "^1.54.5",
     "popper.js": "1.14.7",
+    "recordrtc": "^5.6.1",
     "rxjs": "6.5.4",
     "rxjs-compat": "6.5.4",
+    "streamsaver": "^2.0.4",
     "zone.js": "0.10.2"
   },
   "devDependencies": {

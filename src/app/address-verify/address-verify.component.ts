@@ -4,6 +4,7 @@ import { VerifydoctorService } from '../services/verifydoctor.service';
 import { CoreAuthService } from '../core/core-auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { trigger, transition, animate, style } from '@angular/animations';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-address-verify',
@@ -19,12 +20,17 @@ import { trigger, transition, animate, style } from '@angular/animations';
   ]
 })
 export class AddressVerifyComponent implements OnInit {
+  codeSubmission_form = new FormGroup({
+    code: new FormControl(''),
+  });
   touched:boolean = false
   user: firebase.User;
   send:boolean=true;
   sent:boolean=false;
   // div3:boolean=true;
   data: any;
+  verificationCode: number;
+  isAddressverified: boolean = true;
   constructor(
     private router: Router,
     private _router: ActivatedRoute,
@@ -51,13 +57,25 @@ export class AddressVerifyComponent implements OnInit {
   sendToken(){
     var otp = Math.floor(1000000 + Math.random() * 9000000)
     this.doctorService.sendToken(this.user.uid,otp,this.user.displayName,['address']).subscribe(res=>{
-      console.log(res)
+      // console.log(res)
+      this.verificationCode = otp
+      console.log(this.verificationCode,otp)
     })
   }
 
   verifyToken(){
-    this.doctorService.verifyAddress(this.user.uid);
-    this.router.navigate(['/welcomepage'])
+    var code = this.codeSubmission_form.value["code"];
+    console.log(this.verificationCode)
+    // this.doctorService.verifyAddress(this.user.uid);
+    // this.router.navigate(['/welcomepage'])
+    if (code == this.verificationCode) {
+      this.doctorService.verifyAddress(this.user.uid);
+      this.router.navigate(['/welcomepage'])
+
+    }else{
+      console.log("Invalid code")
+      this.isAddressverified = false
+    }
 
   }
 _touched(){
