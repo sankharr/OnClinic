@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import * as _ from "lodash";
 import { group } from "console";
+import { Timestamp } from "rxjs/internal/operators/timestamp";
 
 @Component({
   selector: "app-doctor-channeling",
@@ -12,6 +13,9 @@ export class DoctorChannelingComponent implements OnInit {
   result: any;
   userId: any;
   app: any;
+  result2: any;
+  //tt: any;
+  
   // doctorId : string;
 
   constructor(private db: AngularFirestore) {}
@@ -22,11 +26,16 @@ export class DoctorChannelingComponent implements OnInit {
       .collection("Appointments")
       .valueChanges()
       .subscribe((output) => {
+        // var ts = output["doctorName"];
+        // this.tt = ts;
+        // console.log(ts);
+
         this.result = output;
         // console.log(this.result);
+        // console.log(this.result["appointmentDate"]);
         this.test(this.result);
         this.getUserState();
-        this.getTime(this.app);
+        this.getTime();
       });
   }
 
@@ -50,16 +59,33 @@ export class DoctorChannelingComponent implements OnInit {
         // console.log(res)
         var doctorId = res["doctorID"];
         console.log(doctorId);
+        
         var grouped = _.mapValues(_.groupBy(data, "doctorID"), (clist) =>
           clist.map((data) => _.omit(data, "doctorID"))
         );
         this.app = grouped[doctorId];
         console.log(this.app);
+
+        // var ts = this.app["appointmentDate"];
+        // console.log(ts);
+        
       });
   }
-  getTime(details){
 
-
+  getTime() {
+    // this.userId = localStorage.getItem("uid");
+    // this.db
+    //   .collection("Appointments")
+    //   .doc(this.userId)
+    //   .valueChanges()
+    //   .subscribe((res) => {
+    //     // console.log(res)
+    //     var ts = res["appointmentDate"];
+    //     console.log(ts);
+        
+        
+        
+      // });
 
   }
 }

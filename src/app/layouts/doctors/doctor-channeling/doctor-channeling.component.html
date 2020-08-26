@@ -101,7 +101,7 @@
                                             <span class="mb-0 text-sm">Appoinment with user : {{item.patientName}}</span> 
                                         </td>
                                         <td>
-                                          <span class="mb-0 text-sm"> {{item.appointmentDate }}</span> 
+                                          <span class="mb-0 text-sm"> {{item.appointmentDate.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</span> 
                                       </td>
                                         <td>
                                             <button type="button" class="btn btn-primary" style="background-color: #2364ce;">View Details</button>
@@ -127,7 +127,7 @@
                                             <span class="mb-0 text-sm">Appoinment with user : {{item.patientName}}</span> 
                                         </td>
                                         <td>
-                                          <span class="mb-0 text-sm"> {{item.appointmentDate}}</span> 
+                                          <span class="mb-0 text-sm"> {{item.appointmentDate.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</span>
                                       </td>
                                         <td>
                                           <button type="button" class="btn btn-primary">View Details</button>

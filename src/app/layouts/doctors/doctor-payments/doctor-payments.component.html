@@ -95,54 +95,25 @@
                               <table class="table align-items-center table-flush">
                         
                                 <tbody>
+                                  <div *ngFor = 'let item of app'>
+                                    <div *ngIf="item.status==='Active'">
                                   <tr>
                                     <td>
-                                        <span class="mb-0 text-sm">Appoinment with user : User name 1</span> 
+                                        <span class="mb-0 text-sm">Appoinment with user : {{item.patientName}}</span> 
                                     </td>
                                     <td>
-                                      In 12hours 
+                                      <span class="mb-0 text-sm"> {{item.appointmentDate.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</span> 
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
+                                        <button type="button" class="btn btn-success">Total Fee<br/>{{item.totalFee}}</button>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-primary" style="background-color: #2364ce;">View Details</button>
                                     </td>
                                                   
                                   </tr>
-                        
-                                  <tr>
-                                    <td>
-                                        <span class="mb-0 text-sm">Appoinment with user : User name 2</span> 
-                                    </td>
-                                    <td>
-                                      In 12hours 
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary" style="background-color: #2364ce;" >View Details</button>
-                                    </td>
-                                                   
-                                  </tr>
-                                  
-                                  <tr>
-                                    <td>
-                                        <span class="mb-0 text-sm">Appoinment with user : User name 2</span> 
-                                    </td>
-                                    <td>
-                                      In 12hours 
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary" style="background-color: #2364ce;">View Details</button>
-                                    </td>
-                                                   
-                                  </tr>
-                        
+                                  </div>
+                                  </div>
                                 </tbody>
                               </table>
                             </div>
@@ -155,53 +126,26 @@
                               <table class="table align-items-center table-flush">
                         
                                 <tbody>
+                                  <div *ngFor = 'let item of app'>
+                                    <div *ngIf="item.status==='Success'">
                                   <tr>
                                     <td>
-                                        <span class="mb-0 text-sm">Appoinment with user : User name 1</span> 
+                                        <span class="mb-0 text-sm">Appoinment with user : {{item.patientName}}</span> 
                                     </td>
                                     <td>
-                                      12hours ago
+                                      <span class="mb-0 text-sm"> {{item.appointmentDate.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</span>  
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
+                                        <button type="button" class="btn btn-success">Total Fee<br/>{{item.totalFee}}</button>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary">View Details</button>
-                                    </td>
-                                                    
-                                  </tr>
-                        
-                                  <tr>
-                                    <td>
-                                        <span class="mb-0 text-sm">Appoinment with user : User name 2</span> 
-                                    </td>
-                                    <td>
-                                      12hours ago
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary">View Details</button>
-                                    </td>
-                                    
-                                  </tr>
-                                  
-                                  <tr>
-                                    <td>
-                                        <span class="mb-0 text-sm">Appoinment with user : User name 2</span> 
-                                    </td>
-                                    <td>
-                                      12hours ago 
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-success">Total Fee<br/>Rs 1500/=</button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary">View Details</button>
+                                        <button type="button" class="btn btn-primary" style="background-color: #2364ce;">View Details</button>
                                     </td>
                                                   
                                   </tr>
+                                  </div>
+                                  </div>
+                        
                         
                                 </tbody>
                               </table>
