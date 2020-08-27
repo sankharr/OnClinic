@@ -16,6 +16,7 @@ export class DoctorChannelingComponent implements OnInit {
   app: any;
   result2: any;
   closeResult: string;
+  appointmentId: string;
   //tt: any;
   
   // doctorId : string;
@@ -37,6 +38,7 @@ export class DoctorChannelingComponent implements OnInit {
         // console.log(this.result["appointmentDate"]);
         this.test(this.result);
         this.getUserState();
+        this.getPrescriptions();
       
       });
   }
@@ -82,6 +84,14 @@ export class DoctorChannelingComponent implements OnInit {
     });
   }
 
+  open2(content2) {
+    this.modalService.open(content2, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -90,6 +100,22 @@ export class DoctorChannelingComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+
+}
+
+getPrescriptions(){
+  this.appointmentId = localStorage.getItem("appointmentID");
+  console.log(this.appointmentId);
+
+  // this.db
+  //     .collection("Appointments")
+  //     .doc(this.appointmentId)
+  //     .collection("Prescriptions")
+  //     .valueChanges()
+  //     .subscribe((output) => { 
+  //       this.result2 = output;
+  //       console.log(this.result2);
+  //     });
 
 }
 
