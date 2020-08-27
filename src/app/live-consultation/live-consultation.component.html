@@ -4,7 +4,7 @@
             <div class="col">
                 <div class="appoNumBox" *ngIf="appointmentCountDoc?.currentNumber">
                     <h3>{{appointmentCountDoc?.currentNumber}}</h3>
-                </div> 
+                </div>
             </div>
             <div class="col">
                 <h3>0{{hours}}:<span *ngIf="minutes < 10">0</span>{{minutes}}:<span
@@ -30,8 +30,27 @@
         <button class="btn btn-danger sidebtn" type="submit" [routerLink]="['/patients/waiting-room']"
             (click)="endCall()">Leave</button>
 
-        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal" (click)="openVerticallyCentered(content)">Download <br>
+        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal"
+            (click)="openVerticallyCentered(content)">Download <br>
             Prescription</button>
+        <a class="btn btn-neutral sidebtn" *ngIf="!isRecording && !blobUrl && extensionInstalled"
+            (click)="startRecording()">Start Recording</a>
+        <a class="btn btn-neutral sidebtn" *ngIf="!extensionInstalled"
+            href="https://chrome.google.com/webstore/detail/recordrtc/ndcljioonkecdnaaihodjgiliohngojp" target="_blank">
+            Install RecordRtc <br>Extension to Record <br> Consultation</a>
+        <a class="btn btn-neutral sidebtn" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">Stop Recording</a>
+        <a class="btn btn-neutral sidebtn" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">Clear
+            Recording</a>
+        <div *ngIf="isRecording && !blobUrl"> {{recordedTime}} </div>
+        <div><br>
+            <small *ngIf="!isRecording && blobUrl" style="color: red;">This is audio preview only.You can download both audio and video of the consultation.</small><br>
+            <audio title="This is audio preview only.You can download both audio and video of the consultation."
+                *ngIf="!isRecording && blobUrl" controls style="width: 180px; height: 50px;">
+                <source [src]="blobUrl" type="video/webm">
+            </audio>
+            <a class="btn btn-success sidebtn" *ngIf="!isRecording && blobUrl" [href]="blobUrl"
+                download="{{fileName}}">Download Recoding</a>
+        </div>
         <!-- <div class="row newSidebarRow">
 
         </div>
@@ -64,31 +83,32 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title">Prescriptions</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <h4 class="modal-title">Prescriptions</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div class="modal-body">
-      <div class="list-group">
-          <div class="list-group-item" *ngFor="let item of prescriptions">
-            <div class="row">
-                <div class="col">
-                    <small>Prescription ID</small>
-                    <p>{{item.prescriptionID}}</p>
-                </div>
-                <div class="col">
-                    <small>Uploaded At</small>
-                    <p>{{item.uploadedAt.toDate() | date:"medium"}}</p>
-                </div>
-                <div class="col" style="text-align: right;">
-                    <button class="btn btn-outline-primary" (click)="viewPrescription(item.prescriptionURL)">View</button>
+        <div class="list-group">
+            <div class="list-group-item" *ngFor="let item of prescriptions">
+                <div class="row">
+                    <div class="col">
+                        <small>Prescription ID</small>
+                        <p>{{item.prescriptionID}}</p>
+                    </div>
+                    <div class="col">
+                        <small>Uploaded At</small>
+                        <p>{{item.uploadedAt.toDate() | date:"medium"}}</p>
+                    </div>
+                    <div class="col" style="text-align: right;">
+                        <button class="btn btn-outline-primary"
+                            (click)="viewPrescription(item.prescriptionURL)">View</button>
+                    </div>
                 </div>
             </div>
-          </div>
-      </div>
+        </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     </div>
-  </ng-template>
+</ng-template>
