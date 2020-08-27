@@ -14,25 +14,20 @@
     </div>
 </form>
 
-<div id="remote"></div>
-<h1>test</h1>
-<!-- </div> -->
-
-<!-- <div [id]="localCallId" class="local"></div>
+<div [id]="localCallId" class="local"></div>
 
 <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote" id="remote" #remote></div>
 
+
+
+<!-- <div id="video"></div> -->
+
 <div>
-    <a class="btn btn-primary" id="start" (click)="startRecording()">Record</a>
-    <a class="btn btn-primary" id="stop">Stop</a>
-</div>
-
-<div id="video"></div> -->
-
-<div >
-    <button class="start-button" *ngIf="!isRecording && !blobUrl" (click)="startRecording()">Start Recording</button>
-    <button class="stop-button" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">Stop Recording</button>
-    <button class="cancel-button" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">Clear Recording</button>
+    <a class="btn btn-success" *ngIf="!isRecording && !blobUrl" (click)="startRecording()">Start Recording</a>
+    <a class="btn btn-warning" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">Stop Recording</a>
+    <a class="btn btn-danger" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">Clear Recording</a>
+    <!-- <button class="download-button" *ngIf="!isRecording && blobUrl" (click)="download()">Download</button> -->
+    <a class="btn btn-success" *ngIf="!isRecording && blobUrl" [href]="blobUrl" download="{{fileName}}">DownloadFile</a>
     <div *ngIf="isRecording && !blobUrl"> {{recordedTime}} </div>
     <div>
         <video *ngIf="!isRecording && blobUrl" controls style="width: 500px; height: 300px;">

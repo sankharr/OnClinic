@@ -3,6 +3,8 @@ import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from '
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RecordingService } from '../services/recording.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import 'rxjs/Rx';
+// import { DomSanitizer } from '@angular/platform-browser';
 // import { chunk } from 'lodash';
 // import * as RecordRTC from 'recordrtc';
 // import { createWriteStream } from 'fs';
@@ -22,6 +24,7 @@ export class LiveConsultationComponent implements OnInit {
 
   localCallId = 'agora_local';
   remoteCalls: any[] = []
+  fileName;
 
   private client: AgoraClient;
   private localStream: Stream;
@@ -73,6 +76,10 @@ export class LiveConsultationComponent implements OnInit {
     }
   }
 
+  // download() {
+  //   caches.delete()
+  // }
+
   clearRecordedData() {
     this.blobUrl = null;
   }
@@ -83,33 +90,9 @@ export class LiveConsultationComponent implements OnInit {
       channelid: ["", Validators.required]
     });
 
-    // this.client = this.ngxAgoraService.createClient({ mode: 'rtc', codec: 'h264' });
-    // this.assignClientHandlers();
-
-    // // Added in this step to initialize the local A/V stream
-    // this.localStream = this.ngxAgoraService.createStream({ streamID: this.uid, audio: true, video: true, screen: false });
-    // this.assignLocalStreamHandlers();
-    // // this.initLocalStream();
-    // this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
-    // this.test()
   }
 
-  // test() {
-  //   this.record_tool.startRecording({
-  //     enableScreen: true,
-  //     enableMicrophone: true,
-  //     enableSpeakers: true
-  //   });
 
-  //   // btnStopRecording.onclick = function () {
-  //     this.record_tool.stopRecording(function (blob) {
-  //       console.log(blob.size, blob);
-  //       var url = URL.createObjectURL(blob);
-  //       // video.src = url;
-  //       console.log(url)
-  //     });
-  //   // }
-  // }
 
   startCall() {
 
@@ -142,6 +125,7 @@ export class LiveConsultationComponent implements OnInit {
         var id = stream.getId()
         if (stream.isPlaying()) {
           stream.stop()
+          
         }
         // removeView(id)
       }
