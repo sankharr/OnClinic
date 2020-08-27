@@ -77,6 +77,7 @@ import {DatePipe} from '@angular/common';
 import { EpidemicDetectionComponent } from './epidemic-detection/epidemic-detection.component';
 import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
 import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
+import { LiveConsultationDoctorComponent } from './live-consultation-doctor/live-consultation-doctor.component';
 import { RecordingService } from './services/recording.service';
 
 var firebaseConfig = {
@@ -133,7 +134,8 @@ var firebaseConfig = {
     PaymentFailedComponent,
     EpidemicDetectionComponent,
     InquiriesComponent,
-    SocialRespComponent
+    SocialRespComponent,
+    LiveConsultationDoctorComponent
   ],
   imports: [
     BrowserModule,

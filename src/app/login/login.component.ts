@@ -69,9 +69,11 @@ export class LoginComponent implements OnInit {
                 console.log("role - ", this.role);
                 localStorage.setItem("role",this.role);
                 if (this.role == "patient") {
+                  localStorage.setItem("loggedPatientID",output.payload.get("patientID"));
                   this.router.navigate(['/patients/dashboard']);
                 }
                 if (this.role == "doctor") {
+                  localStorage.setItem("loggedDoctorID",output.payload.get("doctorID"));
                   this.router.navigate(['/doctors/dashboard']);
                 }
               })

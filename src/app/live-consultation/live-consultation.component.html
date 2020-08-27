@@ -1,37 +1,94 @@
-<form [formGroup]="channelForm">
-    <div class="row">
-        <div class="col-3">
-            <!-- <label for="coption"><b>Teacher Id</b></label> -->
-            <input class="form-control" type="text" placeholder="Channel ID" formControlName="channelid">
+<div class="container-fluid">
+    <div id="topBar">
+        <div class="row">
+            <div class="col">
+                <div class="appoNumBox" *ngIf="appointmentCountDoc?.currentNumber">
+                    <h3>{{appointmentCountDoc?.currentNumber}}</h3>
+                </div> 
+            </div>
+            <div class="col">
+                <h3>0{{hours}}:<span *ngIf="minutes < 10">0</span>{{minutes}}:<span
+                        *ngIf="seconds < 10">0</span>{{seconds}}</h3>
+            </div>
         </div>
-        <div class="col-1">
-            <button class="btn btn-primary" type="submit" (click)="startCall()">Join</button>
-        </div>
-        <div class="col-1">
-            <button class="btn btn-primary" type="submit" [routerLink]="['/patients/waiting-room']"
-                (click)="endCall()">Leave</button>
-        </div>
+
     </div>
-</form>
+    <div class="row">
+        <div class="col-9">
+            <div [id]="localCallId" class="local"></div>
+            <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+            <div *ngIf="remoteCalls.length === 0" class="waitingScreen">
+                <h1 class="waitingText">Waiting for the Doctor</h1>
+            </div>
+        </div>
+        <!-- <div class="col-2">
+            <button class="btn btn-danger" type="submit" [routerLink]="['/patients/waiting-room']"
+                (click)="endCall()">Leave</button>                
+        </div> -->
+    </div>
+    <div id="newSidebar">
+        <button class="btn btn-danger sidebtn" type="submit" [routerLink]="['/patients/waiting-room']"
+            (click)="endCall()">Leave</button>
 
-<div [id]="localCallId" class="local"></div>
+        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal" (click)="openVerticallyCentered(content)">Download <br>
+            Prescription</button>
+        <!-- <div class="row newSidebarRow">
 
-<div *ngFor="let callId of remoteCalls" [id]="callId" class="remote" id="remote" #remote></div>
+        </div>
+        <div class="row newSidebarRow">
 
-
-
-<!-- <div id="video"></div> -->
-
-<div>
-    <a class="btn btn-success" *ngIf="!isRecording && !blobUrl" (click)="startRecording()">Start Recording</a>
-    <a class="btn btn-warning" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">Stop Recording</a>
-    <a class="btn btn-danger" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">Clear Recording</a>
-    <!-- <button class="download-button" *ngIf="!isRecording && blobUrl" (click)="download()">Download</button> -->
-    <a class="btn btn-success" *ngIf="!isRecording && blobUrl" [href]="blobUrl" download="{{fileName}}">DownloadFile</a>
-    <div *ngIf="isRecording && !blobUrl"> {{recordedTime}} </div>
-    <div>
-        <video *ngIf="!isRecording && blobUrl" controls style="width: 500px; height: 300px;">
-            <source [src]="blobUrl" type="video/webm">
-        </video>
+        </div> -->
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Prescriptions</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="list-group">
+          <div class="list-group-item" *ngFor="let item of prescriptions">
+            <div class="row">
+                <div class="col">
+                    <small>Prescription ID</small>
+                    <p>{{item.prescriptionID}}</p>
+                </div>
+                <div class="col">
+                    <small>Uploaded At</small>
+                    <p>{{item.uploadedAt.toDate() | date:"medium"}}</p>
+                </div>
+                <div class="col" style="text-align: right;">
+                    <button class="btn btn-outline-primary" (click)="viewPrescription(item.prescriptionURL)">View</button>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+  </ng-template>

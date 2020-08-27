@@ -9,7 +9,7 @@
         </div>
     </div>
     <!--Form Begins-->
-    <form [formGroup]="updateProfileForm" novalidate>
+    <form [formGroup]="updateBasicProfileForm" novalidate>
         <!--Feedback Handling-->
         <div *ngIf="submitError" class="alert alert-danger">
             Update Failed! Please check whether you have filled all the required fields and try again!
@@ -62,108 +62,199 @@
                     </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6">
-                    <label for="coption"><b>Long Term deseases</b></label>
-                    <div class="card" id="list">
-                        <h6 style="text-align: left;">
-                            <ul>
-                                <li *ngFor="let long of lgdis">{{long}}</li>
-                            </ul>
-                        </h6>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <label for="coption" id="avgTime"><b>Alergies</b></label>
-                    <div class="card" id="list">
-                        <h6 style="text-align: left;">
-                            <ul>
-                                <li *ngFor="let alergy of alergies">{{alergy}}</li>
-                            </ul>
-                        </h6>
-                    </div>
-                </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn" id="bottom" type="submit" (click)="updateProfilePatient()">Update</button>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <!-- Label and selection for long term diseases -->
+        <div class="col-6">
+            <label for="coption"><b>Chronic diseases</b></label>
+            <div class="card" id="list">
+                <h6 style="text-align: left;">
+                    <ul>
+                        <li *ngFor="let long of lgdis">{{long}}</li>
+                    </ul>
+                </h6>
             </div>
+        </div>
+        <!-- Label and selection for long term alergies -->
+        <div class="col-6">
+            <label for="coption" id="avgTime"><b>Alergies</b></label>
+            <div class="card" id="list">
+                <h6 style="text-align: left;">
+                    <ul>
+                        <li *ngFor="let alergy of alergies">{{alergy}}</li>
+                    </ul>
+                </h6>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="updateDAProfileForm" novalidate>
+        <!--Feedback Handling-->
+        <div *ngIf="submitError" class="alert alert-danger">
+            Update Failed! Please check whether you have filled all the required fields and try again!
+        </div>
+
+        <div *ngIf="submitSuccess" class="alert alert-success">
+            Succesfully Updated!
+        </div>
+        <!--edit Values-->
+        <div class="card">
+            <!-- Add other categories and view list -->
             <div class="row">
+                <!-- Long term diseases -->
                 <div class="col-6">
                     <div class="row">
-                        <div class="col-10">
-                            <select class="form-control" formControlName="longTermDiseases">
-                                <option *ngFor="let disease of longTermDiseasesList">{{disease}}</option>
+                        <div class="col-6">
+                            <select class="form-control" formControlName="longTermDiseases"
+                                (change)="selectedDisease($event)">
+                                <option #selectedDisease *ngFor="let disease of longTermDiseasesList">{{disease}}
+                                </option>
+                                <option #otherDisease>Other</option>
                             </select>
                         </div>
-                        <div class="col-2">
-                            <button class="btn" type="button" (click)="add1()">
+                        <div class="col-5" *ngIf="otherDisease.selected">
+                            <input class="form-control" type="text" placeholder="Enter the disease"
+                                formControlName="newLTDisease" required>
+                        </div>
+                        <div class="col-1" *ngIf="otherDisease.selected">
+                            <button class="btn" type="button"
+                                (click)="newLTDAddList(updateDAProfileForm.controls['newLTDisease'].value)">
                                 <span class="btn-inner--icon">
                                     <i class="fa fa-plus mr-2"></i>
-                                </span>Add
+                                </span>
                             </button>
                         </div>
                     </div>
+                    
                 </div>
+                <!-- Alergies -->
                 <div class="col-6">
                     <div class="row">
-                        <div class="col-10">
-                            <select class="form-control" formControlName="alergies">
-                                <option *ngFor="let alergy of allergiesList">{{alergy}}</option>
+                        <div class="col-6">
+                            <select class="form-control" formControlName="allergies" (change)="selectedAllergy($event)">
+                                <option *ngFor="let allergy of allergiesList">{{allergy}}</option>
+                                <option #otherAllergy>Other</option>
                             </select>
                         </div>
-                        <div class="col-2">
-                            <button class="btn" type="button" (click)="add1()">
-                                <span class="btn-inner--icon">
-                                    <i class="fa fa-plus mr-2"></i>
-                                </span>Add
-                            </button>
+                        <div class="col-5" *ngIf="otherAllergy.selected">
+                            <input class="form-control" type="text" placeholder="Enter the alergy"
+                                formControlName="newAllergy" required>
                         </div>
+                        
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                <div class="list-group">
-                    <div class="list-group-item" *ngFor="let operation of operations">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="card" id="center">
-                                    <h6><b>{{operation.operationName}}</b></h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card" id="center">
-                                    <h6><b>{{operation.operationDate}}</b></h6>
+                    <div class="row mb-lg-4">
+                        <div class="col-5">
+                            <div class="list-group">
+                                <div class="list-group-item" *ngFor="let allergy of selectedAllergies">
+                                    {{allergy}}
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn" id="bottom" type="submit" (click)="updateDAProfilePatient()">Update</button>
+        </div>
+    </div>
+    <!-- End of alergies and diseases -->
+    <div class="row">
+        <div class="col-12">
+            <div class="list-group">
+                <div class="list-group-item" *ngFor="let operation of operations">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card" id="center">
+                                <h6><b>{{operation.operationName}}</b></h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card" id="center">
+                                <h6><b>{{operation.operationDate}}</b></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+    <form [formGroup]="updateOperationForm" novalidate>
+        <!--Feedback Handling-->
+        <div *ngIf="submitError" class="alert alert-danger">
+            Update Failed! Please check whether you have filled all the required fields and try again!
+        </div>
+
+        <div *ngIf="submitSuccess" class="alert alert-success">
+            Succesfully Updated!
+        </div>
+        <!--edit Values-->
+        <div class="card">
             <div class="row">
                 <div class="col-6">
-                    <label for="coption"><b>Name of the operation</b></label>
-                    <input class="form-control" type="text" placeholder="" formControlName="long" required>
+                    <label for="coption" id="avgTime"><b>Name of the operation</b></label>
+                    <input class="form-control" type="text" placeholder="" formControlName="operationName" required>
                 </div>
                 <div class="col-4">
                     <label for="coption" id="avgTime"><b>Date</b></label>
-                    <input class="form-control" type="date" placeholder="" formControlName="alergy" required>
+                    <input class="form-control" type="date" placeholder="" formControlName="operationDate" required>
                 </div>
                 <div class="col-2">
-                    <button class="btn" id="down" type="button" (click)="add1()">
+                    <button class="btn" id="down" type="button"
+                        (click)="addOperation(updateOperationForm.controls['operationName'].value,updateOperationForm.controls['operationDate'].value)">
                         <span class="btn-inner--icon">
                             <i class="fa fa-plus mr-2"></i>
                         </span>Add
                     </button>
                 </div>
             </div>
-            <!--submit button-->
-            <div class="row">
-                <div class="col-12">
-                    <button class="btn" id="bottom" type="submit" (click)="updateProfilePatient()">Update</button>
-                    <button class="btn" id="bottom" type="submit" (click)="back()">Back</button>
+            <div class="row mb-lg-4">
+                <div class="col-5">
+                    <div class="list-group">
+                        <div class="list-group-item" *ngFor="let op of finalOperationsList">
+                            <div class="row">
+                                <div class="col ml-4">
+                                    <div class="row">
+                                        <small>Date</small>
+                                    </div>
+                                    <div class="row">
+                                        <b>{{op.operationDate}}</b>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <small>Operation Name</small>
+                                    </div>
+                                    <div class="row">
+                                        <b>{{op.operationName}}</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
+    <!--submit button-->
+    <div class="row">
+        <div class="col-12">
+            <button class="btn" id="bottom" type="submit" (click)="updateOperationPatient()">Update</button>
+            <button class="btn" id="bottom" type="submit" (click)="back()">Back</button>
+        </div>
+    </div>
+
+
 
 
 
