@@ -95,16 +95,20 @@
                               <table class="table align-items-center table-flush">
                                 <tbody>
                                   <div *ngFor = 'let item of app'>
-                                    <div *ngIf="item.status==='Active'">
+                                    <div *ngIf="item.status=='Active'">
                                       <tr>
                                         <td>
                                             <span class="mb-0 text-sm">Appoinment with user : {{item.patientName}}</span> 
                                         </td>
                                         <td>
                                           <span class="mb-0 text-sm"> {{item.appointmentDate.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</span> 
+                                      </td>    
+                                      <td>
+                                        <span class="mb-0 text-sm">Appoinment number {{item.appointmentNo}}</span> 
                                       </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" style="background-color: #2364ce;">View Details</button>
+                                            
+                                            <button class="btn btn-lg btn-outline-primary" (click)="open(content)">View Details</button>
                                         </td>          
                                       </tr>       
                                     </div>
@@ -121,13 +125,16 @@
                                 <tbody>
 
                                   <div *ngFor = 'let item of app'>
-                                    <div *ngIf="item.status==='Success'">
+                                    <div *ngIf="item.status=='Success'">
                                       <tr>
                                         <td>
                                             <span class="mb-0 text-sm">Appoinment with user : {{item.patientName}}</span> 
                                         </td>
                                         <td>
                                           <span class="mb-0 text-sm"> {{item.appointmentDate.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</span>
+                                      </td>
+                                      <td>
+                                        <span class="mb-0 text-sm">Appoinment number {{item.appointmentNo}}</span> 
                                       </td>
                                         <td>
                                           <button type="button" class="btn btn-primary">View Details</button>
@@ -151,5 +158,27 @@
   </div>
 </div>          
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">More Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <div class="input-group-append">
+            This is modal
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+</ng-template>
 
     

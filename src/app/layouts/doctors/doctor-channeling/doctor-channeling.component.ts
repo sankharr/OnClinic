@@ -3,6 +3,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import * as _ from "lodash";
 import { group } from "console";
 import { Timestamp } from "rxjs/internal/operators/timestamp";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-doctor-channeling",
@@ -14,11 +15,12 @@ export class DoctorChannelingComponent implements OnInit {
   userId: any;
   app: any;
   result2: any;
+  closeResult: string;
   //tt: any;
   
   // doctorId : string;
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore, private modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.userId = localStorage.getItem("uid");
@@ -35,7 +37,7 @@ export class DoctorChannelingComponent implements OnInit {
         // console.log(this.result["appointmentDate"]);
         this.test(this.result);
         this.getUserState();
-        this.getTime();
+      
       });
   }
 
@@ -72,20 +74,23 @@ export class DoctorChannelingComponent implements OnInit {
       });
   }
 
-  getTime() {
-    // this.userId = localStorage.getItem("uid");
-    // this.db
-    //   .collection("Appointments")
-    //   .doc(this.userId)
-    //   .valueChanges()
-    //   .subscribe((res) => {
-    //     // console.log(res)
-    //     var ts = res["appointmentDate"];
-    //     console.log(ts);
-        
-        
-        
-      // });
-
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+
+}
+
 }
