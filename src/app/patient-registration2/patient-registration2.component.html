@@ -23,6 +23,13 @@
             <div class="col-2">
                 <button class="btn btn-primary mt-4" (click)="uploadProPic()">Upload</button>
             </div>
+            <div class="col-2">
+                <label for="coption"><b>Gender</b></label>
+                <select class="form-control" formControlName="gender">
+                    <option #male>Male</option>
+                    <option #female>Female</option>
+                </select>               
+            </div>
         </div>
 
         <div class="row mb-lg-4">

@@ -181,7 +181,21 @@ export class LiveConsultationDoctorComponent implements OnInit {
               appointmentShortDate: this.appointmentData.appointmentShortDate,
               totalFee: this.appointmentData.totalFee,
               status: 'Active'
-            })
+            });
+            this.db.collection('Appointments').doc(this.appointmentData.appointmentID).collection("Prescriptions").add({
+              // reportDate: repDate,
+              // reportName: repName,
+              prescriptionID: this.dateToday + '_' + this.appointmentData.doctorName,
+              doctorName: this.appointmentData.doctorName,
+              doctorID: this.appointmentData.doctorID,
+              prescriptionURL: this.fb,
+              uploadedAt: new Date(),
+              appointmentTime: this.appointmentData.appointmentTime,
+              appointmentDate: this.appointmentData.appointmentDate,
+              appointmentShortDate: this.appointmentData.appointmentShortDate,
+              totalFee: this.appointmentData.totalFee,
+              status: 'Active'
+            });
             setTimeout(() => {
               this.prescriptionContent = []
               this.otherNotesArray = []
@@ -256,7 +270,8 @@ export class LiveConsultationDoctorComponent implements OnInit {
     this.db.collection("Appointments").doc(this.channelID).update({
       // status: "Success"
       consultationStarted: "false",
-      consultationStartedAt: null
+      consultationStartedAt: null,
+      availabilityStatus: "Finished"
     });
     this.client.leave(() => {
 
