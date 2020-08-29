@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-const { toUpper, identity } = require('lodash');
+const { toUpper, identity, now } = require('lodash');
 var md5 = require('md5');
 
 var firebaseConfig = {
@@ -11,7 +11,7 @@ var firebaseConfig = {
     messagingSenderId: "431443097768",
     appId: "1:431443097768:web:a82ec860e388224d4fea9d",
     measurementId: "G-NEX6MKFZJY"
-  };
+};
 
 const firebase = require("firebase");
 // Required for side-effects
@@ -55,24 +55,24 @@ exports.paymentStatus = functions.https.onRequest((req, res) => {
         db.collection('Appointments').doc(data.custom_1).update({
             paymentStatus: 'Verified'
         })
-        .then(()=>{
-            console.log("successfully updated appointments MAIN")
-            return null;
-        })
-        .catch(error => {
-            console.log(error)
-        });
+            .then(() => {
+                console.log("successfully updated appointments MAIN")
+                return null;
+            })
+            .catch(error => {
+                console.log(error)
+            });
 
         db.collection('Users').doc(data.custom_2).collection('Appointments').doc(data.custom_1).update({
             paymentStatus: 'Verified'
         })
-        .then(()=>{
-            console.log("successfully updated appointments DOCTOR");
-            return null;
-        })
-        .catch(error => {
-            console.log(error)
-        });
+            .then(() => {
+                console.log("successfully updated appointments DOCTOR");
+                return null;
+            })
+            .catch(error => {
+                console.log(error)
+            });
     }
     console.log(data.md5sig);
     console.log(md5signature);
@@ -80,3 +80,67 @@ exports.paymentStatus = functions.https.onRequest((req, res) => {
 
 
 })
+const admin = require('firebase-admin')
+const _ = require('lodash');
+const { element } = require('protractor');
+const { error } = require('console');
+var AWS = require('aws-sdk');
+AWS.config.region = 'eu-west-1';
+var sns = new AWS.SNS();
+require('dotenv').config()
+const accountSid = process.env.accountSid;
+const authToken = process.env.authToken;
+const client = require('twilio')(accountSid, authToken);
+exports.getLatestPosts =
+    functions.https.onRequest(async (req, res) => {
+        const now = admin.firestore.Timestamp.now().toDate();
+        // var interval = now.setMinutes(now.getMinutes() + 30);
+        var interval = new Date(now.getTime() + 30 * 60000);
+        // now = new Date(interval);
+        // const interval = admin.firestore.Timestamp.now()
+        // var interval = new Date(now.getTime() + (30 * 60 * 1000));
+        console.log(now) 
+        console.log(interval)
+        const snapshot = await db
+            .collection("Appointments").where('appointmentDate', '>', now).where('status', '==', "Active").where('appointmentDate', '<=', interval)
+            .orderBy("appointmentDate", "desc").limit(1)
+            .get()
+        // console.log(snapshot.docs)
+        const data = snapshot.docs.map(doc => doc.data())
+        // const subset = _.pick(data, ['Appointments', 'status']);
+        // data.forEach(element => console.log(element))
+        // var result = Object.entries(data)
+        // console.log(result["appointmentDate"]);
+        // console.log(result['appointmentDate'])
+        // const appointmentdata = data[0]
+        // const appointmentDate
+        data.forEach(element => {
+            // console.log(element['appointmentDate'])
+            client.messages
+                .create({ body: 'Hi there!', from: '+19036907183', to: '+94713255247' })
+                .then(message => console.log(message.sid)).catch(error => console.log(error))
+            var name = element['patientName'];
+            var doctorName = element['doctorName'];
+            var appointmentNo = element['appointmentNo']
+            var appointmentTime = element['appointmentTime']
+            var phone = element['phone'].substring(1)
+            // var params = {
+            //     Message: 'Hello '+name+' you have appointment with Dr. '+doctorName+' on today at '+appointmentTime+'   Appointment No: '+appointmentNo,
+            //     MessageStructure: 'string',
+            //     PhoneNumber: "+94"+phone
+            // };
+            // console.log()
+            // sns.publish(params, function (err, data) {
+            //     if (err) console.log(err, err.stack); // an error occurred
+            //     else console.log(data);           // successful response
+            // });
+        })
+        res.send(data)
+    })
+
+// exports.timer = functions.pubsub.schedule('1 * * * *').onRun((context)=>{
+//     const now = admin.firestore.Timestamp.now().toDate();
+//     db.doc("Appointments/2020-08-24_d0000001_p0000002_2").update({"testTime":now});
+//     // console.log("sdhfbsdhfvsdhv");
+//     return console.log('ssss');
+// })

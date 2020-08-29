@@ -15,7 +15,7 @@ export class VerifydoctorService {
     // private db:AngularFirestore
   ) { }
 
-  verifyDoctor(id,data){
+  verifyDoctor(id,data){ 
     // console.log("At service")
     console.log(id,data)
     return this.http.post('api/doctor_verification',[data,id])
