@@ -80,6 +80,7 @@ import { SocialRespComponent } from './moderator/social-resp/social-resp.compone
 import { LiveConsultationDoctorComponent } from './live-consultation-doctor/live-consultation-doctor.component';
 import { RecordingService } from './services/recording.service';
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -161,7 +162,8 @@ var firebaseConfig = {
     HttpModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ScheduleModule 
+    ScheduleModule,
+    AngularFireDatabaseModule 
   ],
   providers: [DatePipe,RecordingService],
   bootstrap: [AppComponent]

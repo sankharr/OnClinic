@@ -1,24 +1,24 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from 'ngx-agora';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as jsPDF from 'jspdf'
-// declare var jsPDF: any;
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { DatePipe } from '@angular/common';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Observable, timer } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-// pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import * as firebase from 'firebase/app';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-live-consultation-doctor',
   templateUrl: './live-consultation-doctor.component.html',
   styleUrls: ['./live-consultation-doctor.component.css']
 })
-export class LiveConsultationDoctorComponent implements OnInit {
+export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
 
   @ViewChild('htmlData') htmlData: ElementRef;
 
@@ -48,6 +48,11 @@ export class LiveConsultationDoctorComponent implements OnInit {
   minutes = 0;
   seconds = 0;
   doctorUID: string;
+  liveData: any;
+  liveTemperature: any[] = [];
+  liveBPM: any[] = [];
+  @Input() liveTemperatureString:any;
+  @Input() liveBPMString:any;
 
 
   constructor(
@@ -56,14 +61,20 @@ export class LiveConsultationDoctorComponent implements OnInit {
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private datePipe: DatePipe,
-    private afStorage: AngularFireStorage
-    // private formbuilder: FormBuilder,
+    private afStorage: AngularFireStorage,
+    private angularFireDatabase: AngularFireDatabase,
+    private ref: ChangeDetectorRef
   ) {
     this.uid = Math.floor(Math.random() * 100);
     this.doctorUID = localStorage.getItem('uid');
     this.channelID = localStorage.getItem('selectedAppointmentID_doctor');
     this.dateToday = this.datePipe.transform(new Date(), "yyyy-MM-dd");
 
+  }
+
+  ngOnChanges() {
+    console.log(this.liveTemperature[this.liveTemperature.length - 1],"live temperature - ",this.liveTemperature);
+    console.log(this.liveBPM[this.liveBPM.length - 1],"live heartBeat - ",this.liveBPM);
   }
 
   ngOnInit(): void {
@@ -75,13 +86,26 @@ export class LiveConsultationDoctorComponent implements OnInit {
     this.db.collection('Appointments').doc(this.channelID).valueChanges()
       .subscribe(output => {
         this.appointmentData = output;
+        console.log("current Appoinment patientID - ",this.appointmentData.patientID);
+        
+        this.angularFireDatabase.object('/'+this.appointmentData.patientID).snapshotChanges()
+        .subscribe(res => {
+          this.liveData = res.payload.toJSON();
+          if(this.liveTemperature[this.liveTemperature.length - 1] != this.liveData.temperature){
+            this.liveTemperature.push(this.liveData.temperature);            
+            this.liveTemperatureString = this.liveTemperature.toString();
+          }
+          if(this.liveBPM[this.liveBPM.length - 1] != this.liveData.heartBeat){
+            this.liveBPM.push(this.liveData.heartBeat);
+            this.liveBPMString = this.liveBPM.toString();
+          }         
+        })
       })
 
     this.startCall(this.channelID);
 
     this.timeObservable = timer(0, 1000)
     this.timeObservable.subscribe(x => {
-      // this.seconds = x;
       this.displayTime()
     });
 
@@ -89,14 +113,12 @@ export class LiveConsultationDoctorComponent implements OnInit {
 
   addOtherNotes() {
     this.otherNotesArray.push(this.prescriptionForm.controls['otherNotes'].value)
-    // console.log("prescriptionContentArray - ",this.prescriptionContent);
     this.prescriptionForm.reset();
   }
 
   removeNote(val) {
     var index = this.otherNotesArray.indexOf(val);
     this.otherNotesArray.splice(index, 1);
-    // console.log("from removeQualifications, val index qualificationsArray - ",val,index,this.qualificationsArray)
   }
 
   addPrescriptionLines() {
@@ -108,7 +130,6 @@ export class LiveConsultationDoctorComponent implements OnInit {
   removePrescriptionLines(val) {
     var index = this.prescriptionContent.indexOf(val);
     this.prescriptionContent.splice(index, 1);
-    // console.log("from removeQualifications, val index qualificationsArray - ",val,index,this.qualificationsArray)
   }
 
   openVerticallyCentered(content) {
@@ -118,28 +139,27 @@ export class LiveConsultationDoctorComponent implements OnInit {
     });
   }
 
+  openModalLiveData(content) {
+    this.modalService.open(content, {
+      centered: true,
+      size: 'lg'
+    });
+    this.getLiveData();
+  }
+
+  getLiveData(){
+    firebase.database().ref(this.appointmentData.patientID).on('value',(snap)=>{
+      console.log("from realtime database - ",snap.val());
+    });
+  }
+
   formReset() {
     this.prescriptionForm.reset();
     this.prescriptionContent = [];
     this.otherNotesArray = [];
   }
 
-  htmlToPdf() {
-
-    // let DATA = this.htmlData.nativeElement;
-    // let doc = new jsPDF('p','pt', 'a4');
-
-    // let handleElement = {
-    //   '#editor':function(element,renderer){
-    //     return true;
-    //   }
-    // };
-    // doc.fromHTML(DATA.innerHTML,15,15,{
-    //   'width': 200,
-    //   'elementHandlers': handleElement
-    // });
-
-    // doc.save('angular-demo.pdf');
+  htmlToPdf() {    
 
     this.db.collection('Users', ref => ref.where("patientID", "==", this.appointmentData.patientID)).snapshotChanges()
       .subscribe(output => {
@@ -150,7 +170,6 @@ export class LiveConsultationDoctorComponent implements OnInit {
     const doc = new jsPDF('p', 'pt', 'a5')
     const ta = document.getElementById('htmlData');
     doc.fromHTML(ta, 20, 20);
-    // doc.sav e('demo.pdf')
 
     const file = doc.output("blob");
     const filePath = `Prescriptions/${this.appointmentData.patientID}/${this.dateToday}_${this.appointmentData.doctorName}`;
@@ -169,8 +188,7 @@ export class LiveConsultationDoctorComponent implements OnInit {
             }
             console.log("url from finalize - ", this.fb);
             this.db.collection('Users').doc(this.patientUID).collection("Prescriptions").add({
-              // reportDate: repDate,
-              // reportName: repName,
+             
               prescriptionID: this.dateToday + '_' + this.appointmentData.doctorName,
               doctorName: this.appointmentData.doctorName,
               doctorID: this.appointmentData.doctorID,
@@ -183,8 +201,7 @@ export class LiveConsultationDoctorComponent implements OnInit {
               status: 'Active'
             });
             this.db.collection('Appointments').doc(this.appointmentData.appointmentID).collection("Prescriptions").add({
-              // reportDate: repDate,
-              // reportName: repName,
+             
               prescriptionID: this.dateToday + '_' + this.appointmentData.doctorName,
               doctorName: this.appointmentData.doctorName,
               doctorID: this.appointmentData.doctorID,
@@ -208,15 +225,6 @@ export class LiveConsultationDoctorComponent implements OnInit {
           console.log("url from subscribe - ", url);
         }
       });
-
-
-
-
-
-    // let DATA = this.htmlData.nativeElement;
-    // let doc = new jsPDF('p','pt', 'a4');
-    // doc.fromHTML(DATA.innerHTML,15,15);
-    // doc.save('demo.pdf');
 
   }
 
@@ -261,7 +269,6 @@ export class LiveConsultationDoctorComponent implements OnInit {
     // Added in this step to initialize the local A/V stream
     this.localStream = this.ngxAgoraService.createStream({ streamID: this.uid, audio: true, video: true, screen: false });
     this.assignLocalStreamHandlers();
-    // this.initLocalStream();
     this.initLocalStream(() => this.join(uid => this.publish(), error => console.error(error)));
 
   }
