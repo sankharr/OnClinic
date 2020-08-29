@@ -95,19 +95,37 @@
                               <table class="table align-items-center table-flush">
                                 <tbody>
                                   <div *ngFor = 'let item of app'>
-                                    <div *ngIf="item.status==='Active'">
+                                    <div *ngIf="item.status=='Active'">
                                       <tr>
                                         <td>
-                                            <span class="mb-0 text-sm">Appoinment with user : {{item.patientName}}</span> 
+                                            <span class="mb-0 text-sm">Appoinment with patient : {{item.patientID}}</span> 
                                         </td>
-                                        <td>
-                                          <span class="mb-0 text-sm"> {{item.appointmentDate }}</span> 
+                                           
+                                      <td>
+                                        <span class="mb-0 text-sm">Appoinment No : {{item.appointmentNo}}</span> 
                                       </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" style="background-color: #2364ce;">View Details</button>
+                                            
+                                            <button class="btn btn-lg btn-outline-primary" (click)="open(content)">View Details</button>
                                         </td>          
                                       </tr>       
                                     </div>
+
+                                    <ng-template #content let-modal>
+                                      <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">More Details</h4>
+                                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <h6>Patient Name: {{item.patientName}}</h6> 
+                                        <h6>Appointment Date: {{item.appointmentDate.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</h6>
+                                        <h6>Appointment Number: {{item.appointmentNo}}</h6>
+                                        <h6>Availability Status: {{item.availabilityStatus}}</h6>   
+                                      </div>   
+                                    </ng-template>
+
                                   </div>     
                                   </tbody>
                               </table>
@@ -121,22 +139,50 @@
                                 <tbody>
 
                                   <div *ngFor = 'let item of app'>
-                                    <div *ngIf="item.status==='Success'">
+                                    <div *ngIf="item.status=='Success'">
                                       <tr>
                                         <td>
-                                            <span class="mb-0 text-sm">Appoinment with user : {{item.patientName}}</span> 
+                                            <span class="mb-0 text-sm">Appoinment with patient : {{item.patientID}}</span> 
                                         </td>
-                                        <td>
-                                          <span class="mb-0 text-sm"> {{item.appointmentDate}}</span> 
-                                      </td>
-                                        <td>
-                                          <button type="button" class="btn btn-primary">View Details</button>
-                                      </td>
+                                           
                                       <td>
-                                        <button type="button" class="btn btn-success">View Recipt</button>
+                                        <span class="mb-0 text-sm">Appoinment No : {{item.appointmentNo}}</span> 
+                                      </td>
+                                        <td>                                            
+                                            <button class="btn btn-lg btn-outline-primary" (click)="open(content)">View Details</button>
+                                        </td> 
+                                        <td>                                           
+                                          <button class="btn btn-lg btn-outline-primary" (click)="open2(content2)">View Recipt</button>
                                       </td>         
-                                      </tr>       
+                                      </tr>        
                                     </div>
+
+                                    <ng-template #content let-modal>
+                                      <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">More Details</h4>
+                                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <h6>Patient Name: {{item.patientName}}</h6> 
+                                        <h6>Appointment Date: {{item.appointmentDate.toDate() | date:'yyyy/MM/dd h:mm:ss a'}}</h6>
+                                        <h6>Appointment Number: {{item.appointmentNo}}</h6>   
+                                      </div>   
+                                    </ng-template>
+
+                                    <ng-template #content2 let-modal>
+                                      <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">More Details</h4>
+                                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <h6>Patient Name: {{item.patientName}}</h6> 
+                                      </div>   
+                                    </ng-template>
+
                                   </div>
 
                                 </tbody>
@@ -151,5 +197,7 @@
   </div>
 </div>          
 </div>
+
+
 
     
