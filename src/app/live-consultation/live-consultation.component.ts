@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from 'ngx-agora';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -14,7 +14,7 @@ declare var RecordRTC_Extension: any;
   templateUrl: './live-consultation.component.html',
   styleUrls: ['./live-consultation.component.css']
 })
-export class LiveConsultationComponent implements OnInit {
+export class LiveConsultationComponent implements OnInit, OnDestroy {
 
   // channelForm: FormGroup;
 
@@ -42,7 +42,7 @@ export class LiveConsultationComponent implements OnInit {
   recordedTime;
   blobUrl;
   record_tool: any;
-  extensionInstalled:boolean;
+  extensionInstalled: boolean;
 
 
   constructor(
@@ -76,6 +76,10 @@ export class LiveConsultationComponent implements OnInit {
       this.blobUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data.blob));
     });
 
+  }
+
+  ngOnDestroy() {
+    console.log('destroyed!!');
   }
 
   ngOnInit() {
@@ -296,7 +300,7 @@ export class LiveConsultationComponent implements OnInit {
   startRecording() {
     if (!this.isRecording) {
       this.isRecording = true;
-      this.recorder.startRecording()
+      this.recorder.startRecording();
     }
   }
 
@@ -317,7 +321,5 @@ export class LiveConsultationComponent implements OnInit {
   clearRecordedData() {
     this.blobUrl = null;
   }
-
-
 
 }
