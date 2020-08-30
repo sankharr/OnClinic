@@ -6,8 +6,8 @@
       <div class="col-lg-8">
         <div class="card" id="light" >
 
-          <h3>Hello Dr. {{result.name}}</h3>
-          <p>Here are your important tasks and reports. <br/> Please check recent appointments.</p>
+          <h3>Hello Dr. {{result2.name}}</h3>
+          
         </div>
 
         <div class="row" style="margin-top: 20px;">
@@ -75,7 +75,7 @@
               <div class="card card-stats mb-4 mb-lg-0">
                 <div class="card-body">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total Channelings</h5>
-                        <span class="h2 font-weight-bold mb-0">3</span>
+                        <span class="h2 font-weight-bold mb-0">{{channellings}}</span>
                       
                 </div>
               </div>
@@ -85,8 +85,8 @@
         
             <div class="card card-stats mb-4 mb-lg-0">
               <div class="card-body">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Average Channeling Fee</h5>
-                      <span class="h2 font-weight-bold mb-0">{{result.doctorFee}}</span>
+                    <h5 class="card-title text-uppercase text-muted mb-0"> Channeling Fee</h5>
+                      <span class="h2 font-weight-bold mb-0">{{result2.doctorFee}}</span>
               </div>
             </div>
 

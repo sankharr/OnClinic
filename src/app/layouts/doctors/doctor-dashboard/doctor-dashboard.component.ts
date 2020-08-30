@@ -13,24 +13,26 @@ export class DoctorDashboardComponent implements OnInit {
   @ViewChild('pieChart') el2: ElementRef;
   userId: any;
   result: any;
+  result2: any;
+  app: any;
+  channellings: any;
+
 
   // +userid: string;
 
   constructor(private auth: AuthService, private db: AngularFirestore) {}
 
   ngOnInit(): void {
-    // this.auth.getUserState().subscribe((res) => {
-    //   this.userid = res.uid;
-    //   this.auth.updateLastlogin(this.userid);
-    //   this.lineChart();
-    //   this.pieChart();
-    // });
 
     this.userId = localStorage.getItem("uid");
-    this.db.collection("Users").doc(this.userId).valueChanges()
-    .subscribe(output=>{
-      this.charts()
+    this.db
+      .collection("Appointments")
+      .valueChanges()
+      .subscribe((output) => {
       this.result = output;
+      this.test(this.result);
+      this.charts();
+     
       // console.log(this.result);
     
     })
@@ -80,4 +82,33 @@ charts(){
     Plotly.newPlot("pie", data, layout);
 
   }
+
+  test(data) {
+    this.userId = localStorage.getItem("uid");
+    this.db
+      .collection("Users")
+      .doc(this.userId)
+      .valueChanges()
+      .subscribe((res) => {
+        // console.log(res)
+        var doctorId = res["doctorID"];
+        console.log(doctorId);
+        this.result2 = res;
+        
+        var grouped = _.mapValues(_.groupBy(data, "doctorID"), (clist) =>
+          clist.map((data) => _.omit(data, "doctorID"))
+        );
+        this.app = grouped[doctorId];
+        console.log(this.app);
+        
+        var numOfChannelings =(this.app.length);
+        console.log(numOfChannelings);
+        this.channellings = numOfChannelings;
+
+        // var ts = this.app["appointmentDate"];
+        // console.log(ts);
+        
+      });
+  }
+
 }
