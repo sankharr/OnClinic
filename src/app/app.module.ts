@@ -79,6 +79,8 @@ import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
 import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
 import { RecordingService } from './services/recording.service';
 
+import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
+
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
   authDomain: "onclinic-dd11a.firebaseapp.com",
@@ -133,7 +135,8 @@ var firebaseConfig = {
     PaymentFailedComponent,
     EpidemicDetectionComponent,
     InquiriesComponent,
-    SocialRespComponent
+    SocialRespComponent,
+    ProfileDoctorviewComponent
   ],
   imports: [
     BrowserModule,

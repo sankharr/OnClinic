@@ -19,8 +19,8 @@
                     <div class="topnav">
                       <div class="search-container">
                         <form action="/action_page.php">
-                          <input type="text" placeholder="Search.." name="search">
-                          <button type="submit">Search</button>
+                          <input [(ngModel)]="searchValue" [ngModelOptions]="{standalone:true}" (keyup)="searchByName()" type="text" placeholder="Search.." name="search">
+                          <!-- <button type="submit">Search</button> -->
                         </form>
                       </div>
                     </div>

@@ -9,6 +9,8 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./patient-payments.component.css']
 })
 export class PatientPaymentsComponent implements OnInit {
+  searchValue:string = "";
+  searchResult:any;
   uid: any;
   userData: any;
   result: any[];
@@ -28,7 +30,7 @@ export class PatientPaymentsComponent implements OnInit {
       .subscribe(output => {
         this.userData = output;
         console.log("userData of patients - ", this.userData);
-        this.db.collection('Appointments', ref => ref.where("status", "==", "Success").where("patientID", "==", this.userData.patientID).orderBy("appointmentDate")).valueChanges()
+        this.db.collection('Appointments', ref => ref.where("patientID", "==", this.userData.patientID)).valueChanges()
           .subscribe(output3 => {
             this.result = output3;
             console.log("Get All Past Channelings - ", this.result);
@@ -52,6 +54,14 @@ export class PatientPaymentsComponent implements OnInit {
   }
   viewRecipt(url){
     window.open(url, "myWindow", "height=900,width=1000");
+  }
+  searchByName(){
+    let value = this.searchValue.toLowerCase();
+    this.db.collection('Appointments', ref => ref.where("patientID", "==", this.userData.patientID).where("nameToSearch",">=",value).where("nameToSearch","<=",value+"\uf8ff")).valueChanges()
+          .subscribe(output3 => {
+            this.result = output3;
+            console.log("Get All Past Channelings - ", this.result);
+          })
   }
   submit() {
    
