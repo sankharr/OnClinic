@@ -5,12 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
 import { DoctorsComponent } from './doctors.component';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
-import { LiveConsultationComponent } from 'src/app/live-consultation/live-consultation.component';
+// import { LiveConsultationComponent } from 'src/app/live-consultation/live-consultation.component';
 import { DoctorPaymentsComponent } from './doctor-payments/doctor-payments.component';
 import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
 import { DoctorChannelingComponent } from './doctor-channeling/doctor-channeling.component';
 import { WaitingroomDoctorviewComponent } from './waitingroom-doctorview/waitingroom-doctorview.component';
 import { EditDoctorprofileComponent } from './edit-doctorprofile/edit-doctorprofile.component';
+import { LiveConsultationDoctorComponent } from 'src/app/live-consultation-doctor/live-consultation-doctor.component';
 
 // import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 // import { PatientsComponent } from './patients.component';
@@ -30,7 +31,7 @@ const routes: Routes =[
      children:[
         { path: 'dashboard', component: DoctorDashboardComponent},
         { path: 'profile', component: DoctorProfileComponent},
-        { path: 'lcd', component: LiveConsultationComponent},
+        { path: 'lcd', component: LiveConsultationDoctorComponent},
         { path: 'payments', component: DoctorPaymentsComponent},
         { path: 'ppv', component: ProfilePatientviewComponent},
         { path: 'channeling', component: DoctorChannelingComponent},

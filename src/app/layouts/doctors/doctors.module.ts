@@ -10,6 +10,7 @@ import { DoctorChannelingComponent } from './doctor-channeling/doctor-channeling
 import { ReactiveFormsModule,FormsModule } from '@angular/forms'
 import { WaitingroomDoctorviewComponent } from './waitingroom-doctorview/waitingroom-doctorview.component';
 import { EditDoctorprofileComponent } from './edit-doctorprofile/edit-doctorprofile.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // import {MatTabsModule} from '@angular/material/tabs';
 
@@ -22,6 +23,7 @@ import { EditDoctorprofileComponent } from './edit-doctorprofile/edit-doctorprof
     CalendarModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     // MatTabsModule,
 
   ]

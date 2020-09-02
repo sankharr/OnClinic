@@ -26,11 +26,7 @@ export class ProfilePatientviewComponent implements OnInit {
       this.result = output;
       console.log(this.result);
 
-    })
-
-    
-
-    
+    }) 
   }
 
 }
