@@ -5,6 +5,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize, map, tap } from 'rxjs/operators';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-myhealth',
@@ -53,6 +54,7 @@ export class MyhealthComponent implements OnInit {
   }
   upload(repDate, repName) {
     const file = this.selectedFile;
+    const filetype = file.type;
     const filePath = `${this.uid}/${repDate}_${repName}`;
     const fileRef = this.afStorage.ref(filePath);
     this.task = this.afStorage.upload(filePath, file);
@@ -73,6 +75,7 @@ export class MyhealthComponent implements OnInit {
               reportDate: repDate,
               reportName: repName,
               reportURL: this.fb,
+              fileType: filetype,
               uploadedAt: new Date(),
               status: 'Active'
             })
@@ -95,5 +98,39 @@ export class MyhealthComponent implements OnInit {
     this.db.collection('Users').doc(this.uid).collection("Reports").doc(`${this.deleteReportDate}_${this.deleteReportName}`).update({
       status:"Deleted"
     })
+  }
+  download(repName,furl,ftype){
+    var storage = firebase.storage();
+    storage.refFromURL(furl)
+    .getDownloadURL().then((url)=>{
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = "blob";
+      xhr.onload = (event)=>{
+        const blob = new Blob([xhr.response]);
+        const a:any = document.createElement("a");
+        a.style = "display:none";
+        document.body.appendChild(a);
+        const url = window.URL.createObjectURL(blob);
+        a.href = url;
+        if(ftype=="image/jpeg"){
+          a.download = repName+".jpg";
+        }
+        else if(ftype=="image/png"){
+          a.download = repName+".png";
+        }
+        else if(ftype=="image/jpg"){
+          a.download = repName+".jpg";
+        }
+        else{
+          a.download = repName+".pdf";
+        }
+        a.click();
+        window.URL.revokeObjectURL(url);
+      };
+      xhr.open("GET",url);
+      xhr.send();
+    }).catch(function(error) {
+      console.log(error);
+    });
   }
 }
