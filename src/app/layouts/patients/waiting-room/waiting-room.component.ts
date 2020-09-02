@@ -80,6 +80,7 @@ export class WaitingRoomComponent implements OnInit {
 
   upload(repDate, repName) {
     const file = this.selectedFile;
+    const filetype = file.type;
     const filePath = `${this.uid}/${repDate}_${repName}`;
     const fileRef = this.afStorage.ref(filePath);
     this.task = this.afStorage.upload(filePath, file);
@@ -100,6 +101,7 @@ export class WaitingRoomComponent implements OnInit {
               reportDate: repDate,
               reportName: repName,
               reportURL: this.fb,
+              fileType: filetype,
               uploadedAt: new Date(),
               status: 'Active'
             })
