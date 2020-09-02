@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit {
   selectedFile: File = null;  //file selected to upload
   task: AngularFireUploadTask;
   fb;
+  dob:any;
+  age:any;
   uid:any;
   result:any;
   lgdis:any[];
@@ -39,6 +41,8 @@ export class ProfileComponent implements OnInit {
         console.log("result-",this.result.allergies)
         this.operations=this.result.operations;
         console.log("result-",this.result.operations)
+        this.dob=this.result.dob;
+        this.ageCalculation();
     })
   }
   edit() {
@@ -46,6 +50,12 @@ export class ProfileComponent implements OnInit {
   }
   detectFiles(event) {
     this.selectedFile = event.target.files[0];
+  }
+  ageCalculation(){
+    var dobMilis = Number(new Date(this.dob));
+    var currentDateMilis = Number(new Date());
+    var age = ((((((currentDateMilis-dobMilis)/1000)/60)/60)/24)/365).toFixed(0);
+    this.age = age;
   }
   upload() {
     const file = this.selectedFile;
