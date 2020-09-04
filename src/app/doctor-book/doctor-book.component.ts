@@ -350,6 +350,8 @@ export class DoctorBookComponent implements OnInit {
       consultationStarted:"false",
       availabilityStatus:'Absent',
       paymentStatus:'Pending',
+      patientPhone:this.results.telno,
+      nameToSearch: this.data.name.toLowerCase(),
       status:'Active'
     }    
 

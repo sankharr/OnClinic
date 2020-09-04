@@ -34,6 +34,7 @@ export class DoctorRegistration2Component implements OnInit {
   taskProPic: AngularFireUploadTask;
   uid: any;
   downloadURL: Observable<string>;
+  userData: any;
 
   constructor(
     private _formbuilder: FormBuilder,
@@ -41,11 +42,16 @@ export class DoctorRegistration2Component implements OnInit {
     private router: Router,
     private afStorage: AngularFireStorage,
     private http: HttpClient
-  ) { }
+  ) {
+    this.uid = localStorage.getItem("uid");
+   }
 
   ngOnInit(): void {
 
-    this.uid = localStorage.getItem("uid");
+    this.db.collection('Users').doc(this.uid).valueChanges()
+    .subscribe(res => {
+      this.userData = res;
+    });
 
     this.completeProfileDoctorForm = this._formbuilder.group({
       mondayTime: ["", Validators.required],
@@ -89,6 +95,8 @@ export class DoctorRegistration2Component implements OnInit {
 
     this.uploadProPic();
 
+    console.log("user name - ",this.userData.name)
+
     var finalQualiObjectsArray = [];
 
     this.qualificationsArray.forEach(function (value) {
@@ -119,8 +127,8 @@ export class DoctorRegistration2Component implements OnInit {
       numberOfAppointments: this.completeProfileDoctorForm.controls["numberOfAppointments"].value,
       averageConsulationTime: this.completeProfileDoctorForm.controls["averageConsulationTime"].value,
       averageRating: ((Math.random() * 5) + 1).toFixed(1),
-      qualifications: finalQualiObjectsArray
-      // doctorID:
+      qualifications: finalQualiObjectsArray,
+      nameToSearch: (this.userData.name).toLowerCase()
     }
 
     console.log(newData);

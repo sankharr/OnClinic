@@ -198,6 +198,7 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
               appointmentDate: this.appointmentData.appointmentDate,
               appointmentShortDate: this.appointmentData.appointmentShortDate,
               totalFee: this.appointmentData.totalFee,
+              nameToSearch: this.appointmentData.doctorName.toLowerCase(),
               status: 'Active'
             });
             this.db.collection('Appointments').doc(this.appointmentData.appointmentID).collection("Prescriptions").add({
@@ -211,6 +212,7 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
               appointmentDate: this.appointmentData.appointmentDate,
               appointmentShortDate: this.appointmentData.appointmentShortDate,
               totalFee: this.appointmentData.totalFee,
+              nameToSearch: this.appointmentData.doctorName.toLowerCase(),
               status: 'Active'
             });
             setTimeout(() => {
