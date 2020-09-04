@@ -71,7 +71,7 @@ export class WaitingRoomComponent implements OnInit {
 
   displayReports() {
     this.db.collection("Users").doc(this.uid).collection("Reports", ref =>
-      (ref.orderBy("uploadedAt", "desc"))).valueChanges()
+      (ref.where("status","==","Active").orderBy("uploadedAt", "desc"))).valueChanges()
       .subscribe(output => {
         this.reports = output;
         console.log("result-", this.reports)
@@ -80,6 +80,7 @@ export class WaitingRoomComponent implements OnInit {
 
   upload(repDate, repName) {
     const file = this.selectedFile;
+    const filetype = file.type;
     const filePath = `${this.uid}/${repDate}_${repName}`;
     const fileRef = this.afStorage.ref(filePath);
     this.task = this.afStorage.upload(filePath, file);
@@ -99,7 +100,10 @@ export class WaitingRoomComponent implements OnInit {
             this.db.collection('Users').doc(this.uid).collection("Reports").doc(`${repDate}_${repName}`).set({
               reportDate: repDate,
               reportName: repName,
-              reportURL: this.fb
+              reportURL: this.fb,
+              fileType: filetype,
+              uploadedAt: new Date(),
+              status: 'Active'
             })
           });
         }),

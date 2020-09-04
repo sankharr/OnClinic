@@ -82,6 +82,8 @@ import { RecordingService } from './services/recording.service';
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
+import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
+
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
   authDomain: "onclinic-dd11a.firebaseapp.com",
@@ -137,6 +139,7 @@ var firebaseConfig = {
     EpidemicDetectionComponent,
     InquiriesComponent,
     SocialRespComponent,
+    ProfileDoctorviewComponent,
     LiveConsultationDoctorComponent
   ],
   imports: [

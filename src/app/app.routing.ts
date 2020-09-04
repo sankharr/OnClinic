@@ -39,6 +39,7 @@ import { PaymentFailedComponent } from './payment-failed/payment-failed.componen
 import { EpidemicDetectionComponent } from './epidemic-detection/epidemic-detection.component';
 import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
 import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
+import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
 
 const routes: Routes =[
   { path: 'home',             component: HomeComponent },
@@ -81,6 +82,7 @@ const routes: Routes =[
   { path: 'addressverificatoin', component: AddressVerifyComponent },
   { path: 'welcomepage', component: WelcomeComponent },
   {path:'map',component:EpidemicDetectionComponent},
+  { path: 'patientDoctorView', component: ProfileDoctorviewComponent },
   { path: 'admin', component: AdminComponent,
   children:[
     { path: 'systemUsers', component: SystemUsersComponent },

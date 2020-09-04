@@ -89,8 +89,8 @@
                     <div class="topnav">
                       <div class="search-container">
                         <form action="/action_page.php">
-                          <input type="text" placeholder="Search.." name="search">
-                          <button type="submit">Search</button>
+                          <input [(ngModel)]="searchValue" [ngModelOptions]="{standalone:true}" (keyup)="searchByName()" type="text" placeholder="Search.." name="search">
+                          <!-- <button type="submit">Search</button> -->
                         </form>
                       </div>
                     </div>
@@ -151,7 +151,7 @@
       <div class="modal-body">
         <!-- --------------- -->
         <div class="card">
-          <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
+          <img class="rounded-circle" [src]=moreView?.doctorProPic>
           <h5>{{moreView?.doctorName}}</h5>
           <h6>{{moreView?.doctorSpeciality}}</h6>
         </div>
