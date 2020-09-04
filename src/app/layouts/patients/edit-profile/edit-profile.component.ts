@@ -19,7 +19,7 @@ export class EditProfileComponent implements OnInit {
   updateOperationForm: FormGroup;
 
 
-  foods = ["Vegetarian", "Non-vegetarian"];
+  foods = ["Vegetarian", "Non - Vegetarian"];
   longTermDiseasesList = ["", "ALS", "Alzheimer's Disease", "Arthritis", "Asthma", "Cancer", "Chronic kidney disease", "Dementia", "Depression", "Diabetes", "Eating Disorders", "Heart Disease", "Migraine", "Obesity", "Oral Health", "Osteoporosis", "Parkinson’s disease"]
   allergiesList = ["", "Food Allergy", "Skin Allergy", "Dust Allergy", "Insect Sting Allergy", "Pet Allergy", "Eye Allergy", "Mold Allergy", "Sinus Infection", "Cockroach Allergy"]
   viewcol1: boolean = false;

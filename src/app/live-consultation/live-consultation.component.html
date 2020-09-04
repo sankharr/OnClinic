@@ -4,7 +4,7 @@
             <div class="col">
                 <div class="appoNumBox" *ngIf="appointmentCountDoc?.currentNumber">
                     <h3>{{appointmentCountDoc?.currentNumber}}</h3>
-                </div> 
+                </div>
             </div>
             <div class="col">
                 <h3>0{{hours}}:<span *ngIf="minutes < 10">0</span>{{minutes}}:<span
@@ -21,23 +21,14 @@
                 <h1 class="waitingText">Waiting for the Doctor</h1>
             </div>
         </div>
-        <!-- <div class="col-2">
-            <button class="btn btn-danger" type="submit" [routerLink]="['/patients/waiting-room']"
-                (click)="endCall()">Leave</button>                
-        </div> -->
     </div>
     <div id="newSidebar">
         <button class="btn btn-danger sidebtn" type="submit" [routerLink]="['/patients/waiting-room']"
             (click)="endCall()">Leave</button>
 
-        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal" (click)="openVerticallyCentered(content)">Download <br>
+        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal"
+            (click)="openVerticallyCentered(content)">Download <br>
             Prescription</button>
-        <!-- <div class="row newSidebarRow">
-
-        </div>
-        <div class="row newSidebarRow">
-
-        </div> -->
     </div>
 </div>
 
@@ -64,31 +55,32 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title">Prescriptions</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <h4 class="modal-title">Prescriptions</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div class="modal-body">
-      <div class="list-group">
-          <div class="list-group-item" *ngFor="let item of prescriptions">
-            <div class="row">
-                <div class="col">
-                    <small>Prescription ID</small>
-                    <p>{{item.prescriptionID}}</p>
-                </div>
-                <div class="col">
-                    <small>Uploaded At</small>
-                    <p>{{item.uploadedAt.toDate() | date:"medium"}}</p>
-                </div>
-                <div class="col" style="text-align: right;">
-                    <button class="btn btn-outline-primary" (click)="viewPrescription(item.prescriptionURL)">View</button>
+        <div class="list-group">
+            <div class="list-group-item" *ngFor="let item of prescriptions">
+                <div class="row">
+                    <div class="col">
+                        <small>Prescription ID</small>
+                        <p>{{item.prescriptionID}}</p>
+                    </div>
+                    <div class="col">
+                        <small>Uploaded At</small>
+                        <p>{{item.uploadedAt.toDate() | date:"medium"}}</p>
+                    </div>
+                    <div class="col" style="text-align: right;">
+                        <button class="btn btn-outline-primary"
+                            (click)="viewPrescription(item.prescriptionURL)">View</button>
+                    </div>
                 </div>
             </div>
-          </div>
-      </div>
+        </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     </div>
-  </ng-template>
+</ng-template>

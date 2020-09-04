@@ -1,0 +1,173 @@
+<div class="container-fluid">
+  <div class="col-lg-12">
+
+    <!-- 1st row -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card" id="dark">
+          <div class="row">
+
+            <!--First grid - Patient Summary-->
+            <div class="col-lg-4">
+              <div class="card shadow">
+                <h6>Weight</h6>
+                <h6 style="color:blueviolet;"><b>{{userData?.weight}} kg</b></h6>
+                <h6>Height</h6>
+                <h6 style="color:blueviolet;"><b>{{userData?.height}} cm</b></h6>
+                <h5>BMI</h5>
+                <h4 style="color:blue;"><b>{{userData?.bmi}}</b></h4>
+                <h4 style="color:green;font-family: sans-serif;" id="bmi"><b>{{bmiRange}}</b></h4>
+                <!--<h6 style="color:red;">OVER WEIGHT</h6>
+                    <h6 style="color:red;">UNDER WEIGHT</h6>-->
+                <h6>Normal BMI Range</h6>
+                <h6>18.5-24.9</h6>
+              </div> 
+            </div>
+            <!--end of first grid-->
+
+            <!--Second grid - profile-->
+            <div class="col-lg-4">
+              <div class="card" id="dark">
+                <img class="rounded-circle" src="./assets/img/theme/team-1-800x800.jpg">
+               <div class = "card" id="dark">
+                <div class="card" id="dark">
+                  <h6><b>Ryan Tompson</b></h6>
+                </div>
+                <div class="card" id="dark">
+                  <h5><b>Age - 42</b></h5>
+                </div>
+              </div>
+              </div>
+            </div>
+            <!--end of second grid-->
+
+            <!--Third grid - latest update-->
+            <div class="col-lg-4">
+              <div class="card" id="fixsize">
+                <div class="card shadow">
+                  <div class="card" id="light">
+                    <h6><b>Summary</b></h6>
+                  </div>
+                </div>
+                <div class="card shadow">
+                  <h6>Last Health Data Update</h6>
+                  <h6 style="color:red;">27.05.2020</h6>
+                  <h6>Last Report Upolad</h6>
+                  <h6 style="color:red;">27.05.2020</h6>
+                  <h6>Last Consultation</h6>
+                  <h6 style="color:red;">27.05.2020</h6>
+                </div>
+              </div>
+            </div>
+            <!--end of third grid-->
+          </div>
+        </div>
+      </div>
+      <!--End of Health details-->
+    </div>
+    <!-- end of 1st row -->
+
+    <!-- 2nd row -->
+    <div class="row" id="notfirst">
+      <!--Upcomming Consultation-->
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-12">
+              <div class="card" id="dark">
+                  <div class="row">
+                      <div class="col-lg-4">
+                          <div class="card" id="center">
+                              <h6><b>Height : {{result.height}} cm</b></h6>
+                          </div>
+                      </div>
+                      <div class="col-lg-4">
+                          <div class="card" id="center">
+                              <h6><b>Weight : {{result.weight}} kg</b></h6>
+                          </div>
+                      </div>
+                      <div class="col-lg-4">
+                          <div class="card" id="green">
+                              <h6><b>{{result.dietaryRestrictions}}</b></h6>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--Long trem diseaces-->
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card" id="dark">
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="card shadow">
+                              <div class="card" id="center">
+                                  <h6><b>Long Term Diceases</b></h6>
+                              </div>
+                              <div class="card">
+                                  <h6 style="text-align: left;">
+                                      <ul>
+                                          <li *ngFor="let long of lgdis">{{long}}</li>
+                                      </ul>
+                                  </h6>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="card shadow">
+                              <div class="card" id="center">
+                                  <h6><b>Alergies</b></h6>
+                              </div>
+                              <div class="card">
+                                  <h6 style="text-align: left;">
+                                      <ul>
+                                          <li *ngFor="let alergy of alergies">{{alergy}}</li>
+                                      </ul>
+                                  </h6>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--operations-->
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card" id="dark">
+                  <div class="card shadow">
+                      <div class="card" id="center">
+                          <h6><b>Operations</b></h6>
+                      </div>
+                      <div class="list-group">
+                          <div class="list-group-item" *ngFor="let operation of operations">
+                              <div class="row">
+                                  <div class="col-lg-8">
+                                      <div class="card" id="center">
+                                          <h6><b>{{operation.operationName}}</b></h6>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <div class="card" id="center">
+                                          <h6><b>{{operation.operationDate}}</b></h6>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+      <!--End of upcomming Consultation-->
+
+      <!--Chaneeling History-->
+      
+
+    </div>
+    <!-- end of 2nd row -->
+
+  </div>
+</div>
