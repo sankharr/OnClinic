@@ -271,6 +271,9 @@ export class DoctorBookComponent implements OnInit {
   }
 
   doPayment() {
+
+    localStorage.setItem("paymentAppointmentID",this.appointmentID);
+
     const data = new Array<InputData>()
     data.push({ name: 'merchant_id', value: "1214922"  })
     data.push({ name: 'return_url', value: "http://localhost:4200/payment-completed" })
