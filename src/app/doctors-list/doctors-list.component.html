@@ -15,9 +15,9 @@
             Sort By
           </button>
           <div class="dropdown-menu" aria-labelledby="Sort_By">
-            <a class="dropdown-item" href="doctors-list">Ratings</a>
-            <a class="dropdown-item" href="doctors-list">Accending</a>
-            <a class="dropdown-item" href="doctors-list">Decending</a>
+            <a class="dropdown-item" (click)="sortByRatings()">Ratings</a>
+            <a class="dropdown-item" (click)="sortByAscending()">Ascending</a>
+            <a class="dropdown-item" (click)="sortByDescending()">Descending</a>
           </div>
         </div>
       </div>
