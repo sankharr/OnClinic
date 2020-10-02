@@ -12,7 +12,7 @@
             </div>
         </div>
 
-    </div>
+    </div>    
     <div class="row">
         <div class="col-9">
             <div [id]="localCallId" class="local"></div>
@@ -20,14 +20,20 @@
             <div *ngIf="remoteCalls.length === 0" class="waitingScreen">
                 <h1 class="waitingText">Waiting for the Doctor</h1>
             </div>
-        </div>        
+        </div>
     </div>
     <div id="newSidebar">
-        <button class="btn btn-danger sidebtn" type="submit" [routerLink]="['/patients/waiting-room']"
-            (click)="endCall()">Leave</button>
+        <button class="btn btn-danger sidebtn" type="button" data-toggle="modal"
+            (click)="openRating(rating)">Leave</button>
 
-        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal" (click)="openVerticallyCentered(content)">Download <br>
-            Prescription</button>        
+        <!-- [routerLink]="['/patients/waiting-room']" -->
+
+        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal"
+            (click)="openVerticallyCentered(content)">Download <br>
+            Prescription</button>
+
+        <!-- <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal" (click)="openRating(rating)">Download <br>
+                Prescription</button>  -->
     </div>
 </div>
 
@@ -81,5 +87,36 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #rating let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Rate the consulation</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col">
+            <fieldset class="rating">
+                <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
+                    <!-- full star -->
+                    <input (click)="starHandler(num)" [id]="'star'+num" [value]="num-0.5" name="rating" type="radio" />
+    
+                    <label class="full" [for]="'star'+num"></label>
+    
+                    <!-- half star -->
+                    <input (click)="starHandler(num-0.5)" [value]="num-0.5" [id]="'halfstar'+num" name="rating"
+                        type="radio" />
+    
+                    <label class="half" [for]="'halfstar'+num"></label>
+    
+                </ng-container>
+            </fieldset>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close('Close click')">Submit</button>
     </div>
 </ng-template>

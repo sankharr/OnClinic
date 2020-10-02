@@ -5,11 +5,11 @@
                 <!-- <small>Current Number</small> -->
                 <div class="appoNumBox" *ngIf="appointmentData?.appointmentNo">
                     <h3>{{appointmentData?.appointmentNo}}</h3>
-                </div>               
+                </div>
             </div>
             <div class="col">
                 <h3 id="timer">0{{hours}}:<span *ngIf="minutes < 10">0</span>{{minutes}}:<span
-                    *ngIf="seconds < 10">0</span>{{seconds}}</h3>                
+                        *ngIf="seconds < 10">0</span>{{seconds}}</h3>
             </div>
         </div>
 
@@ -20,11 +20,11 @@
             <div [id]="localCallId" class="local"></div>
             <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
 
-            <div *ngIf="remoteCalls.length === 0"  class="waitingScreen">
-                <h1 class="waitingText">Waiting for the Patient</h1>                
+            <div *ngIf="remoteCalls.length === 0" class="waitingScreen">
+                <h1 class="waitingText">Waiting for the Patient</h1>
             </div>
 
-        </div>        
+        </div>
     </div>
     <div id="newSidebar">
         <button class="btn btn-danger sidebtn" type="button" [routerLink]="['/doctors/dashboard']"
@@ -33,12 +33,13 @@
         <button class="btn btn-neutral sidebtn" type="button" (click)="openVerticallyCentered(content)">Create <br>
             Prescription</button>
 
-        <button class="btn btn-neutral sidebtn" type="button" (click)="openVerticallyCentered(content)">Patient's <br>
+        <button class="btn btn-neutral sidebtn" type="button" (click)="openPatientProfile(patientProfile)">Patient's
+            <br>
             Profile</button>
 
         <button class="btn btn-neutral sidebtn" type="button" (click)="openModalLiveData(liveData)">Current <br>
             Health Data</button>
-        
+
     </div>
 </div>
 
@@ -49,7 +50,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body">       
+    <div class="modal-body">
         <label>Add prescribed medicines</label>
         <form [formGroup]="prescriptionForm">
             <div class="row">
@@ -72,7 +73,7 @@
                             class="fa fa-plus"></i></button>
                 </div>
             </div>
-        </form>        
+        </form>
         <div class="row">
             <div class="col">
                 <label *ngIf="prescriptionContent.length"><b>Added prescribed medicines</b></label>
@@ -120,12 +121,12 @@
             <p>-----------------------------------------------------------------------------------------------</p>
             <div class="row">
                 <div class="col" style="font-size: 14px;">
-                    Date : {{dateToday}}                    
+                    Date : {{dateToday}}
                 </div>
             </div>
             <div class="row">
                 <div class="col" style="font-size: 14px;">
-                    Doctor's Name : {{appointmentData?.doctorName}}                  
+                    Doctor's Name : {{appointmentData?.doctorName}}
                 </div>
             </div>
             <div class="row" style="color: white;">ghfghfg</div>
@@ -135,9 +136,9 @@
                     <h6 style="font-size: 14px;">Name - <span>{{appointmentData?.patientName}}</span></h6>
                     <h6 style="font-size: 14px;">Age - <span>24</span></h6>
                 </div>
-                
+
             </div>
-            
+
             <p style="color: white;">ghfghfg</p>
             <p></p>
             <p></p>
@@ -177,12 +178,100 @@
             <div class="col">
                 <p><b>Temperature</b><span></span></p>
                 <textarea disabled style="width:500px; height: 150px;">{{liveTemperatureString}}</textarea>
-                
+
                 <p style="margin-top: 20px;"><b>BPM</b><span></span></p>
                 <textarea disabled style="width:500px; height: 150px;">{{liveBPMString}}</textarea>
-            </div>            
-        </div>        
-    </div>   
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #patientProfile let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Patient's Profile</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row overflow-auto">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <h4 style="margin-bottom: 25px;">Basic Data</h4>
+                        <p>Name - {{ patientData?.name }}</p>
+                        <p>Date of Birth - {{ patientData?.dob }}</p>
+                        <p>Blood Group - {{ patientData?.bloodGroup }}</p>
+                        <p>BMI - {{ patientData?.bmi }}</p>
+                        <p>Dietary Restrictions - {{ patientData?.dietaryRestrictions }}</p>
+                        <p>Height - {{ patientData?.height }}</p>
+                        <p>Weight - {{ patientData?.weight }}</p>
+                    </div>
+                    <div class="col">
+                        <h4 style="margin-bottom: 25px;">Allergies</h4>
+                        <ul>
+                            <li *ngFor='let item of patientData.allergies'>{{ item }}</li>
+                        </ul>
+                        <h4 style="margin-bottom: 25px; margin-top: 35px;">Chronic Conditions</h4>
+                        <ul>
+                            <li *ngFor='let item of patientData.longTermDiseases'>{{ item }}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Name - {{ patientData.name }} -->
+                </div>
+                <h4 style='margin-top:25px;'>Operations</h4>
+
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Operation Name</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of patientData.operations">
+                                <td>{{ item.operationDate }}</td>
+                                <td>{{ item.operationName }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Reports</h4>
+                <div class=list-group style="margin-left: 5px;">
+                    <div class="list-group-item" *ngFor="let item of appointmentData.selectedReports">
+                        <div class=row>
+                            <div class="col">
+                                <div class=row>
+                                    <small>Report Name</small>
+                                </div>
+                                <div class=row>
+                                    <b>{{ item.reportName }}</b>
+                                </div>                               
+                            </div>
+                            <div class="col">
+                                <div class=row>
+                                    <small>Report Date</small>
+                                </div>
+                                <div class=row>
+                                    <b>{{ item.reportDate }}</b>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary" (click)="viewReport(item.reportURL)">View</button>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     </div>

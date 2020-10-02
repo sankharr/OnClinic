@@ -53,6 +53,7 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
   liveBPM: any[] = [];
   @Input() liveTemperatureString:any;
   @Input() liveBPMString:any;
+  patientData: any;
 
 
   constructor(
@@ -87,6 +88,30 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
       .subscribe(output => {
         this.appointmentData = output;
         console.log("current Appoinment patientID - ",this.appointmentData.patientID);
+
+        // this.db.collection('Users',ref => ref.where('patientID','==',this.appointmentData.patientID)).snapshotChanges()
+        // .subscribe(res => {
+        //   var idArray = []
+        //   res.forEach(a => {
+        //     // console.log("a - ",a.payload.doc.id)
+        //     idArray.push(a.payload.doc.id)
+        //   })
+        //   console.log("id - ",idArray[0])
+        //   // this.db.collection('Users').doc(idArray[0]).collection
+
+        //   // var patientData = res.values();
+        //   // this.patientData = patientData[0];
+
+        //   // console.log(patientData, ' --------- ', this.patientData, ' ------------- ', res)
+        // });
+
+        this.db.collection('Users',ref => ref.where('patientID','==',this.appointmentData.patientID)).valueChanges()
+        .subscribe(res => {
+          var patientData = res;
+          this.patientData = patientData[0];
+
+          console.log(patientData, ' --------- ', this.patientData.selectedReports, ' ------------- ', res)
+        });
         
         this.angularFireDatabase.object('/'+this.appointmentData.patientID).snapshotChanges()
         .subscribe(res => {
@@ -102,12 +127,12 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
         })
       })
 
-    this.startCall(this.channelID);
+    // this.startCall(this.channelID);
 
-    this.timeObservable = timer(0, 1000)
-    this.timeObservable.subscribe(x => {
-      this.displayTime()
-    });
+    // this.timeObservable = timer(0, 1000)
+    // this.timeObservable.subscribe(x => {
+    //   this.displayTime()
+    // });
 
   }
 
@@ -147,6 +172,14 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
     this.getLiveData();
   }
 
+  openPatientProfile(content) {
+    this.modalService.open(content, {
+      centered: true,
+      size: 'lg'
+    });
+    // this.getLiveData();
+  }
+
   getLiveData(){
     firebase.database().ref(this.appointmentData.patientID).on('value',(snap)=>{
       console.log("from realtime database - ",snap.val());
@@ -157,6 +190,10 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
     this.prescriptionForm.reset();
     this.prescriptionContent = [];
     this.otherNotesArray = [];
+  }
+
+  viewReport(url) {
+    window.open(url, "View Report", "height=900,width=1000");
   }
 
   htmlToPdf() {    

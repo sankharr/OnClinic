@@ -23,6 +23,7 @@ export class LiveConsultationComponent implements OnInit {
   appointmentData: any;
   timerDisplay: any;
   time: any;
+  rating: number;
 
   timeObservable: any;
   hours = 0;
@@ -30,7 +31,7 @@ export class LiveConsultationComponent implements OnInit {
   seconds = 0;
   prescriptions: any;
   appointmentCountDoc: any;
-
+  docData: any;
 
   constructor(
     private ngxAgoraService: NgxAgoraService,
@@ -44,36 +45,77 @@ export class LiveConsultationComponent implements OnInit {
 
   ngOnInit() {
 
+    // this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
 
-    this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
-    
     this.db.collection("Appointments").doc(this.appointmentID).valueChanges()
       .subscribe(output => {
         this.appointmentData = output;
         console.log("appointment Data - ", this.appointmentData);
-        
+
         if (this.appointmentData?.consultationStarted === "true") {
           console.log("start the timer");
           this.timeObservable = timer(0, 1000)
           this.timeObservable.subscribe(x => {
             this.displayTime()
-          });          
+          });
         }
         this.db.collection("Users").doc(localStorage.getItem("selectedAppointmentDoctorUID")).collection("appointmentCounts").doc(this.appointmentData.appointmentShortDate).valueChanges()
-        .subscribe(output2 => {
-          this.appointmentCountDoc = output2;
-          console.log("appointmentCountDoc - ",this.appointmentCountDoc)
-        })       
+          .subscribe(output2 => {
+            this.appointmentCountDoc = output2;
+            console.log("appointmentCountDoc - ", this.appointmentCountDoc)
+          })
+      })
+
+    this.db.collection("Users").doc(localStorage.getItem("selectedAppointmentDoctorUID")).valueChanges()
+      .subscribe(output => {
+        this.docData = output;
       })
 
 
 
   }
 
+  starHandler(value) {
+    // var rating:number = value;
+    this.rating = Number(value);
+    console.log(value, this.rating);
+    this.submitRating();
+  }
+
+  submitRating() {
+    if (this.docData.averageRating == null) {
+      console.log("true");
+      this.db.collection("Users").doc(localStorage.getItem("selectedAppointmentDoctorUID")).update({
+        averageRating: Number(this.rating),
+      })
+    }
+    else {
+      var newRating = ((this.docData.averageRating + this.rating) / 2).toFixed(1);
+      this.db.collection("Users").doc(localStorage.getItem("selectedAppointmentDoctorUID")).update({
+        averageRating: Number(newRating),
+      }).then(() => {
+        console.log("false - ", newRating);
+      })
+      console.log("false");
+    }
+  }
+
   openVerticallyCentered(content) {
     this.modalService.open(content, {
       centered: true,
       size: 'lg'
+    });
+    this.db.collection('Users').doc(localStorage.getItem('uid')).collection('Prescriptions', ref => ref.where("uploadedAt", ">=", this.appointmentData.consultationStartedAt)).valueChanges()
+      .subscribe(output2 => {
+        this.prescriptions = output2;
+        console.log("available prescriptions - ", this.prescriptions);
+      })
+  }
+
+  openRating(content) {
+    this.modalService.open(content, {
+      centered: true,
+      size: 'md'
     });
     this.db.collection('Users').doc(localStorage.getItem('uid')).collection('Prescriptions', ref => ref.where("uploadedAt", ">=", this.appointmentData.consultationStartedAt)).valueChanges()
       .subscribe(output2 => {
