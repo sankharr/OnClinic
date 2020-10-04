@@ -13,6 +13,7 @@ export class ChannelingComponent implements OnInit {
   result2: any[];
   result3: any[];
   moreView: any;
+  searchValue: string = "";
   constructor(
     private router: Router,
     private db: AngularFirestore
@@ -35,6 +36,14 @@ export class ChannelingComponent implements OnInit {
   }
   joinlc() {
     this.router.navigate(['/patients/waiting-room'])
+  }
+  searchByName(){
+    let value = this.searchValue.toLowerCase();
+    this.db.collection('Users').doc(this.uid).collection("Prescriptions",ref=>ref.where("nameToSearch",">=",value).where("nameToSearch","<=",value+"\uf8ff")).valueChanges()
+          .subscribe(output3 => {
+            this.result3 = output3;
+            console.log("Get All Past Channelings - ", this.result3);
+          })
   }
   moreview(appoID) {
     this.db.collection("Appointments").doc(appoID).valueChanges()

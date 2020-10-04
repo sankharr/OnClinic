@@ -38,9 +38,21 @@ export class DoctorsListComponent implements OnInit {
 
   }
 
+sortByRatings(){
+  this.items.sort((a,b) => (a.payload.doc.data().averageRating < b.payload.doc.data().averageRating)? 1 : -1 )
+}
+
+sortByAscending(){
+  this.items.sort((a,b) => (a.payload.doc.data().name > b.payload.doc.data().name)? 1 : -1 )
+}
+
+sortByDescending(){
+  this.items.sort((a,b) => (a.payload.doc.data().name < b.payload.doc.data().name)? 1 : -1 )
+}
   toDoctorDates(uid){
     localStorage.setItem("selectedDocID",uid);
     //this.router.navigate('/doctor-book')
   }
+  
 
 }

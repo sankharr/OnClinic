@@ -350,6 +350,8 @@ export class DoctorBookComponent implements OnInit {
       consultationStarted:"false",
       availabilityStatus:'Absent',
       paymentStatus:'Pending',
+      patientPhone:this.results.telno,
+      nameToSearch: this.data.name.toLowerCase(),
       status:'Active'
     }    
 
@@ -388,7 +390,7 @@ export class DoctorBookComponent implements OnInit {
     const dateObjects = this.getDateObjectsFromToday(data, 14);
 
     let initialDate = dateObjects[0];
-    if (initialDate < timeNow) {
+    if (initialDate > timeNow) {
       this.availableAppointments.push({
         date: initialDate.toString(),
         time: this.calculateTime(initialDate, data.numberOfAppointments),
