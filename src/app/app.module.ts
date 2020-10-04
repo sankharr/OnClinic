@@ -79,6 +79,7 @@ import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
 import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
 import { LiveConsultationDoctorComponent } from './live-consultation-doctor/live-consultation-doctor.component';
 import { RecordingService } from './services/recording.service';
+import { NavbarModeratorComponent } from './moderator/navbar-moderator/navbar-moderator.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -135,7 +136,8 @@ var firebaseConfig = {
     EpidemicDetectionComponent,
     InquiriesComponent,
     SocialRespComponent,
-    LiveConsultationDoctorComponent
+    LiveConsultationDoctorComponent,
+    NavbarModeratorComponent
   ],
   imports: [
     BrowserModule,

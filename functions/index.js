@@ -99,7 +99,7 @@ exports.getLatestPosts =
         // now = new Date(interval);
         // const interval = admin.firestore.Timestamp.now()
         // var interval = new Date(now.getTime() + (30 * 60 * 1000));
-        console.log(now) 
+        console.log(now)
         console.log(interval)
         const snapshot = await db
             .collection("Appointments").where('appointmentDate', '>', now).where('status', '==', "Active").where('appointmentDate', '<=', interval)
@@ -144,3 +144,68 @@ exports.getLatestPosts =
 //     // console.log("sdhfbsdhfvsdhv");
 //     return console.log('ssss');
 // })
+
+const sgMail = require('@sendgrid/mail')
+exports.sendTextmessage = functions.https.onRequest(async (req, res) => {
+    console.log(req.query.name)
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+    // const params = new URLSearchParams(window.location.search)
+    // console.log(params)
+    const msg = {
+        to: 'ransakaravihara@gmail.com',
+        from: 'hospitalcorepvtltd@gmail.com',
+        subject: 'New account created',
+        text: 'and easy to do anywhere, even with Node.js',
+        html: '<link>http://localhost:4200//emailverify?key</link>',
+    }
+    try {
+        const sender = await sgMail.send(msg)
+        res.send(sender)
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Automatically allow cross-origin requests
+app.use(cors({ origin: true }));
+
+app.get('/hello', (req, res) => {
+    res.send("Received GET request!");
+});
+
+app.post('/hello', async (req, res) => {
+    // console.log(req.body)
+    const reqData = req.body;
+    // console.log(reqData['subject']);
+    const subject = reqData['subject']
+    const bloodGroup = reqData['bloodGroup']
+    const contactPerson = reqData['contactPerson']
+    const contactNo = reqData['contactNo']
+    const SpecialNotes = reqData['SpecialNotes']
+    const snapshot = await db
+        .collection("Users").where('bloodGroup', 'in', bloodGroup).limit(1)
+        .get();
+    const data = snapshot.docs.map(doc => doc.data());
+    data.forEach(element => {
+        // var params = {
+        //     Message: subject+ '\n'+'Dear ' + element['name']+","+"\n" + SpecialNotes+"\n"+"contact person -"+contactPerson+"("+contactNo+")",
+        //     MessageStructure: 'string',
+        //     PhoneNumber: "+94" + "0713255247"
+        // };
+        // // console.log()
+        // sns.publish(params, function (err, data) {
+        //     if (err) console.log(err, err.stack); // an error occurred
+        //     else console.log(data);           // successful response
+        // });
+    });
+
+    res.send("Received POST request!");
+});
+
+// Expose Express API as a single Cloud Function:
+exports.broadcast = functions.https.onRequest(app);
+
