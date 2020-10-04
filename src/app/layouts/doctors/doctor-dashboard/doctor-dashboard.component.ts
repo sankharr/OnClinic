@@ -103,8 +103,8 @@ export class DoctorDashboardComponent implements OnInit {
         console.log(numOfChannelings);
         this.channellings = numOfChannelings;
 
-        var p_count = this.app.map(a => a.patientID);
-        var p_count_unique = _.uniq(p_count)
+        var p_count = this.app.map((a) => a.patientID);
+        var p_count_unique = _.uniq(p_count);
         console.log(p_count_unique);
         this.patientCount = p_count_unique;
 
@@ -112,15 +112,16 @@ export class DoctorDashboardComponent implements OnInit {
         console.log(patient_count);
         this.patients = patient_count;
 
-        var dates = this.app.map(a => a.appointmentShortDate);
-        var dates_unique = _.uniq(dates)
+        var dates = this.app.map((a) => a.appointmentShortDate);
+        var dates_unique = _.uniq(dates);
         console.log(dates_unique);
 
-        // var grouped = _.mapValues(_.groupBy(data, "appointmentShortDate"), (clist) =>
-        //   clist.map((data) => _.omit(data, "appointmentShortDate"))
-        // );
-        // this.app1 = grouped[dates];
-        // console.log(this.app1);
+        var groupedDates = _.mapValues(
+          _.groupBy(data, "appointmentShortDate"),
+          (clist) => clist.map((data) => _.omit(data, "appointmentShortDate"))
+        );
+        this.app1 = groupedDates["dates_unique"];
+        console.log(this.app1);
       });
   }
 

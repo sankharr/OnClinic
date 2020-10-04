@@ -1,253 +1,329 @@
 <div class="container-fluid">
   <div class="col-md-12">
-    
-
-    <h2 style="text-align: center; padding-top: 15px;">Update Details</h2>
+    <h2 style="text-align: center; padding-top: 15px">Update Details</h2>
 
     <div class="row justify-content-center">
-      <div class="col-md-1"> </div>
-  
-      <div class="col-md-10">
+      <div class="col-md-1"></div>
 
+      <div class="col-md-10">
         <form [formGroup]="updateProfileForm" novalidate>
           <!--Feedback Handling-->
           <div *ngIf="submitError" class="alert alert-danger">
-              Update Failed! Please check whether you have filled all the required fields and try again!
+            Update Failed! Please check whether you have filled all the required
+            fields and try again!
           </div>
-  
+
           <div *ngIf="submitSuccess" class="alert alert-success">
-              Succesfully Updated!
+            Succesfully Updated!
           </div>
           <!--edit Values-->
           <div>
-              <div class="row">
-                  <div class="col-12">
-                    <div class="form-group row">
-                      <div class="col-lg-4">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group row">
+                  <div class="col-lg-4">
+                    <div class="card" id="light">
+                      <p><b> Name </b></p>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder=""
+                      formControlName="name"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group row">
+                  <div class="col-lg-4">
+                    <div class="card" id="light">
+                      <p><b> Address </b></p>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder=""
+                      formControlName="address"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <div class="col-lg-4">
+                    <div class="card" id="light">
+                      <p><b> Email </b></p>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder=""
+                      formControlName="email"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <div class="col-lg-4">
+                    <div class="card" id="light">
+                      <p><b> Phone </b></p>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder=""
+                      formControlName="telno"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <div class="col-lg-4">
+                    <div class="card" id="light" style="height: 57px">
+                      <p>
+                        <b> <small>Daily num of appointments</small> </b>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder=""
+                      formControlName="numberOfAppointments"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <div class="col-lg-4">
+                    <div class="card" id="light" style="height: 57px">
+                      <p>
+                        <b> <small>Avg time per consultation</small> </b>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder=""
+                      formControlName="averageConsulationTime"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p id="days" style="text-align: center">
+              Select the starting time of the session in each day
+            </p>
+
+            <div class="row">
+              <div class="col-12">
+                <ul style="list-style: none">
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <p id="days" style="font-weight: bold">
+                          Day of the week
+                        </p>
+                      </div>
+                      <div class="col-6">
+                        <p id="days" style="font-weight: bold">Starting Time</p>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
                         <div class="card" id="light">
-                          <p><b> Name </b></p>
+                          <p><b>Monday </b></p>
+                        </div>
                       </div>
+                      <div class="col-6">
+                        <select
+                          class="form-control"
+                          formControlName="mondayTime"
+                        >
+                          <option *ngFor="let time of times">{{ time }}</option>
+                        </select>
                       </div>
-                      <div class="col-lg-8">
-                      <input class="form-control" type="text" placeholder="" formControlName="name" required>
-                      </div>
-                      </div>
-                  </div>
-              </div>
+                    </div>
+                  </li>
 
-              <div class="row">
-                  <div class="col-12">
-                    <div class="form-group row">
-                      <div class="col-lg-4">
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
                         <div class="card" id="light">
-                          <p><b> Address </b></p>
+                          <p><b>Tuesday </b></p>
+                        </div>
                       </div>
+                      <div class="col-6">
+                        <select
+                          class="form-control"
+                          formControlName="tuesdayTime"
+                        >
+                          <option *ngFor="let time of times">{{ time }}</option>
+                        </select>
                       </div>
-                      <div class="col-lg-8">
-                      <input class="form-control" type="text" placeholder="" formControlName="address" required>
-                      </div>
-                      </div>
-                  </div>
-              </div>
+                    </div>
+                  </li>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group row">
-                    <div class="col-lg-4">
-                      <div class="card" id="light">
-                          <p><b> Email </b></p>
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="card" id="light">
+                          <p><b>Wednesday </b></p>
+                        </div>
                       </div>
-                  </div>
-                <div class="col-lg-8">
-                  <input class="form-control" type="text" placeholder="" formControlName="email" required>
-              </div>
-                  </div>
-                </div>
-                 <div class="col-md-6">
-                  <div class="form-group row">
-                    <div class="col-lg-4">
-                      <div class="card" id="light">
-                          <p><b> Phone </b></p>
+                      <div class="col-6">
+                        <select
+                          class="form-control"
+                          formControlName="wednesdayTime"
+                        >
+                          <option *ngFor="let time of times">{{ time }}</option>
+                        </select>
                       </div>
-                  </div>
-                <div class="col-lg-8">
-                  <input class="form-control" type="text" placeholder="" formControlName="telno" required>
-              </div>
-                </div>  
-              </div>
-              </div>
+                    </div>
+                  </li>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group row">
-                    <div class="col-lg-4">
-                      <div class="card" id="light" style="height: 57px;">
-                          <p><b> <small>Daily num of appointments</small>  </b></p>
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="card" id="light">
+                          <p><b>Thursday </b></p>
+                        </div>
                       </div>
-                  </div>
-                <div class="col-lg-8">
-                  <input class="form-control" type="text" placeholder="" formControlName="numberOfAppointments" required>
-              </div>
-                  </div>
-                </div>
+                      <div class="col-6">
+                        <select
+                          class="form-control"
+                          formControlName="thursdayTime"
+                        >
+                          <option *ngFor="let time of times">{{ time }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
 
-                <div class="col-md-6">
-                  <div class="form-group row">
-                    <div class="col-lg-4">
-                      <div class="card" id="light" style="height: 57px;">
-                          <p><b> <small>Avg time per consultation</small>  </b></p>
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="card" id="light">
+                          <p><b>Friday </b></p>
+                        </div>
                       </div>
-                  </div>
-                <div class="col-lg-8">
-                  <input class="form-control" type="text" placeholder="" formControlName="averageConsulationTime" required>
-              </div>
-                  </div>
-                </div>
-              </div>
+                      <div class="col-6">
+                        <select
+                          class="form-control"
+                          formControlName="fridayTime"
+                        >
+                          <option *ngFor="let time of times">{{ time }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
 
-              <p id="days" style="text-align: center;">Select the starting time of the session in each day</p>
-          
-              <div class="row">
-                <div class="col-12">
-                  <ul style="list-style: none;">
-                    <li>
-                      <div class="row">
-                        <div class="col-4">
-                          <p id="days" style="font-weight: bold;">Day of the week</p>
-                        </div>
-                        <div class="col-6">
-                          <p id="days" style="font-weight: bold;">Starting Time</p>
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="card" id="light">
+                          <p><b>Saturday </b></p>
                         </div>
                       </div>
-                    </li>
-          
-                    <li>
-                      <div class="row">
-                        <div class="col-4">
-                          <div class="card" id="light">
-                            <p><b>Monday </b></p>
-                        </div>
-                        </div>
-                        <div class="col-6">
-                          <select class="form-control" formControlName="mondayTime">
-                            <option *ngFor="let time of times">{{time}}</option>
-                          </select>
-                        </div>
+                      <div class="col-6">
+                        <select
+                          class="form-control"
+                          formControlName="saturdayTime"
+                        >
+                          <option *ngFor="let time of times">{{ time }}</option>
+                        </select>
                       </div>
-                    </li>
-          
-                    <li>
-                      <div class="row">
-                        <div class="col-4">
-                          <div class="card" id="light">
-                            <p><b>Tuesday </b></p>
-                        </div>
-                        </div>
-                        <div class="col-6">
-                          <select class="form-control" formControlName="tuesdayTime">
-                            <option *ngFor="let time of times">{{time}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </li>
-          
-                    <li>
-                      <div class="row">
-                        <div class="col-4">
-                          <div class="card" id="light">
-                            <p><b>Wednesday </b></p>
-                        </div>
-                        </div>
-                        <div class="col-6">
-                          <select class="form-control" formControlName="wednesdayTime">
-                            <option *ngFor="let time of times">{{time}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </li>
-          
-                    <li>
-                      <div class="row">
-                        <div class="col-4">
-                          <div class="card" id="light">
-                            <p><b>Thursday </b></p>
-                        </div>
-                        </div>
-                        <div class="col-6">
-                          <select class="form-control" formControlName="thursdayTime">
-                            <option *ngFor="let time of times">{{time}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </li>
-          
-                    <li>
-                      <div class="row">
-                        <div class="col-4">
-                          <div class="card" id="light">
-                            <p><b>Friday </b></p>
-                        </div>
-                        </div>
-                        <div class="col-6">
-                          <select class="form-control" formControlName="fridayTime">
-                            <option *ngFor="let time of times">{{time}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </li>
-          
-                    <li>
-                      <div class="row">
-                        <div class="col-4">
-                          <div class="card" id="light">
-                            <p><b>Saturday </b></p>
-                        </div>
-                        </div>
-                        <div class="col-6">
-                          <select class="form-control" formControlName="saturdayTime">
-                            <option *ngFor="let time of times">{{time}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </li>
-          
-                    <li>
-                      <div class="row">
-                        <div class="col-4">
-                          <div class="card" id="light">
-                            <p><b>Sunday </b></p>
-                        </div>
-                        </div>
-                        <div class="col-6">
-                          <select class="form-control" formControlName="sundayTime">
-                            <option *ngFor="let time of times">{{time}}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  
-                </div>
-          
-              </div>
-              
-              <!--submit button-->
-              <div class="row">
-                  <div class="col-12" style="margin-left: 400px;">
-                      <button class="btn" id="bottom" style="background-color: #2364ce;" type="submit" (click)="updateProfileDoctor()">Update</button>
-                      <button class="btn" id="bottom" style="background-color: #2364ce;" type="submit" (click)="back()">Back</button>
+                    </div>
+                  </li>
 
-                      <!-- <button class="btn" id="bottom" type="submit" (click)="back()">Back</button> -->
-                  </div>
+                  <li>
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="card" id="light">
+                          <p><b>Sunday </b></p>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <select
+                          class="form-control"
+                          formControlName="sundayTime"
+                        >
+                          <option *ngFor="let time of times">{{ time }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
               </div>
+            </div>
+
+            <!--submit button-->
+            <div class="row">
+              <div class="col-12" style="margin-left: 400px">
+                <button
+                  class="btn"
+                  id="bottom"
+                  style="background-color: #2364ce"
+                  type="submit"
+                  (click)="updateProfileDoctor()"
+                >
+                  Update
+                </button>
+                <button
+                  class="btn"
+                  id="bottom"
+                  style="background-color: #2364ce"
+                  type="submit"
+                  (click)="back()"
+                >
+                  Back
+                </button>
+
+                <!-- <button class="btn" id="bottom" type="submit" (click)="back()">Back</button> -->
+              </div>
+            </div>
           </div>
         </form>
-
       </div>
-  
-      <div class="col-md-1">  </div>
 
+      <div class="col-md-1"></div>
     </div>
 
-  <hr>
+    <hr />
+  </div>
 </div>
