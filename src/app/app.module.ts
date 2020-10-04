@@ -81,6 +81,7 @@ import { LiveConsultationDoctorComponent } from './live-consultation-doctor/live
 import { RecordingService } from './services/recording.service';
 
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -162,6 +163,7 @@ var firebaseConfig = {
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId }),
     HttpModule,
     HttpClientModule,
+    ScheduleModule,
     BrowserAnimationsModule, 
     // MatTabsModule,
   ],

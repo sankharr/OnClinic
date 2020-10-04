@@ -153,3 +153,44 @@ form{
 /* .header-part{
     text-align: center;
 } */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rowp{
+    padding: 1.5%;
+    align-content: center;
+    min-height: max-content;
+  }
+
+  .card{
+    padding: 2%;
+    text-align: center;
+    align-content: center;
+    font-size: xx-large;
+    border: none;
+  }
+  .rounded-circle{
+    width: 120px;
+    align-self: center;
+  }
+
+  #dark.card{
+    background-color:#2196F3;
+  }
+  #more.btn{
+    margin-top: -15%;
+    background-color: #2196F3;
+  }

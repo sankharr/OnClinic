@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Observable, timer } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { RFC_2822 } from 'moment';
 // pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -48,6 +49,9 @@ export class LiveConsultationDoctorComponent implements OnInit {
   minutes = 0;
   seconds = 0;
   doctorUID: string;
+  patientData: any;
+  bmiRange: string;
+  bmi_val: number;
 
 
   constructor(
@@ -75,15 +79,21 @@ export class LiveConsultationDoctorComponent implements OnInit {
     this.db.collection('Appointments').doc(this.channelID).valueChanges()
       .subscribe(output => {
         this.appointmentData = output;
+        this.db.collection("Users",ref=>ref.where("patientID",'==',this.appointmentData.patientID)).valueChanges()
+        .subscribe(output=>{
+          this.patientData=output[0];
+          this.bmi_val = parseFloat(this.patientData.bmi);
+          this.bmi(this.bmi_val);
+        })
       })
 
-    this.startCall(this.channelID);
+    // this.startCall(this.channelID);
 
-    this.timeObservable = timer(0, 1000)
-    this.timeObservable.subscribe(x => {
-      // this.seconds = x;
-      this.displayTime()
-    });
+    // this.timeObservable = timer(0, 1000)
+    // this.timeObservable.subscribe(x => {
+    //   // this.seconds = x;
+    //   this.displayTime()
+    // });
 
   }
 
@@ -112,6 +122,12 @@ export class LiveConsultationDoctorComponent implements OnInit {
   }
 
   openVerticallyCentered(content) {
+    this.modalService.open(content, {
+      centered: true,
+      size: 'lg'
+    });
+  }
+  openPatientsProfile(content) {
     this.modalService.open(content, {
       centered: true,
       size: 'lg'
@@ -364,9 +380,26 @@ export class LiveConsultationDoctorComponent implements OnInit {
       }
     });
   }
-
   private getRemoteId(stream: Stream): string {
     return `agora_remote-${stream.getId()}`;
   }
+  bmi(bmi_val) {
+    console.log("from BMI function-", bmi_val)
+    if (bmi_val < 18.5) {
+      this.bmiRange = "Under-Weight",
+        (<HTMLInputElement>document.getElementById("bmi")).style.color = "red";
+    } else if (bmi_val <= 24.9 && bmi_val > 18.5) {
+      this.bmiRange = "Normal"
+    } else if (bmi_val <= 29.9 && bmi_val > 24.9) {
+      this.bmiRange = "Over-Weight",
+        (<HTMLInputElement>document.getElementById("bmi")).style.color = "red";
+    } else {
+      this.bmiRange = "Obese",
+        (<HTMLInputElement>document.getElementById("bmi")).style.color = "darkred";
+    }
 
+  }
+  viewReport(url){
+    window.open(url, "Report", "height=900,width=1000");
+  }
 }
