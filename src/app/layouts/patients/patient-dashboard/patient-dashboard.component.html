@@ -61,7 +61,7 @@
             </div>
           </div>
           <div class="card" id="space">
-            <ejs-calendar id=calendar [values]='value' [isMultiSelection]='multiselect'></ejs-calendar>
+            <ejs-schedule height="300px" currentView='Month' [eventSettings]="eventSettings"></ejs-schedule>
           </div>
         </div>
       </div>
@@ -88,7 +88,8 @@
                   <h5>{{currentappData?.doctorName}}</h5>
                   <h6>{{currentappData?.doctorSpeciality}}</h6>
                   <h6 class="text-primary"><b>{{currentappData?.appointmentDate.toDate()|date:"medium"}}</b></h6>
-                  <button class="btn" id="btndd" type="submit" (click)="joinlc(result2[0].appointmentID)">Join</button>
+                  <button *ngIf="activestatus" class="btn" id="btndd" type="submit" (click)="joinlc(result2[0].appointmentID)">Join</button>
+                  <button *ngIf="!activestatus" disabled class="btn" id="btndd" type="submit" (click)="joinlc(result2[0].appointmentID)">Join</button>
                 </div>
               </div>
             </div>
