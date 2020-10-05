@@ -33,8 +33,7 @@
         <button class="btn btn-neutral sidebtn" type="button" (click)="openVerticallyCentered(content)">Create <br>
             Prescription</button>
 
-        <button class="btn btn-neutral sidebtn" type="button" (click)="openPatientProfile(patientProfile)">Patient's
-            <br>
+        <button class="btn btn-neutral sidebtn" type="button" (click)="openPatientsProfile(profile)">Patient's <br>
             Profile</button>
 
         <button class="btn btn-neutral sidebtn" type="button" (click)="openModalLiveData(liveData)">Current <br>
@@ -188,89 +187,146 @@
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     </div>
 </ng-template>
-
-<ng-template #patientProfile let-modal>
+<ng-template #profile let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Patient's Profile</h4>
+        <h4 class="modal-title">Patient Profile</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <div class="row overflow-auto">
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <h4 style="margin-bottom: 25px;">Basic Data</h4>
-                        <p>Name - {{ patientData?.name }}</p>
-                        <p>Date of Birth - {{ patientData?.dob }}</p>
-                        <p>Blood Group - {{ patientData?.bloodGroup }}</p>
-                        <p>BMI - {{ patientData?.bmi }}</p>
-                        <p>Dietary Restrictions - {{ patientData?.dietaryRestrictions }}</p>
-                        <p>Height - {{ patientData?.height }}</p>
-                        <p>Weight - {{ patientData?.weight }}</p>
-                    </div>
-                    <div class="col">
-                        <h4 style="margin-bottom: 25px;">Allergies</h4>
-                        <ul>
-                            <li *ngFor='let item of patientData.allergies'>{{ item }}</li>
-                        </ul>
-                        <h4 style="margin-bottom: 25px; margin-top: 35px;">Chronic Conditions</h4>
-                        <ul>
-                            <li *ngFor='let item of patientData.longTermDiseases'>{{ item }}</li>
-                        </ul>
-                    </div>
-
-                    <!-- Name - {{ patientData.name }} -->
-                </div>
-                <h4 style='margin-top:25px;'>Operations</h4>
-
-                <div class="col">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Operation Name</th>
-                                <th scope="col">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of patientData.operations">
-                                <td>{{ item.operationDate }}</td>
-                                <td>{{ item.operationName }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h4>Reports</h4>
-                <div class=list-group style="margin-left: 5px;">
-                    <div class="list-group-item" *ngFor="let item of appointmentData.selectedReports">
-                        <div class=row>
-                            <div class="col">
-                                <div class=row>
-                                    <small>Report Name</small>
-                                </div>
-                                <div class=row>
-                                    <b>{{ item.reportName }}</b>
-                                </div>                               
-                            </div>
-                            <div class="col">
-                                <div class=row>
-                                    <small>Report Date</small>
-                                </div>
-                                <div class=row>
-                                    <b>{{ item.reportDate }}</b>
+        <div class="rowp">
+            <div class="col-lg-12">
+                <div class=card>
+                    <div class="card" id="dark">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card shadow" id="dark">
+                                    <img class="rounded-circle" [src]=patientData.proPicURL>
+                                    <div class="card" id="dark">
+                                        <div class="card" id="dark">
+                                            <h6><b>{{patientData?.name}}</b></h6>
+                                        </div>
+                                        <div class="card" id="dark">
+                                            <h5><b>{{patientData?.age}} Years</b></h5>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <button class="btn btn-primary" (click)="viewReport(item.reportURL)">View</button>
+                            <div class="col-lg-6">
+                                <div class="card shadow">
+                                    <h6>Weight</h6>
+                                    <h6 style="color:blueviolet;"><b>{{patientData?.weight}} kg</b></h6>
+                                    <h6>Height</h6>
+                                    <h6 style="color:blueviolet;"><b>{{patientData?.height}} cm</b></h6>
+                                    <h5>BMI</h5>
+                                    <h4 style="color:blue;"><b>{{patientData?.bmi}}</b></h4>
+                                    <h4 style="color:green;font-family: sans-serif;" id="bmi"><b>{{bmiRange}}</b></h4>
+
+                                </div>
                             </div>
-                        </div>                        
+
+                        </div>
                     </div>
                 </div>
+            </div>
+            <!-- long term deseises and alergies -->
+            <div class="rowp">
+                <div class="col-lg-12">
+                    <div class="card" id="dark">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card shadow" id="center">
+                                    <h6><b>Long Term Diseases</b></h6>
+                                </div>
+                                <div class="card">
+                                    <h6 style="text-align: left;">
+                                        <ul>
+                                            <li *ngFor="let long of patientData?.longTermDiseases">{{long}}</li>
+                                        </ul>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card shadow" id="center">
+                                    <h6><b>Allergies</b></h6>
+                                </div>
+                                <div class="card">
+                                    <h6 style="text-align: left;">
+                                        <ul>
+                                            <li *ngFor="let alergy of patientData?.allergies">{{alergy}}</li>
+                                        </ul>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- operations -->
+            <div class="rowp">
+                <div class="col-lg-12">
+                    <div class="card shadow" id="dark">
+                        <div class="card">
+                            <div class="card" id="center">
+                                <h6><b>Operations</b></h6>
+                            </div>
+                            <div class="list-group">
+                                <div class="list-group-item" *ngFor="let operation of patientData?.operations">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="card" id="center">
+                                                <h6><b>{{operation?.operationName}}</b></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="card" id="center">
+                                                <h6><b>{{operation?.operationDate}}</b></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Report -->
+            <div class="rowp">
+                <div class="col-lg-12">
+                    <div class="card shadow" id="dark">
+                        <div class="card">
+                            <div class="card" id="center">
+                                <h6><b>Reports</b></h6>
+                            </div>
+                            <div class="list-group">
+                                <div class="list-group-item" *ngFor="let report of appointmentData?.selectedReports">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="card" id="center">
+                                                <h6><b>{{report.reportName}}</b></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="card" id="center">
+                                                <h6><b>{{report.reportDate}}</b></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <button class="btn" id="more" type="submit"
+                                                (click)="viewReport(report.reportURL)">View</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>

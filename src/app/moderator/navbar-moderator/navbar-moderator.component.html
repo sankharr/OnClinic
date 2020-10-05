@@ -1,0 +1,47 @@
+<!--    Made by Erik Terwan    -->
+<!--   24th of November 2015   -->
+<!--        MIT License        -->
+<nav role="navigation">
+    <div id="menuToggle">
+        <!--
+      A fake / hidden checkbox is used as click reciever,
+      so you can use the :checked selector on it.
+      -->
+        <input type="checkbox" />
+
+        <!--
+      Some spans to act as a hamburger.
+      
+      They are acting like a real hamburger,
+      not that McDonalds stuff.
+      -->
+        <span></span>
+        <span></span>
+        <span></span>
+
+        <!--
+      Too bad the menu has to be inside of the button
+      but hey, it's pure CSS magic.
+      -->
+        <ul id="menu">
+            <a [routerLink]="['/moderator']" routerLinkActive="router-link-active" >
+                <li>Dashboard</li>
+            </a>
+            <a [routerLink]="['/map']" routerLinkActive="router-link-active" >
+                <li>Edpidemic Detection</li>
+            </a>
+            <a [routerLink]="['/moderator/socialworks']" routerLinkActive="router-link-active" >
+                <li>Social Works</li>
+            </a>
+            <a [routerLink]="['/moderator/inquiries']" routerLinkActive="router-link-active" >
+                <li>Inquiries</li>
+            </a>
+            <a [routerLink]="['/moderator/patients']" routerLinkActive="router-link-active" >
+                <li>Patients</li>
+            </a>
+            <a [routerLink]="['/moderator/doctors']" routerLinkActive="router-link-active" >
+                <li>Doctors</li>
+            </a>
+        </ul>
+    </div>
+</nav>

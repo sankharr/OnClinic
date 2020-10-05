@@ -7,7 +7,7 @@ import { DoctorsComponent } from './doctors.component';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 // import { LiveConsultationComponent } from 'src/app/live-consultation/live-consultation.component';
 import { DoctorPaymentsComponent } from './doctor-payments/doctor-payments.component';
-import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
+//import { ProfilePatientviewComponent } from '../../profile-patientview/profile-patientview.component';
 import { DoctorChannelingComponent } from './doctor-channeling/doctor-channeling.component';
 import { WaitingroomDoctorviewComponent } from './waitingroom-doctorview/waitingroom-doctorview.component';
 import { EditDoctorprofileComponent } from './edit-doctorprofile/edit-doctorprofile.component';
@@ -33,7 +33,7 @@ const routes: Routes =[
         { path: 'profile', component: DoctorProfileComponent},
         { path: 'lcd', component: LiveConsultationDoctorComponent},
         { path: 'payments', component: DoctorPaymentsComponent},
-        { path: 'ppv', component: ProfilePatientviewComponent},
+       // { path: 'ppv', component: ProfilePatientviewComponent},
         { path: 'channeling', component: DoctorChannelingComponent},
         { path: 'waitingroomdoctorview', component: WaitingroomDoctorviewComponent},
         { path: 'editdoctorprofile', component: EditDoctorprofileComponent },

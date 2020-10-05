@@ -10,7 +10,8 @@ import { ChannelingComponent } from './channeling/channeling.component';
 import { MyhealthComponent } from './myhealth/myhealth.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { ReactiveFormsModule,FormsModule } from '@angular/forms'
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 
 
 
@@ -20,7 +21,8 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms'
     CommonModule,
     CalendarModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ScheduleModule
   ]
 })
 export class PatientsModule { }

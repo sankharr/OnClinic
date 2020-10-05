@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { DatePipe } from '@angular/common';
+import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, AgendaService } from '@syncfusion/ej2-angular-schedule';
+
 @Component({
   selector: 'app-patient-dashboard',
   templateUrl: './patient-dashboard.component.html',
-  styleUrls: ['./patient-dashboard.component.css']
+  styleUrls: ['./patient-dashboard.component.css'],
+  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService],
 })
 export class PatientDashboardComponent implements OnInit {
   userid: string;
@@ -25,6 +28,17 @@ export class PatientDashboardComponent implements OnInit {
   todayDateInt: number;
   appDateInt: number;
   activestatus: boolean = false;
+  @Input() public data: any[] = [];
+  public eventSettings: EventSettingsModel = {
+    dataSource: this.data,
+    allowAdding: false,
+    allowDeleting: false,
+    allowEditing: false,
+    enableTooltip: true,
+    // tooltipTemplate: "Hii"
+  }
+  patientID: string;
+  allAppointments: any[];
 
   constructor(
     public auth: AuthService,
@@ -35,6 +49,33 @@ export class PatientDashboardComponent implements OnInit {
     this.uid = localStorage.getItem("uid");
     this.todayDateInt = parseInt(this.datePipe.transform(new Date(), "yyyyMMddhhmmss"));
     console.log("appointmentBtnDate - ", this.todayDateInt)
+    this.patientID = localStorage.getItem("loggedPatientID");
+    this.db.collection('Appointments', ref => ref.where('patientID', '==', this.patientID)).valueChanges()
+      .subscribe(output => {
+        this.allAppointments = output;
+        console.log('All appointments relevant to the logged in patient - ', this.allAppointments);
+        let schObj = (document.querySelector('.e-schedule') as any).ej2_instances[0];
+        let length = this.allAppointments.length;
+        for (let i = 0; i < length; i++) {
+          // let endTime = this.test[i].EndTime.seconds.toString() + "000";
+          // let tempData: calendarObject;
+          let srtTime = this.allAppointments[i].appointmentShortDate;
+          let tempData = {
+            StartTime: new Date(srtTime),
+            EndTime: new Date(srtTime),
+            IsAllDay: true,
+            Subject: 'Dr. ' + this.allAppointments[i].doctorName + ' - ' + this.allAppointments[i].doctorSpeciality
+          }
+          this.data.push(tempData);
+          schObj.eventSettings.dataSource = this.data;
+          // this.refresh.next();
+        }
+        // this.data.slice();
+        var nextBtn = document.getElementById("e-tbr-btn_1");
+        var prevBtn = document.getElementById("e-tbr-btn_0");
+        nextBtn.click();
+        prevBtn.click();
+      })
   }
   // docref=this.db.collection("Users")
   ngOnInit(): void {
@@ -53,8 +94,8 @@ export class PatientDashboardComponent implements OnInit {
             this.result2 = output2;
             this.currentappData = this.result2[0]
             this.appDateInt = parseInt(this.datePipe.transform(this.currentappData.appointmentDate.toDate(), "yyyyMMddhhmmss"));
-            // this.buttonActive();
-            
+            this.buttonActive();
+
             this.nextappData1 = this.result2[1]
             this.nextappData2 = this.result2[2]
             console.log("JOIN data from patients dashboard - ", this.result2);
@@ -98,10 +139,10 @@ export class PatientDashboardComponent implements OnInit {
     var timeDif = this.appDateInt - this.todayDateInt;
     console.log("Time diffrence - ", timeDif)
     if (timeDif <= 3000) {
-      window.onload = () => {
-        (<HTMLButtonElement>document.getElementById("btndd")).disabled = false;
-      }
-      console.log("time to active....")
+      // window.onload = () => {
+      //   (<HTMLButtonElement>document.getElementById("btndd")).disabled = false;
+      // }
+      // console.log("time to active....")
       this.activestatus = true;
     }
   }

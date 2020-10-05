@@ -40,6 +40,7 @@ import { EpidemicDetectionComponent } from './epidemic-detection/epidemic-detect
 import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
 import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
+import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
 
 const routes: Routes =[
   { path: 'home',             component: HomeComponent },
@@ -83,6 +84,7 @@ const routes: Routes =[
   { path: 'welcomepage', component: WelcomeComponent },
   {path:'map',component:EpidemicDetectionComponent},
   { path: 'patientDoctorView', component: ProfileDoctorviewComponent },
+  { path: 'ppv', component: ProfilePatientviewComponent },
   { path: 'admin', component: AdminComponent,
   children:[
     { path: 'systemUsers', component: SystemUsersComponent },

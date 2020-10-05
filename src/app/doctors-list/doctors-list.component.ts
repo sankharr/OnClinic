@@ -38,9 +38,39 @@ export class DoctorsListComponent implements OnInit {
 
   }
 
+sortByRatings(){
+  this.items.sort((a,b) => (a.payload.doc.data().averageRating < b.payload.doc.data().averageRating)? 1 : -1 )
+}
+
+sortByAscending(){
+  this.items.sort((a,b) => (a.payload.doc.data().name > b.payload.doc.data().name)? 1 : -1 )
+}
+
+sortByDescending(){
+  this.items.sort((a,b) => (a.payload.doc.data().name < b.payload.doc.data().name)? 1 : -1 )
+}
   toDoctorDates(uid){
     localStorage.setItem("selectedDocID",uid);
     //this.router.navigate('/doctor-book')
+  }
+  
+  filterBySpeciality(speciality){
+    if(speciality=='All'){
+      this.db.collection("Users", (ref) => (ref.where("role", "==", "doctor"))).snapshotChanges()
+      .subscribe(result => {
+        this.items = result;
+        console.log(this.items);
+      })
+    }else{
+      this.db.collection("Users", (ref) => (ref.where("speciality", "==", speciality))).snapshotChanges()
+      .subscribe(result => {
+        this.items = result;
+        console.log(this.items);
+      })
+    }
+    
+
+
   }
 
 }

@@ -79,10 +79,13 @@ import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
 import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
 import { LiveConsultationDoctorComponent } from './live-consultation-doctor/live-consultation-doctor.component';
 import { RecordingService } from './services/recording.service';
-import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+import { NavbarModeratorComponent } from './moderator/navbar-moderator/navbar-moderator.component';
+// import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -140,7 +143,9 @@ var firebaseConfig = {
     InquiriesComponent,
     SocialRespComponent,
     ProfileDoctorviewComponent,
-    LiveConsultationDoctorComponent
+    LiveConsultationDoctorComponent,
+    NavbarModeratorComponent,
+    ProfilePatientviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -164,9 +169,9 @@ var firebaseConfig = {
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId }),
     HttpModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     ScheduleModule,
-    AngularFireDatabaseModule 
+    BrowserAnimationsModule,
+    AngularFireDatabaseModule
   ],
   providers: [DatePipe,RecordingService],
   bootstrap: [AppComponent]
