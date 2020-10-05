@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgxAgoraService, Stream, AgoraClient, ClientEvent, StreamEvent } from 'ngx-agora';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { timer, Observable, observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RecordingService } from '../services/recording.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import 'rxjs/Rx';
+declare var RecordRTC_Extension: any;
 
 @Component({
   selector: 'app-live-consultation',
   templateUrl: './live-consultation.component.html',
   styleUrls: ['./live-consultation.component.css']
 })
-export class LiveConsultationComponent implements OnInit {
-
-  // channelForm: FormGroup;
+export class LiveConsultationComponent implements OnInit, OnDestroy {
 
   localCallId = 'agora_local';
   remoteCalls: any[] = []
+  fileName;
 
   private client: AgoraClient;
   private localStream: Stream;
@@ -33,49 +36,72 @@ export class LiveConsultationComponent implements OnInit {
   prescriptions: any;
   appointmentCountDoc: any;
 
+  isRecording = false;
+  recordedTime;
+  blobUrl;
+  record_tool: any;
+  extensionInstalled: boolean;
+
 
   constructor(
     private ngxAgoraService: NgxAgoraService,
     private formbuilder: FormBuilder,
     private db: AngularFirestore,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private recorder: RecordingService,
+    private sanitizer: DomSanitizer
   ) {
     this.uid = Math.floor(Math.random() * 100);
     this.appointmentID = localStorage.getItem("selectedAppointmentID_patient");
+    // this.record_tool = new RecordRTC_Extension();
+    try {
+      this.record_tool = new RecordRTC_Extension();
+      this.extensionInstalled = true;
+    } catch (error) {
+      window.alert('You dont have installed record rtc extension');
+      this.extensionInstalled = false;
+    }
+    // console.log(typeof RecordRTC_Extension())
+    this.recorder.recordingFailed().subscribe(() => {
+      this.isRecording = false
+    });
+
+    this.recorder.getRecordedTime().subscribe((time) => {
+      this.recordedTime = time
+    });
+
+    this.recorder.getRecordedBlob().subscribe((data) => {
+      this.blobUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data.blob));
+    });
+
+  }
+
+  ngOnDestroy() {
+    console.log('destroyed!!');
   }
 
   ngOnInit() {
 
 
     this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
-    
+
     this.db.collection("Appointments").doc(this.appointmentID).valueChanges()
       .subscribe(output => {
         this.appointmentData = output;
         console.log("appointment Data - ", this.appointmentData);
-        
+
         if (this.appointmentData?.consultationStarted === "true") {
           console.log("start the timer");
           this.timeObservable = timer(0, 1000)
           this.timeObservable.subscribe(x => {
-            // this.seconds = x;
             this.displayTime()
-          });
-          // timer(0, 1000).subscribe(ec => {
-          //   this.time++;
-          //   this.timerDisplay = this.getDisplayTimer(this.time);
-          // });
+          });          
         }
         this.db.collection("Users").doc(localStorage.getItem("selectedAppointmentDoctorUID")).collection("appointmentCounts").doc(this.appointmentData.appointmentShortDate).valueChanges()
         .subscribe(output2 => {
           this.appointmentCountDoc = output2;
           console.log("appointmentCountDoc - ",this.appointmentCountDoc)
-        })
-        // this.db.collection('Users').doc(localStorage.getItem('uid')).collection('Prescriptions',ref => ref.where("uploadedAt",">=",this.appointmentData.consultationStartedAt)).valueChanges()
-        // .subscribe(output2 => {
-        //   this.prescriptions = output2;
-        //   console.log("available prescriptions - ",this.prescriptions);
-        // })
+        })       
       })
 
 
@@ -159,6 +185,7 @@ export class LiveConsultationComponent implements OnInit {
         var id = stream.getId()
         if (stream.isPlaying()) {
           stream.stop()
+
         }
         // removeView(id)
       }
@@ -256,6 +283,31 @@ export class LiveConsultationComponent implements OnInit {
 
   private getRemoteId(stream: Stream): string {
     return `agora_remote-${stream.getId()}`;
+  }
+
+  startRecording() {
+    if (!this.isRecording) {
+      this.isRecording = true;
+      this.recorder.startRecording();
+    }
+  }
+
+  abortRecording() {
+    if (this.isRecording) {
+      this.isRecording = false;
+      this.recorder.abortRecording();
+    }
+  }
+
+  stopRecording() {
+    if (this.isRecording) {
+      this.recorder.stopRecording();
+      this.isRecording = false;
+    }
+  }
+
+  clearRecordedData() {
+    this.blobUrl = null;
   }
 
 }

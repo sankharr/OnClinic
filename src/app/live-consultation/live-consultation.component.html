@@ -20,15 +20,14 @@
             <div *ngIf="remoteCalls.length === 0" class="waitingScreen">
                 <h1 class="waitingText">Waiting for the Doctor</h1>
             </div>
-        </div>
+        </div>        
     </div>
     <div id="newSidebar">
         <button class="btn btn-danger sidebtn" type="submit" [routerLink]="['/patients/waiting-room']"
             (click)="endCall()">Leave</button>
 
-        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal"
-            (click)="openVerticallyCentered(content)">Download <br>
-            Prescription</button>
+        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal" (click)="openVerticallyCentered(content)">Download <br>
+            Prescription</button>        
     </div>
 </div>
 

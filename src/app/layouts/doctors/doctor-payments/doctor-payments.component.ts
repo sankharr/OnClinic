@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import * as _ from "lodash";
 import { group } from "console";
 import { Timestamp } from "rxjs/internal/operators/timestamp";
 
 @Component({
-  selector: 'app-doctor-payments',
-  templateUrl: './doctor-payments.component.html',
-  styleUrls: ['./doctor-payments.component.css']
+  selector: "app-doctor-payments",
+  templateUrl: "./doctor-payments.component.html",
+  styleUrls: ["./doctor-payments.component.css"],
 })
 export class DoctorPaymentsComponent implements OnInit {
   result: any;
@@ -15,7 +15,7 @@ export class DoctorPaymentsComponent implements OnInit {
   app: any;
   result2: any;
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore) {}
 
   ngOnInit(): void {
     this.userId = localStorage.getItem("uid");
@@ -38,7 +38,7 @@ export class DoctorPaymentsComponent implements OnInit {
         // console.log(res)
         var doctorId = res["doctorID"];
         console.log(doctorId);
-        
+
         var grouped = _.mapValues(_.groupBy(data, "doctorID"), (clist) =>
           clist.map((data) => _.omit(data, "doctorID"))
         );
@@ -46,5 +46,4 @@ export class DoctorPaymentsComponent implements OnInit {
         console.log(this.app);
       });
   }
-
 }

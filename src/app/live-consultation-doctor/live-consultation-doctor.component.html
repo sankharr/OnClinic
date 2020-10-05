@@ -22,16 +22,9 @@
 
             <div *ngIf="remoteCalls.length === 0" class="waitingScreen">
                 <h1 class="waitingText">Waiting for the Patient</h1>
-                <!-- <div class="row">
-                    
-                </div> -->
             </div>
 
         </div>
-        <!-- <div class="col-2">
-            <button class="btn btn-danger" type="submit" [routerLink]="['/patients/waiting-room']"
-                (click)="endCall()">Leave</button>                
-        </div> -->
     </div>
     <div id="newSidebar">
         <button class="btn btn-danger sidebtn" type="button" [routerLink]="['/doctors/dashboard']"
@@ -43,57 +36,9 @@
         <button class="btn btn-neutral sidebtn" type="button" (click)="openPatientsProfile(profile)">Patient's <br>
             Profile</button>
 
-        <button class="btn btn-neutral sidebtn" type="button" (click)="openVerticallyCentered(content)">Current <br>
+        <button class="btn btn-neutral sidebtn" type="button" (click)="openModalLiveData(liveData)">Current <br>
             Health Data</button>
 
-        <!-- <div class="modal fade" id="prescriptionModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="prescriptionModalLabel">Create a Prescription</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="col basicDetails">
-                            <p><b>Patient's Name - </b><span>Sankha</span></p>
-                            <p><b>Patient's Age - </b><span>24</span></p>
-                        </div>
-                        <form [formGroup]="prescriptionForm">
-                            <div class="row">
-                                <div class="col-10">
-                                    <input class="form-control" type="text" placeholder="" formControlName="content">
-                                </div>
-                                <div class="col-1">
-                                    <button class="btn btn-primary" (click)="addPrescriptionLines()"><i
-                                            style="font-size: larger;" class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="list-group">
-                            <div class="list-group-item" *ngFor="let line of prescriptionContent">
-                                <div class="row">
-                                    <div class="col-10">
-                                        <p>{{line}}</p>
-                                    </div>
-                                    <div class="col-1">
-                                        <button class="btn btn-danger"><i style="font-size: larger;"
-                                                class="fa fa-trash"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </div>
 
@@ -105,10 +50,6 @@
         </button>
     </div>
     <div class="modal-body">
-        <!-- <div class="col basicDetails">
-            <p><b>Patient's Name - </b><span>Sankha</span></p>
-            <p><b>Patient's Age - </b><span>24</span></p>
-        </div> -->
         <label>Add prescribed medicines</label>
         <form [formGroup]="prescriptionForm">
             <div class="row">
@@ -132,18 +73,6 @@
                 </div>
             </div>
         </form>
-        <!-- <div class="list-group">
-            <div class="list-group-item" *ngFor="let line of prescriptionContent">
-                <div class="row">
-                    <div class="col-10">
-                        <p>{{line}}</p>
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-danger"><i style="font-size: larger;" class="fa fa-trash"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="row">
             <div class="col">
                 <label *ngIf="prescriptionContent.length"><b>Added prescribed medicines</b></label>
@@ -200,24 +129,19 @@
                 </div>
             </div>
             <div class="row" style="color: white;">ghfghfg</div>
-            <!-- <div class="row">Date : {{appointmentData?.doctorName}}</div> -->
             <h6><b><u>Patient's Details</u></b></h6>
             <div class="row">
                 <div class="col">
                     <h6 style="font-size: 14px;">Name - <span>{{appointmentData?.patientName}}</span></h6>
                     <h6 style="font-size: 14px;">Age - <span>24</span></h6>
                 </div>
-                <!-- <div class="col">
-                    <p>Date : {{dateToday | date:'yyyy-MM-dd'}}</p>
-                </div> -->
+
             </div>
-            <!-- <hr class="solid"> -->
-            <!-- <br><br><br> -->
+
             <p style="color: white;">ghfghfg</p>
             <p></p>
             <p></p>
             <h6><b><u>Prescribed Medicines</u></b></h6>
-            <!-- <br> -->
             <div class="col">
                 <div class="row" *ngFor="let line of prescriptionContent">
                     {{line}}
@@ -227,23 +151,11 @@
 
             <p style="color: white;">ghfghfg</p>
             <h6><b><u>Other Notes</u></b></h6>
-            <!-- <br> -->
             <div class="col">
                 <div class="row" *ngFor="let line of otherNotesArray">
                     {{line}}
                 </div>
             </div>
-
-
-            <!-- <ul>
-                <li *ngFor="let line of prescriptionContent">
-                    <div class="row">
-                        <div class="col-10">
-                            <p style="font-size: 14px;">{{line}}</p>
-                        </div>
-                    </div>
-                </li>
-            </ul> -->
         </div>
     </div>
     <div class="modal-footer">
@@ -253,6 +165,28 @@
     </div>
 </ng-template>
 
+<ng-template #liveData let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Current Health Condition</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <p><b>Temperature</b><span></span></p>
+                <textarea disabled style="width:500px; height: 150px;">{{liveTemperatureString}}</textarea>
+
+                <p style="margin-top: 20px;"><b>BPM</b><span></span></p>
+                <textarea disabled style="width:500px; height: 150px;">{{liveBPMString}}</textarea>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
 <ng-template #profile let-modal>
     <div class="modal-header">
         <h4 class="modal-title">Patient Profile</h4>
@@ -263,37 +197,37 @@
     <div class="modal-body">
         <div class="rowp">
             <div class="col-lg-12">
-                <div class = card>
-                <div class="card" id="dark">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card shadow" id="dark">
-                                <img class="rounded-circle" [src]=patientData.proPicURL>
-                                <div class="card" id="dark">
+                <div class=card>
+                    <div class="card" id="dark">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card shadow" id="dark">
+                                    <img class="rounded-circle" [src]=patientData.proPicURL>
                                     <div class="card" id="dark">
-                                        <h6><b>{{patientData?.name}}</b></h6>
-                                    </div>
-                                    <div class="card" id="dark">
-                                        <h5><b>{{patientData?.age}} Years</b></h5>
+                                        <div class="card" id="dark">
+                                            <h6><b>{{patientData?.name}}</b></h6>
+                                        </div>
+                                        <div class="card" id="dark">
+                                            <h5><b>{{patientData?.age}} Years</b></h5>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card shadow">
-                                <h6>Weight</h6>
-                                <h6 style="color:blueviolet;"><b>{{patientData?.weight}} kg</b></h6>
-                                <h6>Height</h6>
-                                <h6 style="color:blueviolet;"><b>{{patientData?.height}} cm</b></h6>
-                                <h5>BMI</h5>
-                                <h4 style="color:blue;"><b>{{patientData?.bmi}}</b></h4>
-                                <h4 style="color:green;font-family: sans-serif;" id="bmi"><b>{{bmiRange}}</b></h4>
+                            <div class="col-lg-6">
+                                <div class="card shadow">
+                                    <h6>Weight</h6>
+                                    <h6 style="color:blueviolet;"><b>{{patientData?.weight}} kg</b></h6>
+                                    <h6>Height</h6>
+                                    <h6 style="color:blueviolet;"><b>{{patientData?.height}} cm</b></h6>
+                                    <h5>BMI</h5>
+                                    <h4 style="color:blue;"><b>{{patientData?.bmi}}</b></h4>
+                                    <h4 style="color:green;font-family: sans-serif;" id="bmi"><b>{{bmiRange}}</b></h4>
 
+                                </div>
                             </div>
+
                         </div>
-                        
                     </div>
-                </div>
                 </div>
             </div>
             <!-- long term deseises and alergies -->

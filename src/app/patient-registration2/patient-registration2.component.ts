@@ -6,6 +6,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { finalize, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { GeolocationService } from '../services/geolocation.service';
+import { HttpClient } from '@angular/common/http';
 // import { setTimeout } from 'timers';
 
 class Operation {
@@ -61,6 +62,7 @@ export class PatientRegistration2Component implements OnInit {
     private router: Router,
     private afStorage: AngularFireStorage,
     private geolocation: GeolocationService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -78,6 +80,7 @@ export class PatientRegistration2Component implements OnInit {
       reportName: ["", Validators.required],
       dietaryRestrictions: ["", Validators.required],
       bloodGroup: ["", Validators.required],
+      gender: ["", Validators.required],
     });
 
     this.uid = localStorage.getItem("uid");
@@ -114,6 +117,7 @@ export class PatientRegistration2Component implements OnInit {
       allergies: this.selectedAllergies,
       operations: this.finalOperationsList,   //<--------------assign this as an object
       dietaryRestrictions: this.completeProfilePatientForm.controls["dietaryRestrictions"].value,
+      gender: this.completeProfilePatientForm.controls["gender"].value,
       bmi: bmi.toFixed(1),
       bloodGroup: this.completeProfilePatientForm.controls["bloodGroup"].value
       // doctorID:
@@ -255,36 +259,74 @@ export class PatientRegistration2Component implements OnInit {
 
   uploadProPic() {
 
-    const file = this.selectedProPic;
-    const filePath = `${this.uid}/propic`;
-    const fileRef = this.afStorage.ref(filePath);
-    this.taskProPic = this.afStorage.upload(filePath, file);
-    this.uploadProPicProgress = this.taskProPic.percentageChanges();
+    if (this.selectedProPic == null) {                                              //uploading default-avatar pro pic
+      this.http.get('./assets/img/default-avatar.jpg', { responseType: 'blob' })
+        .subscribe(data => {
+          const file = data;
+          const filePath = `${this.uid}/propic`;
+          const fileRef = this.afStorage.ref(filePath);
+          this.taskProPic = this.afStorage.upload(filePath, file);
+          this.uploadProPicProgress = this.taskProPic.percentageChanges();
 
-    this.taskProPic
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => {
-            if (url) {
-              this.fb = url;
-            }
-            console.log("url from finalize - ", this.fb);
-            this.db.collection('Users').doc(this.uid).update({
-              proPicURL: this.fb,
-            })
-            setTimeout(() => {
-              this.uploadProPicProgress = null;
-            }, 500)
-          });
-        }),
-      )
-      .subscribe(url => {
-        if (url) {
-          console.log("url from subscribe - ", url);
-        }
-      });
+          this.taskProPic
+            .snapshotChanges()
+            .pipe(
+              finalize(() => {
+                this.downloadURL = fileRef.getDownloadURL();
+                this.downloadURL.subscribe(url => {
+                  if (url) {
+                    this.fb = url;
+                  }
+                  console.log("url from finalize - ", this.fb);
+                  this.db.collection('Users').doc(this.uid).update({
+                    proPicURL: this.fb,
+                  })
+                  setTimeout(() => {
+                    this.uploadProPicProgress = null;
+                  }, 500)
+                });
+              }),
+            )
+            .subscribe(url => {
+              if (url) {
+                console.log("url from subscribe - ", url);
+              }
+            });
+        });
+    }
+    else {                                                              //uploading user selected pro pic
+      const file = this.selectedProPic;
+      const filePath = `${this.uid}/propic`;
+      const fileRef = this.afStorage.ref(filePath);
+      this.taskProPic = this.afStorage.upload(filePath, file);
+      this.uploadProPicProgress = this.taskProPic.percentageChanges();
+
+      this.taskProPic
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            this.downloadURL = fileRef.getDownloadURL();
+            this.downloadURL.subscribe(url => {
+              if (url) {
+                this.fb = url;
+              }
+              console.log("url from finalize - ", this.fb);
+              this.db.collection('Users').doc(this.uid).update({
+                proPicURL: this.fb,
+              })
+              setTimeout(() => {
+                this.uploadProPicProgress = null;
+              }, 500)
+            });
+          }),
+        )
+        .subscribe(url => {
+          if (url) {
+            console.log("url from subscribe - ", url);
+          }
+        });
+    }
+
   }
 
 

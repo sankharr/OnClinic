@@ -1,0 +1,175 @@
+<!--Upper block-->
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="card shadow" id="dark">
+        <div class="pt-0 text-center">
+          <div class="card-body py-20">
+            <div class="row">
+              <!--First grid-->
+              <div class="col-lg-4">
+                <div class="card shadow border-0" id="light">
+                  <div class="card-body py-20" style="height: 250px">
+                    <h2><b>Doctor Qualification</b></h2>
+                    <h4>MBBS:Uninersity of colmbo</h4>
+                  </div>
+                </div>
+              </div>
+              <!--Second grid-->
+              <div class="col-lg-4">
+                <div class="card-body py-20" style="height: 250px">
+                  <img
+                    src="./assets/img/theme/team-1-800x800.jpg"
+                    class="rounded-circle img-center img-fluid shadow shadow-lg--hover"
+                    style="width: 120px"
+                  />
+                  <span class="d-block mb-1">Last active - 20 mins ago</span>
+                  <div class="card shadow border-0">
+                    <small class="h6 text-muted">Dr. {{ result.name }}</small>
+                  </div>
+                </div>
+              </div>
+              <!--Third grid-->
+              <div class="col-lg-4">
+                <div class="card shadow border-0" id="light">
+                  <div class="card-body py-20" style="height: 250px">
+                    <h2 style="text-align: center"><b>Summary</b></h2>
+                    <h6>16 total number of patients channel</h6>
+                    <h6>3 successfull channeling</h6>
+                  </div>
+                </div>
+              </div>
+              <!--end of 3 grids-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--end of Upper block-->
+  <!--second block-->
+
+  <div class="row justify-content-center" style="margin-top: 10px">
+    <div class="col-lg-12">
+      <div class="row row-grid">
+        <!--First grid-->
+        <div class="col-lg-4">
+          <div class="card shadow border-0" id="dark">
+            <div class="pt-0 text-center">
+              <div class="card-body py-20" style="height: 470px">
+                <div class="card shadow border-0" id="topic">
+                  <div class="card-body py-1">
+                    <span class="d-block mb-1">Channeling Status</span>
+                  </div>
+                </div>
+                <div class="card shadow border-0" id="light">
+                  <div class="card-body py-20" style="height: 390px">
+                    <div class="card shadow" id="space">
+                      <div class="card card-stats mb-4 mb-lg-0">
+                        <div class="card-body">
+                          <h5 class="card-title">Success Rate</h5>
+                          <h3>80%</h3>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card shadow" id="space">
+                      <div class="card card-stats mb-4 mb-lg-0">
+                        <div class="card-body">
+                          <h5 class="card-title">No of Channelings</h5>
+                          <h3>20</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--second grid-->
+        <div class="col-lg-4">
+          <div class="card shadow border-0" id="dark">
+            <div class="pt-0 text-center">
+              <div class="card-body py-20" style="height: 470px">
+                <div class="card shadow border-0" id="topic">
+                  <div class="card-body py-1">
+                    <span class="d-block mb-1">Available days and times</span>
+                  </div>
+                </div>
+                <div class="card shadow border-0" id="light">
+                  <div class="card-body py-20" style="height: 390px">
+                    <div class="card shadow" id="space">
+                      <div class="card card-stats mb-4 mb-lg-0">
+                        <div class="card-body">
+                          <div *ngIf="result.mondayTime !== ''">
+                            <h5>Monday : {{ result.mondayTime }}</h5>
+                          </div>
+                          <div *ngIf="result.tuesdayTime !== ''">
+                            <h5>Tuesday : {{ result.tuesdayTime }}</h5>
+                          </div>
+                          <div *ngIf="result.wednesdayTime !== ''">
+                            <h5>Wednesday : {{ result.wednesdayTime }}</h5>
+                          </div>
+                          <div *ngIf="result.thursdayTime !== ''">
+                            <h5>Thursday : {{ result.thursdayTime }}</h5>
+                          </div>
+                          <div *ngIf="result.fridayTime !== ''">
+                            <h5>Friday : {{ result.fridayTime }}</h5>
+                          </div>
+                          <div *ngIf="result.saturdayTime !== ''">
+                            <h5>Saturday : {{ result.saturdayTime }}</h5>
+                          </div>
+                          <div *ngIf="result.sundayTime !== ''">
+                            <h5>Sunday : {{ result.sundayTime }}</h5>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--third grid-->
+        <div class="col-lg-4">
+          <div class="card shadow border-0" id="dark">
+            <div class="pt-0 text-center">
+              <div class="card-body py-20" style="height: 470px">
+                <div class="card shadow border-0" id="topic">
+                  <div class="card-body py-1">
+                    <span class="d-block mb-1">Fees and charges</span>
+                  </div>
+                </div>
+                <div class="card shadow border-0" id="light">
+                  <div class="card-body py-20" style="height: 390px">
+                    <div class="card shadow" id="space">
+                      <div class="card card-stats mb-4 mb-lg-0">
+                        <div class="card-body">
+                          <h5 class="card-title">Channeling Fee</h5>
+                          <h3>{{ result.doctorFee }}</h3>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      style="margin-top: 40px"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

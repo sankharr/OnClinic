@@ -63,10 +63,6 @@ export class RecordingService {
 
   private record() {
     this.recorder = new RecordRTC_Extension();
-    // this.recorder = new RecordRTC.StereoAudioRecorder(this.stream, {
-    //   type: 'audio',
-    //   mimeType: 'audio/webm'
-    // });
     this.recorder.startRecording({
       enableScreen: true,
       enableMicrophone: true,
@@ -105,6 +101,8 @@ export class RecordingService {
           const mp3Name = encodeURIComponent('my_channeling' + new Date().getTime() + '.mp4');
           this.stopMedia();
           this._recorded.next({ blob: blob, title: mp3Name });
+          console.log("recording ended")
+          // this.fileName = "channeling_"+today+".webm"
         }
       }, () => {
         this.stopMedia();

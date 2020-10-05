@@ -228,7 +228,7 @@ export class EpidemicDetectionComponent implements OnInit {
       showlegend: true,
       annotations: [{
         x: 0,
-        y: 0,
+        y: 0, 
         xref: 'paper',
         yref: 'paper',
         showarrow: true
