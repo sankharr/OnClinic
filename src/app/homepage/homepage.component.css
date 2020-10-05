@@ -16,6 +16,24 @@
     height: 101%
 }
 
+#aboutUs{
+  margin-top: 25%;
+  margin-left: 10%;
+  margin-right: 10%;
+  
+}
+
+#aboutUs h3{
+  font-size: 300%;
+  font-weight: bold;
+}
+
+#aboutUs p {
+  margin-top: 1%;
+  font-size: x-large;
+  font-weight: 500;
+}
+
 .welcome{
   margin-top: 20%;
   margin-left: 10%;
