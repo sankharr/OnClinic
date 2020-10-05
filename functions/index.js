@@ -85,6 +85,7 @@ const _ = require('lodash');
 const { element } = require('protractor');
 const { error } = require('console');
 var AWS = require('aws-sdk');
+// AWS.config.loadFromPath('./config.json')
 AWS.config.region = 'eu-west-1';
 var sns = new AWS.SNS();
 require('dotenv').config()
@@ -124,16 +125,16 @@ exports.getLatestPosts =
             var appointmentNo = element['appointmentNo']
             var appointmentTime = element['appointmentTime']
             var phone = element['phone'].substring(1)
-            // var params = {
-            //     Message: 'Hello '+name+' you have appointment with Dr. '+doctorName+' on today at '+appointmentTime+'   Appointment No: '+appointmentNo,
-            //     MessageStructure: 'string',
-            //     PhoneNumber: "+94"+phone
-            // };
-            // console.log()
-            // sns.publish(params, function (err, data) {
-            //     if (err) console.log(err, err.stack); // an error occurred
-            //     else console.log(data);           // successful response
-            // });
+            var params = {
+                Message: 'Hello '+name+' you have appointment with Dr. '+doctorName+' on today at '+appointmentTime+'   Appointment No: '+appointmentNo,
+                MessageStructure: 'string',
+                PhoneNumber: "+94"+"0713255247"
+            };
+            console.log()
+            sns.publish(params, function (err, data) {
+                if (err) console.log(err, err.stack); // an error occurred
+                else console.log(data);           // successful response
+            });
         })
         res.send(data)
     })
@@ -191,16 +192,18 @@ app.post('/hello', async (req, res) => {
         .get();
     const data = snapshot.docs.map(doc => doc.data());
     data.forEach(element => {
-        // var params = {
-        //     Message: subject+ '\n'+'Dear ' + element['name']+","+"\n" + SpecialNotes+"\n"+"contact person -"+contactPerson+"("+contactNo+")",
-        //     MessageStructure: 'string',
-        //     PhoneNumber: "+94" + "0713255247"
-        // };
-        // // console.log()
-        // sns.publish(params, function (err, data) {
-        //     if (err) console.log(err, err.stack); // an error occurred
-        //     else console.log(data);           // successful response
-        // });
+        // commmented out sms codes
+        var params = {
+            Message: subject+ '\n'+'Dear ' + element['name']+","+"\n" + SpecialNotes+"\n"+"contact person -"+contactPerson+"("+contactNo+")",
+            MessageStructure: 'string',
+            PhoneNumber: "+94" + "0713255247"
+        };
+        // console.log()
+        sns.publish(params, function (err, data) {
+            if (err) console.log(err, err.stack); // an error occurred
+            else console.log(data);           // successful response
+        });
+        console.log(element['telno'])
     });
 
     res.send("Received POST request!");
