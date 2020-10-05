@@ -216,25 +216,35 @@
                     aria-labelledby="nav-previous-tab"
                   >
                     <div class="table-responsive">
+                      <div class="row justify-content-center">
                       <table class="table align-items-center table-flush">
                         <tbody>
+                          <div>
+                            <tr>
+                              <th style="padding-left: 20px;" >Patient Name</th>
+                              <th style="padding-left: 130px;">Appoinment No</th>
+                              <th style="padding-left: 130px;">Details</th>
+                              <th style="padding-left: 130px;"> Profile </th>
+                              <th style="padding-left: 100px;"> Recipt </th>
+                            </tr>
+                          </div>
                           <div *ngFor="let item of app">
                             <div *ngIf="item.status == 'Success'">
                               <tr>
                                 <td>
                                   <span class="mb-0 text-sm"
-                                    >Appoinment with patient :
-                                    {{ item.patientID }}</span
+                                    >
+                                    {{ item.patientName }}</span
                                   >
                                 </td>
 
-                                <td>
+                                <td style="padding-left: 180px;">
                                   <span class="mb-0 text-sm"
-                                    >Appoinment No :
+                                    >
                                     {{ item.appointmentNo }}</span
                                   >
                                 </td>
-                                <td>
+                                <td style="padding-left: 170px;">
                                   <button
                                     class="btn btn-lg btn-outline-primary"
                                     (click)="open(content)"
@@ -242,7 +252,14 @@
                                     View Details
                                   </button>
                                 </td>
-                                <td>
+                                <td style="padding-left: 40px;">
+                                  <button
+                                    class="btn btn-lg btn-outline-primary"
+                                  >
+                                    View Profile
+                                  </button>
+                                </td>
+                                <td style="padding-left: 40px;">
                                   <button
                                     class="btn btn-lg btn-outline-primary"
                                     (click)="open2(content2)"
@@ -303,6 +320,7 @@
                           </div>
                         </tbody>
                       </table>
+                      </div>
                     </div>
                   </div>
                 </div>
