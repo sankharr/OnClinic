@@ -20,43 +20,14 @@
             <div *ngIf="remoteCalls.length === 0" class="waitingScreen">
                 <h1 class="waitingText">Waiting for the Doctor</h1>
             </div>
-        </div>
-        <!-- <div class="col-2">
-            <button class="btn btn-danger" type="submit" [routerLink]="['/patients/waiting-room']"
-                (click)="endCall()">Leave</button>                
-        </div> -->
+        </div>        
     </div>
     <div id="newSidebar">
         <button class="btn btn-danger sidebtn" type="submit" [routerLink]="['/patients/waiting-room']"
             (click)="endCall()">Leave</button>
 
-        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal"
-            (click)="openVerticallyCentered(content)">Download <br>
-            Prescription</button>
-        <a class="btn btn-neutral sidebtn" *ngIf="!isRecording && !blobUrl && extensionInstalled"
-            (click)="startRecording()">Start Recording</a>
-        <a class="btn btn-neutral sidebtn" *ngIf="!extensionInstalled"
-            href="https://chrome.google.com/webstore/detail/recordrtc/ndcljioonkecdnaaihodjgiliohngojp" target="_blank">
-            Install RecordRtc <br>Extension to Record <br> Consultation</a>
-        <a class="btn btn-neutral sidebtn" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">Stop Recording</a>
-        <a class="btn btn-neutral sidebtn" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">Clear
-            Recording</a>
-        <div *ngIf="isRecording && !blobUrl"> {{recordedTime}} </div>
-        <div><br>
-            <small *ngIf="!isRecording && blobUrl" style="color: red;">This is audio preview only.You can download both audio and video of the consultation.</small><br>
-            <audio title="This is audio preview only.You can download both audio and video of the consultation."
-                *ngIf="!isRecording && blobUrl" controls style="width: 180px; height: 50px;">
-                <source [src]="blobUrl" type="video/webm">
-            </audio>
-            <a class="btn btn-success sidebtn" *ngIf="!isRecording && blobUrl" [href]="blobUrl"
-                download="{{fileName}}">Download Recoding</a>
-        </div>
-        <!-- <div class="row newSidebarRow">
-
-        </div>
-        <div class="row newSidebarRow">
-
-        </div> -->
+        <button class="btn btn-neutral sidebtn" type="button" data-toggle="modal" (click)="openVerticallyCentered(content)">Download <br>
+            Prescription</button>        
     </div>
 </div>
 

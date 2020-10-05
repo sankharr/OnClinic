@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
     public isCollapsed = true;
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
+    userRole: any;
 
     user: firebase.User;
 
@@ -22,6 +23,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.userRole = localStorage.getItem("role");
       this.router.events.subscribe((event) => {
         this.isCollapsed = true;
         if (event instanceof NavigationStart) {

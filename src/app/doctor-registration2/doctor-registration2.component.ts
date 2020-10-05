@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { toPath } from 'lodash';
+import { pathToFileURL } from 'url';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-doctor-registration2',
@@ -31,17 +34,24 @@ export class DoctorRegistration2Component implements OnInit {
   taskProPic: AngularFireUploadTask;
   uid: any;
   downloadURL: Observable<string>;
+  userData: any;
 
   constructor(
     private _formbuilder: FormBuilder,
     private db: AngularFirestore,
     private router: Router,
     private afStorage: AngularFireStorage,
-  ) { }
+    private http: HttpClient
+  ) {
+    this.uid = localStorage.getItem("uid");
+   }
 
   ngOnInit(): void {
 
-    this.uid = localStorage.getItem("uid");
+    this.db.collection('Users').doc(this.uid).valueChanges()
+    .subscribe(res => {
+      this.userData = res;
+    });
 
     this.completeProfileDoctorForm = this._formbuilder.group({
       mondayTime: ["", Validators.required],
@@ -56,8 +66,9 @@ export class DoctorRegistration2Component implements OnInit {
       numberOfAppointments: ["", Validators.required],
       averageConsulationTime: ["", Validators.required],
       eduQualifications: ["", Validators.required],
+      gender: ["", Validators.required],
     });
-    
+
 
     // this.db.collection("system_variables").doc("system_variables").snapshotChanges()
     //   .subscribe(result => {
@@ -69,20 +80,22 @@ export class DoctorRegistration2Component implements OnInit {
     // this.generateNewDoctorID();
   }
 
-  addQualifications(qualifi){
+  addQualifications(qualifi) {
     this.qualificationsArray.push(qualifi);
-    this.completeProfileDoctorForm.controls['eduQualifications'].reset()  
+    this.completeProfileDoctorForm.controls['eduQualifications'].reset()
   }
 
-  removeQualifications(val){
+  removeQualifications(val) {
     var index = this.qualificationsArray.indexOf(val);
-    this.qualificationsArray.splice(index,1);
-    console.log("from removeQualifications, val index qualificationsArray - ",val,index,this.qualificationsArray)
-  }  
+    this.qualificationsArray.splice(index, 1);
+    console.log("from removeQualifications, val index qualificationsArray - ", val, index, this.qualificationsArray)
+  }
 
   updateProfileDoctor() {
 
     this.uploadProPic();
+
+    console.log("user name - ",this.userData.name)
 
     var finalQualiObjectsArray = [];
 
@@ -93,7 +106,7 @@ export class DoctorRegistration2Component implements OnInit {
       }
       finalQualiObjectsArray.push(temp);
       console.log(value);
-    }); 
+    });
 
     var speciality = this.completeProfileDoctorForm.controls["speciality"].value;
     var doctorFee = this.completeProfileDoctorForm.controls["doctorFee"].value;
@@ -110,11 +123,12 @@ export class DoctorRegistration2Component implements OnInit {
       sundayTime: this.completeProfileDoctorForm.controls["sundayTime"].value,
       speciality: this.completeProfileDoctorForm.controls["speciality"].value,
       doctorFee: this.completeProfileDoctorForm.controls["doctorFee"].value,
+      gender: this.completeProfileDoctorForm.controls["gender"].value,
       numberOfAppointments: this.completeProfileDoctorForm.controls["numberOfAppointments"].value,
       averageConsulationTime: this.completeProfileDoctorForm.controls["averageConsulationTime"].value,
       averageRating: ((Math.random() * 5) + 1).toFixed(1),
-      qualifications: finalQualiObjectsArray
-      // doctorID:
+      qualifications: finalQualiObjectsArray,
+      nameToSearch: (this.userData.name).toLowerCase()
     }
 
     console.log(newData);
@@ -126,7 +140,7 @@ export class DoctorRegistration2Component implements OnInit {
         .then(() => {
           this.submitSuccess = true;
           this.completeProfileDoctorForm.reset();
-          setTimeout(()=>{this.router.navigate(['/doctors/dashboard'])},2000);          
+          setTimeout(() => { this.router.navigate(['/doctors/dashboard']) }, 2000);
         })
     }
 
@@ -139,38 +153,82 @@ export class DoctorRegistration2Component implements OnInit {
     this.selectedProPic = event.target.files[0];
   }
 
+  // uploadDefaultProPic() {
+  //   if(this.selectedProPic == null)
+  // }
+
   uploadProPic() {
 
-    const file = this.selectedProPic;
-    const filePath = `${this.uid}/propic`;
-    const fileRef = this.afStorage.ref(filePath);
-    this.taskProPic = this.afStorage.upload(filePath, file);
-    this.uploadProPicProgress = this.taskProPic.percentageChanges();
 
-    this.taskProPic
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => {
-            if (url) {
-              this.fb = url;
-            }
-            console.log("url from finalize - ", this.fb);
-            this.db.collection('Users').doc(this.uid).update({
-              proPicURL: this.fb,
-            })
-            setTimeout(() => {
-              this.uploadProPicProgress = null;
-            }, 500)
-          });
-        }),
-      )
-      .subscribe(url => {
-        if (url) {
-          console.log("url from subscribe - ", url);
-        }
-      });
+    // var file: File;
+    if (this.selectedProPic == null) {                                              //uploading default-avatar pro pic
+      this.http.get('./assets/img/default-avatar.jpg', { responseType: 'blob' })
+        .subscribe(data => {
+          const file = data;
+          const filePath = `${this.uid}/propic`;
+          const fileRef = this.afStorage.ref(filePath);
+          this.taskProPic = this.afStorage.upload(filePath, file);
+          this.uploadProPicProgress = this.taskProPic.percentageChanges();
+
+          this.taskProPic
+            .snapshotChanges()
+            .pipe(
+              finalize(() => {
+                this.downloadURL = fileRef.getDownloadURL();
+                this.downloadURL.subscribe(url => {
+                  if (url) {
+                    this.fb = url;
+                  }
+                  console.log("url from finalize - ", this.fb);
+                  this.db.collection('Users').doc(this.uid).update({
+                    proPicURL: this.fb,
+                  })
+                  setTimeout(() => {
+                    this.uploadProPicProgress = null;
+                  }, 500)
+                });
+              }),
+            )
+            .subscribe(url => {
+              if (url) {
+                console.log("url from subscribe - ", url);
+              }
+            });
+        });
+    }
+    else {                                                              //uploading user selected pro pic
+      const file = this.selectedProPic;
+      const filePath = `${this.uid}/propic`;
+      const fileRef = this.afStorage.ref(filePath);
+      this.taskProPic = this.afStorage.upload(filePath, file);
+      this.uploadProPicProgress = this.taskProPic.percentageChanges();
+
+      this.taskProPic
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            this.downloadURL = fileRef.getDownloadURL();
+            this.downloadURL.subscribe(url => {
+              if (url) {
+                this.fb = url;
+              }
+              console.log("url from finalize - ", this.fb);
+              this.db.collection('Users').doc(this.uid).update({
+                proPicURL: this.fb,
+              })
+              setTimeout(() => {
+                this.uploadProPicProgress = null;
+              }, 500)
+            });
+          }),
+        )
+        .subscribe(url => {
+          if (url) {
+            console.log("url from subscribe - ", url);
+          }
+        });
+    }
+
   }
 
 }

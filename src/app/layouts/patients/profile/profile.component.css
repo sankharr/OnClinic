@@ -63,6 +63,15 @@
     padding-right: 10px;
     float: right;
   }
+  .btnedit{
+    color: rgb(38, 113, 179);
+    width: fit-content;
+    align-self: flex-end;
+    padding: 0%;
+    padding-left: 10px;
+    padding-right: 10px;
+    float: right;
+  }
   
   .image-man{
     width: 150px;

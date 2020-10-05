@@ -143,6 +143,27 @@
             <span class="nav-link-inner--text">Home</span>
           </a>
         </li>
+
+        <!-- Patient's Dashboard -->
+        <li class="nav-item d-lg-block ml-lg-4" *ngIf="userRole === 'patient'">              
+          <a href="patients/dashboard" class="nav-link no-caret">
+            <span class="btn-inner--icon">
+              <i class="fa fa-home mr-2"></i>
+            </span>
+            <span class="nav-link-inner--text">Dashboard</span>
+          </a>
+        </li>
+
+        <!-- Doctors's Dashboard -->
+        <li class="nav-item d-lg-block ml-lg-4" *ngIf="userRole === 'doctor'">
+          <a href="doctors/dashboard" class="nav-link no-caret">
+            <span class="btn-inner--icon">
+              <i class="fa fa-home mr-2"></i>
+            </span>
+            <span class="nav-link-inner--text">Dashboard</span>
+          </a>
+        </li>
+        
         <li class="nav-item d-lg-block ml-lg-4">
           <a href="doctors-list" class="nav-link no-caret">
             <span class="btn-inner--icon">

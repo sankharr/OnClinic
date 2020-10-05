@@ -16,8 +16,6 @@ declare var RecordRTC_Extension: any;
 })
 export class LiveConsultationComponent implements OnInit, OnDestroy {
 
-  // channelForm: FormGroup;
-
   localCallId = 'agora_local';
   remoteCalls: any[] = []
   fileName;
@@ -96,24 +94,14 @@ export class LiveConsultationComponent implements OnInit, OnDestroy {
           console.log("start the timer");
           this.timeObservable = timer(0, 1000)
           this.timeObservable.subscribe(x => {
-            // this.seconds = x;
             this.displayTime()
-          });
-          // timer(0, 1000).subscribe(ec => {
-          //   this.time++;
-          //   this.timerDisplay = this.getDisplayTimer(this.time);
-          // });
+          });          
         }
         this.db.collection("Users").doc(localStorage.getItem("selectedAppointmentDoctorUID")).collection("appointmentCounts").doc(this.appointmentData.appointmentShortDate).valueChanges()
-          .subscribe(output2 => {
-            this.appointmentCountDoc = output2;
-            console.log("appointmentCountDoc - ", this.appointmentCountDoc)
-          })
-        // this.db.collection('Users').doc(localStorage.getItem('uid')).collection('Prescriptions',ref => ref.where("uploadedAt",">=",this.appointmentData.consultationStartedAt)).valueChanges()
-        // .subscribe(output2 => {
-        //   this.prescriptions = output2;
-        //   console.log("available prescriptions - ",this.prescriptions);
-        // })
+        .subscribe(output2 => {
+          this.appointmentCountDoc = output2;
+          console.log("appointmentCountDoc - ",this.appointmentCountDoc)
+        })       
       })
 
 
