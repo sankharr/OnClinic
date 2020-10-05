@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
@@ -6,13 +6,14 @@ import { Observable, timer } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as jsPDF from 'jspdf';
 import { finalize } from 'rxjs/operators';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-payment-completed',
   templateUrl: './payment-completed.component.html',
   styleUrls: ['./payment-completed.component.css']
 })
-export class PaymentCompletedComponent implements OnInit {
+export class PaymentCompletedComponent implements OnInit,AfterViewInit {
   results: any;
   // results1: any;
  
@@ -48,7 +49,7 @@ export class PaymentCompletedComponent implements OnInit {
       .subscribe(output => {
         this.results = output;
         console.log("payment successful - ",this.results);
-        this.htmlToPdf();
+        // this.htmlToPdf();
       })
       
   }
@@ -125,6 +126,46 @@ export class PaymentCompletedComponent implements OnInit {
       console.log("at the end from html2pdf");    
 
 
+  }
+
+  download(){
+    var storage = firebase.storage();
+    storage.refFromURL(this.fb)
+    .getDownloadURL().then((url)=>{
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = "blob";
+      xhr.onload = (event)=>{
+        const blob = new Blob([xhr.response]);
+        const a:any = document.createElement("a");
+        a.style = "display:none";
+        document.body.appendChild(a);
+        const url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = this.dateToday + '_' + this.results.doctorName+".pdf";
+        // if(ftype=="image/jpeg"){
+        //   a.download = repName+".jpg";
+        // }
+        // else if(ftype=="image/png"){
+        //   a.download = repName+".png";
+        // }
+        // else if(ftype=="image/jpg"){
+        //   a.download = repName+".jpg";
+        // }
+        // else{
+        //   a.download = repName+".pdf";
+        // }
+        a.click();
+        window.URL.revokeObjectURL(url);
+      };
+      xhr.open("GET",url);
+      xhr.send();
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
+
+  ngAfterViewInit(){
+    this.htmlToPdf();
   }
 
 

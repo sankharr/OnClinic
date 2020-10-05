@@ -14,12 +14,12 @@
         <div class="col-6">
             <img src='../../assets/img/payment/successful.jpg' alt="successful" height="300" width="300">
         </div>
-        <p style="padding-left: 66%;"> <button type="submit" class="btn btn-primary" (click)="htmlToPdf()">Download Payment Receipt</button> </p>
+        <p style="padding-left: 66%;"> <button type="submit" class="btn btn-primary" (click)="download()">Download Payment Receipt</button> </p>
     </div>
   
 </div>
 
-<div class="invisible" >
+<div class="a" >
 <div id="htmlData" #htmlData>
     <div class="header-part">
         <h2 style="color: dodgerblue;"><b>HospitalCore</b></h2>
@@ -34,22 +34,22 @@
     </div>
     <div class="row">
         <div class="col" style="font-size: 14px;">
-            Doctor's Name : {{results.doctorName}}                  
+            Doctor's Name : {{results?.doctorName}}                  
         </div>
     </div>
     <div class="row">
         <div class="col" style="font-size: 14px;">
-            Appointment No: {{results.appointmentNo}}                  
+            Appointment No: {{results?.appointmentNo}}                  
         </div>
     </div>
     <div class="row" style="color: white;">ghfghfg</div>
     <!-- <h6><b><u>Patient's Details</u></b></h6> -->
     <div class="row">
         <div class="col">
-            <h6 style="font-size: 14px;">Patient's Name - <span>{{results.patientName}}</span></h6>
-            <h6 style="font-size: 14px;">Apoinment Date - <span>{{results.appointmentShortDate}}</span></h6>
-            <h6 style="font-size: 14px;">Apoinment Time - <span>{{results.appointmentTime}}</span></h6>
-            <h4 style="font-size: 18px;"><b>Total Amount Rs <span>{{results.totalFee}}</span></b></h4>
+            <h6 style="font-size: 14px;">Patient's Name - <span>{{results?.patientName}}</span></h6>
+            <h6 style="font-size: 14px;">Appointment Date - <span>{{results?.appointmentShortDate}}</span></h6>
+            <h6 style="font-size: 14px;">Appointment Time - <span>{{results?.appointmentTime}}</span></h6>
+            <h4 style="font-size: 18px;"><b>Total Amount - Rs <span>{{results?.totalFee}}</span></b></h4>
         </div>
        
     </div>
