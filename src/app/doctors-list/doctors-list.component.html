@@ -61,10 +61,12 @@
             {{item.payload.doc.data().speciality}}
 
           </div>
-          <div class="col-2" style="color: white;" >
-            Ratings : {{item.payload.doc.data().averageRating}}<br>
-            <star-rating value={{item.payload.doc.data().averageRating}} checkedcolor="red" uncheckedcolor="black"
-              size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+          <div class="col-2" style="color: white;">
+            Ratings {{item.payload.doc.data().averageRating}}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" ><span style="color: orange;" class="fa fa-star checked"></span> 
+            <!-- <br> -->
+            <!-- <star-rating value={{item.payload.doc.data().averageRating}} checkedcolor="red" uncheckedcolor="black"
+              size="24px" readonly="false" (rate)="onRate($event)"></star-rating> -->
           </div>
           <div class="col-1">
             <button routerLink="/doctors/ppv" button class="btn btn-primary" (click)=viewDocId(item.payload.doc.id) >View </button>
