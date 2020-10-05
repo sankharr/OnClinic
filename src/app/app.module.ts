@@ -83,6 +83,7 @@ import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
+import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -140,6 +141,7 @@ var firebaseConfig = {
     InquiriesComponent,
     SocialRespComponent,
     ProfileDoctorviewComponent,
+    ProfilePatientviewComponent,
     LiveConsultationDoctorComponent
   ],
   imports: [
