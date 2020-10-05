@@ -28,24 +28,26 @@
             Specialized in
           </button>
           <div class="dropdown-menu" aria-labelledby="Specialized_in">
-            <a class="dropdown-item" href="doctors-list"> </a>
-            <!-- <a class="dropdown-item" href="doctors-list"> aaaaa</a>
-            <a class="dropdown-item" href="doctors-list">General Physician </a>
-            <a class="dropdown-item" href="doctors-list">Family practice physician" </a>
-            <a class="dropdown-item" href="doctors-list"> Pediatricians </a>
-            <a class="dropdown-item" href="doctors-list">Allergists </a>
-            <a class="dropdown-item" href="doctors-list"> Dermatologists </a>
-            <a class="dropdown-item" href="doctors-list"> Infectious disease doctors </a>
-            <a class="dropdown-item" href="doctors-list"> Ophthalmologists </a>
-            <a class="dropdown-item" href="doctors-list"> Obstetrician/gynecologists </a>
-            <a class="dropdown-item" href="doctors-list"> Cardiologists </a>
-            <a class="dropdown-item" href="doctors-list"> Endocrinologists </a>
-            <a class="dropdown-item" href="doctors-list"> Gastroenterologists </a>
-            <a class="dropdown-item" href="doctors-list"> Nephrologists </a>
-            <a class="dropdown-item" href="doctors-list"> Urologists </a>
-            <a class="dropdown-item" href="doctors-list"> Pulmonologists </a>
-            <a class="dropdown-item" href="doctors-list"> Otolaryngologists </a> -->
-            <option *ngFor="let category of doctorCategories">{{category}}</option>
+            <!-- <div class="dropdown-item" href="doctors-list"> </div>
+            <div class="dropdown-item" href="doctors-list"> aaaaa</a> -->
+            <div class="dropdown-item" (click)='filterBySpeciality("All")'> All </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("General Physician")'>General Physician </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Family practice physician")'>Family practice physician" </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Pediatricians")'> Pediatricians </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Allergists")'>Allergists </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Dermatologists")'> Dermatologists </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Infectious disease doctors")'> Infectious disease doctors </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Ophthalmologists")'> Ophthalmologists </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Obstetrician/gynecologists")'> Obstetrician/gynecologists </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Cardiologists")'> Cardiologists </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Endocrinologists")'> Endocrinologists </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Gastroenterologists")'> Gastroenterologists </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Nephrologists")'> Nephrologists </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Urologists")'> Urologists </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Pulmonologists")'> Pulmonologists </div>
+            <div class="dropdown-item" (click)='filterBySpeciality("Otolaryngologists")'> Otolaryngologists </div>
+            
+            <!-- <option *ngFor="let category of doctorCategories">{{category}}</option> -->
           </div>
         </div>
       </div>
@@ -56,16 +58,18 @@
         <div class="row">
           <div class="col-7" style="color: white;">
             {{item.payload.doc.data().name}} <br>
-            {{item.payload.doc.data().email}}
+            {{item.payload.doc.data().speciality}}
 
           </div>
-          <div class="col-2" style="color: white;" >
-            Ratings : {{item.payload.doc.data().averageRating}}<br>
-            <star-rating value={{item.payload.doc.data().averageRating}} checkedcolor="red" uncheckedcolor="black"
-              size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+          <div class="col-2" style="color: white;">
+            Ratings {{item.payload.doc.data().averageRating}}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" ><span style="color: orange;" class="fa fa-star checked"></span> 
+            <!-- <br> -->
+            <!-- <star-rating value={{item.payload.doc.data().averageRating}} checkedcolor="red" uncheckedcolor="black"
+              size="24px" readonly="false" (rate)="onRate($event)"></star-rating> -->
           </div>
           <div class="col-1">
-            <button routerLink="/doctors/ppv" button class="btn btn-primary" (click)=viewDocId(item.payload.doc.id) >View </button>
+            <button routerLink="/ppv" button class="btn btn-primary" (click)=viewDocId(item.payload.doc.id) >View </button>
 
           </div>
           <div class="col-2">

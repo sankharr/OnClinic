@@ -54,5 +54,23 @@ sortByDescending(){
     //this.router.navigate('/doctor-book')
   }
   
+  filterBySpeciality(speciality){
+    if(speciality=='All'){
+      this.db.collection("Users", (ref) => (ref.where("role", "==", "doctor"))).snapshotChanges()
+      .subscribe(result => {
+        this.items = result;
+        console.log(this.items);
+      })
+    }else{
+      this.db.collection("Users", (ref) => (ref.where("speciality", "==", speciality))).snapshotChanges()
+      .subscribe(result => {
+        this.items = result;
+        console.log(this.items);
+      })
+    }
+    
+
+
+  }
 
 }

@@ -84,6 +84,7 @@ import { NavbarModeratorComponent } from './moderator/navbar-moderator/navbar-mo
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
+import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -142,7 +143,8 @@ var firebaseConfig = {
     SocialRespComponent,
     ProfileDoctorviewComponent,
     LiveConsultationDoctorComponent,
-    NavbarModeratorComponent
+    NavbarModeratorComponent,
+    ProfilePatientviewComponent,
   ],
   imports: [
     BrowserModule,
