@@ -14,9 +14,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // import {MatTabsModule} from '@angular/material/tabs';
 
-
 @NgModule({
-  declarations: [DoctorDashboardComponent, DoctorProfileComponent, DoctorPaymentsComponent, DoctorChannelingComponent, WaitingroomDoctorviewComponent, EditDoctorprofileComponent,],
+  declarations: [
+    DoctorDashboardComponent,
+    DoctorProfileComponent,
+    DoctorPaymentsComponent,
+    // ProfilePatientviewComponent,
+    DoctorChannelingComponent,
+    WaitingroomDoctorviewComponent,
+    EditDoctorprofileComponent,
+  ],
   imports: [
     CommonModule,
     DoctorsRoutingModule,
@@ -25,7 +32,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     NgbModule,
     // MatTabsModule,
-
-  ]
+  ],
 })
-export class DoctorsModule { }
+export class DoctorsModule {}
