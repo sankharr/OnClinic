@@ -79,7 +79,8 @@ import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
 import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
 import { LiveConsultationDoctorComponent } from './live-consultation-doctor/live-consultation-doctor.component';
 import { RecordingService } from './services/recording.service';
-import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+import { NavbarModeratorComponent } from './moderator/navbar-moderator/navbar-moderator.component';
+// import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
@@ -141,8 +142,9 @@ var firebaseConfig = {
     InquiriesComponent,
     SocialRespComponent,
     ProfileDoctorviewComponent,
+    LiveConsultationDoctorComponent,
+    NavbarModeratorComponent,
     ProfilePatientviewComponent,
-    LiveConsultationDoctorComponent
   ],
   imports: [
     BrowserModule,
@@ -167,7 +169,7 @@ var firebaseConfig = {
     HttpModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ScheduleModule,
+    // ScheduleModule,
     AngularFireDatabaseModule 
   ],
   providers: [DatePipe,RecordingService],

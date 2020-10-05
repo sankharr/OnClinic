@@ -1,1 +1,177 @@
-<p>social-resp works!</p>
+<app-navbar-moderator></app-navbar-moderator>
+<div class="container">
+    <!-- 
+This is a variation on a basic bootstrap carousel example, which I forked this from.
+The key differences present here are:
+1. When moving to a mobile view, the images *should* compress and hidden overflow their content area while
+staying centered.
+2. Text is manuvered to be over the images, so that you could present a title or product information, whatever
+your use case may be, over the image.
+
+It's not much, but it took more finagling than you might think. These changes are tested only
+on my own usecase, so YMMV.
+
+-->
+
+
+    <div>
+        <!--Carousel Wrapper-->
+        <div id="carousel-thumb" class="carousel carousel-thumbnails slide" data-ride="carousel" data-interval="15000">
+            <!--Slides-->
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active carousel-banner">
+                    <img class="d-block w-100 carousel-img-fit" src="../../../assets/svg/social work.svg"
+                        alt="First slide">
+                    <div class="row carousel-ban-text-adj">
+                        <div class="row col-12">
+                            <!-- <input type="search" name="" id=""> -->
+                            <!-- <a href="/internet" class="btn btn-primary btn-large col-md-3">Post message</a> -->
+                            <div class="container">
+                                <form>
+                                    <h2 style="color: aliceblue;text-align: center;">Broadcast a Message</h2>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="first">Subject</label>
+                                                <input type="text" class="form-control" placeholder="Add message title"
+                                                    id="subject">
+                                            </div>
+                                        </div>
+                                        <!--  col-md-6   -->
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="last">Recipient Blood Group</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Use commas to seperate groups" id="bloodGroup">
+                                            </div>
+                                        </div>
+                                        <!--  col-md-6   -->
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="company">Contact Person</label>
+                                                <input type="text" class="form-control" placeholder="Contact Person"
+                                                    id="name">
+                                            </div>
+
+
+                                        </div>
+                                        <!--  col-md-6   -->
+
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label for="phone">Phone Number</label>
+                                                <input type="tel" class="form-control" id="phone" placeholder="phone">
+                                            </div>
+                                        </div>
+                                        <!--  col-md-6   -->
+                                    </div>
+                                    <!--  row   -->
+
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label for="email">Email address</label>
+                                                <input type="email" class="form-control" id="email" placeholder="email">
+                                            </div>
+                                        </div>
+                                        <!--  col-md-6   -->
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="url">Additional Referance Sources<small> (If have
+                                                        any)</small></label>
+                                                <input type="url" class="form-control" id="url" placeholder="url">
+                                            </div>
+
+                                        </div>
+                                        <!--  col-md-6   -->
+                                    </div>
+                                    <!--  row   -->
+
+                                    <label for="">Additional notes</label>
+                                    <textarea style="margin-bottom:15px;" class="form-control"
+                                        id="exampleFormControlTextarea1" rows="4"></textarea>
+
+
+                                    <button style="display: block;margin:auto;" type="submit" class="btn btn-primary"
+                                        (click)="broadcastMessage()">Broadcast</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div class="list-group-item" *ngFor="let message of sentMessages"
+                style="background-color:#666292; opacity: 0.7;">
+                <div class="row">
+                    <div class="col-12" style="color: rgb(255, 255, 255);">
+                        <p><strong>You sent</strong>: {{message.subject}} <br>{{message.SpecialNotes}}.
+                            {{message.contactPerson}} {{message.contactNo}} <br>Bradcasted to users with
+                            bloodGroup: {{message.bloodGroup}}</p> <br>
+                    </div>
+
+
+                </div>
+            </div> -->
+            <div id="accordion">
+                <div class="card" *ngFor="let message of sentMessages">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne"> <i class="fa" aria-hidden="true"></i>
+                                Collapsible Group Item #1
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <p><strong>You sent</strong>: <br> {{message.subject}} <br>{{message.SpecialNotes}}. <br>Contact Person: 
+                                {{message.contactPerson}} {{message.contactNo}} <br><strong>Bradcasted to users with
+                                    bloodGroup: {{message.bloodGroup}}</strong></p> <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+            <!--/.Slides-->
+            <!--Controls-->
+            <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+            <!--/.Controls-->
+            <ol class="carousel-indicators carousel-swap-adjuster carousel-banner-indicator ">
+                <li data-target="#carousel-thumb" data-slide-to="0" class="active tile_3">
+                    <div>
+                        <img class="d-block w-100 "
+                            src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(88).jpg"
+                            class="img-fluid">
+                        <p>text example</p>
+                    </div>
+                </li>
+                <li data-target="#carousel-thumb" data-slide-to="1" class="tile_2">
+                    <img class="d-block w-100"
+                        src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(121).jpg"
+                        class="img-fluid"></li>
+                <li data-target="#carousel-thumb" data-slide-to="2" class="tile_1">
+                    <img class="d-block w-100"
+                        src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(31).jpg"
+                        class="img-fluid"></li>
+            </ol>
+        </div>
+        <!--/.Carousel Wrapper-->
+    </div>
