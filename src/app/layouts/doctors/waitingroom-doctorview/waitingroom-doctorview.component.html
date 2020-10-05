@@ -69,7 +69,7 @@
               <div class="col-lg-6">
                 <div class="card shadow border-0" id="topic">
                   <div class="card-body py-1">
-                    <span class="d-block mb-1">Room members 12/40</span>
+                    <span class="d-block mb-1">Patients 12/40</span>
                   </div>
                 </div>
 
@@ -80,9 +80,11 @@
                         <div class="table-responsive">
                           <table class="table align-items-center table-flush">
                             <tbody>
+                               <div *ngFor="let item of result1">
+                                
                               <tr>
                                 <td>
-                                  <span class="mb-0 text-sm"> User name 1</span>
+                                  <span class="mb-0 text-sm">{{ item.patientName }}</span>
                                 </td>
                                 <td>In 12hours</td>
                                 <td>
@@ -95,127 +97,9 @@
                                   >
                                 </td>
                               </tr>
-
-                              <tr>
-                                <td>
-                                  <span class="mb-0 text-sm">User name 1</span>
-                                </td>
-                                <td>In 12hours</td>
-                                <td>
-                                  <a
-                                    href="/doctors/lcd"
-                                    button
-                                    class="btn btn-success"
-                                    type="submit"
-                                    >Ready</a
-                                  >
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="mb-0 text-sm"> User name 1</span>
-                                </td>
-                                <td>In 12hours</td>
-                                <td>
-                                  <a
-                                    href="/doctors/lcd"
-                                    button
-                                    class="btn btn-success"
-                                    type="submit"
-                                    >Ready</a
-                                  >
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="mb-0 text-sm"> User name 1</span>
-                                </td>
-                                <td>In 12hours</td>
-                                <td>
-                                  <a
-                                    href="/doctors/lcd"
-                                    button
-                                    class="btn btn-success"
-                                    type="submit"
-                                    >Ready</a
-                                  >
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="mb-0 text-sm"> User name 1</span>
-                                </td>
-                                <td>In 12hours</td>
-                                <td>
-                                  <a
-                                    href=""
-                                    button
-                                    class="btn btn-warning"
-                                    type="submit"
-                                    >Absent</a
-                                  >
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="mb-0 text-sm"> User name 1</span>
-                                </td>
-                                <td>In 12hours</td>
-                                <td>
-                                  <a
-                                    href="/doctors/lcd"
-                                    button
-                                    class="btn btn-success"
-                                    type="submit"
-                                    >Ready</a
-                                  >
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="mb-0 text-sm"> User name 1</span>
-                                </td>
-                                <td>In 12hours</td>
-                                <td>
-                                  <a
-                                    href=""
-                                    button
-                                    class="btn btn-warning"
-                                    type="submit"
-                                    >Absent</a
-                                  >
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="mb-0 text-sm"> User name 1</span>
-                                </td>
-                                <td>In 12hours</td>
-                                <td>
-                                  <a
-                                    href="/doctors/lcd"
-                                    button
-                                    class="btn btn-success"
-                                    type="submit"
-                                    >Ready</a
-                                  >
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="mb-0 text-sm"> User name 1</span>
-                                </td>
-                                <td>In 12hours</td>
-                                <td>
-                                  <a
-                                    href="/doctors/lcd"
-                                    button
-                                    class="btn btn-success"
-                                    type="submit"
-                                    >Ready</a
-                                  >
-                                </td>
-                              </tr>
+                            
+                              </div>
+                              
                             </tbody>
                           </table>
                         </div>

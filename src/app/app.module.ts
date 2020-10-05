@@ -84,6 +84,7 @@ import { NavbarModeratorComponent } from './moderator/navbar-moderator/navbar-mo
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
 
 var firebaseConfig = {
@@ -168,9 +169,9 @@ var firebaseConfig = {
     NgxAgoraModule.forRoot({ AppID: environment.agora.appId }),
     HttpModule,
     HttpClientModule,
+    ScheduleModule,
     BrowserAnimationsModule,
-    // ScheduleModule,
-    AngularFireDatabaseModule 
+    AngularFireDatabaseModule
   ],
   providers: [DatePipe,RecordingService],
   bootstrap: [AppComponent]

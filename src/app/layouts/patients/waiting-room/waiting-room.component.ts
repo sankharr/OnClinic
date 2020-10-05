@@ -35,6 +35,10 @@ export class WaitingRoomComponent implements OnInit {
   status3:any;
   status4:any;
   currentappData: any;
+  totalPatients: any;
+  docData: any;
+  reportsToView: any = [];
+  reportAdded: boolean= false;
   constructor(
     private _formbuilder: FormBuilder,
     private db: AngularFirestore,
@@ -47,6 +51,10 @@ export class WaitingRoomComponent implements OnInit {
     this.docID = localStorage.getItem("selectedAppointment_doctorID");
     this.appID = localStorage.getItem("selectedAppointmentID_patient")
     console.log(this.currentDate, " --- ", this.docID, "");
+    this.db.collection('Users',ref=>ref.where('doctorID','==',this.docID)).valueChanges()
+    .subscribe(output=>{
+      this.docData=output[0];
+    })
   }
 
   ngOnInit(): void {
@@ -61,6 +69,7 @@ export class WaitingRoomComponent implements OnInit {
       .subscribe(output7 => {
         this.result1 = output7;
         console.log("Get All Upcomming channelings - ", this.result1);
+        this.totalPatients = this.result1.length;
       })
     })
     
@@ -95,6 +104,13 @@ export class WaitingRoomComponent implements OnInit {
             if (url) {
               this.fb = url;
             }
+            var repData = {
+              reportName:repName,
+              reportDate:repDate,
+              reportURL:this.fb
+            };
+            this.reportsToView.push(repData);
+            this.updateSelectedReports();
             //add report url to database
             console.log("url from finalize - ", this.fb);
             this.db.collection('Users').doc(this.uid).collection("Reports").doc(`${repDate}_${repName}`).set({
@@ -127,6 +143,24 @@ export class WaitingRoomComponent implements OnInit {
     })
     
   }
-  submit() {
+  addReport(rep){
+    var repData = {
+      reportName:rep.reportName,
+      reportDate:rep.reportDate,
+      reportURL:rep.reportURL
+    };
+    this.reportsToView.push(repData);
+    this.reportAdded = true
+    setTimeout(()=>{
+      this.reportAdded=false
+    },1000);
   }
+
+  updateSelectedReports() {
+    this.db.collection("Appointments").doc(this.currentappData.appointmentID).update({
+      selectedReports:this.reportsToView
+    })
+  }
+
+  
 }

@@ -27,7 +27,6 @@
                 <li>Make sure you have proper internet connection</li>
                 <li>Be alret on your time</li>
                 <li><b>Click on 'Join Video' once you ready</b></li>
-                <li>{{appoID}}</li>
               </ul>
             </h6>
           </div>
@@ -42,7 +41,7 @@
       <!--right column-->
       <div class="col-lg-8">
         <div class="card">
-          <h3><b>No of Patients : 12/40</b></h3>
+          <h3><b>No of Patients : 12/{{totalPatients}}</b></h3>
         </div>
 
         <div class="col-lg-12">
@@ -81,44 +80,8 @@
               </div>
             </div>
 
-            <!-- <div class="card">
-                            <div class="row" id="lessmargin">
-                                <div class="col-lg-4">
-                                    <div class="card" id="tablecol">
-                                        <h6>Sahan Perera</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card" id="tablecol">
-                                        <h6>3.00-3.20PM</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card" id="change">
-                                        <h6>Ready</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-            <!-- <div class="card">
-                            <div class="row" id="lessmargin">
-                                <div class="col-lg-4">
-                                    <div class="card" id="tablecol">
-                                        <h6>Nimali gamage</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card" id="tablecol">
-                                        <h6>3.20-3.40PM</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card" id="change">
-                                        <h6>Ready</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+           
+          
           </div>
         </div>
         <div class="card">
@@ -126,12 +89,32 @@
             <h5><b>Select from your past medical reports</b></h5>
           </div>
           <a href="#SelectDialogBox" class="btn" data-toggle="modal" (click)="displayReports()">Select</a>
-          <div class="card">
-
+        
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="list-group">
+                <div class="list-group-item" *ngFor="let report of currentappData.selectedReports">
+                  <div class="row">
+                    <div class="col-lg-5">
+                      <div class="card" id="light">
+                        <h6>{{report.reportDate}}</h6>
+                      </div>
+                    </div>
+                    <div class="col-lg-7">
+                      <div class="card" id="light">
+                        <h6>{{report.reportName}}</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      
     </div>
+    
   </div>
 </div>
 
@@ -205,10 +188,13 @@
                     </div>
                   </div>
                   <div class="col-lg-3">
-                    <button class="btn" type="submit" (click)="view()">Select</button>
+                    <button class="btn" type="submit" (click)="addReport(report)">Add</button>
                   </div>
                 </div>
               </div>
+            </div>
+            <div *ngIf="reportAdded" class="alert alert-success">
+              Report Added
             </div>
           </div>
         </div>
@@ -217,7 +203,7 @@
       <div class="modal-footer">
         <button type="button" class="btn" data-dismiss="modal">Close</button>
         <button type="submit" class="btn" data-dismiss="modal"
-          (click)="upload(uploadReportForm.controls['reportDate'].value,uploadReportForm.controls['reportName'].value)">Submit</button>
+          (click)="updateSelectedReports()">Submit</button>
       </div>
     </div>
   </div>
