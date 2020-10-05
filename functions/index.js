@@ -126,9 +126,9 @@ exports.getLatestPosts =
             var appointmentTime = element['appointmentTime']
             var phone = element['phone'].substring(1)
             var params = {
-                Message: 'Hello '+name+' you have appointment with Dr. '+doctorName+' on today at '+appointmentTime+'   Appointment No: '+appointmentNo,
+                Message: 'Hello ' + name + ' you have appointment with Dr. ' + doctorName + ' on today at ' + appointmentTime + '   Appointment No: ' + appointmentNo,
                 MessageStructure: 'string',
-                PhoneNumber: "+94"+"0713255247"
+                PhoneNumber: "+94" + "0713255247"
             };
             console.log()
             sns.publish(params, function (err, data) {
@@ -194,7 +194,7 @@ app.post('/hello', async (req, res) => {
     data.forEach(element => {
         // commmented out sms codes
         var params = {
-            Message: subject+ '\n'+'Dear ' + element['name']+","+"\n" + SpecialNotes+"\n"+"contact person -"+contactPerson+"("+contactNo+")",
+            Message: subject + '\n' + 'Dear ' + element['name'] + "," + "\n" + SpecialNotes + "\n" + "contact person -" + contactPerson + "(" + contactNo + ")",
             MessageStructure: 'string',
             PhoneNumber: "+94" + "0713255247"
         };
@@ -206,6 +206,14 @@ app.post('/hello', async (req, res) => {
         console.log(element['telno'])
     });
 
+    const broadcastData = await db.collection('broadcasts').add({
+        subject: subject,
+        bloodGroup: bloodGroup,
+        contactPerson: contactPerson,
+        contactNo: contactNo,
+        SpecialNotes: SpecialNotes,
+    });
+    console.log('Added document with ID: ', broadcastData.id);
     res.send("Received POST request!");
 });
 

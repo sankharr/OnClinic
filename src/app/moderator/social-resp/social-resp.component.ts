@@ -14,7 +14,7 @@ export class SocialRespComponent implements OnInit {
   }
 
   broadcastMessage() {
-    var data = { "bloodGroup": ['O+', 'A-', 'O-'], "contactPerson": "Ransaka", "contactNo": "0713255247", "subject": "Need a blood donor!!", "SpecialNotes": "This Message sent from HospitalCore.If you're blood donor, and willing to donate your blood, then we need your assistance." }
+    var data = { "bloodGroup": ['O+', 'A-', 'O-'], "contactPerson": "Maheema", "contactNo": "0713255247", "subject": "Need a blood donor!!", "SpecialNotes": "This Message sent from HospitalCore.If you're blood donor, and willing to donate your blood, then we need your assistance." }
     this.moderatorService.broadcast(data).subscribe(res => {
       // console.log(res)
       console.log("Okay")
