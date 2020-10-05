@@ -19,13 +19,16 @@
             <h6 class="card-subtitle mb-2 text-muted" style="color: white;">{{ item.date | date: "MMM d, y" }}</h6>
             <p class="card-text" style="color: white;">
               Starting at {{ item.date | date:"h:00 a" }} <br />
-              Specialized in :{{ data.speciality }} <br />
+              {{ data.speciality }} <br />
               <!-- Description : MBBS qulified in University of Colombo 2002<br /> -->
-              Total channel count :{{ data.numberOfAppointments }}
+              <!-- Total channel count :{{ data.numberOfAppointments }} -->
+              
             </p>
-            <a href="#RegistrationDialogBox" class="card-link" data-toggle="modal" (click)="setResult(item.date)">Book
+
+            <a href="#RegistrationDialogBox" class="btn btn-primary btn-sm btn-block" data-toggle="modal" (click)="setResult(item.date)" >Book
               Now</a>
-            <a href="doctors-list" class="card-link">Cancel</a>
+
+            <!-- <a href="doctors-list" class="card-link">Cancel</a> -->
           </div>
         </div>
       </div>
