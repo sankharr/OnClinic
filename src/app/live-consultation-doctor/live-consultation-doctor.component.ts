@@ -56,7 +56,7 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
   liveBPM: any[] = [];
   @Input() liveTemperatureString:any;
   @Input() liveBPMString:any;
-  patientData: any;
+  // patientData: any;
 
 
   constructor(
@@ -460,7 +460,7 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
     }
 
   }
-  viewReport(url){
-    window.open(url, "Report", "height=900,width=1000");
-  }
+  // viewReport(url){
+  //   window.open(url, "Report", "height=900,width=1000");
+  // }
 }
