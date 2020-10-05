@@ -101,38 +101,48 @@ on my own usecase, so YMMV.
                                         id="exampleFormControlTextarea1" rows="4"></textarea>
 
 
-                                    <button style="display: block;margin:auto;" type="submit"
-                                        class="btn btn-primary" (click)="broadcastMessage()">Broadcast</button>
+                                    <button style="display: block;margin:auto;" type="submit" class="btn btn-primary"
+                                        (click)="broadcastMessage()">Broadcast</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="carousel-item carousel-banner">
-                    <img class="d-block w-100 carousel-img-fit"
-                        src="../../../assets/svg/social work.svg" alt="Second slide">
-                    <div class="row carousel-ban-text-adj">
-                        <div class="row col-12">
-                            <h1 class="col-12 carousel-header-adj">Lorem Ipsum</h1>
-                            <p class="col-12 carousel-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elite. </p>
-                            <a href="/internet" class="btn btn-primary btn-large col-md-3">Neque porro</a>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="carousel-item carousel-banner">
-                    <img class="d-block w-100 carousel-img-fit"
-                        src="../../../assets/svg/social work.svg" alt="Third slide">
-                    <div class="row carousel-ban-text-adj">
-                        <div class="row col-12">
-                            <h1 class="col-12 carousel-header-adj">Lorem Ipsum</h1>
-                            <p class="col-12 carousel-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit. </p>
-                            <a href="/#" class="btn btn-primary btn-large col-md-3">Neque porro</a>
-                        </div>
-                    </div>
-                </div> -->
+
             </div>
+            <!-- <div class="list-group-item" *ngFor="let message of sentMessages"
+                style="background-color:#666292; opacity: 0.7;">
+                <div class="row">
+                    <div class="col-12" style="color: rgb(255, 255, 255);">
+                        <p><strong>You sent</strong>: {{message.subject}} <br>{{message.SpecialNotes}}.
+                            {{message.contactPerson}} {{message.contactNo}} <br>Bradcasted to users with
+                            bloodGroup: {{message.bloodGroup}}</p> <br>
+                    </div>
+
+
+                </div>
+            </div> -->
+            <div id="accordion">
+                <div class="card" *ngFor="let message of sentMessages">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne"> <i class="fa" aria-hidden="true"></i>
+                                Collapsible Group Item #1
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <p><strong>You sent</strong>: <br> {{message.subject}} <br>{{message.SpecialNotes}}. <br>Contact Person: 
+                                {{message.contactPerson}} {{message.contactNo}} <br><strong>Bradcasted to users with
+                                    bloodGroup: {{message.bloodGroup}}</strong></p> <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
             <!--/.Slides-->
             <!--Controls-->
             <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">

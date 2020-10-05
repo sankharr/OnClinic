@@ -25,5 +25,8 @@ export class ModeratorService {
   getInquiries(){
     return this.db.collection('Inquries').valueChanges();
   }
+  getBroadcasts(){
+    return this.db.collection('broadcasts').valueChanges();
+  }
 }
 

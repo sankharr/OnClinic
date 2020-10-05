@@ -81,14 +81,6 @@ justify-content: center;
 }
 }
 
-h1, p{
-color:white;
--webkit-text-stroke-width: 1px;
--webkit-text-stroke-color: black;
-}
-p{
-font-size: 28px;
-}
 a{
 -webkit-text-stroke-width: 0px;
 }
@@ -101,3 +93,11 @@ z-index: 13;
 .tile_3{
 z-index: 12;
 }
+[data-toggle="collapse"] .fa:before {  
+    content: "\f139";
+  }
+  
+  [data-toggle="collapse"].collapsed .fa:before {
+    content: "\f13a";
+  }
+  
