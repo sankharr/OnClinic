@@ -9,7 +9,7 @@ declare var MeasureConnectionSpeed: any
 @Component({
   selector: 'app-moderator-dashboard',
   templateUrl: './moderator-dashboard.component.html',
-  styleUrls: ['./moderator-dashboard.component.css']
+  styleUrls: ['./moderator-dashboard.component.scss']
 })
 export class ModeratorDashboardComponent implements OnInit {
   categories: any[];
@@ -18,6 +18,8 @@ export class ModeratorDashboardComponent implements OnInit {
   selected: number;
   @ViewChild('chart') el: ElementRef;
   usersData: unknown[];
+  patients: Pick<any, string | number | symbol>[];
+  doctors: Pick<any, string | number | symbol>[];
   constructor(private moderatorService: ModeratorService,) {
     this.categories = 
     [
@@ -88,10 +90,11 @@ export class ModeratorDashboardComponent implements OnInit {
     // this.baseChart()
     this.moderatorService.getAllUsers().subscribe(res => {
       this.usersData = res;
-      let usercount = this.usersData.length
-      var result = Object.keys(res).map(function (key) {
-        return [Number(key), res[key]];
-      });
+      
+      // let usercount = this.usersData.length
+      // var result = Object.keys(res).map(function (key) {
+      //   return [Number(key), res[key]];
+      // });
       this.baseChart(this.usersData)
     });
   }
@@ -101,15 +104,15 @@ export class ModeratorDashboardComponent implements OnInit {
     var grouped = _.mapValues(_.groupBy(userArray, 'role'),
       userlist => userlist.map(data => _.omit(data, 'role')));
 
-    let doctors = grouped['doctor']
-    let patients = grouped['patient']
+    this.doctors = grouped['doctor']
+    this.patients = grouped['patient']
     for (let index = 0; index < userArray.length; index++) {
       const element = userArray[index]['role'];
 
     }
 
     var data = [{
-      values: [doctors.length, patients.length],
+      values: [this.doctors.length, this.patients.length],
       labels: ['Doctors', 'Patients'],
       type: 'pie'
     }];
