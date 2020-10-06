@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { DatePipe } from "@angular/common";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { Router } from "@angular/router";
 import { Timestamp } from "rxjs/internal/operators/timestamp";
 import { group } from "console";
 
 @Component({
-  selector: 'app-waitingroom-doctorview',
-  templateUrl: './waitingroom-doctorview.component.html',
-  styleUrls: ['./waitingroom-doctorview.component.css']
+  selector: "app-waitingroom-doctorview",
+  templateUrl: "./waitingroom-doctorview.component.html",
+  styleUrls: ["./waitingroom-doctorview.component.css"],
 })
 export class WaitingroomDoctorviewComponent implements OnInit {
-
-  todayDate:string;
+  todayDate: string;
   result: any;
   doctorData: any;
   currentAppointment: any;
@@ -27,28 +26,42 @@ export class WaitingroomDoctorviewComponent implements OnInit {
   ) {
     this.todayDate = this.datePipe.transform(new Date(), "yyyy-MM-dd");
     // (<HTMLButtonElement>document.getElementById("joinBtn")).disabled = true;
-   }
+  }
 
   ngOnInit(): void {
-    
     console.log(this.todayDate);
 
-    this.db.collection('Users').doc(localStorage.getItem("uid")).valueChanges()
-    .subscribe(output => {
-      this.doctorData = output;
-      this.db.collection('Appointments',ref => ref.where("status","==","Active").where("doctorID","==",this.doctorData.doctorID).orderBy("appointmentDate").orderBy("appointmentNo")).valueChanges()
-      .subscribe(output => {
-        this.result1 = output;
-        this.currentAppointment = output[0];
+    this.db
+      .collection("Users")
+      .doc(localStorage.getItem("uid"))
+      .valueChanges()
+      .subscribe(async (output) => {
+        this.doctorData = output;
+        const doctorChannelings = await this.db
+          .collection("Appointments", (ref) =>
+            ref
+              .where("status", "==", "Active")
+              .where("doctorID", "==", this.doctorData.doctorID)
+              .orderBy("appointmentDate")
+              .orderBy("appointmentNo")
+          )
+          .valueChanges()
+          .subscribe((output) => {
+            this.result1 = output;
+            this.currentAppointment = output[0];
 
-        if(this.currentAppointment?.appointmentID != null){
-          console.log("buttonVisible");
-          (<HTMLButtonElement>document.getElementById("joinBtn")).disabled = false;
-        }
-        console.log("available appointments (waitingroom-doctorView) - ",this.currentAppointment);
-      })
-      
-    })
+            if (this.currentAppointment?.appointmentID != null) {
+              console.log("buttonVisible");
+              (<HTMLButtonElement>(
+                document.getElementById("joinBtn")
+              )).disabled = false;
+            }
+            console.log(
+              "available appointments (waitingroom-doctorView) - ",
+              this.currentAppointment
+            );
+          });
+      });
 
     // this.userId = localStorage.getItem("uid");
     // this.db
@@ -61,10 +74,10 @@ export class WaitingroomDoctorviewComponent implements OnInit {
     //   })
   }
 
-  joinLiveConsultation(appoID){
-    console.log("selected appointmentID from DOCTOR - ",appoID);
-    localStorage.setItem('selectedAppointmentID_doctor',appoID);
-    this.router.navigate(['/doctors/lcd']);
+  joinLiveConsultation(appoID) {
+    console.log("selected appointmentID from DOCTOR - ", appoID);
+    localStorage.setItem("selectedAppointmentID_doctor", appoID);
+    this.router.navigate(["/doctors/lcd"]);
     // href="/doctors/lcd"
   }
 
@@ -78,7 +91,7 @@ export class WaitingroomDoctorviewComponent implements OnInit {
   //       // console.log(res)
   //       var doctorId = res["doctorID"];
   //       console.log(doctorId);
-        
+
   //       var grouped = _.mapValues(_.groupBy(data, "doctorID"), (clist) =>
   //         clist.map((data) => _.omit(data, "doctorID"))
   //       );
@@ -87,8 +100,7 @@ export class WaitingroomDoctorviewComponent implements OnInit {
 
   //       // var ts = this.app["appointmentDate"];
   //       // console.log(ts);
-        
+
   //     });
   // }
-
 }

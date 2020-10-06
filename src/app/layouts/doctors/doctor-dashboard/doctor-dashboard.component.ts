@@ -10,7 +10,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 })
 export class DoctorDashboardComponent implements OnInit {
   @ViewChild("chart") el: ElementRef;
-  @ViewChild("pieChart") el2: ElementRef;
+  // @ViewChild("pieChart") el2: ElementRef;
   userId: any;
   result: any;
   result2: any;
@@ -41,7 +41,7 @@ export class DoctorDashboardComponent implements OnInit {
   charts() {
     console.log("chart called");
     this.lineChart();
-    this.pieChart();
+    // this.pieChart();
   }
   lineChart() {
     // const element = this.el.nativeElement;
@@ -62,24 +62,24 @@ export class DoctorDashboardComponent implements OnInit {
     Plotly.newPlot("linechart", data, style);
   }
 
-  pieChart() {
-    // const element = this.el2.nativeElement;
-    console.log("Pie chart");
-    const data = [
-      {
-        values: [19, 26],
-        labels: ["Treated", "All"],
-        type: "pie",
-      },
-    ];
+  // pieChart() {
+  
+  //   console.log("Pie chart");
+  //   const data = [
+  //     {
+  //       values: [19, 26],
+  //       labels: ["Treated", "All"],
+  //       type: "pie",
+  //     },
+  //   ];
 
-    var layout = {
-      height: 300,
-      width: 320,
-    };
+  //   var layout = {
+  //     height: 300,
+  //     width: 320,
+  //   };
 
-    Plotly.newPlot("pie", data, layout);
-  }
+  //   Plotly.newPlot("pie", data, layout);
+  // }
 
   test(data) {
     this.userId = localStorage.getItem("uid");

@@ -1,9 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
+import { DatePipe } from "@angular/common";
 import * as _ from "lodash";
 import { group } from "console";
 import { Timestamp } from "rxjs/internal/operators/timestamp";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { Router } from "@angular/router";
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: "app-doctor-channeling",
@@ -11,46 +14,36 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./doctor-channeling.component.css"],
 })
 export class DoctorChannelingComponent implements OnInit {
-  result: any;
+  result1: any;
   userId: any;
   app: any;
   result2: any;
   closeResult: string;
   appointmentId: string;
+  data2: any;
+  res: any;
+
   //tt: any;
-  
+
   // doctorId : string;
 
-  constructor(private db: AngularFirestore, private modalService: NgbModal) {}
+  constructor(private db: AngularFirestore, private modalService: NgbModal ,private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.userId = localStorage.getItem("uid");
     this.db
       .collection("Appointments")
       .valueChanges()
-      .subscribe((output) => {
-        // var ts = output["doctorName"];
-        // this.tt = ts;
-        // console.log(ts);
+      .subscribe(async (output) => {
+        var appointmentId = output["appointmentID"];
+        console.log(appointmentId);
 
-        this.result = output;
+        this.result1 = output;
         // console.log(this.result);
         // console.log(this.result["appointmentDate"]);
-        this.test(this.result);
-        this.getUserState();
-        this.getPrescriptions();
-      
+        this.test(this.result1);
+        this.testMaheema();
       });
-  }
-
-  getUserState() {
-    //   this.userId = localStorage.getItem("uid");
-    //   this.db.collection("Users").doc(this.userId).valueChanges()
-    //   .subscribe(res=>{
-    //     // console.log(res)
-    //     this.doctorId = res["doctorID"];
-    //     console.log(this.doctorId)
-    // })
   }
 
   test(data) {
@@ -63,7 +56,7 @@ export class DoctorChannelingComponent implements OnInit {
         // console.log(res)
         var doctorId = res["doctorID"];
         console.log(doctorId);
-        
+
         var grouped = _.mapValues(_.groupBy(data, "doctorID"), (clist) =>
           clist.map((data) => _.omit(data, "doctorID"))
         );
@@ -71,52 +64,64 @@ export class DoctorChannelingComponent implements OnInit {
         console.log(this.app);
 
         // var ts = this.app["appointmentDate"];
-        // console.log(ts);
-        
+        //console.log(this.data2);
       });
   }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  testMaheema() {
+    const data2 = this.db
+      .collection("Appointments")
+      .doc("2020-10-06_d0000014_p0000002_2")
+      .collection("Prescriptions")
+      .valueChanges()
+      .subscribe((output2) => {
+        this.res = output2;
+        console.log(output2);
+      });
+    // console.log(data2)
   }
 
+  open(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  link;
+
   open2(content2) {
-    this.modalService.open(content2, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.testMaheema();
+    this.link = this.res.prescriptionURL;
+    this.modalService
+      .open(content2, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
+      return "by pressing ESC";
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
+      return "by clicking on a backdrop";
     } else {
       return `with: ${reason}`;
     }
+  }
+  transform(){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.res.prescriptionURL);
 
-}
-
-getPrescriptions(){
-  this.appointmentId = localStorage.getItem("appointmentID");
-  console.log(this.appointmentId);
-
-  // this.db
-  //     .collection("Appointments")
-  //     .doc(this.appointmentId)
-  //     .collection("Prescriptions")
-  //     .valueChanges()
-  //     .subscribe((output) => { 
-  //       this.result2 = output;
-  //       console.log(this.result2);
-  //     });
-
-}
-
+  }
 }
