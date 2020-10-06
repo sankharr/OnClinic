@@ -10,6 +10,7 @@ export class ProfilePatientviewComponent implements OnInit {
   userId: any;
   result: any;
   docId: any;
+  
 
   constructor(
     private db: AngularFirestore
@@ -25,6 +26,8 @@ export class ProfilePatientviewComponent implements OnInit {
     .subscribe(output=>{
       this.result = output;
       console.log(this.result);
+      const sr = this.result.averageRating ;
+      // console.log(this.sr);
 
     }) 
   }
