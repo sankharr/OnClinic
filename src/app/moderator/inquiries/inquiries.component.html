@@ -11,7 +11,7 @@
         <div class="list-group-item" *ngFor="let inqury of inquries" style="background-color:#666292; opacity: 0.7;">
             <div class="row">
                 <div class="col-7" style="color: rgb(255, 255, 255);">
-                   <h4>Patient Name: {{inqury.patientName}}</h4> <br>
+                   <h4 style="color:black;">Patient Name: {{inqury.patientName}}</h4> <br>
                     Reason to Terminate: {{inqury.reason}} <br>
                     <span>Doctor Name: {{inqury.doctorName}}</span>
                     <small>Date: {{inqury.inquiryDate}}</small>
@@ -19,7 +19,7 @@
 
                 </div>
                 <div class="col-2" style="color: white;">
-                    Reason : {{inqury.totalFee}}<br>
+                    Fee : {{inqury.totalFee}}<br>
                     <!-- <star-rating value={{item.payload.doc.data().averageRating}} checkedcolor="red"
                         uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating> -->
                 </div>

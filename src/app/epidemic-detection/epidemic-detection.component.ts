@@ -107,7 +107,7 @@ export class EpidemicDetectionComponent implements OnInit {
     var grouped = _.mapValues(_.groupBy(data, 'class'),
       clist => clist.map(data => _.omit(data, 'class')));
     // console.log(grouped)
-    this.disease_count = _.keys(grouped).length
+    this.disease_count = _.keys(grouped)?.length
     var disease = _.keys(grouped)
     var disease_info = _.values(grouped)
     // for (let index = 0; index < data.length - 1; index++) {
@@ -119,7 +119,7 @@ export class EpidemicDetectionComponent implements OnInit {
   }
 
   public async onChange(event) {  // event will give you full breif of action
-    const newVal = event.target.value;
+    const newVal = event.target?.value;
     console.log(newVal);
     // const snapshot = await firebase.firestore().collection('diseases').get()
     // var grouped = _.mapValues(_.groupBy(snapshot, 'class'),
@@ -198,7 +198,7 @@ export class EpidemicDetectionComponent implements OnInit {
     });
 
     var layout = {
-      title: 'Epidemic Detection',
+      // title: 'Epidemic Detection',
       font: {
         color: 'white'
       },

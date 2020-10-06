@@ -13,7 +13,7 @@ export class ModeratorService {
   ) { }
 
   getAllUsers() {
-    return this.db.collection("Users", (ref) => (ref.where("role", "in", ['doctor', 'patient']))).valueChanges()
+    return this.db.collection("Users", (ref) => (ref.where("role", "in", ['doctor', 'patient']).limit(15))).valueChanges()
   }
   getDoctor() {
     return this.db.collection("Users", (ref) => (ref.where("role", "==", "doctor"))).valueChanges()
