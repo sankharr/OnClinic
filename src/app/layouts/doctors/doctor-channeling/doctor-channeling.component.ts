@@ -6,6 +6,7 @@ import { group } from "console";
 import { Timestamp } from "rxjs/internal/operators/timestamp";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: "app-doctor-channeling",
@@ -21,12 +22,12 @@ export class DoctorChannelingComponent implements OnInit {
   appointmentId: string;
   data2: any;
   res: any;
-  
+
   //tt: any;
 
   // doctorId : string;
 
-  constructor(private db: AngularFirestore, private modalService: NgbModal) {}
+  constructor(private db: AngularFirestore, private modalService: NgbModal ,private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.userId = localStorage.getItem("uid");
@@ -34,17 +35,15 @@ export class DoctorChannelingComponent implements OnInit {
       .collection("Appointments")
       .valueChanges()
       .subscribe(async (output) => {
-
-        var appointmentId = output["appointmentID"]
+        var appointmentId = output["appointmentID"];
         console.log(appointmentId);
 
         this.result1 = output;
         // console.log(this.result);
         // console.log(this.result["appointmentDate"]);
         this.test(this.result1);
-        this.testMaheema(this.app);
+        this.testMaheema();
       });
-
   }
 
   test(data) {
@@ -55,7 +54,7 @@ export class DoctorChannelingComponent implements OnInit {
       .valueChanges()
       .subscribe((res) => {
         // console.log(res)
-        var doctorId = res["doctorID"]
+        var doctorId = res["doctorID"];
         console.log(doctorId);
 
         var grouped = _.mapValues(_.groupBy(data, "doctorID"), (clist) =>
@@ -63,24 +62,22 @@ export class DoctorChannelingComponent implements OnInit {
         );
         this.app = grouped[doctorId];
         console.log(this.app);
-        //   console.log(maheema)
-        // const messageRef = this.db.collection('Appointments').doc('2020-10-05_d0000001_p0000002_2')
-        // .collection('Prescriptions').doc('uZUBs40iQr31dB6F9Ysi').get().subscribe(maheema=>{
-        // })
-        // console.log(messageRef);
-        
+
         // var ts = this.app["appointmentDate"];
-        console.log(this.data2);
+        //console.log(this.data2);
       });
   }
 
-  testMaheema(app) {
-    const data2 = this.db.collection('Appointments').doc('2020-10-05_d0000001_p0000002_2').collection("Prescriptions").valueChanges()
-    .subscribe(output2 => {
-      this.res = output2;
-      console.log(output2);
-
-    })       
+  testMaheema() {
+    const data2 = this.db
+      .collection("Appointments")
+      .doc("2020-10-06_d0000014_p0000002_2")
+      .collection("Prescriptions")
+      .valueChanges()
+      .subscribe((output2) => {
+        this.res = output2;
+        console.log(output2);
+      });
     // console.log(data2)
   }
 
@@ -97,7 +94,11 @@ export class DoctorChannelingComponent implements OnInit {
       );
   }
 
+  link;
+
   open2(content2) {
+    this.testMaheema();
+    this.link = this.res.prescriptionURL;
     this.modalService
       .open(content2, { ariaLabelledBy: "modal-basic-title" })
       .result.then(
@@ -119,6 +120,8 @@ export class DoctorChannelingComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+  transform(){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.res.prescriptionURL);
 
-  
+  }
 }
