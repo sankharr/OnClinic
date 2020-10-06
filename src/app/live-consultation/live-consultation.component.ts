@@ -86,7 +86,7 @@ export class LiveConsultationComponent implements OnInit, OnDestroy {
 
     // this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
 
-    this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
+    // this.startCall(localStorage.getItem("selectedAppointmentID_patient"));
 
     this.db.collection("Appointments").doc(this.appointmentID).valueChanges()
       .subscribe(output => {

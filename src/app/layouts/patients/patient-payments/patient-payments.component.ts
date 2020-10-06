@@ -30,7 +30,7 @@ export class PatientPaymentsComponent implements OnInit {
       .subscribe(output => {
         this.userData = output;
         console.log("userData of patients - ", this.userData);
-        this.db.collection('Appointments', ref => ref.where("patientID", "==", this.userData.patientID)).valueChanges()
+        this.db.collection('Users').doc(this.uid).collection('Receipts').valueChanges()
           .subscribe(output3 => {
             this.result = output3;
             console.log("Get All Past Channelings - ", this.result);

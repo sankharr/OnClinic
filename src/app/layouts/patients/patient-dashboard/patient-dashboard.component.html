@@ -19,7 +19,7 @@
               <div class="card shadow">
                 <h6>Last Profile Update</h6>
                 <h6 style="color:red;">{{userData?.lastlogin | date:"medium"}}</h6>
-                <h6>Last Report Upolad</h6>
+                <h6>Last Report Upload</h6>
                 <h6 style="color:red;">{{lastupload?.toDate() | date:"medium"}}</h6>
                 <hr>
                 <h6>Required Sugar level</h6>
@@ -82,7 +82,7 @@
           <div class="row" id="lessmargin">
             <!--First grid-->
             <div class="col-lg-4">
-              <div class="card shadow" *ngIf = "currentappData">
+              <div class="card shadow" *ngIf = "currentappData" id="firstCard">
                 <div class="card" id="differ">
                    <img class="rounded-circle" [src]=currentappData?.doctorProPic> 
                   <h5>{{currentappData?.doctorName}}</h5>
@@ -133,6 +133,7 @@
           <div class="card shadow" id="space" *ngFor="let item of result3">
             <div class="card">
               <p>Date </p>
+              <p><b>{{item?.appointmentShortDate}}</b></p>
               <p>Doctor </p>
               <p><b>{{item?.doctorName}}</b></p>
             </div>

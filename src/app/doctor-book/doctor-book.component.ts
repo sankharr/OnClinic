@@ -289,7 +289,7 @@ export class DoctorBookComponent implements OnInit {
     data.push({ name: 'order_id', value: this.appointmentForm.controls['last_name'].value })
     data.push({ name: 'items', value: this.appointmentForm.controls['last_name'].value })
     data.push({ name: 'currency', value: "LKR" })
-    data.push({ name: 'amount', value: this.data.doctorFee })
+    data.push({ name: 'amount', value: (parseInt(this.data.doctorFee) + 200).toString() })
     data.push({ name: 'custom_1', value: this.appointmentID })
     data.push({ name: 'custom_2', value: localStorage.getItem("selectedDocID") })
     // data.push({ name: 'hash', value: `${pd.hash}` })

@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <!--button row-->
     <div class="topnav">
-      <button class="btn" id="green" type="submit" (click)="ready()">Join vedio</button>
+      <button class="btn" id="green" type="submit" (click)="ready()">Join Video</button>
       <button class="btn" type="submit" id="orange" (click)="leave()">Leave</button>
     </div>
     <!--end of Button row-->
@@ -41,7 +41,10 @@
       <!--right column-->
       <div class="col-lg-8">
         <div class="card">
-          <h3><b>No of Patients : 12/{{totalPatients}}</b></h3>
+          <h3><b>Total Number of Patients :{{totalPatients}}</b></h3>
+        </div>
+        <div class="card">
+          <h3><b>Current Number :{{totalPatients}}</b></h3>
         </div>
 
         <div class="col-lg-12">

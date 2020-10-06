@@ -86,6 +86,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { AdminSettingsComponent } from './admin/admin-settings/admin-settings.component';
 
 var firebaseConfig = {
   apiKey: "AIzaSyB64pNbCqJSKksiZrEdNLCDwPkyP554HpU",
@@ -146,6 +148,8 @@ var firebaseConfig = {
     LiveConsultationDoctorComponent,
     NavbarModeratorComponent,
     ProfilePatientviewComponent,
+    AdminDashboardComponent,
+    AdminSettingsComponent,
   ],
   imports: [
     BrowserModule,

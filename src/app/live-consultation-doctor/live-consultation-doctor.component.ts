@@ -97,6 +97,9 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
           this.bmi(this.bmi_val);
         })
         console.log("current Appoinment patientID - ",this.appointmentData.patientID);
+        this.db.collection('Users').doc(localStorage.getItem("uid")).update({
+          currentAppointmentNumber:this.appointmentData.appointmentNo
+        });
 
         // this.db.collection('Users',ref => ref.where('patientID','==',this.appointmentData.patientID)).snapshotChanges()
         // .subscribe(res => {
@@ -136,12 +139,12 @@ export class LiveConsultationDoctorComponent implements OnInit,OnChanges {
         })
       })
 
-    // this.startCall(this.channelID);
+    this.startCall(this.channelID);
 
-    // this.timeObservable = timer(0, 1000)
-    // this.timeObservable.subscribe(x => {
-    //   this.displayTime()
-    // });
+    this.timeObservable = timer(0, 1000)
+    this.timeObservable.subscribe(x => {
+      this.displayTime()
+    });
 
   }
 

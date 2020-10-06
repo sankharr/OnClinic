@@ -1,0 +1,108 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="container-fluid">
+    <div class="row">
+        
+    </div>
+    <h2>Add Moderators</h2>
+    <!-- <button class="btn btn-primary" (click)=generatex()>Test</button> -->
+    <form [formGroup]="addModeratorsForm" novalidate>
+
+        <!-- <div *ngIf="submitError" class="alert alert-danger">
+      Submission Failed! Please check whether you have filled all the required fields and try again!
+    </div>
+
+    <div *ngIf="submitSuccess" class="alert alert-success">
+      Succesfully Submited!
+    </div> -->
+        <div class="col-4">
+            <label for="coption"><b>Name</b></label>
+            <input class="form-control" type="text" placeholder="" formControlName="name" required>
+
+            <!-- <div
+          *ngIf="completeProfileDoctorForm.controls['doctorFee'].invalid && (completeProfileDoctorForm.controls['doctorFee'].dirty || completeProfileDoctorForm.controls['doctorFee'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="completeProfileDoctorForm.controls['doctorFee'].errors.required">
+            Fee is required.
+          </div>
+        </div> -->
+
+        </div>
+
+        <div class="col-4">
+            <label for="coption"><b>Email</b></label>
+            <input class="form-control" type="text" placeholder="" formControlName="email" required>
+
+            <!-- <div
+          *ngIf="completeProfileDoctorForm.controls['doctorFee'].invalid && (completeProfileDoctorForm.controls['doctorFee'].dirty || completeProfileDoctorForm.controls['doctorFee'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="completeProfileDoctorForm.controls['doctorFee'].errors.required">
+            Fee is required.
+          </div>
+        </div> -->
+
+        </div>
+
+        <div class="col-4">
+            <label for="coption"><b>Phone Number</b></label>
+            <input class="form-control" type="text" placeholder="" formControlName="telno" required>
+
+            <!-- <div
+          *ngIf="completeProfileDoctorForm.controls['doctorFee'].invalid && (completeProfileDoctorForm.controls['doctorFee'].dirty || completeProfileDoctorForm.controls['doctorFee'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="completeProfileDoctorForm.controls['doctorFee'].errors.required">
+            Fee is required.
+          </div>
+        </div> -->
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <button id="moderatorSaveBtn" class="btn btn-primary" type="submit"
+                    (click)="createModerator()">Add</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="section" id="listMod">
+        <h2>Current Moderators</h2>
+        <div class="list-group">
+            <div class="list-group-item" id="tableHeader">
+                <div class="row">
+                    <div class="col">
+                        Name
+                    </div>
+                    <div class="col">
+                        Email
+                    </div>
+                    <div class="col">
+                        Telephone Number
+                    </div>
+                    <div class="col">
+                        Delete
+                    </div>
+                </div>
+            </div>
+            <div class="list-group-item" *ngFor="let item of allModerators">
+                <div class="row">
+                    <div class="col">
+                       {{item.name}}
+                    </div>
+                    <div class="col">
+                        {{item.email}}
+                    </div>
+                    <div class="col">
+                        {{item.telno}}
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+
+</div>

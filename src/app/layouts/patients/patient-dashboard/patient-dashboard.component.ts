@@ -136,7 +136,7 @@ export class PatientDashboardComponent implements OnInit {
 
   }
   buttonActive() {
-    var timeDif = this.appDateInt - this.todayDateInt;
+    var timeDif = 2500;
     console.log("Time diffrence - ", timeDif)
     if (timeDif <= 3000) {
       // window.onload = () => {

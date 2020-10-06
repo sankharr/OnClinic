@@ -1,0 +1,23 @@
+form{
+    margin-top: 3%;
+}
+
+h2{
+    margin-top: 2%;
+    font-weight: bold;
+}
+
+#moderatorSaveBtn{
+    margin-left: 1%;
+    margin-top: 2%;
+}
+
+#listMod{
+    /* margin-top: 5%; */
+}
+
+#tableHeader{
+    margin-top: 2%;
+    margin-bottom: 1%;
+    background-color: whitesmoke;
+}

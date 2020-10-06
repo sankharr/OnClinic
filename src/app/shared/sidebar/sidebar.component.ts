@@ -44,7 +44,7 @@ export const patientROUTES: RouteInfo[] = [
 //admin routings
 export const adminROUTES: RouteInfo[] = [
   { path: '/admin/dashboard', title: 'Dashboard', icon: 'dashboard', class: '' },
-  { path: '/admin/systemUsers', title: 'System Users', icon: 'profile', class: '' },
+  // { path: '/admin/systemUsers', title: 'System Users', icon: 'profile', class: '' },
   { path: '/admin/settings', title: 'Settings', icon: 'profile', class: '' },  
 ];
 
@@ -62,6 +62,8 @@ export class SidebarComponent implements OnInit {
   user_details: any = [];
   user: any;
   results: any;
+  dob: any;
+  age: string;
   
   constructor(
     private db: AngularFirestore,
@@ -81,6 +83,8 @@ export class SidebarComponent implements OnInit {
     this.db.collection('Users').doc(localStorage.getItem('uid')).valueChanges()
       .subscribe(output => {
         this.results = output;
+        this.dob = this.results.dob;
+        this.ageCalculation();
         console.log("side bara retrived data - ",this.results)
       })
     if (localStorage.getItem('role') == 'doctor') {
@@ -113,6 +117,13 @@ export class SidebarComponent implements OnInit {
 
   closeSidebar() {
     (<HTMLInputElement>document.getElementById("sidebar")).style.display = "none";
+  }
+
+  ageCalculation(){
+    var dobMilis = Number(new Date(this.dob));
+    var currentDateMilis = Number(new Date());
+    var age = ((((((currentDateMilis-dobMilis)/1000)/60)/60)/24)/365).toFixed(0);
+    this.age = age;
   }
 
 }

@@ -41,6 +41,8 @@ import { InquiriesComponent } from './moderator/inquiries/inquiries.component';
 import { SocialRespComponent } from './moderator/social-resp/social-resp.component';
 import { ProfileDoctorviewComponent } from './profile-doctorview/profile-doctorview.component';
 import { ProfilePatientviewComponent } from './profile-patientview/profile-patientview.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { AdminSettingsComponent } from './admin/admin-settings/admin-settings.component';
 
 const routes: Routes =[
   { path: 'home',             component: HomeComponent },
@@ -87,7 +89,8 @@ const routes: Routes =[
   { path: 'ppv', component: ProfilePatientviewComponent },
   { path: 'admin', component: AdminComponent,
   children:[
-    { path: 'systemUsers', component: SystemUsersComponent },
+    { path: 'dashboard', component: AdminDashboardComponent },
+    { path: 'settings', component: AdminSettingsComponent },
   ] },
   { path: '', redirectTo: 'homepage', pathMatch: 'full' }
 
