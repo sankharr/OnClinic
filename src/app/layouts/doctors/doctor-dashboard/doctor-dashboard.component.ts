@@ -37,30 +37,9 @@ export class DoctorDashboardComponent implements OnInit {
 
         // console.log(this.result);
       });
+    // this.db.collection('Users').doc(this.userId).collection('appointmentCounts')
   }
-  charts() {
-    console.log("chart called");
-    this.lineChart();
-    // this.pieChart();
-  }
-  lineChart() {
-    // const element = this.el.nativeElement;
-
-    const data = [
-      {
-        x: ["7/1", "7/2", "7/3", "7/4", "7/5", "7/6", "7/7"],
-        y: [10000, 15000, 16500, 9800, 11200, 13500, 9700],
-      },
-    ];
-
-    const style = {
-      margin: { t: 0 },
-      title: "Daily Income",
-      height: 240,
-    };
-
-    Plotly.newPlot("linechart", data, style);
-  }
+  
 
   // pieChart() {
   
@@ -123,6 +102,30 @@ export class DoctorDashboardComponent implements OnInit {
         this.app1 = groupedDates["dates_unique"];
         console.log(this.app1);
       });
+  }
+
+  charts() {
+    console.log("chart called");
+    this.lineChart();
+    // this.pieChart();
+  }
+  lineChart() {
+    // const element = this.el.nativeElement;
+
+    const data = [
+      {
+        x: ["10/1", "10/2", "10/3", "10/4", "10/5", "10/6", "10/7"],
+        y: [0, 0, 0, 0, 0, 10000, 0],
+      },
+    ];
+
+    const style = {
+      margin: { t: 0 },
+      title: "Daily Income",
+      height: 240,
+    };
+
+    Plotly.newPlot("linechart", data, style);
   }
 
   // test2(data) {
