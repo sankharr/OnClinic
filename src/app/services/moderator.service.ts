@@ -9,24 +9,62 @@ export class ModeratorService {
 
   constructor(
     private http: HttpClient,
-    private db:AngularFirestore
+    private db: AngularFirestore
   ) { }
 
-  getAllUsers(){
-    return this.db.collection('Users').valueChanges();
+  getAllUsers() {
+    return this.db.collection("Users", (ref) => (ref.where("role", "in", ['doctor', 'patient']))).valueChanges()
   }
-  getDoctor(doctorId){
-    return this.db.collection("Users",(ref)=>(ref.where("email","==","saman@gmail.com"))).snapshotChanges()
+  getDoctor() {
+    return this.db.collection("Users", (ref) => (ref.where("role", "==", "doctor"))).valueChanges()
   }
-  broadcast(data){
+  getpatients() {
+    return this.db.collection("Users", (ref) => (ref.where("role", "==", "patient"))).valueChanges()
+  }
+  broadcast(data) {
     // http://localhost:5001/onclinic-dd11a/us-central1/broadcast/hello
-    return this.http.post("https://us-central1-onclinic-dd11a.cloudfunctions.net/broadcast/hello",data)
+    return this.http.post("https://us-central1-onclinic-dd11a.cloudfunctions.net/broadcast/hello", data)
   }
-  getInquiries(){
+  getInquiries() {
     return this.db.collection('Inquries').valueChanges();
   }
-  getBroadcasts(){
+  getUnregDoctors() {
+    return this.db.collection("Users", (ref) => (ref.where("role", "==", "doctor").where("slmcVerified", "==", true).where("addressTokenVerified", '==', false))).valueChanges()
+  }
+  getBroadcasts() {
     return this.db.collection('broadcasts').valueChanges();
+  }
+  getThismonthUsers_d(){
+    var datetime = new Date();
+    var year = datetime.getFullYear()*10;
+    var month = datetime.getMonth()+1;
+    var accountCreation = year+month; 
+    console.log(accountCreation)
+    return this.db.collection("Users", (ref) => (ref.where("role", "==", "doctor")).where('accountcreation','==',accountCreation)).valueChanges()
+  }
+  getLastmonthDoctors(){
+    var datetime = new Date();
+    var year = datetime.getFullYear()*10;
+    var month = datetime.getMonth();
+    var accountCreation = year+month; 
+    console.log(accountCreation)
+    return this.db.collection("Users", (ref) => (ref.where("role", "==", "doctor")).where('accountcreation','==',accountCreation)).valueChanges()
+  }
+  getThismonthUsers_p(){
+    var datetime = new Date();
+    var year = datetime.getFullYear()*10;
+    var month = datetime.getMonth()+1;
+    var accountCreation = year+month; 
+    console.log(accountCreation)
+    return this.db.collection("Users", (ref) => (ref.where("role", "==", "patient")).where('accountcreation','==',accountCreation)).valueChanges()
+  }
+  getLastmonthPatient(){
+    var datetime = new Date();
+    var year = datetime.getFullYear()*10;
+    var month = datetime.getMonth();
+    var accountCreation = year+month; 
+    console.log(accountCreation)
+    return this.db.collection("Users", (ref) => (ref.where("role", "==", "patient")).where('accountcreation','==',accountCreation)).valueChanges()
   }
 }
 

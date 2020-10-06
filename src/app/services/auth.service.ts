@@ -331,9 +331,12 @@ export class AuthService {
   }
 
   usersignupDetails(uid){
-    var datetime = new Date().toLocaleString();
+    var datetime = new Date();
+    var year = datetime.getFullYear()*10;
+    var month = datetime.getMonth();
+    var accountCreation = year+month; 
     return this.db.doc(`Users/${uid}`).update({
-      'accountcreation':datetime
+      'accountcreation':accountCreation
     });
   }
 
