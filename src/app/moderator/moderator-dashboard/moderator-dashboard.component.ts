@@ -53,6 +53,10 @@ export class ModeratorDashboardComponent implements OnInit {
                   this.moderatorService.getLastmonthDoctors().subscribe(pastmontUsers_d=>{
                     this.chartbyMonth(thismonthusers_p, thismonthusers_d, patientData,doctorsData,pastmontUsers_d,pastmontUsers_p);
                     this.piechart(doctorsData,patientData,unregdoc);
+                    // console.log("past doc,this docs");
+                    // console.log(pastmontUsers_d,thismonthusers_d);
+                    // console.log("past pat,this pat");
+                    // console.log(pastmontUsers_p,thismonthusers_p)
                   })
                 })
               })
@@ -80,10 +84,10 @@ export class ModeratorDashboardComponent implements OnInit {
         value: thismonthusers_p?.length,
         title: {
           text:
-            "Patient Account<br><span style='font-size:0.8em;color:gray'>New Accounts for <br>this month</span>"
+            "<span style='font-size:0.8em;color:gray'>New Accounts for <br>this month</span>"
         },
         delta: { reference: pastmontUsers_p?.length, relative: true },
-        domain: { row: 0, column: 1 }
+        domain: { row: 1, column: 0 }
       },
       {
         type: "indicator",
@@ -91,7 +95,7 @@ export class ModeratorDashboardComponent implements OnInit {
         mode: "number+delta",
         delta: { reference: (doctorsData?.length-thismonthusers_d?.length) },
         value: doctorsData?.length,
-        domain: { row: 0, column: 2 }
+        domain: { row: 0, column: 1 }
       },
       {
         type: "indicator",
@@ -99,18 +103,18 @@ export class ModeratorDashboardComponent implements OnInit {
         value: thismonthusers_d?.length,
         title: {
           text:
-            "Patient Account<br><span style='font-size:0.8em;color:gray'>New Accounts for <br>this month</span>"
+            "<span style='font-size:0.8em;color:gray'>New Accounts for <br>this month</span>"
         },
         delta: { reference: pastmontUsers_d?.length, relative: true },
-        domain: { row: 0, column: 3 }
+        domain: { row: 1, column: 1 },
       }
     ];
 
     var layout = {
       width: 800,
       height: 400,
-      margin: { t: 25, b: 25, l: 25, r: 25 },
-      grid: { rows: 1, columns: 4, pattern: "independent" },
+      margin: { t: 30, b: 25, l: 25, r: 25 },
+      grid: { rows: 2, columns: 2, pattern: "independent" },
       template: {
         data: {
           indicator: [
@@ -128,7 +132,7 @@ export class ModeratorDashboardComponent implements OnInit {
   piechart(doctorsData,patientData,unregdoc){
     var data = [{
       values: [(doctorsData?.length)-unregdoc?.length, patientData?.length, unregdoc?.length],
-      labels: ['Doctors', 'Patient', 'Waithing Doctors'],
+      labels: ['Doctors', 'Patient', 'Pending Doctors'],
       domain: {column: 0},
       name: 'HospitalCore Users',
       hoverinfo: 'label+percent+name',
