@@ -27,13 +27,16 @@ on my own usecase, so YMMV.
                             <!-- <input type="search" name="" id=""> -->
                             <!-- <a href="/internet" class="btn btn-primary btn-large col-md-3">Post message</a> -->
                             <div class="container">
-                                <form>
+                                <form [formGroup]="myform" role="form" #broadcastForm="ngForm"
+                                    (ngSubmit)="broadcastMessage(broadcastForm)">
                                     <h2 style="color: aliceblue;text-align: center;">Broadcast a Message</h2>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="first">Subject</label>
-                                                <input type="text" class="form-control" placeholder="Add message title"
+                                                <input type="text" class="form-control"
+                                                    [(ngModel)]="broadcastForm.subject" placeholder="Add message title"
+                                                    name="subject" class="form-control" formControlName="subject"
                                                     id="subject">
                                             </div>
                                         </div>
@@ -42,8 +45,9 @@ on my own usecase, so YMMV.
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="last">Recipient Blood Group</label>
-                                                <input type="text" class="form-control"
-                                                    placeholder="Use commas to seperate groups" id="bloodGroup">
+                                                <input type="text" [(ngModel)]="broadcastForm.bloodGroup"
+                                                    name="bloodGroup" class="form-control" formControlName="bloodGroup"
+                                                    placeholder="Add comma seperated blood groups">
                                             </div>
                                         </div>
                                         <!--  col-md-6   -->
@@ -54,8 +58,9 @@ on my own usecase, so YMMV.
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="company">Contact Person</label>
-                                                <input type="text" class="form-control" placeholder="Contact Person"
-                                                    id="name">
+                                                <input type="text" [(ngModel)]="broadcastForm.contactPerson"
+                                                    name="contactPerson" class="form-control"
+                                                    formControlName="contactPerson" placeholder="Contact Person">
                                             </div>
 
 
@@ -66,7 +71,9 @@ on my own usecase, so YMMV.
 
                                             <div class="form-group">
                                                 <label for="phone">Phone Number</label>
-                                                <input type="tel" class="form-control" id="phone" placeholder="phone">
+                                                <input type="text" [(ngModel)]="broadcastForm.contactNo"
+                                                    name="contactNo" class="form-control" formControlName="contactNo"
+                                                    placeholder="Phone Number">
                                             </div>
                                         </div>
                                         <!--  col-md-6   -->
@@ -79,7 +86,8 @@ on my own usecase, so YMMV.
 
                                             <div class="form-group">
                                                 <label for="email">Email address</label>
-                                                <input type="email" class="form-control" id="email" placeholder="email">
+                                                <input type="email" [(ngModel)]="broadcastForm.email" name="email"
+                                                    class="form-control" formControlName="email" placeholder="E-mail">
                                             </div>
                                         </div>
                                         <!--  col-md-6   -->
@@ -88,7 +96,8 @@ on my own usecase, so YMMV.
                                             <div class="form-group">
                                                 <label for="url">Additional Referance Sources<small> (If have
                                                         any)</small></label>
-                                                <input type="url" class="form-control" id="url" placeholder="url">
+                                                <input type="url" [(ngModel)]="broadcastForm.url" name="url"
+                                                    class="form-control" formControlName="url" placeholder="url">
                                             </div>
 
                                         </div>
@@ -98,11 +107,13 @@ on my own usecase, so YMMV.
 
                                     <label for="">Additional notes</label>
                                     <textarea style="margin-bottom:15px;" class="form-control"
-                                        id="exampleFormControlTextarea1" rows="4"></textarea>
+                                        id="exampleFormControlTextarea1" rows="4"
+                                        [(ngModel)]="broadcastForm.SpecialNotes" name="SpecialNotes"
+                                        formControlName="SpecialNotes"></textarea>
 
 
-                                    <button style="display: block;margin:auto;" type="submit" class="btn btn-primary"
-                                        (click)="broadcastMessage()">Broadcast</button>
+                                    <button style="display: block;margin:auto;" type="submit"
+                                        class="btn btn-primary">Broadcast</button>
                                 </form>
                             </div>
                         </div>
@@ -122,20 +133,24 @@ on my own usecase, so YMMV.
 
                 </div>
             </div> -->
+            <br>
+            <h3 style="text-align: center;">Recent Broadcast Messages</h3>
+            <br>
             <div id="accordion">
                 <div class="card" *ngFor="let message of sentMessages">
                     <div class="card-header" id="headingOne">
                         <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
                                 aria-expanded="true" aria-controls="collapseOne"> <i class="fa" aria-hidden="true"></i>
-                                Collapsible Group Item #1
+                                {{message.subject}}
                             </button>
                         </h5>
                     </div>
 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
-                            <p><strong>You sent</strong>: <br> {{message.subject}} <br>{{message.SpecialNotes}}. <br>Contact Person: 
+                            <p><strong>You sent</strong>: <br> {{message.subject}} <br>{{message.SpecialNotes}}.
+                                <br>Contact Person:
                                 {{message.contactPerson}} {{message.contactNo}} <br><strong>Bradcasted to users with
                                     bloodGroup: {{message.bloodGroup}}</strong></p> <br>
                         </div>
@@ -153,25 +168,7 @@ on my own usecase, so YMMV.
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
-            <!--/.Controls-->
-            <ol class="carousel-indicators carousel-swap-adjuster carousel-banner-indicator ">
-                <li data-target="#carousel-thumb" data-slide-to="0" class="active tile_3">
-                    <div>
-                        <img class="d-block w-100 "
-                            src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(88).jpg"
-                            class="img-fluid">
-                        <p>text example</p>
-                    </div>
-                </li>
-                <li data-target="#carousel-thumb" data-slide-to="1" class="tile_2">
-                    <img class="d-block w-100"
-                        src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(121).jpg"
-                        class="img-fluid"></li>
-                <li data-target="#carousel-thumb" data-slide-to="2" class="tile_1">
-                    <img class="d-block w-100"
-                        src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(31).jpg"
-                        class="img-fluid"></li>
-            </ol>
+
         </div>
         <!--/.Carousel Wrapper-->
     </div>

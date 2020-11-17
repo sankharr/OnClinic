@@ -54,7 +54,7 @@ export class EpidemicDetectionComponent implements OnInit {
   ngOnInit(): void {
     this.geolocation.getAlldesease().subscribe(res => {
       this.diseases_list = res;
-      this.users_count = res.length;
+      this.users_count = res?.length;
       // console.log(res)
       var grouped_by_city = _.mapValues(_.groupBy(res, 'city'),
         userlist => userlist.map(data => _.omit(res, 'city')));
@@ -62,7 +62,7 @@ export class EpidemicDetectionComponent implements OnInit {
       var cities = _.keys(grouped_by_city)
       var disease_by_sity = _.values(grouped_by_city)
       // console.log(typeof(cities))
-      this.city_count = cities.length
+      this.city_count = cities?.length
       this.pieChart(res);
     })
     // this.geolocation.buildMap()
@@ -85,8 +85,8 @@ export class EpidemicDetectionComponent implements OnInit {
     var disease_info = _.values(grouped)
 
     var data = [{
-      values: [disease_info[0].length, disease_info[1].length, disease_info[2].length, disease_info[3].length, disease_info[4].length],
-      labels: [disease[0], disease[1], disease[2], disease[3], 'other'],
+      values: [disease_info[0]?.length, disease_info[1]?.length, disease_info[2]?.length, disease_info[3]?.length, disease_info[4]?.length,disease_info[5]?.length,disease_info[6]?.length],
+      labels: [disease[0], disease[1], disease[2], disease[3],disease[4],disease[5],'other'],
       type: 'pie'
     }];
 
@@ -107,7 +107,7 @@ export class EpidemicDetectionComponent implements OnInit {
     var grouped = _.mapValues(_.groupBy(data, 'class'),
       clist => clist.map(data => _.omit(data, 'class')));
     // console.log(grouped)
-    this.disease_count = _.keys(grouped).length
+    this.disease_count = _.keys(grouped)?.length
     var disease = _.keys(grouped)
     var disease_info = _.values(grouped)
     // for (let index = 0; index < data.length - 1; index++) {
@@ -119,7 +119,7 @@ export class EpidemicDetectionComponent implements OnInit {
   }
 
   public async onChange(event) {  // event will give you full breif of action
-    const newVal = event.target.value;
+    const newVal = event.target?.value;
     console.log(newVal);
     // const snapshot = await firebase.firestore().collection('diseases').get()
     // var grouped = _.mapValues(_.groupBy(snapshot, 'class'),
@@ -127,7 +127,7 @@ export class EpidemicDetectionComponent implements OnInit {
     this.afs.collection('diseases').ref.where('city', '==',newVal).get().then((ref) => {
 
       let results = ref.docs.map(doc => doc.data());
-      if (results.length > 0) {
+      if (results?.length > 0) {
         console.log(results); //do what you want with code
         this.specificMap_by_city(results);
       }
@@ -198,7 +198,7 @@ export class EpidemicDetectionComponent implements OnInit {
     });
 
     var layout = {
-      title: 'Epidemic Detection',
+      // title: 'Epidemic Detection',
       font: {
         color: 'white'
       },
@@ -206,8 +206,8 @@ export class EpidemicDetectionComponent implements OnInit {
       // mode: 'markers', marker: { size: 20},
       mapbox: {
         center: {
-          lat: 6.386271,
-          lon: 80.542837
+          lat: 6.6669,
+          lon: 80.7048
         },
         domain: {
           x: [0, 1],
@@ -272,7 +272,7 @@ export class EpidemicDetectionComponent implements OnInit {
     });
 
     var layout = {
-      title: `Recorded case count = ${rows.length}`,
+      title: `Recorded case count = ${rows?.length}`,
       font: {
         color: 'white'
       },

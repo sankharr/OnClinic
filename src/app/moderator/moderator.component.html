@@ -29,16 +29,16 @@
             <div class="col-6">
               {{item.name}} <br>
               <!-- <label *ngIf="item.slmcVerified" class="label label-success label-large">SLMC Verified |</label> -->
-              <label *ngIf="!item.slmcVerified" class="badge badge-warning">SLMC Failed |</label>
+              <label *ngIf="!item.slmcVerified && !item.isVerified" class="badge badge-warning">SLMC Failed |</label>
               <!-- <label *ngIf="item.emailVerified" class="label label-success label-large">Email Verified |</label> -->
-              <label *ngIf="!item.emailVerified" class="badge badge-warning">Email Failed |</label>
+              <label *ngIf="!item.emailVerified && !item.isVerified" class="badge badge-warning">Email Failed |</label>
               <!-- <label *ngIf="item.PhoneNumberVerified" class="label label-success label-large">Phone Verified |</label> -->
-              <label *ngIf="!item.PhoneNumberVerified" class="badge badge-warning">Phone Failed</label>
-              <label *ngIf="item.addressTokenVerified" class="badge badge-success">Full Verified Profile</label>
+              <label *ngIf="!item.PhoneNumberVerified && !item.isVerified" class="badge badge-warning">Phone Failed</label>
+              <label *ngIf="item.isVerified" class="badge badge-success">Full Verified Profile</label>
             </div>
             <div class="col-2">
               <!-- <a class="btn btn-warning" href="{{item.report_url}}">Report</a> <br> -->
-              <a type="button" class="btn btn-primary btn-sm" href="{{item.report_url}}" target="_blank" >View Report</a>
+              <a *ngIf="!item?.report_url" type="button" class="btn btn-primary btn-sm" href="{{item.report_url}}" target="_blank" >View Report</a>
             </div>
             <div class="col-2">
               {{item.lastlogin}} <br>
