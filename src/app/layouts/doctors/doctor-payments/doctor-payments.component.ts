@@ -3,6 +3,8 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import * as _ from "lodash";
 import { group } from "console";
 import { Timestamp } from "rxjs/internal/operators/timestamp";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-doctor-payments",
@@ -14,8 +16,9 @@ export class DoctorPaymentsComponent implements OnInit {
   userId: any;
   app: any;
   result2: any;
+  closeResult: string;
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore , private modalService: NgbModal ) {}
 
   ngOnInit(): void {
     this.userId = localStorage.getItem("uid");
@@ -46,4 +49,19 @@ export class DoctorPaymentsComponent implements OnInit {
         console.log(this.app);
       });
   }
+
+  open(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  
 }

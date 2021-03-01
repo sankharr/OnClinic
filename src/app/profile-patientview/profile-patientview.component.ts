@@ -17,6 +17,7 @@ export class ProfilePatientviewComponent implements OnInit {
 
   ) { }
 
+
   ngOnInit(): void {
     this.docId=localStorage.getItem("viewedDocId");
     console.log("viewedDocId",this.docId);
